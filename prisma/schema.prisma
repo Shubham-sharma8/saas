@@ -36,13 +36,22 @@ model Image {
   updatedAt DateTime   @updatedAt
 }
 
-model message {
-  id       String @id @default(uuid())
-  userId     String
-  question   String   @db.LongText
-  answer     String   @db.LongText
-  created_at DateTime @default(now())
+model Chat {
+  id        String    @id @default(uuid())
+  userId    String
+  completed Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
 }
 
-
+model Message {
+  id        String   @id @default(uuid())
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  userId    String
+  question  String   @db.LongText
+  answer    String   @db.Text
+  createdAt DateTime @default(now())
+}
 
