@@ -304,7 +304,7 @@ const Chat = () => {
               control={form.control}
               name="model"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-2 mt-5">
+                <FormItem className="col-span-12 bg-muted lg:col-span-2 mt-5">
                   <Select
                     disabled={isLoading}
                     onValueChange={field.onChange}
