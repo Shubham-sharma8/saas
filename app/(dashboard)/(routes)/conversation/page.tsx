@@ -356,7 +356,7 @@ const Chat = () => {
                 className={cn(
                   "relative p-8 w-full flex items-start gap-x-8 rounded-lg",
                   message.role === "user"
-                    ? "bg-white border border-black/10"
+                    ? "bg-white dark:text-black border border-black/10"
                     : "bg-muted"
                 )}
               >
