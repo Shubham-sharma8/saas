@@ -1,12 +1,16 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
+import { ThemeProvider } from '@/components/theme-provider'
+
+
 
 import { ToasterProvider } from '@/components/toaster-provider';
 import { ModalProvider } from '@/components/modal-provider';
 import { CrispProvider } from '@/components/crisp-provider';
 
 import './globals.css';
+
 
 export const viewport: Viewport = {
   themeColor: [
@@ -53,6 +57,7 @@ export const metadata: Metadata = {
     canonical: 'https://cogify.social',
   },
 };
+
 export default async function RootLayout({
   children,
 }: {
@@ -85,12 +90,20 @@ export default async function RootLayout({
           <meta name="twitter:image" content="https://cogify.social/logo.png" />
         </head>
         <CrispProvider />
-        <body className={font.className}>
-          <ToasterProvider />
-          <ModalProvider />
-          {children}
-        </body>
-      </html>
+          <body className={font.className}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+          
+            <ToasterProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider> 
+          </body>
+        </html>
     </ClerkProvider>
   );
 }
