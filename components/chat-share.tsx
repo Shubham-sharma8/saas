@@ -13,7 +13,7 @@ import {
   DialogTitle
 } from './ui/dialog'
 import { shareChat } from '@/lib/actions/chat'
-import { toast } from 'sonner'
+import { toast } from "react-hot-toast";
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { Spinner } from './ui/spinner'
 
@@ -50,7 +50,7 @@ export function ChatShare({ chatId, className }: ChatShareProps) {
   const handleCopy = () => {
     if (shareUrl) {
       copyToClipboard(shareUrl)
-      toast.success('Link copied to clipboard')
+      toast.success('Link copied to clipboard')  // Show toast notification
       setOpen(false)
     } else {
       toast.error('No link to copy')

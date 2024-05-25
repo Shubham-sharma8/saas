@@ -92,7 +92,7 @@ export async function shareChat(id: string, userId: string = 'anonymous') {
 
   const payload = {
     ...chat,
-    sharePath: `/share/${id}`
+    sharePath: `advance/share/${id}`
   }
 
   await redis.hmset(`chat:${id}`, payload)
