@@ -2,7 +2,7 @@
 
 # Cogify.Social Platform - Your Gateway to Enhanced AI-Based SAAS!🎉🤖
 
-Welcome to the git repository for Cogify.Social, the ultimate interactive web platform designed to Chatgpt-4 based conversation **Free always, no ads and Whatsapp usability**. 
+Welcome to the git repository for Cogify.Social, the ultimate interactive web platform designed to Chatgpt-4 based conversation **Free always, no ads and Whatsapp,telegram usability**. 
 Powered by cutting-edge technologies like Next.js 13, React, TypeScript, and more, this platform offers users a rich blend of features including Chatgpt-4 conversations, AI-driven image generation, insightful image analysis, and lifelike text-to-speech functionalities and much more. Dive into a world where technology meets creativity, fully live-hosted and free to use, backed by an open-source community's excellence.
 
 ### Features 🚀
@@ -11,8 +11,9 @@ Powered by cutting-edge technologies like Next.js 13, React, TypeScript, and mor
 - **Web connected GPT-4o:** Experience the power of OPEN AI GPT-4o connected to realtime internet. 🛜
 - **AI-Powered Image Generation:** Bring your imaginations to life with just a few clicks. Generate up to 7 images at once with Dall-E-3 🎨
 - **Image Insights:** Get deep insights into the content and context of images. And ask questions regarding your image🔍
-- **Whatsapp integration:** Send your message to [Here](https://wa.me/919831047163) to continue these awesome features in whatsapp. Start enjoying by saying **Hi**. 
 - **Text to Speech:** Convert your text into natural-sounding speech seamlessly with more then 5 speaking model. 🗣️
+- **Whatsapp integration:** Send your message to [Here](https://wa.me/919831047163) to continue these awesome features in whatsapp. Start enjoying by saying **Hi**.
+- **Telegram integration:** Send your message to [Here](https://cogify_bot.t.me/) to continue these awesome features in telegram. Start enjoying by saying **/start**. 
 - **More features are on the way**
 - ### We build everything at no cost, Including Web domain, Chatgpt API Key, 24*7 Web hosting, SMTP Email Hosting for marketing etc - **Everything** .
 - Fill this form and we will reach out to you with all the information quickly. [Help](https://cogify.social/help)
@@ -130,17 +131,20 @@ Your MySQL database is now set up and configured to accept connections remotely 
 🛑**Invalid Website:** If you getting this error in your button right. Create an account with [Crisp](https://crisp.chat/) and update **components/crisp-chat.tsx** with your credentials. 
 
 
-# Built With 🛠️
+# 🧱 Stack
 
 - **Next.js 14** - The React framework for production
 - **React** - A JavaScript library for building user interfaces
 - **TypeScript (TSX)** - Superset of JavaScript for type-safe code
-- **Clerk** - For secure user management and authentication
-- **Aceternity UI** and **Shadch UI** - Advanced UI frameworks for modern React applications
-- **Tailwind CSS** - A utility-first CSS framework for rapidly building custom designs
-- **Prisma** - Next-generation ORM for Node.js and TypeScript
-- **Stripe** - Integrated payment solutions
-- **Crisp** - For support and quick help.
+- **Clerk** - For secure user management and authentication [clerk](https://clerk.com)
+- **Aceternity UI** and **Shadch UI** - Advanced UI frameworks for modern React applications [acetenity](https://ui.aceternity.com)
+- **Tailwind CSS** - A utility-first CSS framework for rapidly building custom designs [Tailwind CSS](https://tailwindcss.com/)
+- **Prisma** - Next-generation ORM for Node.js and TypeScript [prism](https://www.prisma.io)
+- **Stripe** - Integrated payment solutions [stripe](https://www.strip.com)
+- **Crisp** - For support and quick help.[crisp](https://crisp.chat/en/)
+- **Other**
+- Text streaming / Generative UI [Vercel AI SDK](https://sdk.vercel.ai/docs)
+- Serverless Database: [Upstash](https://upstash.com/)
 
 ### Whatsapp 📱
 
@@ -166,5 +170,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) f
 Join our dynamic community and start contributing. For more information, or to join our team, please visit [Join-us](https://cogify.social/join-us).
 
 
+
+
 We're excited to see how you use and enhance Cogify.Social. Get started today and unleash your creativity! 🌟
 [Cogify.social](hts://cogify.social/)
+
+### Truth
+![1*4MxdirviH9FTq3bw-IuzYg](https://github.com/Shubham-sharma8/saas/assets/96993718/f4c26071-ff45-4f0b-972c-8db021e0d2a2)
+
