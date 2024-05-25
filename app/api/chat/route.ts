@@ -5,7 +5,6 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import prismadb from "@/lib/prismadb"; // Ensure this path is correct
 import { checkSubscription } from "@/lib/subscription";
 import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
-import { v4 as uuidv4 } from "uuid";  // Using uuid to generate unique chatIds
 
 export async function POST(req: Request) {
   try {
@@ -40,26 +39,9 @@ export async function POST(req: Request) {
     });
 
     // Check for an existing incomplete chat session
-    let chat = await prismadb.chat.findFirst({
-      where: { userId, completed: false }
-    });
+    
 
-    let chatId;
-
-    // If there's no existing incomplete chat, create a new one
-    if (!chat) {
-      chatId = uuidv4();
-      await prismadb.chat.create({
-        data: {
-          id: chatId,
-          userId,
-          completed: false,
-        },
-      });
-    } else {
-      // Else, continue with the existing chat
-      chatId = chat.id;
-    }
+    
 
     const response = await openai.chat.completions.create({
       model: model,
@@ -81,17 +63,13 @@ export async function POST(req: Request) {
           await prismadb.message.create({
             data: {
               userId,
-              chatId,
               question: userMessage,
               answer: completion,
             },
           });
 
           // Optional: Mark the chat as completed if the session is done, or leave it open
-           await prismadb.chat.update({
-            where: { id: chatId },
-           data: { completed: true },
-           });
+        
         } catch (error) {
           console.log("[DATABASE_ERROR]", error);
         }
