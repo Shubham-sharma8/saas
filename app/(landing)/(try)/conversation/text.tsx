@@ -72,10 +72,15 @@ export function HeroHighlights() {
           <div className="text-sm md:text-xl font-light text-zinc-400">
             Create content using AI 10x faster.
           </div>
-          <div>
+          <div className="flex space-x-4 justify-center">
             <Link href={"https://try.cogify.social"}>
-              <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm ">
-                Try a demo
+              <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
+                Try without Sign-Up
+              </Button>
+            </Link>
+            <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+              <Button className="w-60 h-10 rounded-xl bg-blue-500 text-white text-sm">
+              {isSignedIn ? "Dashboard" : "Sign-Up Now"}
               </Button>
             </Link>
           </div>
@@ -86,16 +91,16 @@ export function HeroHighlights() {
       </motion.h1>
       
       <div className="flex flex-col justify-center space-y-6"> 
-  <Highlight className="text-2xl md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center">
-   Now Powered by GPT-4o
-  </Highlight>
+        <Highlight className="text-2xl md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center">
+          Now Powered by GPT-4
+        </Highlight>
 
-  <PlaceholdersAndVanishInput
-    placeholders={placeholders}
-    onChange={handleChange}
-    onSubmit={onSubmit}
-  />
-</div>
+        <PlaceholdersAndVanishInput
+          placeholders={placeholders}
+          onChange={handleChange}
+          onSubmit={onSubmit}
+        />
+      </div>
     </HeroHighlight>
   );
 }
