@@ -49,7 +49,7 @@ const routes = [
   {
     label: 'AdvanceGPT',
     icon: MessageCircle,
-    color: "text-pink-700",
+    color: "text-blue-500",
     bgColor: "bg-pink-700/10",
     href: '/advance',
   },

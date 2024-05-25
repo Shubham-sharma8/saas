@@ -15,8 +15,8 @@ export default function Page() {
         title="Advance AI Chatbot"
         description="The most advanced AI chatbot with URL sharing and more."
         icon={MessageCircle}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        iconColor="text-blue-500"
+        bgColor="bg-blue-700/10"
       />
       
       
