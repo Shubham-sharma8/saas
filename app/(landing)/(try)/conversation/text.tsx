@@ -73,9 +73,9 @@ export function HeroHighlights() {
             Create content using AI 10x faster.
           </div>
           <div>
-            <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+            <Link href={"https://try.cogify.social"}>
               <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm ">
-                Start Generating For Free
+                Try a demo
               </Button>
             </Link>
           </div>
