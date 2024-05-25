@@ -42,7 +42,7 @@ export const Footer = () => {
         <div className="flex-col space-y-2 flex " >
           <div className="right flex-col space-y-2 flex ">
             <Link href="/about-us" >
-            <button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm dark:text-white hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <button className="px-4 py-2 rounded-md border border-black bg-white text-neutarl-700 text-sm dark:text-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
                 About us 
             </button>
             </Link>
@@ -65,7 +65,7 @@ export const Footer = () => {
 
             </Link>
             <Link href="/" className="flex items-center">
-            <button className="px-4 py-2 rounded-md border border-black bg-white text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
     Careers
 </button>
 

@@ -27,14 +27,14 @@ export function EmptyScreen({
   className?: string
 }) {
   return (
-    <div className={`mx-auto w-full transition-all ${className}`}>
+    <div className={`mx-auto w-full  transition-all ${className}`}>
       <div className="bg-background p-2">
-        <div className="mt-4 flex flex-col items-start space-y-2 mb-4">
+        <div className="mt-4 flex flex-col  items-start space-y-2 mb-4">
           {exampleMessages.map((message, index) => (
             <Button
               key={index}
               variant="link"
-              className="h-auto p-0 text-base"
+              className="h-auto p-0 text-base dark:text-white"
               name={message.message}
               onClick={async () => {
                 submitMessage(message.message)

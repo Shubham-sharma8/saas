@@ -227,7 +227,7 @@ const PhotoPage = () => {
                 control={form.control}
                 name="resolution"
                 render={({ field, fieldState: { error } }) => (
-                  <FormItem className="col-span-12 lg:col-span-2">
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
                     <Select
                       disabled={isLoading}
                       onValueChange={(value) => {
@@ -278,7 +278,7 @@ const PhotoPage = () => {
                 control={form.control}
                 name="styleOption"
                 render={({ field }) => (
-                  <FormItem className="col-span-12 lg:col-span-2">
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
                     <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
@@ -337,7 +337,7 @@ const PhotoPage = () => {
                 control={form.control}
                 name="colorOption"
                 render={({ field }) => (
-                  <FormItem className="col-span-12 lg:col-span-2">
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
                     <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
@@ -369,7 +369,7 @@ const PhotoPage = () => {
                 control={form.control}
                 name="resolution"
                 render={({ field }) => (
-                  <FormItem className="col-span-12 lg:col-span-2">
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
                     <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
@@ -401,7 +401,7 @@ const PhotoPage = () => {
                 control={form.control}
                 name="amount"
                 render={({ field }) => (
-                  <FormItem className="col-span-12 lg:col-span-2">
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
                     <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
@@ -432,7 +432,7 @@ const PhotoPage = () => {
               control={form.control}
               name="modelImage"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-2">
+                <FormItem className="col-span-12 dark:text-black  lg:col-span-2">
                   <Select
                     disabled={isLoading}
                     onValueChange={field.onChange}

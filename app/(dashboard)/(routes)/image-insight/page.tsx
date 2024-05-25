@@ -127,7 +127,7 @@ const [files, setFiles] = React.useState<any[]>([]);
       />
 
       <hr className={st.separator} />
-      <div className="text-sm md:text-xl font-bold text-zinc-800 flex justify-center items-center gap-2">
+      <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center gap-2">
         Kindly upload the image and then enter your message to get started.
       </div>
 
@@ -172,7 +172,7 @@ const [files, setFiles] = React.useState<any[]>([]);
               <FormField
                 name="prompt"
                 render={({ field }) => (
-                  <FormItem className="col-span-12 lg:col-span-10">
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-10">
                     <FormControl className="m-0 p-0">
                       {/* Replace Input with Textarea */}
                       <Textarea

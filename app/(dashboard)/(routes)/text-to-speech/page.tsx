@@ -120,7 +120,7 @@ const MusicPage = () => {
             <FormField
               name="prompt"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-8">
+                <FormItem className="col-span-12  lg:col-span-8">
                   <FormControl className="m-0 p-0">
                     <Textarea
                       className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
@@ -136,7 +136,7 @@ const MusicPage = () => {
               control={form.control}
               name="model"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-2 mt-5">
+                <FormItem className="col-span-12 dark:text-black lg:col-span-2 mt-5">
                   <Select
                     disabled={isLoading}
                     onValueChange={field.onChange}

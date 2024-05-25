@@ -72,14 +72,17 @@ export function HeroHighlights() {
           <div className="text-sm md:text-xl font-light text-zinc-400">
             Create content using AI 10x faster.
           </div>
-          <div className="flex space-x-4 justify-center">
-            <Link href={"https://try.cogify.social"}>
-              <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
-                Try without Sign-Up
-              </Button>
-            </Link>
+          <div className="space-x-4 ">
+            
+            {!isSignedIn && (
+              <Link href={"https://try.cogify.social"}>
+                <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
+                  Try without Sign-Up
+                </Button>
+              </Link>
+            )}
             <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-              <Button className="w-60 h-10 rounded-xl bg-blue-500 text-white text-sm">
+            <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
               {isSignedIn ? "Dashboard" : "Sign-Up Now"}
               </Button>
             </Link>
