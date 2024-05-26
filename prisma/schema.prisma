@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgres"
   url = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -29,7 +29,7 @@ model UserSubscription {
 model Message {
   id        String   @id @default(uuid())
   userId    String
-  question  String   @db.LongText
+  question  String   @db.Text
   answer    String   @db.Text
   createdAt DateTime @default(now())
 }
