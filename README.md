@@ -61,10 +61,10 @@ To set up your own version of Cogify.Social, follow these steps:
 
 # ✨**IMPORTANT**
 
- **Run the database in server:**
+ **MYSQL Database:**
 ## Setting Up and Hosting the Database on Ubuntu 🐬
 
-Cogify.Social uses a MySQL database to manage data. Here is a step-by-step guide to help you create and host the database on an Ubuntu server:
+Cogify.Social uses a postgres(insitially mySQL) database to manage data. Here is a step-by-step guide to help you create and host the database on an Ubuntu server:
 
 ### Prerequisites:
 Make sure you have Ubuntu server set up and you have administrative (sudo) rights.
@@ -123,6 +123,8 @@ sudo systemctl restart mysql
 Your MySQL database is now set up and configured to accept connections remotely using the public IP of your server.
 
 ℹ️ **Note:** For security purposes, it is highly recommended to use a firewall to restrict access to your MySQL server and to use SSL for data encryption if your database will be accessed over the internet.
+
+🥹 **Try Superbase** For postres
 
 ✅ **For cloud server like azure and AWS etc:** Open port 3306, 80 TCP. 
 
