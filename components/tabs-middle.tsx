@@ -14,16 +14,7 @@ export function TabsDemo() {
           <DummyContent src="/con.svg"/>
         </div>
       ),
-    },
-    {
-      title: "Image Generation",
-      value: "playground",
-      content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Image Generation</p>
-          <DummyContent src="/imag.svg" />
-        </div>
-      ),
+
     },
     {
       title: "WebGPT",
@@ -35,6 +26,37 @@ export function TabsDemo() {
         </div>
       ),
     },
+    {
+      title: "AdvanceGPT",
+      value: "AdvanceGPT",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>AdvanceGPT</p>
+          <DummyContent src="/advance.svg" />
+        </div>
+      ),
+    },
+    {
+      title: "Pdf Chat",
+      value: "Pdf Chat",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Pdf Chat</p>
+          <DummyContent src="/pdf.svg" />
+        </div>
+      ),
+    },
+    {
+      title: "Image Generation",
+      value: "playground",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Image Generation</p>
+          <DummyContent src="/imag.svg" />
+        </div>
+      ),
+    },
+   
     {
       title: "Image Insight",
       value: "Money",
