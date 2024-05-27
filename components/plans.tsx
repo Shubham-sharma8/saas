@@ -31,15 +31,29 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
+                    Including WebGPT
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Including Advance GPT
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
                     Including Image generation
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Including Chat with PDF
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
                     Including Image Insight
                   </li>
+                 
+                  
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Limited gpt-4o Access
+                    Unlimited gpt-4o Access
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
@@ -88,19 +102,27 @@ export const Plans = () =>{
                     <CheckIcon />Unlimited Chat generation
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckIcon />Unlimited Voice generation
+                    <CheckIcon />
+                    Including WebGPT
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited Image generation - Version 2
+                    Including Advance GPT
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Including Image generation
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckIcon />
+                    Including Chat with PDF
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
                     Including Image Insight
                   </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon />Unlimited Code generation
-                  </li>
+                 
+                  
                   <li className="flex items-center gap-2">
                     <CheckIcon />
                     Unlimited gpt-4o Access
@@ -153,7 +175,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited Image generation - Version 2
+                    Unlimited Image generation
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />Unlimited Image Insight

@@ -1,5 +1,5 @@
 
-import { Code, Eye, Film, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus } from "lucide-react";
+import { Code, Eye, FileCheck2, Film, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -11,21 +11,6 @@ export const tools = [
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
-
-  {
-    label: 'Image Generation',
-    icon: ImageIcon,
-    color: "text-pink-700",
-    bgColor: "bg-pink-700/10",
-    href: '/image',
-  },
-  {
-    label: 'WebGPT',
-    icon: MessageSquarePlus,
-    href: '/webgpt',
-    color: "text-black-500",
-    bgColor: "bg-black-500/10",
-  },
   {
     label: 'AdvanceGPT',
     icon: MessageCircle,
@@ -35,10 +20,34 @@ export const tools = [
   },
 
   {
+    label: 'WebGPT',
+    icon: MessageSquarePlus,
+    href: '/webgpt',
+    color: "text-black-500",
+    bgColor: "bg-black-500/10",
+  },
+
+  {
+    label: 'Image Generation',
+    icon: ImageIcon,
+    color: "text-pink-700",
+    bgColor: "bg-pink-700/10",
+    href: '/image',
+  },
+
+  {
+    label: 'PDF Chat',
+    icon: FileCheck2,
+    href: 'https://pdf.cogify.social/',
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
+  },
+
+  {
     label: 'Image-Insight',
     icon: Eye,
-    color: "text-blue-100",
-    bgColor: "bg-blue-100/10",
+    color: "text-blue-500",
+    bgColor: "bg-blue-500/10",
     href: '/image-insight',
   },
   {

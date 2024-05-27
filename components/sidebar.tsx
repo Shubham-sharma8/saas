@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import { Code, Eye, Film, HomeIcon, ImageIcon, LayoutDashboard, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Settings } from "lucide-react";
+import { Code, Eye, FileCheck2, Film, HomeIcon, ImageIcon, LayoutDashboard, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -34,10 +34,11 @@ const routes = [
     color: "text-violet-500",
   },
   {
-    label: 'Image Generation',
-    icon: ImageIcon,
-    color: "text-pink-700",
-    href: '/image',
+    label: 'AdvanceGPT',
+    icon: MessageCircle,
+    color: "text-blue-500",
+    bgColor: "bg-pink-700/10",
+    href: '/advance',
   },
   {
     label: 'WebGPT',
@@ -46,13 +47,21 @@ const routes = [
     color: "text-black-500",
     bgColor: "bg-black-500/10",
   },
+ 
   {
-    label: 'AdvanceGPT',
-    icon: MessageCircle,
-    color: "text-blue-500",
-    bgColor: "bg-pink-700/10",
-    href: '/advance',
+    label: 'Image Generation',
+    icon: ImageIcon,
+    color: "text-pink-700",
+    href: '/image',
   },
+  {
+    label: 'PDF Chat',
+    icon: FileCheck2,
+    href: 'https://pdf.cogify.social/',
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
+  },
+  
   {
     label: 'Image Insight',
     icon: Eye,
@@ -73,7 +82,6 @@ const routes = [
     bgColor: "bg-green-700/10",
     href: '/entertainment',
   },
-  
   {
     label: 'Code Generation',
     icon: Code,

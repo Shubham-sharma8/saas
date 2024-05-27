@@ -21,15 +21,30 @@ import {
             <GradientButton buttonText="Conversation" />
           </Link>
           </AccordionContent>
-          
+          <AccordionContent>
+            <Link href="/advance" > 
+            <GradientButton buttonText="AdvacanceGPT" />
+          </Link>
+          </AccordionContent>
+          <AccordionContent>
+            <Link href="/webgpt" > 
+            <GradientButton buttonText="WebGPT" />
+          </Link>
+          </AccordionContent>
           <AccordionContent>
             <Link href="/image" > 
             <GradientButton buttonText="Image Generation" />
           </Link>
           </AccordionContent>
+          
+          <AccordionContent>
+            <Link href="https://pdf.cogify.social/" > 
+            <GradientButton buttonText="Image Insight" />
+          </Link>
+          </AccordionContent>
           <AccordionContent>
             <Link href="/image-insight" > 
-            <GradientButton buttonText="Image Insight" />
+            <GradientButton buttonText="PDF Chat" />
           </Link>
           </AccordionContent>
           <AccordionContent>

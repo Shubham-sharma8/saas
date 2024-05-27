@@ -54,14 +54,13 @@ export function HeroHighlights() {
                 options={{
                   strings: [
                     "Chatbot.",
-                    "Audio Generation.",
-                    "Photo Generation.",
+                    "Image Generation.",
+                    "Chat with any PDF",
                     "Blog Writing.",
                     "Mail Writing.",
-                    "Content Creation.",
-                    "Code Generation.",
                     "Image Insight",
-                    "Calories Count"
+                    "Audio Generation.",
+
                   ],
                   autoStart: true,
                   loop: true,
