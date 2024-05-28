@@ -1,6 +1,6 @@
 <img width="1788" alt="Cogify.social" src="https://github.com/Shubham-sharma8/saas/assets/96993718/ef81b3ff-bcf1-4ced-9442-08cece819a77">
 
-# Cogify.Social Platform - Your Gateway to Enhanced AI-Based SAAS!🎉🤖
+# Cogify.Social Platform - Your Gateway to Most advanced AI-Based SAAS!🎉🤖
 
 Welcome to the git repository for Cogify.Social, the ultimate interactive web platform designed to Chatgpt-4 based conversation **Free always, no ads and Whatsapp,telegram usability**. 
 Powered by cutting-edge technologies like Next.js 13, React, TypeScript, and more, this platform offers users a rich blend of features including Chatgpt-4 conversations, AI-driven image generation, insightful image analysis, and lifelike text-to-speech functionalities and much more. Dive into a world where technology meets creativity, fully live-hosted and free to use, backed by an open-source community's excellence.
@@ -12,6 +12,9 @@ Powered by cutting-edge technologies like Next.js 13, React, TypeScript, and mor
 - **AI-Powered Image Generation:** Bring your imaginations to life with just a few clicks. Generate up to 7 images at once with Dall-E-3 🎨
 - **Image Insights:** Get deep insights into the content and context of images. And ask questions regarding your image🔍
 - **Text to Speech:** Convert your text into natural-sounding speech seamlessly with more then 5 speaking model. 🗣️
+- **PDF Insight:** Ask you question related to your pdf file directly to gpt-4o.ar [pdf.cogify.social](https://pdf.cogify.social) 📄 **[Github Link](https://github.com/Shubham-sharma8/chatify)**
+- **Try without sign-up:** We also provide a try to our most advanced gpt-4o model without sign up. URL Sharing and more.[try.cogify.social](https://try.cogify.social) **[Github Link](https://github.com/Shubham-sharma8/tryit)**
+- 
 - **Whatsapp integration:** Send your message to [Here](https://wa.me/919831047163) to continue these awesome features in whatsapp. Start enjoying by saying **Hi**.
 - **Telegram integration:** Send your message to [Here](https://cogify_bot.t.me/) to continue these awesome features in telegram. Start enjoying by saying **/start**. 
 - **More features are on the way**
