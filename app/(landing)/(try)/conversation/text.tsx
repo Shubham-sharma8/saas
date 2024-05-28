@@ -68,8 +68,9 @@ export function HeroHighlights() {
               />
             </div>
           </div>
-          <div className="text-sm md:text-xl font-light text-zinc-400">
-            Create content using AI 10x faster.
+          <div className="text-sm md:text-xl font-light text-zinc-500">
+            Due to the high demand, we are currently full with beta users. <br></br>
+            Please sign-up to get early access.
           </div>
           <div className="space-x-4 ">
             
@@ -86,9 +87,9 @@ export function HeroHighlights() {
               </Button>
             </Link>
           </div>
-          <div className="text-zinc-400 text-xs md:text-sm font-normal">
+          {/* <div className="text-zinc-400 text-xs md:text-sm font-normal">
             No credit card required*.
-          </div>
+          </div> */}
         </div>
       </motion.h1>
       
