@@ -99,19 +99,3 @@ export async function shareChat(id: string, userId: string = 'anonymous') {
 
   return payload
 }
-export async function editchat(id: string, userId: string = 'anonymous') {
-  const chat = await redis.hgetall<Chat>(`chat:${id}`)
-
-  if (!chat || chat.userId !== userId) {
-    return null
-  }
-
-  const payload = {
-    ...chat,
-    sharePath: `/advance/search/${id}`
-  }
-
-  await redis.hmset(`chat:${id}`, payload)
-
-  return payload
-}
