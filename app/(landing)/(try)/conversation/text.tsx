@@ -69,8 +69,7 @@ export function HeroHighlights() {
             </div>
           </div>
           <div className="text-sm md:text-xl font-light text-zinc-500">
-            Due to the high demand, we are currently full with beta users. <br></br>
-            Please sign-up to get early access.
+         We are under beta testing. Sign-Up now to get early access.
           </div>
           <div className="space-x-4 ">
             
