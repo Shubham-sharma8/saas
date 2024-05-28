@@ -68,23 +68,14 @@ export function HeroHighlights() {
               />
             </div>
           </div>
-          <div className="text-sm md:text-xl font-light text-zinc-500">
-         We are under beta testing. Sign-Up now to get early access.
-          </div>
+          <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+          <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm ">
+            Start Generating For Free
+          </Button>
+        </Link>
           <div className="space-x-4 ">
             
-            {!isSignedIn && (
-              <Link href={"https://try.cogify.social"}>
-                <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
-                  Try without Sign-Up
-                </Button>
-              </Link>
-            )}
-            <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-            <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
-              {isSignedIn ? "Dashboard" : "Sign-Up Now"}
-              </Button>
-            </Link>
+            
           </div>
           {/* <div className="text-zinc-400 text-xs md:text-sm font-normal">
             No credit card required*.
