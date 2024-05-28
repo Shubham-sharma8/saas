@@ -11,8 +11,8 @@ const exampleMessages = [
     message: 'Why is Nvidia growing rapidly?'
   },
   {
-    heading: 'Who is Narander Modi',
-    message: 'Who is Narander Modi?'
+    heading: 'Who is Narendra modi?',
+    message: 'Who is Narendra modi?'
   },
   {
     heading: 'Tesla vs Ola',
