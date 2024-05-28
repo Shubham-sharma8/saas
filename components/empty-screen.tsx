@@ -6,6 +6,7 @@ const exampleMessages = [
     heading: "What's new with the iPad Pro?",
     message: "What's new with the iPad Pro?"
   },
+  
   {
     heading: 'Why is Nvidia growing rapidly?',
     message: 'Why is Nvidia growing rapidly?'
