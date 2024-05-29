@@ -13,6 +13,7 @@ Powered by cutting-edge technologies like Next.js 13, React, TypeScript, and mor
 - **Image Insights:** Get deep insights into the content and context of images. And ask questions regarding your image🔍
 - **Text to Speech:** Convert your text into natural-sounding speech seamlessly with more then 5 speaking model. 🗣️
 - **PDF Insight:** Ask you question related to your pdf file directly to gpt-4o.ar [pdf.cogify.social](https://pdf.cogify.social) 📄 **[Github Link](https://github.com/Shubham-sharma8/chatify)**
+- **AI Code Translator:** Use AI to translate code from one language to another. 🧑‍💻
 - **Try without sign-up:** We also provide a try to our most advanced gpt-4o model without sign up. URL Sharing and more.[try.cogify.social](https://try.cogify.social) **[Github Link](https://github.com/Shubham-sharma8/tryit)**
 - 
 - **Whatsapp integration:** Send your message to [Here](https://wa.me/919831047163) to continue these awesome features in whatsapp. Start enjoying by saying **Hi**.
