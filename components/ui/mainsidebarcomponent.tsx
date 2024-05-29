@@ -52,18 +52,17 @@ import {
             <GradientButton buttonText="Text-to-Speech Generation" />
           </Link>
           </AccordionContent>
+          <AccordionContent>
+            <Link href="/ai-code" > 
+            <GradientButton buttonText="AI Code Translator" />
+          </Link>
+          </AccordionContent>
 
           <AccordionContent>
             <Link href="/code" > 
             <GradientButton buttonText="Code Generation" />
           </Link>
           </AccordionContent>
-          <AccordionContent>
-            <Link href="/entertainment" > 
-            <GradientButton buttonText="Entertainment Suggestion" />
-          </Link>
-          </AccordionContent>
-
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>Price</AccordionTrigger>

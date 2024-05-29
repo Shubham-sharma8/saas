@@ -79,12 +79,12 @@ export function TabsDemo() {
     },
     
     {
-      title: "Entertainment Suggestion",
+      title: "AI Code Translator",
       value: "content",
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p>Entertainment Suggestion</p>
-          <DummyContent src="/ent.svg" />
+          <p>AI Code Translator </p>
+          <DummyContent src="/coding.svg" />
         </div>
       ),
     },

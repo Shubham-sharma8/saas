@@ -40,12 +40,7 @@ export const projects = [
       "Efficiently create code with our streamlined Code Generation tool.     ",
     link: "/code",
   },
-  {
-    title: "Entertainment Suggestion",
-    description:
-      "Intelligently suggest movies or series based on your preferences. ",
-    link: "/entertainment",
-  },
+ 
   {
     title: "More?",
     description: "More stunning features comming soon.",

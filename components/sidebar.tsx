@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import { Code, Eye, FileCheck2, Film, HomeIcon, ImageIcon, LayoutDashboard, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Settings } from "lucide-react";
+import { Code, Code2, Eye, FileCheck2, Film, HomeIcon, ImageIcon, LayoutDashboard, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -76,12 +76,12 @@ const routes = [
     href: '/text-to-speech',
   },
   {
-    label: 'Entertainment Suggestions',
-    icon: Film,
-    color: "text-green-700",
-    bgColor: "bg-green-700/10",
-    href: '/entertainment',
+    label: 'AI Code Translator',
+    icon: Code2,
+    color: "text-pink-700",
+    href: '/ai-code',
   },
+
   {
     label: 'Code Generation',
     icon: Code,

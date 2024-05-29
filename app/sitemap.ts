@@ -53,9 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         {
             url: 'https://pdf.cogify.social/'
         },
-        {
-            url: 'https://cogify.social/entertainment'
-        },
+       
         {
             url: 'https://cogify.social/code'
         },

@@ -1,5 +1,5 @@
 
-import { Code, Eye, FileCheck2, Film, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus } from "lucide-react";
+import { Code, Code2, Eye, FileCheck2, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -57,15 +57,14 @@ export const tools = [
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
   },
-  
   {
-    label: 'Entertainment Suggestions',
-    icon: Film,
-    color: "text-green-700",
-    bgColor: "bg-green-700/10",
-    href: '/entertainment',
+    label: 'AI Code Translator',
+    icon: Code2,
+    href: '/ai-code',
+    color: "text-pink-700",
+    bgColor: "bg-pink-700/10",
   },
-  
+
   {
     label: 'Code Generation',
     icon: Code,
