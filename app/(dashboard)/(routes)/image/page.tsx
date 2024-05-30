@@ -485,6 +485,7 @@ const PhotoPage = () => {
                   width={1} // Set your desired width
                   height={1} // Set your desired height
                   layout="responsive" // Use responsive layout for better performance
+                  priority
                   
                 />
               </div>
