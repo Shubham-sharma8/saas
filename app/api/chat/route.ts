@@ -9,7 +9,7 @@ import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 export async function POST(req: Request) {
   try {
     const { userId } = auth();
-    const { messages, model = "gpt-4" } = await req.json();
+    const { messages, model = "gpt-4o" } = await req.json();
 
     // Check if the user is authenticated
     if (!userId) {
