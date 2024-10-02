@@ -86,6 +86,8 @@ import { modelOption} from "./constants";
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
+
+  
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Function to adjust the height of the textarea
@@ -110,7 +112,7 @@ const Chat = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gpt-4o",
+      model: "gemini-1.5-flash-002",
     },
   });
   

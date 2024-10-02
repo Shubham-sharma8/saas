@@ -2,7 +2,6 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-import { checkSubscription } from "@/lib/subscription";
 import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 
 
@@ -38,11 +37,8 @@ export async function POST(
     }
 
     const freeTrial = await checkApiLimit();
-    const isPro = await checkSubscription();
 
-    if (!freeTrial && !isPro) {
-      return new NextResponse("Free trial has expired. Please upgrade to pro.", { status: 403 });
-    }
+    
 
     const generateImage = async function(prompt:any, resolution:any, modelImage:any) {
       const response = await openai.images.generate({
@@ -65,10 +61,7 @@ export async function POST(
     // Await all the image generation promises
     const images = await Promise.all(imagePromises);
 
-    if (!isPro) {
-      await incrementApiLimit();
-    }
-
+    
     const imageUrls = images.map(response => response[0]); // Access the first image URL directly from the response array
     return NextResponse.json(imageUrls); // Respond with image URLs
 
