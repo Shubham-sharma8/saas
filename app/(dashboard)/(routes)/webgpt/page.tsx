@@ -256,7 +256,7 @@ const Chat = () => {
     <div>
       <Heading
         title="WebGPT"
-        description="Power of GPT-4o connected with internet. Best for recent searches."
+        description="Power of Gemini-1.5 connected with Google. Best for recent searches."
         icon={MessageSquarePlus}
         iconColor="text-black-500"
         bgColor="bg-black-500/10"
@@ -265,8 +265,7 @@ const Chat = () => {
         <div>
           <Form {...form}>
             <form
-
-onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
               className="
             rounded-lg 
             border 

@@ -1,78 +1,50 @@
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
-import OpenAI from "openai";
-import axios from 'axios';
+import { VertexAI } from "@google-cloud/vertexai";
+import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+const {
+  FunctionDeclarationSchemaType,
+  HarmBlockThreshold,
+  HarmCategory,
+} = require('@google-cloud/vertexai');
 
-import { OpenAIStream, StreamingTextResponse } from 'ai';
+const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'us-central1' });
 
+const buildGoogleGenAIPrompt = (messages: Message[]) => ({
+  contents: messages
+    .filter(
+      (message) => message.role === "user" || message.role === "assistant"
+    )
+    .map((message) => ({
+      role: message.role === "user" ? "user" : "model",
+      parts: [{ text: message.content }],
+    })),
+});
 
 export async function POST(req: Request) {
-  try {
-    const { userId } = auth();
-    const { messages } = await req.json();
+  // Extract the `messages` and `model` from the body of the request
+  const { messages, model = "gemini-1.5-flash-002" } = await req.json();
 
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
+  // Dynamically get the model based on the request
+  const generativeModel = vertex_ai.preview.getGenerativeModel({
+    model: model,
+  generationConfig: {
+    'maxOutputTokens': 8192,
+    'temperature': 1,
+    'topP': 0.95,
+  },
+  safetySettings: [{category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE}],
+  tools: [
+    {
+      googleSearchRetrieval: {},
+    },
+  ],
+});
 
-    if (!messages) {
-      return new NextResponse("Messages are required", { status: 400 });
-    }
+  const geminiStream = await generativeModel.generateContentStream(
+    buildGoogleGenAIPrompt(messages)
+  );
 
-    if (!process.env.OPENAI_API_KEY) {
-      return new NextResponse("OpenAI API Key not configured.", { status: 500 });
-    }
+  const stream = GoogleGenerativeAIStream(geminiStream);
 
-    // Add your Bing Search API key and endpoint
-    const bingSearchApiKey = process.env.BING_SEARCH_API_KEY;
-    const bingSearchEndpoint = 'https://api.bing.microsoft.com/v7.0/search';
-
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
-
-    const search = async (query: string) => {
-      const mkt = 'en-US';
-      const params = { q: query, mkt: mkt };
-      const headers = { 'Ocp-Apim-Subscription-Key': bingSearchApiKey };
-
-      try {
-        const response = await axios.get(bingSearchEndpoint, { headers, params });
-        return response.data.webPages.value;
-      } catch (error) {
-        throw error;
-      }
-    };
-
-    const results = await search(messages[messages.length - 1].content);
-
-    const results_prompts = results.map((result: any) => 
-      `Source:\nTitle: ${result.name}\nURL: ${result.url}\nContent: ${result.snippet}\nDescription: ${result.description}`);
-
-    const prompt = "Use these sources to answer the question:\n\n" +
-               results_prompts.join("\n\n") + "\n\nQuestion: " +
-               messages[messages.length - 1].content + "\n\nAnswer:";
-
-     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      stream: true,
-      messages: [
-        ...messages,
-        {
-          role: 'system',
-          content: prompt
-        }
-      ]
-    });
-
-
-   
-    const stream = OpenAIStream(response);
-    // Respond with the stream
-    return new StreamingTextResponse(stream);
-
-  } catch (error) {
-    console.log('[CONVERSATION_ERROR]', error);
-    return new NextResponse("Internal Error", { status: 500 });
-  }
+  // Respond with the stream
+  return new StreamingTextResponse(stream);
 }

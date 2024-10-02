@@ -19,8 +19,9 @@ export async function POST(req: Request) {
   const { messages, model = "gemini-1.5-flash-002" } = await req.json();
 
   // Dynamically get the model based on the request
-  const generativeModel = vertex_ai.getGenerativeModel({
+  const generativeModel = vertex_ai.preview.getGenerativeModel({
     model, // use the model from the request body
+    
   });
 
   const geminiStream = await generativeModel.generateContentStream(
