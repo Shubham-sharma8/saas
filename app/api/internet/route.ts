@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import { OpenAIStream, StreamingTextResponse } from 'ai';
 
-import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 
 export async function POST(req: Request) {
   try {
@@ -65,7 +64,6 @@ export async function POST(req: Request) {
         }
       ]
     });
-    const freeTrial = await checkApiLimit();
 
 
    

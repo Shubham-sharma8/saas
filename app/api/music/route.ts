@@ -3,7 +3,6 @@ import OpenAI from "openai";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -28,7 +27,6 @@ export async function POST(
       return new NextResponse("model is required", { status: 400 });
     }
 
-    const freeTrial = await checkApiLimit();
     
 
     

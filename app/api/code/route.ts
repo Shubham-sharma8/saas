@@ -2,7 +2,6 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 
-import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 
 
 const openai = new OpenAI({
@@ -35,7 +34,6 @@ export async function POST(
       return new NextResponse("Messages are required", { status: 400 });
     }
 
-    const freeTrial = await checkApiLimit();
 
     
 
