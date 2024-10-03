@@ -18,7 +18,7 @@ export default function HomePage() {
         <title>Dashboard - Cogify</title>
         <meta
           name="description"
-          content="Access CHATGPT 4 Unlimited for free including Image Generation."
+          content="Access gemini-1.5 4 Unlimited for free including Image Generation."
         />
       </Head>
       <div className="mb-8 space-y-4">

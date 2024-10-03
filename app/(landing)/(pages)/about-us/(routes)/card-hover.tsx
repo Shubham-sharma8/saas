@@ -22,10 +22,10 @@ export const projects = [
   },
 
   {
-    title: "WebGPT",
+    title: "WebAi",
     description:
       "Power of GPT-4o connected with internet.",
-    link: "/webgpt",
+    link: "/webai",
   },
   {
     title: "Text-to-Speech Generation",

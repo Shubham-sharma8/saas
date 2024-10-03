@@ -17,6 +17,7 @@
     "@ai-sdk/anthropic": "^0.0.14",
     "@ai-sdk/google": "^0.0.14",
     "@ai-sdk/openai": "^0.0.2",
+    "@anthropic-ai/vertex-sdk": "^0.4.1",
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@clerk/clerk-sdk-node": "^4.13.11",

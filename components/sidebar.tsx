@@ -41,9 +41,9 @@ const routes = [
     href: '/advance',
   },
   {
-    label: 'WebGPT',
+    label: 'WebAI',
     icon: MessageSquarePlus,
-    href: '/webgpt',
+    href: '/webai',
     color: "text-black-500",
     bgColor: "bg-black-500/10",
   },

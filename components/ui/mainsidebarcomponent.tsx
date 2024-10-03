@@ -27,8 +27,8 @@ import {
           </Link>
           </AccordionContent>
           <AccordionContent>
-            <Link href="/webgpt" > 
-            <GradientButton buttonText="WebGPT" />
+            <Link href="/webai" > 
+            <GradientButton buttonText="Webai" />
           </Link>
           </AccordionContent>
           <AccordionContent>

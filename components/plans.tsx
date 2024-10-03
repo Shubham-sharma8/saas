@@ -31,7 +31,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Including WebGPT
+                    Including WebAI
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
@@ -53,7 +53,7 @@ export const Plans = () =>{
                   
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited gpt-4o Access
+                    Unlimited Gemini-1.5
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
@@ -77,7 +77,7 @@ export const Plans = () =>{
                   as="button"
                   className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
                 >
-                  Get Started Now
+                  Donate?
                 </CardItem>
                 </Link>
               </div>
@@ -103,7 +103,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Including WebGPT
+                    Including WebAI
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
@@ -125,7 +125,7 @@ export const Plans = () =>{
                   
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited gpt-4o Access
+                    Unlimited Gemini-1.5 Access
                   </li>
                 </ul>
               </CardItem>
@@ -146,7 +146,7 @@ export const Plans = () =>{
                   as="button"
                   className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
                 >
-                  Get Started Now
+                  Donate?
                 </CardItem>
                 </Link>
               </div>
@@ -185,7 +185,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited gpt-4o Access
+                    Unlimited Gemini-1.5 Access
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
@@ -208,13 +208,12 @@ export const Plans = () =>{
                 </CardItem>
                 </Link>
                 <Link href='/dashboard'> 
-                
                 <CardItem
                   translateZ={20}
                   as="button"
                   className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
                 >
-                  Get Started Now
+                  Donate?
                 </CardItem>
                 </Link>
               </div>

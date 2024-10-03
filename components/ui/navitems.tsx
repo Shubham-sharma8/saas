@@ -36,10 +36,10 @@ function Navbar({ className }: { className?: string }) {
                 description="Bring your ideas to life with our powerful Image Generation tool."
               />
               <ProductItem
-                title="WebGPT"
-                href="/webgpt"
+                title="Webai"
+                href="/webai"
                 src="/webgpt.svg"
-                description= "Power of GPT-4o connected with internet. Get more information from the web and CHATGPT combined."
+                description= "Power of Gemini-1.5 connected with Google. Get more information from the web and CHATGPT combined."
               />
               <ProductItem
                 title="Image Insight"

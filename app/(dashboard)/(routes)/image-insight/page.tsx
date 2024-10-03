@@ -4,6 +4,9 @@ import * as React from "react";
 import * as LR from "@uploadcare/blocks";
 import { PACKAGE_VERSION } from "@uploadcare/blocks";
 import { Heading } from "@/components/heading";
+import dynamic from 'next/dynamic';
+const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
+
 import * as z from "zod";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -29,21 +32,28 @@ import Head from "next/head";
 LR.registerBlocks(LR);
 
 function Minimal() {
-  const router = useRouter();
   const proModal = useProModal();
-  const [messages, setMessages] = useState<
-    OpenAI.Chat.CreateChatCompletionRequestMessage[]
-  >([]);
-
+  const [messages, setMessages] = useState<OpenAI.Chat.CreateChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gpt-4o",
+      model: "gemini-1.5-flash-002",
     },
   });
-
   const isLoading = form.formState.isSubmitting;
+  const [files, setFiles] = React.useState<any[]>([]);
+  const ctxProviderRef = React.useRef<any>(null);
+
+  useEffect(() => {
+    const ctxProvider = ctxProviderRef.current;
+    if (!ctxProvider) return;
+    const handleChangeEvent = (e: any) => {
+      setFiles([...e.detail.allEntries.filter((f: any) => f.status === "success")]);
+    };
+    ctxProvider.addEventListener("change", handleChangeEvent);
+    return () => ctxProvider.removeEventListener("change", handleChangeEvent);
+  }, [setFiles]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -51,62 +61,36 @@ function Minimal() {
         role: "user",
         content: values.prompt,
       };
-      const newMessages = [...messages, userMessage];
-      //URL Which convert image to JPEG//
-      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
+      let newMessages = [...messages, userMessage];
 
+      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
       if (fileUrls.length > 0) {
-        // If there are uploaded files, add their CDN URLs as separate user messages
-        fileUrls.forEach((url) => {
-          newMessages.push({ role: "user", content: url });
-        });
+        newMessages = newMessages.concat(fileUrls.map((url) => ({ role: "user", content: url })));
       }
 
-      const response = await axios.post("/api/vision", {
-        messages: newMessages,
-      });
-      setMessages((current) => [...current, userMessage, response.data]);
-      form.reset();
+      
+
+      const output = await axios.post("/api/vision", { messages: newMessages });
+      
+
+      //  Crucial change:  Handle potential non-Markdown responses
+      const botResponse =  typeof output.data === 'string' ? output.data : JSON.stringify(output.data, null, 2); // Convert JSON to pretty-printed string if needed
+
+
+      setMessages([...messages, userMessage, { role: "assistant", content: botResponse }]);
+
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
+        console.error("Error:", error);
         toast.error("Something went wrong");
       }
-    } finally {
-      router.refresh();
     }
   };
-
-const [files, setFiles] = React.useState<any[]>([]);
-  const ctxProviderRef = React.useRef<any>(null);
-
-  React.useEffect(() => {
-    const ctxProvider = ctxProviderRef.current;
-    if (!ctxProvider) return;
-
-    const handleChangeEvent = (e: any) => {
-      console.log("change event payload:", e);
-      setFiles([
-        ...e.detail.allEntries.filter((f: any) => f.status === "success"),
-      ]);
-    };
-
-    ctxProvider.addEventListener("change", handleChangeEvent);
-    return () => {
-      ctxProvider.removeEventListener("change", handleChangeEvent);
-    };
-  }, [setFiles]);
-
-  const formatSize = (bytes: number) => {
-    if (!bytes) return "0 Bytes";
-
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+  const cleanContent = (content: string) => {
+    // Remove lines starting with '0:'
+    return content.replace(/^0:\s?/gm, '');
   };
 
   return (
@@ -195,125 +179,41 @@ const [files, setFiles] = React.useState<any[]>([]);
                 Generate
               </Button>
             </form>
-          </Form>
-        </div>
+            </Form>
+            
         <div className="space-y-4 mt-4">
-          {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-              <Loader />
-            </div>
-          )}
-          {messages.length === 0 && !isLoading && (
-            <Empty label="No conversation started." />
-          )}
-
+          {isLoading && <Loader />}
+          {messages.length === 0 && !isLoading && <Empty label="No conversation started." />}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
-              <div
-                key={index} // Using index as key is not recommended for dynamic lists, consider using a unique ID
-                className={cn(
-                  "relative p-8 w-full flex items-start gap-x-8 rounded-lg",
-                  message.role === "user"
-                    ? "bg-white border border-black/10"
-                    : "bg-muted"
-                )}
-              >
+              <div key={index} className={cn("relative p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
                 <div className="flex items-start gap-x-8">
                   {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                   <div className="text-sm whitespace-pre-wrap flex-1">
-                    {message.content
-                      ?.toString()
-                      .split("\n")
-                      .map((line, lineIndex) => {
-                        if (line.includes("###")) {
-                          return (
-                            <h1 key={lineIndex}>
-                              <strong>{line.replace(/###/g, "")}</strong>
-                            </h1>
-                          );
-                        } else if (line.includes("####")) {
-                          return (
-                            <h2 key={lineIndex}>
-                              <strong>{line.replace(/####/g, "")}</strong>
-                            </h2>
-                          );
-                        } else {
-                          return (
-                            <p key={lineIndex}>
-                              {line
-                                .split(/\*\*(.*?)\*\*/g)
-                                .map((text, textIndex) => {
-                                  return textIndex % 2 === 0 ? (
-                                    text
-                                  ) : (
-                                    <strong key={textIndex}>{text}</strong>
-                                  );
-                                })}
-                            </p>
-                          );
-                        }
-                      })}
+                    <ReactMarkdown 
+                      components={{
+                        pre: ({ node, ...props }) => (
+                          <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
+                            <pre {...props} />
+                          </div>
+                        ),
+                        a: ({ node, ...props }) => (
+                          <a {...props} style={{ color: 'blue', fontWeight: 'bold', textDecoration: 'underline' }} />
+                        ),
+                      }}
+                      className="text-sm overflow-hidden leading-7"
+                    >
+                      {cleanContent(message.content?.toString() || '')}
+                    </ReactMarkdown>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <div
-          className={st.previews}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {files.length > 0 && ( // Check if files array is not empty
-            <div className="text-sm md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
-              Uploaded Images
-            </div>
-          )}
-        </div>
-        <div className={st.previews}>
-          {/* Map through uploaded files */}
-          {files.map((file) => (
-            <div key={file.uuid} className={st.previewWrapper}>
-              <img
-                className={st.previewImage}
-                key={file.uuid}
-                src={`${file.cdnUrl}-/format/jpeg/`}
-                width="200"
-                height="200"
-                alt={file.fileInfo.originalFilename || ""}
-                title={file.fileInfo.originalFilename || ""}
-              />
-
-              <p className={st.previewData}>
-                Name:
-                {file.fileInfo.originalFilename}
-              </p>
-              <p className={st.previewData}>
-                Size:
-                {formatSize(file.fileInfo.size)}
-              </p>
-              {/* Add the URL display here */}
-              <p className={st.previewData}>
-                Image URL:
-                <Button
-                  variant="link"
-                  onClick={() =>
-                    window.open(`${file.cdnUrl}-/format/jpeg/`, "_blank")
-                  }
-                  rel="noopener noreferrer"
-                >
-                  View Image
-                </Button>
-              </p>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
+  </div>
   );
 }
-
 export default Minimal;

@@ -100,7 +100,7 @@ const Chat = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gpt-4o",
+      model: "gemini-1.5-flash-002",
     },
   });
   
@@ -255,7 +255,7 @@ const Chat = () => {
   return (
     <div>
       <Heading
-        title="WebGPT"
+        title="WebAI"
         description="Power of Gemini-1.5 connected with Google. Best for recent searches."
         icon={MessageSquarePlus}
         iconColor="text-black-500"
@@ -296,7 +296,6 @@ const Chat = () => {
                   </FormItem>
                 )}
               />
-
               <Button
                 className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5"
                 type="submit"
@@ -334,29 +333,18 @@ const Chat = () => {
 
                   <div className="text-sm whitespace-pre-wrap flex-1">
                   <ReactMarkdown
-      components={{
-        pre: ({ node, ...props }) => (
-          <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
-            <pre {...props} />
-          </div>
-        ),
-        a: ({ node, ...props }) => (
-          <a
-            {...props}
-            style={{
-              color: 'blue',
-              fontWeight: 'bold',
-              textDecoration: 'underline',
-            }}
-          />
-        ),
-      }}
-      className="text-sm overflow-hidden leading-7"
-    >
-      {message.content?.toString()}
-    </ReactMarkdown>
+                  components={{
+                    pre: ({ node, ...props }) => (
+                      <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
+                        <pre {...props} />
+                      </div>
+                    ),
+                  }}
+                  className="text-sm overflow-hidden leading-7"
+                >
+                  {message.content?.toString()}
+                </ReactMarkdown>
                   </div>
-
                   <div className="absolute top-0 right-0 flex gap-x-2">
                     <Clipboard
                       onClick={() =>

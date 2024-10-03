@@ -3,18 +3,25 @@ import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
 
 const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'us-central1' });
 
-const buildGoogleGenAIPrompt = (messages: Message[]) => ({
-  contents: messages
-    .filter(
-      (message) => message.role === "user" || message.role === "assistant"
-    )
-    .map((message) => ({
-      role: message.role === "user" ? "user" : "model",
-      parts: [{ text: message.content }],
-    })),
-});
+
+
 
 export async function POST(req: Request) {
+  const buildGoogleGenAIPrompt = (messages: Message[]) => ({
+    contents: messages
+      .filter(
+        (message) => message.role === "user" || message.role === "assistant"
+      )
+      .map((message) => ({
+        role: message.role === "user" ? "user" : "model",
+        
+        parts: [  { text: message.content }  ],
+      })),
+  });
+  
+  
+
+  
   // Extract the `messages` and `model` from the body of the request
   const { messages, model = "gemini-1.5-flash-002" } = await req.json();
 

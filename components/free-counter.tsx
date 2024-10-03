@@ -50,7 +50,7 @@ export const FreeCounter = ({
             
             <Progress className="h-3"  />
           </div>
-          <Button onClick={proModal.onOpen} variant="premium" className="w-full">
+          <Button onClick={() => window.open("https://razorpay.me/@cogifysocial", "Donate")} variant="premium" className="w-full">
             Donate
             <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
