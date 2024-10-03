@@ -41,6 +41,16 @@ function Minimal() {
       model: "gemini-1.5-flash-002",
     },
   });
+  const formatSize = (bytes: number) => {
+    if (!bytes) return "0 Bytes";
+
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+  };
   const isLoading = form.formState.isSubmitting;
   const [files, setFiles] = React.useState<any[]>([]);
   const ctxProviderRef = React.useRef<any>(null);
@@ -54,7 +64,7 @@ function Minimal() {
     ctxProvider.addEventListener("change", handleChangeEvent);
     return () => ctxProvider.removeEventListener("change", handleChangeEvent);
   }, [setFiles]);
-
+  const router = useRouter();
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const userMessage: OpenAI.Chat.CreateChatCompletionRequestMessage = {
@@ -87,10 +97,16 @@ function Minimal() {
         toast.error("Something went wrong");
       }
     }
+    finally {
+      router.refresh();
+    }
   };
   const cleanContent = (content: string) => {
     // Remove lines starting with '0:'
-    return content.replace(/^0:\s?/gm, '');
+    return content
+    .replace(/^0:\s?/gm, '') // Remove '0:'
+    .replace(/\{\s*"role":\s*"model",\s*"parts":\s*\[\s*\{\s*"text":\s*"/g, '') // Remove the JSON-like pattern
+    .replace(/}\s*]\s*}/g, '');  // Remove the closing brackets
   };
 
   return (
@@ -205,15 +221,74 @@ function Minimal() {
                     >
                       {cleanContent(message.content?.toString() || '')}
                     </ReactMarkdown>
+                    </div>
+                    </div>
+                    </div>
+          ))}
+        </div>
+                    
+                    <div
+          className={st.previews}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+
+          {files.length > 0 && ( // Check if files array is not empty
+            <div className="text-sm md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
+              Uploaded Images
+            </div>
+          )}
+        </div>
+
+<div className={st.previews}>
+          {/* Map through uploaded files */}
+          {files.map((file) => (
+            <div key={file.uuid} className={st.previewWrapper}>
+              <img
+                className={st.previewImage}
+                key={file.uuid}
+                src={`${file.cdnUrl}-/format/jpeg/`}
+                width="200"
+                height="200"
+                alt={file.fileInfo.originalFilename || ""}
+                title={file.fileInfo.originalFilename || ""}
+              />
+
+              <p className={st.previewData}>
+                Name:
+                {file.fileInfo.originalFilename}
+              </p>
+              <p className={st.previewData}>
+                Size:
+                {formatSize(file.fileInfo.size)}
+              </p>
+              {/* Add the URL display here */}
+              <p className={st.previewData}>
+                Image URL:
+                <Button
+                  variant="link"
+                  onClick={() =>
+                    window.open(`${file.cdnUrl}-/format/jpeg/`, "_blank")
+                  }
+                  rel="noopener noreferrer"
+                >
+                  View Image
+                </Button>
+              </p>
+            
                   </div>
-                </div>
-              </div>
+                
+               
             ))}
           </div>
         </div>
       </div>
     </div>
   </div>
+
   );
 }
 export default Minimal;

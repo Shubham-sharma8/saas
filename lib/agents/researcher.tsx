@@ -9,6 +9,8 @@ import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { getModel } from '../utilsF'
+import { VertexAI } from "@google-cloud/vertexai";
+
 
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,
@@ -23,6 +25,7 @@ export async function researcher(
       <BotMessage content={streamText.value} />
     </Section>
   )
+  const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'us-central1' });
 
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
