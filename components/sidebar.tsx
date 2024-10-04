@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import { Code, Code2, Eye, FileCheck2, Film, HomeIcon, ImageIcon, LayoutDashboard, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Settings } from "lucide-react";
+import { Code, Code2, Eye, FileCheck2, Film, HomeIcon, ImageIcon, LayoutDashboard, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Music2, Settings, Speaker } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -49,10 +49,10 @@ const routes = [
   },
  
   {
-    label: 'Image Generation',
-    icon: ImageIcon,
+    label: 'Audio',
+    icon: Music2,
     color: "text-pink-700",
-    href: '/image',
+    href: '/audio',
   },
   {
     label: 'PDF Chat',
@@ -63,31 +63,31 @@ const routes = [
   },
   
   {
-    label: 'Image Insight',
+    label: 'Vision',
     icon: Eye,
     color: "text-Blue-500",
-    href: '/image-insight',
+    href: '/vision',
   },
  
-  {
-    label: 'Text to speech Generation',
-    icon: Megaphone,
-    color: "text-emerald-500",
-    href: '/text-to-speech',
-  },
-  {
-    label: 'AI Code Translator',
-    icon: Code2,
-    color: "text-pink-700",
-    href: '/ai-code',
-  },
+  // {
+  //   label: 'Text to speech Generation',
+  //   icon: Megaphone,
+  //   color: "text-emerald-500",
+  //   href: '/text-to-speech',
+  // },
+  // {
+  //   label: 'AI Code Translator',
+  //   icon: Code2,
+  //   color: "text-pink-700",
+  //   href: '/ai-code',
+  // },
 
-  {
-    label: 'Code Generation',
-    icon: Code,
-    color: "text-green-700",
-    href: '/code',
-  },
+  // {
+  //   label: 'Code Generation',
+  //   icon: Code,
+  //   color: "text-green-700",
+  //   href: '/code',
+  // },
   
   {
     label: 'Settings',

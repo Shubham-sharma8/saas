@@ -39,12 +39,12 @@ import {
           
           <AccordionContent>
             <Link href="https://pdf.cogify.social/" > 
-            <GradientButton buttonText="Image Insight" />
+            <GradientButton buttonText="PDF Chat" />
           </Link>
           </AccordionContent>
           <AccordionContent>
-            <Link href="/image-insight" > 
-            <GradientButton buttonText="PDF Chat" />
+            <Link href="/vision" > 
+            <GradientButton buttonText="Vision" />
           </Link>
           </AccordionContent>
           <AccordionContent>
@@ -52,11 +52,11 @@ import {
             <GradientButton buttonText="Text-to-Speech Generation" />
           </Link>
           </AccordionContent>
-          <AccordionContent>
+          {/* <AccordionContent>
             <Link href="/ai-code" > 
             <GradientButton buttonText="AI Code Translator" />
           </Link>
-          </AccordionContent>
+          </AccordionContent> */}
 
           <AccordionContent>
             <Link href="/code" > 

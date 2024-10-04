@@ -9,7 +9,7 @@ import { Section } from '@/components/section'
 import { BotMessage } from '@/components/message'
 import { getTools } from './tools'
 import { getModel } from '../utilsF'
-import { VertexAI } from "@google-cloud/vertexai";
+const {VertexAI} = require('@google-cloud/vertexai');
 
 
 export async function researcher(
@@ -26,7 +26,7 @@ export async function researcher(
     </Section>
   )
   const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'us-central1' });
-
+  const model = 'gemini-1.5-flash-001';
   const currentDate = new Date().toLocaleString()
   const result = await nonexperimental_streamText({
     model: getModel(),

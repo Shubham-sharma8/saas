@@ -4,6 +4,8 @@ import * as React from "react";
 import * as LR from "@uploadcare/blocks";
 import { PACKAGE_VERSION } from "@uploadcare/blocks";
 import { Heading } from "@/components/heading";
+import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+
 import dynamic from 'next/dynamic';
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
 
@@ -28,12 +30,57 @@ import { formSchema } from "./constants";
 import st from "./styles.module.css";
 import { Eye, Image, ImageOff, MessageSquare } from "lucide-react";
 import Head from "next/head";
+import { useChat } from "ai/react";
+import  { ChangeEvent } from 'react';
+
+
 
 LR.registerBlocks(LR);
 
 function Minimal() {
+  const [files, setFiles] = React.useState<any[]>([]);
+  const ctxProviderRef = React.useRef<any>(null);
+  
+
+  useEffect(() => {
+    
+    const ctxProvider = ctxProviderRef.current;
+    if (!ctxProvider) return;
+    const handleChangeEvent = (e: any) => {
+      setFiles([...e.detail.allEntries.filter((f: any) => f.status === "success")]);
+    };
+    ctxProvider.addEventListener("change", handleChangeEvent);
+    return () => ctxProvider.removeEventListener("change", handleChangeEvent);
+  }, [setFiles]);
+  
+  
+      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
+      
+
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    api: "/api/vision",
+  });
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Function to adjust the height of the textarea
+  const adjustTextareaHeight = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustTextareaHeight(); // Adjust height on component mount
+  }, [input]);
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    handleInputChange(event);
+    adjustTextareaHeight(); // Adjust height on content change
+  };
+
+
   const proModal = useProModal();
-  const [messages, setMessages] = useState<OpenAI.Chat.CreateChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,74 +99,20 @@ function Minimal() {
     return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
   };
   const isLoading = form.formState.isSubmitting;
-  const [files, setFiles] = React.useState<any[]>([]);
-  const ctxProviderRef = React.useRef<any>(null);
+     
 
-  useEffect(() => {
-    const ctxProvider = ctxProviderRef.current;
-    if (!ctxProvider) return;
-    const handleChangeEvent = (e: any) => {
-      setFiles([...e.detail.allEntries.filter((f: any) => f.status === "success")]);
-    };
-    ctxProvider.addEventListener("change", handleChangeEvent);
-    return () => ctxProvider.removeEventListener("change", handleChangeEvent);
-  }, [setFiles]);
-  const router = useRouter();
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      const userMessage: OpenAI.Chat.CreateChatCompletionRequestMessage = {
-        role: "user",
-        content: values.prompt,
-      };
-      let newMessages = [...messages, userMessage];
-
-      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
-      if (fileUrls.length > 0) {
-        newMessages = newMessages.concat(fileUrls.map((url) => ({ role: "user", content: url })));
-      }
-
-      
-
-      const output = await axios.post("/api/vision", { messages: newMessages });
-      
-
-      //  Crucial change:  Handle potential non-Markdown responses
-      const botResponse =  typeof output.data === 'string' ? output.data : JSON.stringify(output.data, null, 2); // Convert JSON to pretty-printed string if needed
-
-
-      setMessages([...messages, userMessage, { role: "assistant", content: botResponse }]);
-
-    } catch (error: any) {
-      if (error?.response?.status === 403) {
-        proModal.onOpen();
-      } else {
-        console.error("Error:", error);
-        toast.error("Something went wrong");
-      }
-    }
-    finally {
-      router.refresh();
-    }
-  };
-  const cleanContent = (content: string) => {
-    // Remove lines starting with '0:'
-    return content
-    .replace(/^0:\s?/gm, '') // Remove '0:'
-    .replace(/\{\s*"role":\s*"model",\s*"parts":\s*\[\s*\{\s*"text":\s*"/g, '') // Remove the JSON-like pattern
-    .replace(/}\s*]\s*}/g, '');  // Remove the closing brackets
-  };
 
   return (
     <div className={st.pageWrapper}>
       <Head>
-        <title>Image Insight - Cogify</title>
+        <title>Vision - Cogify</title>
         <meta
           name="description"
           content="Know everything about your image for free. "
         />
       </Head>
       <Heading
-        title="Image Insight"
+        title="Vision"
         description="Introducing our cutting-edge image interpretation and question-answering marvel"
         icon={Eye}
         iconColor="text-blue-500"
@@ -128,8 +121,11 @@ function Minimal() {
 
       <hr className={st.separator} />
       <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center gap-2">
-        Kindly upload the image and then enter your message to get started.
+      <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center">
+          Upload an image and enter your message to get started.
+        </Highlight>      
       </div>
+      
 
       <div className="justify-center ">
         <div className={st.center}>
@@ -137,7 +133,7 @@ function Minimal() {
             ctx-name="my-uploader"
             pubkey="cd4fd5fd4190239a70a6"
             source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
-            multiple={true}
+            multiple={false}
             img-only="true"
           ></lr-config>
           <lr-file-uploader-inline
@@ -155,7 +151,11 @@ function Minimal() {
         <div>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              onSubmit={e => {
+                handleSubmit(e, {
+                  data: { imageUrl: fileUrls.toString()},
+                });
+              }}
               className="
             rounded-lg 
             border 
@@ -170,31 +170,35 @@ function Minimal() {
           "
             >
               <FormField
-                name="prompt"
-                render={({ field }) => (
-                  <FormItem className="col-span-12 dark:text-black lg:col-span-10">
-                    <FormControl className="m-0 p-0">
-                      {/* Replace Input with Textarea */}
-                      <Textarea
-                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-                        placeholder="Enter your message here"
-                        {...field}
-                      />
+              name="prompt"
+              render={() => (
+                <FormItem className="col-span-12 lg:col-span-10">
+                  <FormControl className="m-0 p-0">
+                  <Textarea
+                      ref={textareaRef}
+                      className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
+                      value={input}
+                      placeholder="Enter your message here"
+                      onChange={handleChange}
+                    />
                     </FormControl>
                   </FormItem>
                 )}
+                
               />
-
               <Button
-                className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5"
-                type="submit"
-                disabled={isLoading || files.length === 0} // Disable if loading or no files uploaded
+              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
+              type="submit"
+                disabled={isLoading}
                 size="icon"
               >
                 Generate
               </Button>
+
+              
             </form>
             </Form>
+            </div>
             
         <div className="space-y-4 mt-4">
           {isLoading && <Loader />}
@@ -205,21 +209,18 @@ function Minimal() {
                 <div className="flex items-start gap-x-8">
                   {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                   <div className="text-sm whitespace-pre-wrap flex-1">
-                    <ReactMarkdown 
-                      components={{
-                        pre: ({ node, ...props }) => (
-                          <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
-                            <pre {...props} />
-                          </div>
-                        ),
-                        a: ({ node, ...props }) => (
-                          <a {...props} style={{ color: 'blue', fontWeight: 'bold', textDecoration: 'underline' }} />
-                        ),
-                      }}
-                      className="text-sm overflow-hidden leading-7"
-                    >
-                      {cleanContent(message.content?.toString() || '')}
-                    </ReactMarkdown>
+                  <ReactMarkdown
+                  components={{
+                    pre: ({ node, ...props }) => (
+                      <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
+                        <pre {...props} />
+                      </div>
+                    ),
+                  }}
+                  className="text-sm overflow-hidden leading-7"
+                >
+                  {message.content?.toString()}
+                </ReactMarkdown>
                     </div>
                     </div>
                     </div>
@@ -286,8 +287,7 @@ function Minimal() {
         </div>
       </div>
     </div>
-  </div>
-
+  
   );
 }
 export default Minimal;

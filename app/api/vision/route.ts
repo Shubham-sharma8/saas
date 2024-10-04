@@ -1,5 +1,5 @@
 import { VertexAI } from "@google-cloud/vertexai";
-import { Message } from "ai";
+import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
 import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 
@@ -16,30 +16,31 @@ export async function POST(req: Request) {
         parts: [image1, { text: message.content }],
       })),
   });
+  const { messages, model = "gemini-1.5-flash-002", data } = await req.json();
 
-  const { messages, model = "gemini-1.5-flash-002" } = await req.json();
+  const image1 = {
+    file_data: {
+      file_uri: new URL(data.imageUrl),
+      mime_type: 'image/jpeg',
+    },
+  };
 
-  let image1 = {};
-  for (const msg of messages) {
-    if (typeof msg.content === "string" && msg.content.startsWith('http')) {
-      const urls = msg.content.split(','); 
-      image1 = {
-        file_data: {
-          file_uri: urls[0].trim(),  
-          mime_type: 'image/jpeg',
-        },
-      };
-      break;
-    }
-  }
-
-  const generativeModel = vertex_ai.getGenerativeModel({
+  const generativeModel = vertex_ai.preview.getGenerativeModel({
     model,
+    generationConfig: {
+      'maxOutputTokens': 5000,
+      'temperature': 0,
+      'topP': 0.95,
+    },
+    
   });
 
-  const prompt = buildGoogleGenAIPrompt(messages, image1);
-  const streamingResult = await generativeModel.generateContent(prompt);
+  const geminiStream = await generativeModel.generateContentStream(
+    buildGoogleGenAIPrompt(messages, image1)
+  );
 
-  const response = streamingResult.response;
-  return NextResponse.json(response.candidates?.[0]?.content);
+  const stream = GoogleGenerativeAIStream(geminiStream);
+
+  // Respond with the stream
+  return new StreamingTextResponse(stream);
 }

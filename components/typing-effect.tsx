@@ -35,7 +35,7 @@ export function TypewriterEffectSmoothDemo() {
   return (
     <div className="flex flex-col items-center justify-center h-[20rem]">
       <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base">
-       We are live on Conversation, Image Insight and webAI.
+       We are live on Conversation, Vision and webAI.
       </p>
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4 items-center">

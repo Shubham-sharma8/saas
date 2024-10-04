@@ -15,10 +15,10 @@ export const projects = [
     link: "/conversation",
   },
   {
-    title: "Image Generation",
+    title: "Audio",
     description:
       "Bring your ideas to life with our powerful Image Generation tool.      .",
-    link: "/image",
+    link: "/audio",
   },
 
   {

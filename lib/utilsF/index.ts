@@ -9,21 +9,25 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getModel() {
-  // Currently does not work with Google or Anthropic
-  // if (process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
-  //   const google = createGoogleGenerativeAI()
-  //   return google('models/gemini-1.5-pro-latest')
-  // }
+  if (process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
+    const google = createGoogleGenerativeAI({
+      apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY, // Google API key
+    })
+    return google('models/gemini-1.5-pro-latest') // Replace with the actual Google model identifier
+  }
 
   // if (process.env.ANTHROPIC_API_KEY) {
   //   const anthropic = createAnthropic()
   //   return anthropic('claude-3-haiku-20240307')
   // }
-
   const openai = new OpenAI({
-    baseUrl: process.env.OPENAI_API_BASE, // optional base URL for proxies etc.
-    apiKey: process.env.OPENAI_API_KEY, // optional API key, default to env property OPENAI_API_KEY
-    organization: '' // optional organization
-  })
-  return openai.chat(process.env.OPENAI_API_MODEL || 'gpt-4o')
+    baseUrl: process.env.OPENAI_API_BASE, // Optional base URL for proxies etc.
+    apiKey: process.env.OPENAI_API_KEY, // Optional API key
+    organization: '' // Optional organization
+  });
+
+  return openai.chat(process.env.OPENAI_API_MODEL || 'gpt-4o'); // Ensure this returns a valid model
+
+
+  
 }

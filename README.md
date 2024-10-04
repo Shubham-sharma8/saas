@@ -10,7 +10,7 @@ Powered by cutting-edge technologies like Next.js 13, React, TypeScript, and mor
 - **Live Conversations:** Engage in best AI-Based conversation with GPT-4o. Including streaming, always free forever, no ads.  💬
 - **Web connected GPT-4o:** Experience the power of OPEN AI GPT-4o connected to realtime internet. 🛜
 - **AI-Powered Image Generation:** Bring your imaginations to life with just a few clicks. Generate up to 7 images at once with Dall-E-3 🎨
-- **Image Insights:** Get deep insights into the content and context of images. And ask questions regarding your image🔍
+- **Vision:** Get deep insights into the content and context of images. And ask questions regarding your image🔍
 - **Text to Speech:** Convert your text into natural-sounding speech seamlessly with more then 5 speaking model. 🗣️
 - **PDF Insight:** Ask you question related to your pdf file directly to gpt-4o.ar [pdf.cogify.social](https://pdf.cogify.social) 📄 **[Github Link](https://github.com/Shubham-sharma8/chatify)**
 - **AI Code Translator:** Use AI to translate code from one language to another. 🧑‍💻

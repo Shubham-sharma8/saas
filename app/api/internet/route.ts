@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   const generativeModel = vertex_ai.preview.getGenerativeModel({
     model: model,
   generationConfig: {
-    'maxOutputTokens': 8192,
+    'maxOutputTokens': 5000,
     'temperature': 1,
     'topP': 0.95,
   },

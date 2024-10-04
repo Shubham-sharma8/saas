@@ -47,7 +47,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Including Image Insight
+                    Including Vision
                   </li>
                  
                   
@@ -119,7 +119,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Including Image Insight
+                    Including Vision
                   </li>
                  
                   
@@ -178,7 +178,7 @@ export const Plans = () =>{
                     Unlimited Image generation
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckIcon />Unlimited Image Insight
+                    <CheckIcon />Unlimited Vision
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />Unlimited Code generation

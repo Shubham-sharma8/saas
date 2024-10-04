@@ -42,8 +42,8 @@ function Navbar({ className }: { className?: string }) {
                 description= "Power of Gemini-1.5 connected with Google. Get more information from the web and CHATGPT combined."
               />
               <ProductItem
-                title="Image Insight"
-                href="/image-insight"
+                title="Vision"
+                href="/vision"
                 src="/imageins.svg"
                 description="Unlocking Vision: Simplifying Understanding with Intelligent Image Analysis."
               />

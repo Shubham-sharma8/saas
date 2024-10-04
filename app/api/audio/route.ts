@@ -1,42 +1,42 @@
 import { VertexAI } from "@google-cloud/vertexai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { NextResponse } from "next/server";
+export const dynamic = 'force-dynamic';
 
 const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'us-central1' });
 
-
-
-
 export async function POST(req: Request) {
-  const buildGoogleGenAIPrompt = (messages: Message[]) => ({
+  const buildGoogleGenAIPrompt = (messages: Message[], image1: any) => ({
     contents: messages
       .filter(
         (message) => message.role === "user" || message.role === "assistant"
       )
       .map((message) => ({
         role: message.role === "user" ? "user" : "model",
-        
-        parts: [  { text: message.content }  ],
+        parts: [image1, { text: message.content }],
       })),
   });
-  
-  
+  const { messages, model = "gemini-1.5-flash-001", data } = await req.json();
 
-  
-  // Extract the `messages` and `model` from the body of the request
-  const { messages, model = "gemini-1.5-flash-002" } = await req.json();
+  const image1 = {
+    file_data: {
+      file_uri: new URL(data.imageUrl),
+      mime_type: 'audio/mpeg',
+    },
+  };
 
-  // Dynamically get the model based on the request
   const generativeModel = vertex_ai.preview.getGenerativeModel({
-    model, // use the model from the request body
+    model,
     generationConfig: {
       'maxOutputTokens': 5000,
       'temperature': 0,
       'topP': 0.95,
     },
+    
   });
 
   const geminiStream = await generativeModel.generateContentStream(
-    buildGoogleGenAIPrompt(messages)
+    buildGoogleGenAIPrompt(messages, image1)
   );
 
   const stream = GoogleGenerativeAIStream(geminiStream);

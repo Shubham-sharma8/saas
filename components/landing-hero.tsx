@@ -22,7 +22,7 @@ export const LandingHero = () => {
                     "Chat with any PDF",
                     "Blog Writing.",
                     "Mail Writing.",
-                    "Image Insight",
+                    "Vision",
                     "Audio Generation.",
               ],
               autoStart: true,

@@ -1,5 +1,5 @@
 
-import { Code, Code2, Eye, FileCheck2, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus } from "lucide-react";
+import { Code, Code2, Eye, FileCheck2, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Music2, Speaker } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -28,11 +28,11 @@ export const tools = [
   },
 
   {
-    label: 'Image Generation',
-    icon: ImageIcon,
+    label: 'Audio',
+    icon: Music2,
     color: "text-pink-700",
     bgColor: "bg-pink-700/10",
-    href: '/image',
+    href: '/audio',
   },
 
   {
@@ -50,28 +50,28 @@ export const tools = [
     bgColor: "bg-blue-500/10",
     href: '/image-insight',
   },
-  {
-    label: 'Text to speech',
-    icon: Megaphone,
-    href: '/text-to-speech',
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
-  },
-  {
-    label: 'AI Code Translator',
-    icon: Code2,
-    href: '/ai-code',
-    color: "text-pink-700",
-    bgColor: "bg-pink-700/10",
-  },
+  // {
+  //   label: 'Text to speech',
+  //   icon: Megaphone,
+  //   href: '/text-to-speech',
+  //   color: "text-emerald-500",
+  //   bgColor: "bg-emerald-500/10",
+  // },
+  // {
+  //   label: 'AI Code Translator',
+  //   icon: Code2,
+  //   href: '/ai-code',
+  //   color: "text-pink-700",
+  //   bgColor: "bg-pink-700/10",
+  // },
 
-  {
-    label: 'Code Generation',
-    icon: Code,
-    color: "text-green-700",
-    bgColor: "bg-green-700/10",
-    href: '/code',
-  },
+  // {
+  //   label: 'Code Generation',
+  //   icon: Code,
+  //   color: "text-green-700",
+  //   bgColor: "bg-green-700/10",
+  //   href: '/code',
+  // },
   
 ];
 
