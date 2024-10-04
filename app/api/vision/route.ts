@@ -1,5 +1,6 @@
 import { VertexAI } from "@google-cloud/vertexai";
 import { Message } from "ai";
+import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 
 const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'us-central1' });
@@ -40,5 +41,5 @@ export async function POST(req: Request) {
   const streamingResult = await generativeModel.generateContent(prompt);
 
   const response = streamingResult.response;
-  return Response.json(response.candidates?.[0]?.content);
+  return NextResponse.json(response.candidates?.[0]?.content);
 }

@@ -177,7 +177,6 @@ function Minimal() {
                       {/* Replace Input with Textarea */}
                       <Textarea
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-                        disabled={isLoading || files.length === 0} // Disable if loading or no files uploaded
                         placeholder="Enter your message here"
                         {...field}
                       />
