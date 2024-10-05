@@ -96,7 +96,7 @@ const MusicPage = () => {
       <Heading
         title="Text to speech Generation"
         description="Turn your prompt into Real speech."
-        icon={Megaphone}
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-emerald-500"
         bgColor="bg-emerald-500/10"
       />

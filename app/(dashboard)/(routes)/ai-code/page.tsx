@@ -143,7 +143,7 @@ export default function Home() {
       <Heading
         title="AI Code Translator"
         description="Use AI to translate code from one language to another."
-        icon={Code2}
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-pink-700"
         bgColor="bg-pink-700/10"
       />

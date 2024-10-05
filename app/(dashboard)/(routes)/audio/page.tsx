@@ -103,7 +103,7 @@ function Minimal() {
       <Heading
         title="Audio"
         description="Introducing to play with audio. get audio diarization, translation, and more."
-        icon={Music2}
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-pink-700"
         bgColor="bg-pink-10"
       />

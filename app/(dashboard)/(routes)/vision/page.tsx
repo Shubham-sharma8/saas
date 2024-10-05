@@ -4,7 +4,7 @@ import * as React from "react";
 import * as LR from "@uploadcare/blocks";
 import { PACKAGE_VERSION } from "@uploadcare/blocks";
 import { Heading } from "@/components/heading";
-import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+import {  Highlight } from "@/components/ui/hero-highlight";
 
 import dynamic from 'next/dynamic';
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
@@ -25,7 +25,6 @@ import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 import { formSchema } from "./constants";
 import st from "./styles.module.css";
-import { Eye, Image, ImageOff, MessageSquare } from "lucide-react";
 import Head from "next/head";
 import { useChat } from "ai/react";
 import  { ChangeEvent } from 'react';
@@ -111,9 +110,10 @@ function Minimal() {
       <Heading
         title="Vision"
         description="Introducing our cutting-edge image interpretation and question-answering marvel"
-        icon={Eye}
+        icon={<img src="https://i.ibb.co/Px29hJp/icon-vcap-vqa.png" alt="Vision Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+
         iconColor="text-blue-500"
-        bgColor="bg-blue-500/10"
+        bgColor="bg-violet-500/10"
       />
 
       <hr className={st.separator} />

@@ -7,6 +7,8 @@ import * as z from "zod";
 import dynamic from 'next/dynamic';  // <- Dynamically import ReactMarkdown
 
 import { MessageSquare } from "lucide-react";
+import {ClaudeCard} from '@/components/models'
+    
 import { useForm } from "react-hook-form";
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
 import Prism from 'prismjs';
@@ -75,6 +77,8 @@ import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { Empty } from "@/components/ui/empty";
+import {  Highlight } from "@/components/ui/hero-highlight";
+
 
 import { formSchema } from "./constants";
 import { questionsByPage } from "./questions";
@@ -260,8 +264,8 @@ const Chat = () => {
     <div>
       <Heading
         title="Conversation"
-        description="Our most advanced conversation model."
-        icon={MessageSquare}
+        description="The best performing Gemini model with features for a wide range of tasks"
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -345,9 +349,18 @@ const Chat = () => {
               <Loader />
             </div>
           )}
+          
           {messages.length === 0 && !isLoading && (
-            <Empty label="No conversation started." />
-          )}
+  <div>
+    <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center "> {/* Changed gap from 2 to 1 */}
+      <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center -mb-6">
+        Try other models as well.
+      </Highlight>      
+    </div>
+    <ClaudeCard/>
+  </div>
+)}
+
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
               <div

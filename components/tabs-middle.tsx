@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Tabs } from "./ui/tabs";
+import Link from "next/link";
 
 export function TabsDemo() {
   const tabs = [
@@ -9,10 +10,12 @@ export function TabsDemo() {
       title: "Conversation",
       value: "product",
       content: (
+        <Link href={'/conversation'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
           <p>Conversation</p>
           <DummyContent src="/con.svg"/>
         </div>
+        </Link>
       ),
 
     },
@@ -20,20 +23,25 @@ export function TabsDemo() {
       title: "Image Generation",
       value: "playground",
       content: (
+        <Link href={'/image'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
           <p>Image Generation</p>
           <DummyContent src="/imag.svg" />
+
         </div>
+        </Link>
       ),
     },
     {
       title: "Webai",
       value: "webai",
       content: (
+        <Link href={'/webai'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
           <p>WebAI</p>
           <DummyContent src="/webgpt_tab.svg" />
         </div>
+        </Link>
       ),
     },
     
@@ -41,44 +49,54 @@ export function TabsDemo() {
       title: "Pdf Chat",
       value: "Pdf Chat",
       content: (
+        <Link href={'/pdf'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
           <p>Pdf Chat</p>
           <DummyContent src="/pdf.svg" />
         </div>
+        </Link>
       ),
     },
-    // {
-    //   title: "AdvanceGPT",
-    //   value: "AdvanceGPT",
-    //   content: (
-    //     <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-    //       <p>AdvanceGPT</p>
-    //       <DummyContent src="/advance.svg" />
-    //     </div>
-    //   ),
-    // },
+   
     
    
     {
       title: "Vision",
       value: "Money",
       content: (
+        <Link href={'/vision'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
           <p>Vision</p>
-          <DummyContent src="/image.svg" />
+          <DummyContent src="/vision.svg" />
         </div>
+        </Link>
       ),
     },
-    // {
-    //   title: "Text-to-Speech Generation",
-    //   value: "services",
-    //   content: (
-    //     <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-    //       <p>Text-to-Speech Generation</p>
-    //       <DummyContent src="/spe.svg" />
-    //     </div>
-    //   ),
-    // },
+    {
+      title: "Claude 3.5 Sonnet",
+      value: "services",
+      content: (
+        <Link href={'/claude-3.5'}> 
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Claude 3.5 Sonnet</p>
+          <DummyContent src="/claude.svg" />
+        </div>
+        </Link>
+      ),
+    },
+    {
+      title: "Audio",
+      value: "Audio",
+      content: (
+        <Link href={'/audio'}> 
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Audio</p>
+          <DummyContent src="/audio.svg" />
+          
+        </div>
+        </Link>
+      ),
+    },
     
     // {
     //   title: "AI Code Translator",

@@ -103,9 +103,9 @@ function Minimal() {
       <Heading
         title="PDF Chat"
         description="Introducing to play with audio. get audio diarization, translation, and more."
-        icon={FileCheck2}
+        icon={<img src="https://i.ibb.co/f1tPm1d/icon-text-generation.png" alt="PDF Chat Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-pink-700"
-        bgColor="bg-pink-10"
+        bgColor="bg-violet-500/10"
       />
 
       <hr className={st.separator} />

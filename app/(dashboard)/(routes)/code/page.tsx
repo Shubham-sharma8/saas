@@ -80,7 +80,7 @@ const CodePage = () => {
       <Heading
         title="Code Generation"
         description="Generate code using descriptive text."
-        icon={Code}
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-green-700"
         bgColor="bg-green-700/10"
       />

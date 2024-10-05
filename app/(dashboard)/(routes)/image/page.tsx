@@ -112,9 +112,9 @@ const PhotoPage = () => {
       <Heading
         title="Image Generation"
         description="Turn your prompt into an image."
-        icon={ImageIcon}
+        icon={<img src="https://i.ibb.co/71jJqMR/icon-image-generation.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-green-700"
-        bgColor="bg-green-700/10"
+        bgColor="bg-violet-500/10"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>

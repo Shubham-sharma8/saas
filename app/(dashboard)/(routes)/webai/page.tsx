@@ -73,7 +73,7 @@ import { questionsByPage } from "./questions";
 
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/internet",
+    api: "/api/webai",
   });
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -156,7 +156,6 @@ const Chat = () => {
     }
   };
   //Speaking//
-
   const [speaking, setSpeaking] = useState(false);
   const [paused, setPaused] = useState(false);
   const speak = (text: string) => {
@@ -257,9 +256,9 @@ const Chat = () => {
       <Heading
         title="WebAI"
         description="Power of Gemini-1.5 connected with Google. Best for recent searches."
-        icon={MessageSquarePlus}
+        icon={<img src="https://i.ibb.co/b1YRYsx/icon-text-embeddings.png" alt="WebAi Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-black-500"
-        bgColor="bg-black-500/10"
+        bgColor="bg-violet-500/10"
       />
       <div className="px-4 lg:px-8">
         <div>

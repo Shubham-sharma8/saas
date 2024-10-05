@@ -10,7 +10,7 @@ const SettingsPage = async () => {
       <Heading
         title="Settings"
         description="Manage account settings."
-        icon={Settings}
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-gray-700"
         bgColor="bg-gray-700/10"
       />

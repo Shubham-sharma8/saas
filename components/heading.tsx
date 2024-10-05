@@ -1,11 +1,10 @@
 import { Icon } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
 interface HeadingProps {
   title: string;
   description: string;
-  icon: Icon;
+  icon: React.ReactNode; // Allow for any React node, including images
   iconColor?: string;
   bgColor?: string;
 }
@@ -13,23 +12,23 @@ interface HeadingProps {
 export const Heading = ({
   title,
   description,
-  icon: Icon,
+  icon, // The icon (or image) passed as a prop
   iconColor,
   bgColor,
 }: HeadingProps) => {
   return (
-    <>
-      <div className="px-4 lg:px-8 flex items-center gap-x-3 mb-8">
-        <div className={cn("p-2 w-fit rounded-md", bgColor)}>
-          <Icon className={cn("w-10 h-10", iconColor)} />
-        </div>
-        <div>
-          <h2 className="text-3xl font-bold">{title}</h2>
-          <p className="text-sm text-muted-foreground">
-            {description}
-          </p>
-        </div>
+    <div className="px-4 lg:px-8 flex items-center gap-x-3 mb-8">
+      <div className={cn("p-2 w-fit rounded-md", bgColor)}>
+        {icon && (
+          <div className={cn("w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10", iconColor)}>
+            {icon} {/* Render the icon here */}
+          </div>
+        )}
       </div>
-    </>
+      <div>
+        <h2 className="text-3xl font-bold mb-1">{title}</h2> {/* Add margin bottom to title */}
+        <p className="text-sm text-muted-foreground">{description}</p>
+      </div>
+    </div>
   );
 };
