@@ -38,7 +38,7 @@ export const tools = [
   {
     label: 'PDF Chat',
     icon: FileCheck2,
-    href: 'https://pdf.cogify.social/',
+    href: '/pdf',
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },

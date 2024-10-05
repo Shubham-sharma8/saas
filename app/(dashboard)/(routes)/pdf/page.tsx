@@ -4,7 +4,7 @@ import * as React from "react";
 import * as LR from "@uploadcare/blocks";
 import { PACKAGE_VERSION } from "@uploadcare/blocks";
 import { Heading } from "@/components/heading";
-import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+import { Highlight } from "@/components/ui/hero-highlight";
 
 import dynamic from 'next/dynamic';
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
@@ -13,10 +13,8 @@ import * as z from "zod";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState, useRef, useEffect } from "react";
-import { toast } from "react-hot-toast";
 import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
-import OpenAI from "openai";
+
 import { BotAvatar } from "@/components/bot-avatar";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,7 +26,7 @@ import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 import { formSchema } from "./constants";
 import st from "./styles.module.css";
-import { Eye, Image, ImageOff, MessageSquare } from "lucide-react";
+import { Eye, FileCheck2, Music2 } from "lucide-react";
 import Head from "next/head";
 import { useChat } from "ai/react";
 import  { ChangeEvent } from 'react';
@@ -54,11 +52,11 @@ function Minimal() {
   }, [setFiles]);
   
   
-      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
+      const fileUrls = files.map((file) => `${file.cdnUrl}`);
       
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/vision",
+    api: "/api/pdf",
   });
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -85,19 +83,10 @@ function Minimal() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gemini-1.5-flash-002",
+      model: "gemini-1.5-flash-001",
     },
   });
-  const formatSize = (bytes: number) => {
-    if (!bytes) return "0 Bytes";
-
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
-  };
+  
   const isLoading = form.formState.isSubmitting;
      
 
@@ -105,28 +94,26 @@ function Minimal() {
   return (
     <div className={st.pageWrapper}>
       <Head>
-        <title>Vision - Cogify</title>
+        <title>PDF Chat - Cogify</title>
         <meta
           name="description"
-          content="Know everything about your image for free. "
+          content="Chat with your pdf and Google Gemini for Free!!"
         />
       </Head>
       <Heading
-        title="Vision"
-        description="Introducing our cutting-edge image interpretation and question-answering marvel"
-        icon={Eye}
-        iconColor="text-blue-500"
-        bgColor="bg-blue-500/10"
+        title="PDF Chat"
+        description="Introducing to play with audio. get audio diarization, translation, and more."
+        icon={FileCheck2}
+        iconColor="text-pink-700"
+        bgColor="bg-pink-10"
       />
 
       <hr className={st.separator} />
       <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center gap-2">
       <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center">
-          Upload an image and enter your message to get started.
+          Upload only PDF upto 10 MB.
         </Highlight>      
       </div>
-      
-
       <div className="justify-center ">
         <div className={st.center}>
           <lr-config
@@ -134,7 +121,7 @@ function Minimal() {
             pubkey="cd4fd5fd4190239a70a6"
             source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
             multiple={false}
-            img-only="true"
+            img-only="false"
           ></lr-config>
           <lr-file-uploader-inline
             ctx-name="my-uploader"
@@ -153,7 +140,7 @@ function Minimal() {
             <form
               onSubmit={e => {
                 handleSubmit(e, {
-                  data: { imageUrl: fileUrls.toString()},
+                  data: { pdfURL: fileUrls.toString()},
                 });
               }}
               className="
@@ -199,6 +186,7 @@ function Minimal() {
             </form>
             </Form>
             </div>
+            
         <div className="space-y-4 mt-4">
           {isLoading && <Loader />}
           {messages.length === 0 && !isLoading && <Empty label="No conversation started." />}
@@ -235,54 +223,7 @@ function Minimal() {
           }}
         >
 
-          {files.length > 0 && ( // Check if files array is not empty
-            <div className="text-sm md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
-              Uploaded Images
-            </div>
-          )}
         </div>
-
-<div className={st.previews}>
-          {/* Map through uploaded files */}
-          {files.map((file) => (
-            <div key={file.uuid} className={st.previewWrapper}>
-              <img
-                className={st.previewImage}
-                key={file.uuid}
-                src={`${file.cdnUrl}-/format/jpeg/`}
-                width="200"
-                height="200"
-                alt={file.fileInfo.originalFilename || ""}
-                title={file.fileInfo.originalFilename || ""}
-              />
-
-              <p className={st.previewData}>
-                Name:
-                {file.fileInfo.originalFilename}
-              </p>
-              <p className={st.previewData}>
-                Size:
-                {formatSize(file.fileInfo.size)}
-              </p>
-              {/* Add the URL display here */}
-              <p className={st.previewData}>
-                Image URL:
-                <Button
-                  variant="link"
-                  onClick={() =>
-                    window.open(`${file.cdnUrl}-/format/jpeg/`, "_blank")
-                  }
-                  rel="noopener noreferrer"
-                >
-                  View Image
-                </Button>
-              </p>
-            
-                  </div>
-                
-               
-            ))}
-          </div>
         </div>
       </div>
     </div>

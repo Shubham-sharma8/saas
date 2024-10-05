@@ -47,6 +47,19 @@ const routes = [
     color: "text-black-500",
     bgColor: "bg-black-500/10",
   },
+  {
+    label: 'Vision',
+    icon: Eye,
+    color: "text-Blue-500",
+    href: '/vision',
+  },
+  {
+    label: 'PDF Chat',
+    icon: FileCheck2,
+    href: '/pdf',
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
+  },
  
   {
     label: 'Audio',
@@ -54,20 +67,9 @@ const routes = [
     color: "text-pink-700",
     href: '/audio',
   },
-  {
-    label: 'PDF Chat',
-    icon: FileCheck2,
-    href: 'https://pdf.cogify.social/',
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-  },
   
-  {
-    label: 'Vision',
-    icon: Eye,
-    color: "text-Blue-500",
-    href: '/vision',
-  },
+  
+ 
  
   // {
   //   label: 'Text to speech Generation',

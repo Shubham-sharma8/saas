@@ -111,7 +111,7 @@ function Minimal() {
       <hr className={st.separator} />
       <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center gap-2">
       <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center">
-          Upload audio upto 10 MB and enter your message to get started.
+          Upload only audio upto 10 MB.
         </Highlight>      
       </div>
       

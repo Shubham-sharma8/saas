@@ -20,8 +20,8 @@ export async function POST(req: Request) {
 
   const image1 = {
     file_data: {
-      file_uri: new URL(data.imageUrl),
-      mime_type: 'audio/mpeg',
+      file_uri: new URL(data.pdfURL),
+      mime_type: 'application/pdf',
     },
   };
 

@@ -103,10 +103,10 @@ const WhatsAppIcon = (props: any) => (
                 <span>Try without sign up</span>
               </button>
             </Link>
-            <Link href={"https://pdf.cogify.social"}>
+            <Link href={"/pdf"}>
               <button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
                 <PdfIcon className="h-7 w-7" />
-                <span>Try PDF+Gpt-4o</span>
+                <span>Try PDF+Google</span>
               </button>
             </Link>
   <Link href={"https://wa.me/919831047163?text=Hi"}>

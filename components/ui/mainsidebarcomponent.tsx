@@ -38,7 +38,7 @@ import {
           </AccordionContent>
           
           <AccordionContent>
-            <Link href="https://pdf.cogify.social/" > 
+            <Link href="/pdf" > 
             <GradientButton buttonText="PDF Chat" />
           </Link>
           </AccordionContent>
