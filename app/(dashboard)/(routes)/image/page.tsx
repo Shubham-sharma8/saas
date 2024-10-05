@@ -16,22 +16,14 @@ import { Card, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loaderimage } from "@/components/loader";
 import { Empty } from "@/components/ui/empty";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useProModal } from "@/hooks/use-pro-modal";
 
 import {
-  amountOptions,
-  modelforImage,
+ 
   formSchema,
   resolutionOptions,
-  styleOption,
-  colorOption,
+
 } from "./constants";
 
 import { audioquestionsByPage } from "./audioquestion";
@@ -91,89 +83,23 @@ const PhotoPage = () => {
 
   const isLoading = form.formState.isSubmitting;
 
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setPhotos([]);
-
-      // Get the current prompt value
-      let prompt = values.prompt;
-
-      // Get the selected style option
-      const selectedStyleOption = values.styleOption;
-
-      // Find the corresponding style option label based on its value
-      const selectedStyleLabel =
-        styleOption.find((option) => option.value === selectedStyleOption)
-          ?.label || "";
-
-      const selectedcolorOption = values.colorOption;
-      const selectedcolorLabel =
-        colorOption.find((option) => option.value === selectedcolorOption)
-          ?.label || "";
-
-      // Concatenate the selected style option label with the prompt
-      prompt += " " + selectedStyleLabel + selectedcolorLabel;
-
-      // Make the API request with the updated prompt
-      const response = await axios.post("/api/image", { ...values, prompt });
-      const urls = response.data.map((image: { url: string }) => image.url);
-      setPhotos(urls);
-    } catch (error: any) {
-      if (error?.response?.status === 403) {
-        proModal.onOpen();
-      } else {
-        toast.error("Something went wrong.");
-      }
-    } finally {
-      router.refresh();
+      const response = await axios.post("/api/image", values);
+      setPhotos(response.data);
+    } catch (error) {
+      toast.error("Failed to generate images.");
     }
   };
 
-  function chunkArray<T>(array: T[], size: number): T[][] {
-    const chunkedArray: T[][] = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunkedArray.push(array.slice(i, i + size));
-    }
-    return chunkedArray;
-  }
-
+  
   const [randomQuestion, setRandomQuestion] = useState(getRandomQuestion());
-  const modelImage = form.getValues("modelImage"); // Extracted variable
-  const [showSecondMessage, setShowSecondMessage] = useState(false);
+  
 
-  useEffect(() => {
-    // Show a custom toast message based on the model image
-    if (modelImage === "dall-e-3") {
-      toast.success(
-        "DALL-3 is a highest-quality model and can generate only 1 image with 1024*1024 Quality. It may take longer to generate images or sometime fail."
-      );
+  
 
-      // Set a timeout to show the second message after 3 seconds
-      const timeoutId = setTimeout(() => {
-        setShowSecondMessage(true);
-      }, 3000);
-
-      // Clear the timeout on component unmount or when modelImage changes
-      return () => clearTimeout(timeoutId);
-    } else {
-      toast.success(
-        "DALL-2 is a low-quality model and can generate upto 5 images with different quality. It is faster than DALL-E 3."
-      );
-    }
-  }, [modelImage]);
-
-
-  useEffect(() => {
-    if (modelImage === "dall-e-3") {
-      form.setValue("amount", "1");
-      form.setValue("resolution", "1024x1024"); // Set default resolution to 1024x1024
-    } else {
-      // Reset default values for other models
-      form.setValue("amount", "1");
-      form.setValue("resolution", "512x512"); // Set default resolution to 512x512 for DALL-E 2
-    }
-  }, [modelImage, form]);
-
+ 
   return (
     <div>
       <Head>
@@ -187,8 +113,8 @@ const PhotoPage = () => {
         title="Image Generation"
         description="Turn your prompt into an image."
         icon={ImageIcon}
-        iconColor="text-pink-700"
-        bgColor="bg-pink-700/10"
+        iconColor="text-green-700"
+        bgColor="bg-green-700/10"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>
@@ -210,260 +136,27 @@ const PhotoPage = () => {
             <FormField
               name="prompt"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-4">
+                <FormItem className="col-span-12 lg:col-span-10">
                   <FormControl className="m-0 p-0">
                     <Textarea
                       className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder={randomQuestion}
+                      placeholder={'Describe the image you want to create. For example: '+randomQuestion}
                       {...field}
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
-            {["dall-e-3"].includes(form.getValues("modelImage")) && (
-              <FormField
-                control={form.control}
-                name="resolution"
-                render={({ field, fieldState: { error } }) => (
-                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={(value) => {
-                        field.onChange(value);
-                        // This is to clear errors if the users pick an option after an error was shown
-                        form.clearErrors("resolution");
-                      }}
-                      value={field.value}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger
-                          className={`border-2 ${
-                            error ? "border-red-500" : "border-gray-300"
-                          } rounded-md shadow-sm`}
-                        >
-                          <SelectValue>
-                            {field.value
-                              ? resolutionOptions.find(
-                                  (option) => option.value === field.value
-                                )?.label
-                              : "Resolution"}
-                          </SelectValue>
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {filteredResolutionOptions(
-                          form.getValues("modelImage")
-                        ).map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {error && (
-                      <span className="text-red-500 text-sm mt-1">
-                        {"Kindly select the resolution" || "Required"}
-                      </span>
-                    )}
-                  </FormItem>
-                )}
-              />
-            )}
-
-            {["dall-e-3"].includes(form.getValues("modelImage")) && (
-              <FormField
-                control={form.control}
-                name="styleOption"
-                render={({ field }) => (
-                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue>
-                            {field.value= "Style"}
-                          </SelectValue>
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {chunkArray(styleOption, 2).map((row, rowIndex) => (
-                          <div
-                            key={rowIndex}
-                            style={{ display: "flex", marginBottom: "5px" }}
-                          >
-                            {row.map((option) => (
-                              <SelectItem
-                                key={option.value}
-                                value={option.value}
-                                style={{ marginRight: "5px" }}
-                              >
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <img
-                                    src={option.image}
-                                    alt={option.label}
-                                    style={{
-                                      width: "50px",
-                                      height: "40px",
-                                      marginRight: "5px",
-                                    }}
-                                  />
-                                  <span>{option.label}</span>
-                                </div>
-                              </SelectItem>
-                            ))}
-                          </div>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-            )}
-
-            {form.getValues("modelImage") === "dall-e-3" && (
-              <FormField
-                control={form.control}
-                name="colorOption"
-                render={({ field }) => (
-                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                        <SelectValue>
-                            {field.value= "Color"}
-                          </SelectValue>
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {colorOption.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-            )}
-
-            {form.getValues("modelImage") === "dall-e-2" && (
-              <FormField
-                control={form.control}
-                name="resolution"
-                render={({ field }) => (
-                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue defaultValue={field.value} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {filteredResolutionOptions(
-                          form.getValues("modelImage")
-                        ).map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-            )}
-
-           
-              <FormField
-                control={form.control}
-                name="amount"
-                render={({ field }) => (
-                  <FormItem className="col-span-12 dark:text-black lg:col-span-2">
-                    <Select
-                      disabled={isLoading}
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue defaultValue={field.value} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {
-                          amountOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                              {option.label}
-                            </SelectItem>
-                          ))
-                        }
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-
-
-            <FormField
-              control={form.control}
-              name="modelImage"
-              render={({ field }) => (
-                <FormItem className="col-span-12 dark:text-black  lg:col-span-2">
-                  <Select
-                    disabled={isLoading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue defaultValue={field.value} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {modelforImage.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-
+            
             <Button
-              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-12 w-full"
+              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
               type="submit"
-              disabled={isLoading}
-              size="icon"
-            >
-              Generate
-            </Button>
+                disabled={isLoading}
+                size="icon"
+              >
+                Generate
+              </Button>
           </form>
         </Form>
 
@@ -475,29 +168,44 @@ const PhotoPage = () => {
         {photos.length === 0 && !isLoading && (
           <Empty label="No images generated." />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+        
+        <div className="grid grid-cols-1 justify-items-center md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-20 gap-4 mt-8">
           {photos.map((src) => (
             <Card key={src} className="rounded-lg overflow-hidden">
               <div className="relative aspect-square">
-                <Image
-                  src={src}
-                  alt="Generated Image"
-                  width={1} // Set your desired width
-                  height={1} // Set your desired height
-                  layout="responsive" // Use responsive layout for better performance
-                  priority
-                  
-                />
+              <Image
+              src={src}
+              onClick={() => window.open(src)}
+              alt="Generated Image"
+              layout="responsive"
+              width={1} // Example fixed width
+              height={1} // Example fixed height
+              objectFit="cover" // Adjust the image to cover the aspect ratio box
+              priority
+              />
               </div>
               <CardFooter className="p-2">
-                <Button
-                  onClick={() => window.open(src)}
-                  variant="secondary"
-                  className="w-full"
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  Download
-                </Button>
+              <Button
+  onClick={async () => {
+    try {
+      const response = await fetch(src, { mode: 'cors' }); // Fetch the image
+      const blob = await response.blob(); // Convert to blob
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob); // Create a download link
+      link.download = 'image.jpg'; // Specify the download file name
+      link.click(); // Trigger the download
+      URL.revokeObjectURL(link.href); // Clean up URL object
+    } catch (error) {
+      console.error("Failed to download the image", error);
+    }
+  }}
+  variant="secondary"
+  className="w-full"
+>
+  <Download className="h-4 w-4 mr-2" />
+  Download
+</Button>
+
               </CardFooter>
             </Card>
           ))}

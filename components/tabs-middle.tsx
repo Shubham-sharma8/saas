@@ -17,6 +17,16 @@ export function TabsDemo() {
 
     },
     {
+      title: "Image Generation",
+      value: "playground",
+      content: (
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Image Generation</p>
+          <DummyContent src="/imag.svg" />
+        </div>
+      ),
+    },
+    {
       title: "Webai",
       value: "webai",
       content: (
@@ -47,16 +57,7 @@ export function TabsDemo() {
     //     </div>
     //   ),
     // },
-    // {
-    //   title: "Image Generation",
-    //   value: "playground",
-    //   content: (
-    //     <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-    //       <p>Image Generation</p>
-    //       <DummyContent src="/imag.svg" />
-    //     </div>
-    //   ),
-    // },
+    
    
     {
       title: "Vision",

@@ -4,7 +4,6 @@
 import { useChat } from "ai/react";
 
 import * as z from "zod";
-import axios from "axios";
 import dynamic from 'next/dynamic';  // <- Dynamically import ReactMarkdown
 
 import { MessageSquare } from "lucide-react";
@@ -65,7 +64,6 @@ import jsPDF from "jspdf";
 
 import { Textarea } from "@/components/ui/textarea";
 
-import { useRouter } from "next/navigation";
 import OpenAI from "openai";
 
 import { BotAvatar } from "@/components/bot-avatar";
@@ -77,7 +75,6 @@ import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { Empty } from "@/components/ui/empty";
-import { useProModal } from "@/hooks/use-pro-modal";
 
 import { formSchema } from "./constants";
 import { questionsByPage } from "./questions";

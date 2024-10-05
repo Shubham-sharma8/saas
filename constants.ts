@@ -1,5 +1,5 @@
 
-import { Code, Code2, Eye, FileCheck2, ImageIcon, Megaphone, MessageCircle, MessageSquare, MessageSquarePlus, Music2, Speaker } from "lucide-react";
+import {  Eye, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2 } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -12,29 +12,21 @@ export const tools = [
     bgColor: "bg-violet-500/10",
   },
   {
-    label: 'AdvanceGPT',
-    icon: MessageCircle,
-    color: "text-blue-500",
-    bgColor: "bg-blue-700/10",
-    href: '/advance',
+    label: 'Image Generation',
+    icon: ImageIcon,
+    color: "text-green-500",
+    bgColor: "bg-green-500/10",
+    href: '/image',
   },
+ 
 
   {
     label: 'WebAI',
     icon: MessageSquarePlus,
     href: '/webai',
-    color: "text-black-500",
-    bgColor: "bg-black-500/10",
-  },
-
-  {
-    label: 'Audio',
-    icon: Music2,
     color: "text-pink-700",
-    bgColor: "bg-pink-700/10",
-    href: '/audio',
+    bgColor: "bg-pink-500/10",
   },
-
   {
     label: 'PDF Chat',
     icon: FileCheck2,
@@ -44,12 +36,29 @@ export const tools = [
   },
 
   {
-    label: 'Image-Insight',
+    label: 'vision',
     icon: Eye,
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
-    href: '/image-insight',
+    href: '/vision',
   },
+
+  {
+    label: 'Audio',
+    icon: Music2,
+    color: "text-pink-700",
+    bgColor: "bg-pink-700/10",
+    href: '/audio',
+  },
+  {
+    label: 'AdvanceGPT',
+    icon: MessageCircle,
+    color: "text-blue-500",
+    bgColor: "bg-blue-700/10",
+    href: '/advance',
+  },
+
+  
   // {
   //   label: 'Text to speech',
   //   icon: Megaphone,
