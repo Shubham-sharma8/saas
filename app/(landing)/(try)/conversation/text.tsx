@@ -55,12 +55,11 @@ export function HeroHighlights() {
                   strings: [
                     "Chatbot.",
                     "Image Generation.",
-                    "Chat with any PDF",
-                    "Blog Writing.",
-                    "Mail Writing.",
+                    "Claude 3.5 Sonnet.",
+                    "Gpt-4o.",
                     "Vision",
-                    "Audio Generation.",
-
+                    "Audio Insight.",
+                    "Chat with PDF",
                   ],
                   autoStart: true,
                   loop: true,

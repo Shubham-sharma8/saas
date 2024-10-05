@@ -14,6 +14,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'googleusercontent.com' },
+      { protocol: 'https', hostname: 'media.licdn.com' },
       { protocol: 'https', hostname: 'beginswithai.com' },
       { protocol: 'https', hostname: 'dalleprodaue.blob.core.windows.net' },
       { protocol: 'https', hostname: 'oaidalleapiprodscus.blob.core.windows.net' },

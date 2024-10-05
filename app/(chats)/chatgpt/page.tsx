@@ -6,8 +6,7 @@ import { useChat } from "ai/react";
 import * as z from "zod";
 import dynamic from 'next/dynamic';  // <- Dynamically import ReactMarkdown
 
-import {ClaudeCard, Gpt4o} from '@/components/models'
-    
+import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
 import Prism from 'prismjs';
@@ -75,15 +74,17 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
-import {  Highlight } from "@/components/ui/hero-highlight";
-
+import { Empty } from "@/components/ui/empty";
 
 import { formSchema } from "./constants";
 import { questionsByPage } from "./questions";
-import { modelOption} from "./constants";
 
 const Chat = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { messages, input, handleInputChange, handleSubmit } = useChat(
+    {
+      api: 'api/chatgpt'
+    }
+  );
 
 
   
@@ -111,7 +112,7 @@ const Chat = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gemini-1.5-flash-002",
+      model: "claude-3-5-sonnet@2024062",
     },
   });
   
@@ -261,12 +262,11 @@ const Chat = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="The best performing Gemini model with features for a wide range of tasks"
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
-      />
+  title="GPT-4o"
+  description="Unlock the next level of conversation with GPT—where every chat opens new doors to insights, creativity, and innovation!"
+  icon={<img src="https://pbs.twimg.com/media/GNiQhLVakAAmuhH.png" alt="gpt4o Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+/>
+
       <div className="px-4 lg:px-8">
       <div>
         <Form {...form}>
@@ -288,7 +288,7 @@ const Chat = () => {
             <FormField
               name="prompt"
               render={() => (
-                <FormItem className="col-span-12 lg:col-span-8">
+                <FormItem className="col-span-12 lg:col-span-10">
                   <FormControl className="m-0 p-0">
                   <Textarea
                       ref={textareaRef}
@@ -301,33 +301,7 @@ const Chat = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-              control={form.control}
-              name="model"
-              render={({ field }) => (
-                <FormItem className="col-span-12 dark:text-black lg:col-span-2 mt-5">
-                  <Select
-                    disabled={isLoading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue defaultValue={field.value} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {modelOption.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
+              
 
               <Button
               className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
@@ -347,23 +321,9 @@ const Chat = () => {
               <Loader />
             </div>
           )}
-          
           {messages.length === 0 && !isLoading && (
-  <div>
-    <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center">
-      <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center -mb-6">
-        Try other models as well.
-      </Highlight>
-    </div>
-    <div className="lg:block xl:flex xl:justify-center xl:space-x-6 2xl:space-x-10">
-      {/* Align as row for xl and more space for 2xl */}
-      <ClaudeCard />
-      <Gpt4o />
-    </div>
-  </div>
-)}
-
-
+            <Empty label="No conversation started." />
+          )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
               <div

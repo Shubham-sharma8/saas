@@ -85,6 +85,18 @@ export function TabsDemo() {
       ),
     },
     {
+      title: "Gpt-4o",
+      value: "Gpt4",
+      content: (
+        <Link href={'/chatgpt'}> 
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <p>Gpt-4o</p>
+          <DummyContent src="/Gpt.svg" />
+        </div>
+        </Link>
+      ),
+    },
+    {
       title: "Audio",
       value: "Audio",
       content: (

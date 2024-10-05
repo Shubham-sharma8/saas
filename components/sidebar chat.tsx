@@ -7,6 +7,7 @@ import {   HomeIcon, ImageIcon, LayoutDashboard, MessageCircle, MessageSquare, M
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { MessageSquareDashed } from "lucide-react";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 
@@ -27,9 +28,15 @@ const routes = [
     color: "text-sky-500"
   },
   {
-    label: 'Chat with Claude-3.5 Sonnet',
+    label: 'Claude-3.5 Sonnet',
     icon: MessageSquare,
     href: '/claude-3.5',
+    color: "text-violet-500",
+  },
+  {
+    label: 'GPT-4o',
+    icon: MessageSquare,
+    href: '/chatgpt',
     color: "text-violet-500",
   },
   // {
