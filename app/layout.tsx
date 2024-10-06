@@ -70,7 +70,7 @@ export default async function RootLayout({
           <link rel="shortcut icon" href="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Unleash AI Creativity - Prompt, Generate, Speak, Entertain, Code and more" />
-          <meta name="keywords" content="gemini-1.5, gemini-1.5-flash, ChatGPT4-o free, DALL-E 3, GPT-4o free, Cogify, cogify.social, AI creativity, AI prompt generation, AI text-to-speech, GPT-4o plus internet, AI code generation, AI entertainment, free AI services, unlimited AI, no ads AI, no tracking AI" />
+          <meta name="keywords" content="gemini-1.5, gemini-1.5-flash, GPT-4o, DALL-E 3, GPT-4o free, Cogify, cogify.social, AI creativity, AI prompt generation, AI text-to-speech, GPT-4o plus internet, AI code generation, AI entertainment, free AI services, unlimited AI, no ads AI, no tracking AI" />
           <meta name="author" content="Shubham Sharma" />
 
           {/* Open Graph meta tags */}

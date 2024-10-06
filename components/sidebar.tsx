@@ -72,7 +72,7 @@ const routes = [
     icon: MessageCircle,
     color: "text-blue-500",
     bgColor: "bg-pink-700/10",
-    href: '/advance',
+    href: 'https://try.cogify.social',
   },
   
  

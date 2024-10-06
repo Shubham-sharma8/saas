@@ -22,7 +22,7 @@ import {
           </Link>
           </AccordionContent>
           <AccordionContent>
-            <Link href="/advance" > 
+            <Link href="https://try.cogify.social" > 
             <GradientButton buttonText="AdvacanceGPT" />
           </Link>
           </AccordionContent>

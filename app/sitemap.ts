@@ -42,20 +42,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/image-insight'
         },
         {
-            url: 'https://cogify.social/image'
+            url: 'https://cogify.social/vision'
         },
         {
             url: 'https://cogify.social/webai'
         },
         {
-            url: 'https://cogify.social/advance'
+            url: 'https://cogify.social/audio'
         },
         {
-            url: 'https://pdf.cogify.social/'
+            url: 'https://try.cogify.social'
         },
-       
         {
-            url: 'https://cogify.social/code'
+            url: 'https://cogify.social/pdf'
+        }, 
+        {
+            url: 'https://cogify.social/vision'
         },
         {
             url: 'https://cogify.social/settings'

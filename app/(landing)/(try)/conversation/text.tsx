@@ -53,13 +53,14 @@ export function HeroHighlights() {
               <TypewriterComponent
                 options={{
                   strings: [
-                    "Chatbot.",
+                    "Gemini 1.5 Pro.",
                     "Image Generation.",
                     "Claude 3.5 Sonnet.",
                     "Gpt-4o.",
-                    "Vision",
+                    "Vision.",
+                    "Image Insight.",
+                    "Chat with PDF.",
                     "Audio Insight.",
-                    "Chat with PDF",
                   ],
                   autoStart: true,
                   loop: true,

@@ -8,7 +8,7 @@ const people = [
     name: "Shubham Sharma",
     designation: "Founder and CEO",
     image:
-      "https://lh3.googleusercontent.com/pw/AP1GczPBxsCBKOF3XBsMdxZthh6J1RHoJMY_N1wHTg1823_e19ZqcvLxqg1dpRPVSft1kEvlFBbUxRPbpAggJEH_-ZmAFYis0lTTCPI_GassdQdMOMbdxVk32WAytzsxIw9qsFWNDjyYzlq4StfUH64foNavsg=w3132-h2088-s-no?authuser=0",
+      "https://lh3.googleusercontent.com/pw/AP1GczM8nXkm8r6zOtjeHhgTgakOcQJi8btImZwrQF0cxYaRZFEHVJSa3MJkxN9QKGLHohwkzUPC3ra-t8ysV-YEa0g5HZ-UzCPb9jt9T2daB0l8j07pBj4B-iqqIgVe8tIUYi4R_nGF2C9PTC7L5Ml1d3isyg=w3160-h2106-s-no?authuser=0",
   },
   // {
   //   id: 2,

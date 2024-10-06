@@ -55,7 +55,7 @@ export const tools = [
     icon: MessageCircle,
     color: "text-blue-500",
     bgColor: "bg-blue-700/10",
-    href: '/advance',
+    href: 'https://try.cogify.social',
   },
 
   

@@ -73,14 +73,13 @@ const routes = [
   //   color: "text-pink-700",
   //   href: '/audio',
   // },
-  // {
-  //   label: 'AdvanceGPT',
-  //   icon: MessageCircle,
-  //   color: "text-blue-500",
-  //   bgColor: "bg-pink-700/10",
-  //   href: '/advance',
-  // },
-  
+  {
+    label: 'AdvanceGPT',
+    icon: MessageCircle,
+    color: "text-blue-500",
+    bgColor: "bg-pink-700/10",
+    href: 'https://try.cogify.social',
+  },
  
  
   // {
