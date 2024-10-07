@@ -36,7 +36,6 @@ LR.registerBlocks(LR);
 function Minimal() {
   const [files, setFiles] = React.useState<any[]>([]);
   const ctxProviderRef = React.useRef<any>(null);
-  const pubkey = process.env.UPLOAD_APP_KEY;
 
   
 
@@ -120,7 +119,7 @@ function Minimal() {
         <div className={st.center}>
           <lr-config
             ctx-name="my-uploader"
-            pubkey={pubkey}
+            pubkey="cd4fd5fd4190239a70a6"
             source-list="local, url, dropbox, gdrive, onedrive,"
             multiple={false}
             img-only="false"
