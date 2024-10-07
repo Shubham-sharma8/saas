@@ -1,4 +1,3 @@
-import { LandingNavbar } from "@/components/landing-navbar";
 import { Footer } from "@/components/footer";
 import  SparklesPreview  from "../../../../components/ui/sparks";
 
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
 const helpPage: React.FC = () => {
   return (
     <div>
-      <LandingNavbar /> 
             
       {/* <LandingMiddle />    */}
       <SparklesPreview buttonText="Join Us" />   

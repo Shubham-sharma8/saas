@@ -10,9 +10,8 @@ import dynamic from 'next/dynamic';
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
 
 import * as z from "zod";
-import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useState, useRef, useEffect } from "react";
+import {  useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 
 import { BotAvatar } from "@/components/bot-avatar";
@@ -26,7 +25,6 @@ import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 import { formSchema } from "./constants";
 import st from "./styles.module.css";
-import { Eye, Music2 } from "lucide-react";
 import Head from "next/head";
 import { useChat } from "ai/react";
 import  { ChangeEvent } from 'react';
@@ -38,6 +36,8 @@ LR.registerBlocks(LR);
 function Minimal() {
   const [files, setFiles] = React.useState<any[]>([]);
   const ctxProviderRef = React.useRef<any>(null);
+  const pubkey = process.env.UPLOAD_APP_KEY;
+
   
 
   useEffect(() => {
@@ -120,8 +120,8 @@ function Minimal() {
         <div className={st.center}>
           <lr-config
             ctx-name="my-uploader"
-            pubkey="cd4fd5fd4190239a70a6"
-            source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
+            pubkey={pubkey}
+            source-list="local, url, dropbox, gdrive, onedrive,"
             multiple={false}
             img-only="false"
           ></lr-config>

@@ -1,5 +1,3 @@
-// pages/somepage.tsx
-import { LandingNavbar } from "@/components/landing-navbar";
 import { Footer } from "@/components/footer";
 // import { LandingMiddle } from "@/components/landing-navmiddle";
 import  SparklesPreview  from "@/components/ui/sparks";
@@ -19,7 +17,7 @@ export const metadata: Metadata = {
 const helpPage: React.FC = () => {
   return (
     <div>
-      <LandingNavbar /> 
+      
             
             {/* <LandingMiddle />    */}
             <SparklesPreview buttonText="Help" />            

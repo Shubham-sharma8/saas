@@ -1,3 +1,4 @@
+import { LandingNavbar } from "@/components/landing-navbar";
 
 const LandingLayout = ({
     children
@@ -7,6 +8,7 @@ const LandingLayout = ({
     return (
       <main className="h-full  overflow-auto">
         {/* <div className="mx-auto max-w-screen-xl h-full w-full"> */}
+        <LandingNavbar /> 
           {children}
           
         {/* </div> */}

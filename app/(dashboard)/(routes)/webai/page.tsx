@@ -256,7 +256,7 @@ const Chat = () => {
       <Heading
         title="WebAI"
         description="Power of Gemini-1.5 connected with Google. Best for recent searches."
-        icon={<img src="https://i.ibb.co/b1YRYsx/icon-text-embeddings.png" alt="WebAi Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={<img src="https://i.imgur.com/jZ4rmtt.png" alt="WebAi Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-black-500"
         bgColor="bg-violet-500/10"
       />
@@ -323,7 +323,7 @@ const Chat = () => {
                 className={cn(
                   "relative p-8 w-full flex items-start gap-x-8 rounded-lg",
                   message.role === "user"
-                    ? "bg-white border border-black/10"
+                    ? "bg-white border dark:text-black border-black/10"
                     : "bg-muted"
                 )}
               >

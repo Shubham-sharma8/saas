@@ -38,7 +38,7 @@ function Navbar({ className }: { className?: string }) {
               <ProductItem
                 title="Webai"
                 href="/webai"
-                src="/webgpt.svg"
+                src="/conversation.svg"
                 description= "Power of Gemini-1.5 connected with Google. Get more information from the web and CHATGPT combined."
               />
               <ProductItem

@@ -1,10 +1,8 @@
-import { TimerIcon, Zap } from "lucide-react";
+import {  Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { MAX_FREE_COUNTS } from "@/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 
@@ -12,7 +10,7 @@ export const FreeCounter = ({
   
 }) => {
   const [mounted, setMounted] = useState(false);
-  const proModal = useProModal();
+  
 
   useEffect(() => {
     setMounted(true);
@@ -30,16 +28,14 @@ export const FreeCounter = ({
         <CardContent className="py-6">
           <div className="text-center text-sm text-white mb-4 space-y-2">
             <p>
-             Consider donating to support the development of this project.
+             Consider donating to development of this project.
             </p>
-            <div className="desktop-only"> 
             
-    </div>
             
-            <Progress className="h-3"  />
+            
           </div>
           <Button onClick={() => window.open("https://razorpay.me/@cogifysocial", "Donate")} variant="premium" className="w-full">
-            Donate
+            Donate Here
             <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
         </CardContent>

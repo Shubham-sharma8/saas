@@ -34,6 +34,8 @@ import  { ChangeEvent } from 'react';
 LR.registerBlocks(LR);
 
 function Minimal() {
+  const pubkey = process.env.UPLOAD_APP_KEY;
+
   const [files, setFiles] = React.useState<any[]>([]);
   const ctxProviderRef = React.useRef<any>(null);
   
@@ -110,7 +112,7 @@ function Minimal() {
       <Heading
         title="Vision"
         description="Introducing our cutting-edge image interpretation and question-answering marvel"
-        icon={<img src="https://i.ibb.co/Px29hJp/icon-vcap-vqa.png" alt="Vision Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={<img src="https://i.imgur.com/JFYr4eR.png" alt="Vision Icon" className="w-full h-full object-contain" />} // Use the image as the icon
 
         iconColor="text-blue-500"
         bgColor="bg-violet-500/10"
@@ -127,7 +129,7 @@ function Minimal() {
         <div className={st.center}>
           <lr-config
             ctx-name="my-uploader"
-            pubkey="cd4fd5fd4190239a70a6"
+            pubkey={pubkey}
             source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
             multiple={false}
             img-only="true"
@@ -200,7 +202,7 @@ function Minimal() {
           {messages.length === 0 && !isLoading && <Empty label="No conversation started." />}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
-              <div key={index} className={cn("relative p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
+              <div key={index} className={cn("relative p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border dark:text-black border-black/10" : "bg-muted")}>
                 <div className="flex items-start gap-x-8">
                   {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                   <div className="text-sm whitespace-pre-wrap flex-1">
@@ -232,7 +234,7 @@ function Minimal() {
         >
 
           {files.length > 0 && ( // Check if files array is not empty
-            <div className="text-sm md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
+            <div className="text-sm dark:text-white md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
               Uploaded Images
             </div>
           )}

@@ -27,12 +27,6 @@ export async function POST(req: Request) {
 
   const generativeModel = vertex_ai.preview.getGenerativeModel({
     model,
-    generationConfig: {
-      'maxOutputTokens': 5000,
-      'temperature': 0,
-      'topP': 0.95,
-    },
-    
   });
 
   const geminiStream = await generativeModel.generateContentStream(

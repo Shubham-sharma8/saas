@@ -3,11 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import {   HomeIcon, ImageIcon, LayoutDashboard, MessageCircle, MessageSquare, MessageSquarePlus, Music2, Settings } from "lucide-react";
+import {   HomeIcon,  LayoutDashboard, MessageCircle, MessageSquare,  Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { MessageSquareDashed } from "lucide-react";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 

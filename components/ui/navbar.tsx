@@ -2,8 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { SheetDemo } from "./mainsidear";
-import { MenuIcon } from 'lucide-react'
-import { UserButton, currentUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs'
 import { Montserrat } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { NavbarDemo } from "@/components/ui/navitems";
@@ -25,7 +24,16 @@ const Navbar = async (props: Props) => {
     <header className="fixed right-0 left-0 top-0 py-4 px-4 dark:bg-black bg-white z-[100] flex items-center border-b-[1px] border-neutral-900 justify-between">
       <Link href="/" className="flex items-center">
         <div className="relative p-4 h-8 w-8 mr-4 left-4 ">
-          <Image fill alt="Logo" src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+          <Image fill alt="Logo" 
+           className="block dark:hidden"
+           src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+           <Image
+            fill
+            alt="Dark Mode Logo"
+            src="/logo_white.png"
+            className="hidden dark:block"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </div>
         <div className="relative left-5" >
           <h1 className={cn('text-2xl font-bold  ', font.className)}>Cogify</h1>

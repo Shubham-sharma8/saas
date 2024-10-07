@@ -20,8 +20,16 @@ export const LandingNavbar = async (props: Props) => {
     <nav className="p-4 bg-transparent flex items-center justify-between">
       <Link href="/" className="flex items-center">
         <div className="relative h-8 w-8 mr-4">
-          <Image fill alt="Logo" src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
-        </div>
+        <Image fill alt="Logo" 
+           className="block dark:hidden"
+           src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+           <Image
+            fill
+            alt="Dark Mode Logo"
+            src="/logo_white.png"
+            className="hidden dark:block"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />        </div>
         <div>
           <h1 className={cn('text-2xl font-bold', font.className)}>Cogify</h1>
         </div>

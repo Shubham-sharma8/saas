@@ -192,7 +192,7 @@ const PhotoPage = () => {
       const blob = await response.blob(); // Convert to blob
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob); // Create a download link
-      link.download = 'image.jpg'; // Specify the download file name
+      link.download = 'image'; // Specify the download file name
       link.click(); // Trigger the download
       URL.revokeObjectURL(link.href); // Clean up URL object
     } catch (error) {

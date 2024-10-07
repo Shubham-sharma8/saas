@@ -38,7 +38,8 @@ LR.registerBlocks(LR);
 function Minimal() {
   const [files, setFiles] = React.useState<any[]>([]);
   const ctxProviderRef = React.useRef<any>(null);
-  
+  const pubkey = process.env.UPLOAD_APP_KEY;
+
 
   useEffect(() => {
     
@@ -103,7 +104,7 @@ function Minimal() {
       <Heading
         title="PDF Chat"
         description="Introducing to play with audio. get audio diarization, translation, and more."
-        icon={<img src="https://i.ibb.co/f1tPm1d/icon-text-generation.png" alt="PDF Chat Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={<img src="https://i.imgur.com/jvfAvP7.png" alt="PDF Chat Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-pink-700"
         bgColor="bg-violet-500/10"
       />
@@ -118,8 +119,8 @@ function Minimal() {
         <div className={st.center}>
           <lr-config
             ctx-name="my-uploader"
-            pubkey="cd4fd5fd4190239a70a6"
-            source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
+            pubkey={pubkey}
+            source-list="local, url, dropbox, gdrive, onedrive,"
             multiple={false}
             img-only="false"
           ></lr-config>
@@ -192,7 +193,7 @@ function Minimal() {
           {messages.length === 0 && !isLoading && <Empty label="No conversation started." />}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
-              <div key={index} className={cn("relative p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}>
+              <div key={index} className={cn("relative p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border dark:text-black border-black/10" : "bg-muted")}>
                 <div className="flex items-start gap-x-8">
                   {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                   <div className="text-sm whitespace-pre-wrap flex-1">

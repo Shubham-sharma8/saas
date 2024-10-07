@@ -1,4 +1,3 @@
-import { LandingNavbar } from "@/components/landing-navbar";
 import { Terms } from "./(routes)/terms";
 import  SparklesPreview  from "@/components/ui/sparks";
 // import { LandingMiddle } from "@/components/landing-navmiddle";
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 const LandingPage = () => {
     return ( 
         <div className="h-full ">
-            <LandingNavbar />
+           
             {/* <LandingMiddle /> */}
             <SparklesPreview buttonText="Terms of Service" />
             <Terms />
