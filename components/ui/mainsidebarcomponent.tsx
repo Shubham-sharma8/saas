@@ -4,7 +4,6 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
-  import { Button } from "@/components/ui/button"
   import Link from 'next/link';
   import  GradientButton  from "./buttongrad";
 
@@ -22,6 +21,16 @@ import {
           </Link>
           </AccordionContent>
           <AccordionContent>
+            <Link href="/claude-3.5" > 
+            <GradientButton buttonText="Claude 3.5 Sonnet" />
+          </Link>
+          </AccordionContent>
+          <AccordionContent>
+            <Link href="/gpt-4o" > 
+            <GradientButton buttonText="GPT-4o" />
+          </Link>
+          </AccordionContent>
+          <AccordionContent>
             <Link href="https://try.cogify.social" > 
             <GradientButton buttonText="AdvacanceGPT" />
           </Link>
@@ -36,7 +45,6 @@ import {
             <GradientButton buttonText="Image Generation" />
           </Link>
           </AccordionContent>
-          
           <AccordionContent>
             <Link href="/pdf" > 
             <GradientButton buttonText="PDF Chat" />
@@ -48,8 +56,8 @@ import {
           </Link>
           </AccordionContent>
           <AccordionContent>
-            <Link href="/text-to-speech" > 
-            <GradientButton buttonText="Text-to-Speech Generation" />
+            <Link href="/audio" > 
+            <GradientButton buttonText="Audio Insight" />
           </Link>
           </AccordionContent>
           {/* <AccordionContent>
@@ -58,11 +66,7 @@ import {
           </Link>
           </AccordionContent> */}
 
-          <AccordionContent>
-            <Link href="/code" > 
-            <GradientButton buttonText="Code Generation" />
-          </Link>
-          </AccordionContent>
+          
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>Price</AccordionTrigger>
@@ -82,7 +86,7 @@ import {
           </Link>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-3">
+        <AccordionItem value="item-4">
           <AccordionTrigger>Contact Us</AccordionTrigger>
 
           <AccordionContent>
@@ -104,12 +108,15 @@ import {
             <Link href="/Join-Us" > 
             <GradientButton buttonText="Join Us" />
           </Link>
-          </AccordionContent>
 
+          </AccordionContent>
+          <AccordionContent>
+            <Link href="/about-us" > 
+            <GradientButton buttonText="About Us" />
+          </Link>
+          </AccordionContent>
         </AccordionItem>
-        <Link href="/about-us" > 
-        <Button variant="link">About us</Button>
-        </Link>
+        
       </Accordion>
       </div>
     )

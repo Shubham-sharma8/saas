@@ -49,7 +49,7 @@ const Navbar = async (props: Props) => {
             {user ? 'Dashboard' : 'Get Started'}
           </span>
         </Link>
-        {user ? <UserButton afterSignOutUrl="/" /> : null}
+       
         <ModeToggle/>
         <SheetDemo/>
       </aside>

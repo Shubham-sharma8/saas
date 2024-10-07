@@ -10,12 +10,14 @@ import CookieConsentComponent from "@/components/CookieConsent";
 import { HeroHighlights } from "./(try)/conversation/text";
 import { GridDemo } from "./(try)/conversation/grid"; // Import the GridDemo component
 import  RetroGridFinal  from "@/components/magicui/retro";
+import PageHome from './(try)/conversation/addHome'
 
 
 
 const LandingPage = () => {
   return (
     <div>
+      <PageHome/>
       <Navbar />
       <HeroHighlights/>
       {/* <GridDemo/>  */}
@@ -23,6 +25,7 @@ const LandingPage = () => {
       <TabsDemo />
       
       <LandingContent />
+     
       
 
 

@@ -106,6 +106,7 @@
     "prisma": "^5.11.0",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.5",
     "react-cookie-consent": "^9.0.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.2.0",
@@ -135,6 +136,7 @@
     "typewriter-effect": "^2.20.1",
     "uuid": "^9.0.1",
     "vaul": "^0.9.0",
+    "web-push": "^3.6.7",
     "zod": "^3.23.8",
     "zustand": "^4.3.9"
   }

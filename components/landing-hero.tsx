@@ -20,7 +20,7 @@ export const LandingHero = () => {
                 "Chatbot.",
                 "Image Generation.",
                 "Claude 3.5 Sonnet.",
-                "Gpt-4o",
+                "GPT-4o",
                 "Vision",
                 "Chat with PDF",
                 "Audio Insight.",

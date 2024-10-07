@@ -86,7 +86,7 @@ export function TabsDemo() {
     },
     {
       title: "Gpt-4o",
-      value: "Gpt-4o",
+      value: "GPT-4o",
       content: (
         <Link href={'/chatgpt'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">

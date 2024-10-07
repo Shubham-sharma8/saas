@@ -72,8 +72,14 @@ const WhatsAppIcon = (props: any) => (
 <img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" x="0px" y="0px" width="100" height="100" viewBox="0 0 256 256" {...props}>
 </img>      )
 const TryIcon = (props: any) => (
-  <img src="https://i.imgur.com/YkIDqU6.png" x="0px" y="0px" width="100" height="100" viewBox="0 0 256 256" {...props}>
-  </img>      )
+  <img 
+  src="https://i.imgur.com/YkIDqU6.png" 
+  alt="Image description" 
+  width="256" 
+  height="256" 
+  style={{ objectFit: 'cover' }} 
+  {...props} 
+/>)
 
  const PdfIcon = (props: any) => (
 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 100 100" {...props}>
