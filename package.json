@@ -14,10 +14,10 @@
     "export": "next export"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.18.0",
     "@ai-sdk/azure": "^0.0.45",
     "@ai-sdk/google": "^0.0.14",
     "@ai-sdk/openai": "^0.0.2",
+    "@anthropic-ai/sdk": "^0.18.0",
     "@anthropic-ai/vertex-sdk": "^0.4.1",
     "@azure/core-auth": "^1.8.0",
     "@azure/identity": "^4.4.1",
@@ -87,6 +87,7 @@
     "eslint-config-next": "^14.1.4",
     "eventsource-parser": "^1.0.0",
     "exa-js": "^1.0.12",
+    "firebase": "^10.14.0",
     "framer-motion": "^11.1.9",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
