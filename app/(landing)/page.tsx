@@ -1,4 +1,3 @@
-import { LandingHero } from "@/components/landing-hero";
 import { LandingContent } from "@/components/Landing-content";
 import { TabsDemo } from "@/components/tabs-middle";
 import { Footer } from "@/components/footer";

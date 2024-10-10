@@ -68,7 +68,7 @@ export function HeroHighlights() {
               />
             </div>
           </div>
-          <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+          <Link href={isSignedIn ? "/conversation" : "/sign-up"}>
           <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm ">
             Start Generating For Free
           </Button>
