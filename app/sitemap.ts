@@ -6,11 +6,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/'
         },
         {
+            url: 'https://www.cogify.social/'
+        },
+        {
             url: 'https://cogify.social/help'
         },
         {
             url: 'https://cogify.social/about-us'
         },
+       
         {
             url: 'https://cogify.social/feedback'
         },
@@ -36,29 +40,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/conversation'
         },
         {
-            url: 'https://cogify.social/text-to-speech'
+            url: 'https://cogify.social/claude-3.5'
         },
         {
-            url: 'https://cogify.social/image-insight'
+            url: 'https://cogify.social/chatgpt'
         },
         {
-            url: 'https://cogify.social/vision'
+            url: 'https://cogify.social/pdf'
         },
         {
             url: 'https://cogify.social/webai'
         },
+        {
+            url: 'https://cogify.social/image'
+        },
+        {
+            url: 'https://cogify.social/imagen3'
+        },
+        {
+            url: 'https://cogify.social/vision'
+        },
+       
         {
             url: 'https://cogify.social/audio'
         },
         {
             url: 'https://try.cogify.social'
         },
-        {
-            url: 'https://cogify.social/pdf'
-        }, 
-        {
-            url: 'https://cogify.social/vision'
-        },
+        
         {
             url: 'https://cogify.social/settings'
         },
