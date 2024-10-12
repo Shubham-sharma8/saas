@@ -68,15 +68,14 @@ export function HeroHighlights() {
               />
             </div>
           </div>
+          <div className="space-x-10 ">
           <Link href={isSignedIn ? "/conversation" : "/sign-up"}>
           <Button className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm ">
             Start Generating For Free
           </Button>
         </Link>
-          <div className="space-x-4 ">
-            
-            
-          </div>
+        </div>
+
           {/* <div className="text-zinc-400 text-xs md:text-sm font-normal">
             No credit card required*.
           </div> */}

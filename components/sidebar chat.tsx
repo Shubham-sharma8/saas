@@ -3,10 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import {   HomeIcon,  LayoutDashboard, MessageCircle, MessageSquare,  Settings } from "lucide-react";
+import {   HomeIcon,  ImagePlus,  LayoutDashboard, MessageCircle, MessageSquare,  Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { GalleryHorizontal } from "lucide-react";
+import { Frame } from "lucide-react";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 
@@ -36,7 +38,13 @@ const routes = [
     label: 'GPT-4o',
     icon: MessageSquare,
     href: '/chatgpt',
-    color: "text-violet-500",
+    color: "text-pink-500",
+  },
+  {
+    label: 'Imagen3',
+    icon: ImagePlus,
+    href: '/imagen3',
+    color: "text-red-500",
   },
   // {
   //   label: 'Image Generation',

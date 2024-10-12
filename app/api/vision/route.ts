@@ -1,6 +1,5 @@
 import { VertexAI } from "@google-cloud/vertexai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
-import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 
 const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'asia-south1' });

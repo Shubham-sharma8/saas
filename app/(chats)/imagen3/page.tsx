@@ -3,15 +3,12 @@
 import * as z from "zod";
 import axios from "axios";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Download, ImageIcon, SearchX, Share2 } from "lucide-react";
+import { Download, ImageIcon, Share2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import {ImagenCard} from '@/components/models'
-import {  Highlight } from "@/components/ui/hero-highlight";
-
 
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
@@ -20,20 +17,17 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loaderimage } from "@/components/loader";
 import { Empty } from "@/components/ui/empty";
 
-import { useProModal } from "@/hooks/use-pro-modal";
 
 import {
  
   formSchema,
-  resolutionOptions,
+  
 
 } from "./constants";
 
 import { audioquestionsByPage } from "./audioquestion";
 import { Textarea } from "@/components/ui/textarea";
 import Head from "next/head";
-import { Share } from "next/font/google";
-import { Share1Icon } from "@radix-ui/react-icons";
 
 
 const getRandomQuestion = () => {
@@ -54,8 +48,7 @@ const getRandomQuestion = () => {
 };
 
 const PhotoPage = () => {
-  const proModal = useProModal();
-  const router = useRouter();
+  
   const [photos, setPhotos] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -70,28 +63,13 @@ const PhotoPage = () => {
     },
   });
 
-  const filteredResolutionOptions = (modelImage: string) => {
-    if (modelImage === "dall-e-3") {
-      // If DALL-E 3 is selected, exclude certain resolutions
-      return resolutionOptions.filter(
-        (option) => !["256x256", "512x512"].includes(option.value)
-      );
-    } else if (modelImage === "dall-e-2") {
-      // If DALL-E 2 is selected, exclude certain resolutions
-      return resolutionOptions.filter(
-        (option) => !["1024x1792", "1792x1024"].includes(option.value)
-      );
-    }
-    // Default case: return all resolution options
-    return resolutionOptions;
-  };
-
+  
   const isLoading = form.formState.isSubmitting;
 
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("/api/image", values);
+      const response = await axios.post("/api/image3", values);
       setPhotos(response.data);
     } catch (error) {
       toast.error("Failed to generate images.");
@@ -164,43 +142,36 @@ const PhotoPage = () => {
               </Button>
           </form>
         </Form>
-        <div className="space-y-4 mt-4">
+
         {isLoading && (
           <div className="p-20">
             <Loaderimage />
           </div>
         )}
         {photos.length === 0 && !isLoading && (
-          <div>
-          <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center">
-            <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center -mb-6">
-              Try other models as well.
-            </Highlight>
-          </div>
-          <div className="lg:block xl:flex xl:justify-center xl:space-x-6 2xl:space-x-10">
-            {/* Align as row for xl and more space for 2xl */}
-            <ImagenCard />
-            
-          </div>
-        </div>
+          <Empty label="No images generated." />
         )}
         
         <div className="grid grid-cols-1 justify-items-center md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-20 gap-4 mt-8">
-          {photos.map((src) => (
-            <Card key={src} className="rounded-lg overflow-hidden">
-              <div className="relative aspect-square">
-              <Image
-              src={src}
-              onClick={() => window.open(src)}
-              alt="Generated Image"
-              layout="responsive"
-              width={1} // Example fixed width
-              height={1} // Example fixed height
-              objectFit="cover" // Adjust the image to cover the aspect ratio box
-              priority
-              />
-              </div>
-              <CardFooter className="p-2 flex space-x-2">
+        {Array.isArray(photos) && photos.length > 0 ? (
+  photos.map((src) => {
+    
+    return (
+      <Card key={src} className="rounded-lg overflow-hidden">
+        <div className="relative aspect-square">
+          <Image
+            src={src}
+            onClick={() => window.open(src)}
+            alt="Generated Image"
+            layout="responsive"
+            width={500}
+            height={500}
+            objectFit="cover"
+            priority
+            className="cursor-pointer"
+        />
+      </div>
+      <CardFooter className="p-2 flex space-x-2">
               <Button
   onClick={async () => {
     try {
@@ -246,11 +217,12 @@ const PhotoPage = () => {
   </Button>
 </CardFooter>
             </Card>
-          ))}
+          )
+})) : null}
+        
         </div>
       </div>
     </div>
-  </div>
   );
 };
 

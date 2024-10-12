@@ -2,9 +2,7 @@
  
 import Image from "next/image";
 import React from "react";
-import { LampComponent } from '@/components/global/lamp'
 import { CardBody, CardContainer, CardItem } from '@/components/ui/3d-card'
-import { CheckIcon } from 'lucide-react'
 import Link from 'next/link';
 
 export function ClaudeCard() {
@@ -52,6 +50,57 @@ export function ClaudeCard() {
             className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
           >
             Claude 3.5 Sonnet
+          </CardItem>
+        </div>
+      </CardBody>
+    </CardContainer>
+  );
+}
+export function ImagenCard() {
+  return (
+    <CardContainer className="inter-var">
+      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+        <CardItem
+          translateZ="50"
+          className="text-xl font-bold text-neutral-600 dark:text-white"
+        >
+          Imagen 3
+        </CardItem>
+        <CardItem
+          as="p"
+          translateZ="60"
+          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+        >
+This brings Google&apos;s state of the art image generative AI, products that transform their user&apos;s imagination into high quality visual assets using AI generation, in seconds.      
+</CardItem>
+        <Link href="/imagen3" className="flex items-center">
+        <CardItem translateZ="100" className="w-full mt-4">
+          <Image
+         
+            src="https://images.gizbot.com/webp/img/2024/10/whatsappimage2024-10-10at4-10-16pm1-1728556960.jpeg"
+            height="1000"
+            width="1000"
+            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            alt="thumbnail"
+          />
+        </CardItem>
+        </Link>
+        <div className="flex justify-between items-center mt-20">
+          <CardItem
+            translateZ={20}
+            as={Link}
+            href="/imagen3"
+            target="__blank"
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+          >
+            Try now →
+          </CardItem>
+          <CardItem
+            translateZ={20}
+            as="button"
+            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+          >
+            Imagen3
           </CardItem>
         </div>
       </CardBody>
