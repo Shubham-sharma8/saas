@@ -19,7 +19,6 @@ import { Empty } from "@/components/ui/empty";
 
 
 import {
-  resolutionOptions,
   formSchema,
   
 
@@ -56,7 +55,10 @@ const PhotoPage = () => {
     defaultValues: {
       prompt: "",
       amount: "1",
-      resolution: "1:1", // Default resolution for DALL-E 2
+      resolution: "512x512", // Default resolution for DALL-E 2
+      modelImage: "dall-e-2",
+      styleOption: "Emotion",
+      colorOption: "Tone",
 
     },
   });
@@ -129,8 +131,7 @@ const PhotoPage = () => {
                 </FormItem>
               )}
             />
-            
-            
+
             <Button
               className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
               type="submit"

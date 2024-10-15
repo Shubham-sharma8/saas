@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { string } from "zod";
 const aiplatform = require('@google-cloud/aiplatform');
 const { Storage } = require('@google-cloud/storage');
 const util = require('util');
@@ -24,7 +23,7 @@ export async function POST(req: Request) {
     const endpoint = `projects/${projectID}/locations/${aiLocation}/publishers/google/models/imagen-3.0-fast-generate-001`;
 
     
-    const { prompt, resolution = '1:1' } = await req.json();
+    const { prompt } = await req.json();
 
     const promptText = {
       prompt: prompt,
@@ -36,7 +35,7 @@ export async function POST(req: Request) {
       seed: 100,
       addWatermark: false,
       sampleCount: 1,
-      aspectRatio: resolution,
+      aspectRatio: '1:1',
       safetyFilterLevel: 'block_some',
       personGeneration: 'allow_adult',
     };
