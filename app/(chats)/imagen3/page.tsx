@@ -19,6 +19,7 @@ import { Empty } from "@/components/ui/empty";
 
 
 import {
+ 
   formSchema,
   
 
@@ -59,7 +60,6 @@ const PhotoPage = () => {
       modelImage: "dall-e-2",
       styleOption: "Emotion",
       colorOption: "Tone",
-
     },
   });
 
@@ -93,7 +93,7 @@ const PhotoPage = () => {
         />
       </Head>
       <Heading
-        title="Image Generation - Imagen 3"
+        title="Image Generation-Imagen 3"
         description="Experience the latest AI image generation with Google Imagen 3, available for free."
         icon={<img src="https://i.ibb.co/71jJqMR/icon-image-generation.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-green-700"
@@ -131,7 +131,7 @@ const PhotoPage = () => {
                 </FormItem>
               )}
             />
-
+            
             <Button
               className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
               type="submit"
