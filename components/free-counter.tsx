@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useProModal } from "@/hooks/use-pro-modal";
+import RazorpayButton from '../components/RazorpayButton';
+
 
 
 export const FreeCounter = ({
@@ -31,13 +32,12 @@ export const FreeCounter = ({
              Consider donating to development of this project.
             </p>
             
+            </div>
             
-            
-          </div>
-          <Button onClick={() => window.open("https://razorpay.me/@cogifysocial", "Donate")} variant="premium" className="w-full">
-            Donate Here
-            <Zap className="w-4 h-4 ml-2 fill-white" />
-          </Button>
+          
+          <div className="text-center" > 
+          <RazorpayButton />
+      </div>
         </CardContent>
       </Card>
     </div>

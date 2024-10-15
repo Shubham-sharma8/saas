@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { string } from "zod";
 const aiplatform = require('@google-cloud/aiplatform');
 const { Storage } = require('@google-cloud/storage');
 const util = require('util');
@@ -23,7 +24,7 @@ export async function POST(req: Request) {
     const endpoint = `projects/${projectID}/locations/${aiLocation}/publishers/google/models/imagen-3.0-fast-generate-001`;
 
     
-    const { prompt } = await req.json();
+    const { prompt, resolution = '1:1' } = await req.json();
 
     const promptText = {
       prompt: prompt,
@@ -32,8 +33,10 @@ export async function POST(req: Request) {
     const instances = [instanceValue];
 
     const parameter = {
+      seed: 100,
+      addWatermark: false,
       sampleCount: 1,
-      aspectRatio: '1:1',
+      aspectRatio: resolution,
       safetyFilterLevel: 'block_some',
       personGeneration: 'allow_adult',
     };
@@ -56,7 +59,8 @@ export async function POST(req: Request) {
       predictions.map(async (prediction: any, index: number) => {
         const base64String = prediction.structValue.fields.bytesBase64Encoded.stringValue;
         const buffer = Buffer.from(base64String, 'base64');
-        const filename = `google/output-${Date.now()}-${index}.png`;
+        const sanitizeFilename = (str: string) => str.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        const filename = `google/${sanitizeFilename(prompt)}-${Date.now()}-${index}.png`;
 
         // Upload to GCS bucket
         const file = storage.bucket(process.env.GOOGLE_CLOUD_STORAGE_BUCKET).file(filename);

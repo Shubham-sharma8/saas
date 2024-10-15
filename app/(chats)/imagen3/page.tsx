@@ -19,7 +19,7 @@ import { Empty } from "@/components/ui/empty";
 
 
 import {
- 
+  resolutionOptions,
   formSchema,
   
 
@@ -56,10 +56,8 @@ const PhotoPage = () => {
     defaultValues: {
       prompt: "",
       amount: "1",
-      resolution: "512x512", // Default resolution for DALL-E 2
-      modelImage: "dall-e-2",
-      styleOption: "Emotion",
-      colorOption: "Tone",
+      resolution: "1:1", // Default resolution for DALL-E 2
+
     },
   });
 
@@ -86,15 +84,15 @@ const PhotoPage = () => {
   return (
     <div>
       <Head>
-        <title>Image Generation - Cogify</title>
+        <title>Image Generation By Imagen 3</title>
         <meta
           name="description"
-          content="Get AI based Image with DAll-e3 for free "
+          content="Experience the latest AI image generation with Google Imagen 3, available for free."
         />
       </Head>
       <Heading
-        title="Image Generation"
-        description="Turn your prompt into an image."
+        title="Image Generation - Imagen 3"
+        description="Experience the latest AI image generation with Google Imagen 3, available for free."
         icon={<img src="https://i.ibb.co/71jJqMR/icon-image-generation.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-green-700"
         bgColor="bg-violet-500/10"
@@ -131,6 +129,7 @@ const PhotoPage = () => {
                 </FormItem>
               )}
             />
+            
             
             <Button
               className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "

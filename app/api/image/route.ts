@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         // Fetch the image from the Azure OpenAI response
         const response = await fetch(imageUrl);
         const buffer = await response.arrayBuffer();
-        const filename = `openai/output-${Date.now()}-${index}.png`;
+        const filename = `openai/-${prompt}-${Date.now()}-${index}.png`;
 
         // Upload to GCS bucket
         const bucketName = process.env.GOOGLE_CLOUD_STORAGE_BUCKET;
