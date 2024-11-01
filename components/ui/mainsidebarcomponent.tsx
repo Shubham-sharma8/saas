@@ -6,6 +6,8 @@ import {
   } from "@/components/ui/accordion"
   import Link from 'next/link';
   import  GradientButton  from "./buttongrad";
+  import { ModeToggle } from '..//mode-toggle'
+
 
   
   export function AccordionDemo() {
@@ -116,7 +118,10 @@ import {
           </Link>
           </AccordionContent>
         </AccordionItem>
-        
+        <div style={{ display: "flex", alignItems: "center", gap: "2px", marginTop: "24px", justifyContent: "center" }}>
+  <ModeToggle />
+  <span>Change theme</span>
+</div>
       </Accordion>
       </div>
     )

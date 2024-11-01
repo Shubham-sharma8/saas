@@ -7,7 +7,9 @@ import { Montserrat } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { NavbarDemo } from "@/components/ui/navitems";
 import { ModeToggle } from '..//mode-toggle'
+import { UserButton } from '@clerk/nextjs'
 
+import { MenuIcon } from 'lucide-react'
 
 
 
@@ -23,7 +25,7 @@ const Navbar = async (props: Props) => {
   return (
     <header className="fixed right-0 left-0 top-0 py-4 px-4 dark:bg-black bg-white z-[100] flex items-center border-b-[1px] border-neutral-900 justify-between">
       <Link href="/" className="flex items-center">
-        <div className="relative p-4 h-8 w-8 mr-4 left-4 ">
+        <div className="relative p-4 h-8 w-8 mr-4 left-2 ">
           <Image fill alt="Logo" 
            className="block dark:hidden"
            src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
@@ -35,7 +37,7 @@ const Navbar = async (props: Props) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <div className="relative left-5" >
+        <div className="relative" >
           <h1 className={cn('text-2xl font-bold  ', font.className)}>Cogify</h1>
         </div>
       </Link>
@@ -56,11 +58,20 @@ const Navbar = async (props: Props) => {
           <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
             {user ? 'Dashboard' : 'Get Started'}
           </span>
+          
         </Link>
+        
+        {user ? <UserButton afterSignOutUrl="/" /> : null}
+        <nav className="hidden md:flex items-center gap-4">
        
-        <ModeToggle/>
+        <ModeToggle /> 
+      </nav>
+
+
         <SheetDemo/>
+        
       </aside>
+      
     </header>
   )
 }

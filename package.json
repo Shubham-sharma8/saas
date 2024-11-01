@@ -90,7 +90,7 @@
     "eventsource-parser": "^1.0.0",
     "exa-js": "^1.0.12",
     "firebase": "^10.14.0",
-    "framer-motion": "^11.1.9",
+    "framer-motion": "^11.11.11",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "katex": "^0.16.10",
