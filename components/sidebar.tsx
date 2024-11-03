@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { UserButton, useUser } from "@clerk/nextjs"
+import { Button } from "@/components/ui/button"
+
 import { Montserrat } from 'next/font/google'
 import {  Eye, FileCheck2,  HomeIcon, ImageIcon, LayoutDashboard, MessageCircle, MessageSquare, MessageSquarePlus, Music2, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -10,7 +13,6 @@ import { cn } from "@/lib/utils";
 import { FreeCounter } from "@/components/free-counter";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
-
 const routes = [
   
     {
@@ -97,17 +99,15 @@ const routes = [
   //   href: '/code',
   // },
   
-  {
-    label: 'Settings',
-    icon: Settings,
-    href: '/settings',
-  },
+  
 ];
 
 export const Sidebar = ({
   
 }) => {
   const pathname = usePathname();
+  const { user } = useUser()
+
 
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -142,6 +142,19 @@ export const Sidebar = ({
       <FreeCounter 
         
       />
+      {/* User Profile Section */}
+      <div className="mt-auto p-4 border-t">
+        <div className="flex items-center gap-4 px-3">
+          <UserButton afterSignOutUrl="/" />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">{user?.firstName} {user?.lastName}</span>
+            <span className="text-xs text-muted-foreground">{user?.emailAddresses[0].emailAddress}</span>
+          </div>
+          <Button variant="ghost" size="icon" className="ml-auto">
+            <Settings className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
