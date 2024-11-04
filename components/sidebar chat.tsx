@@ -6,7 +6,7 @@ import { Montserrat } from 'next/font/google'
 import {   HomeIcon,  ImagePlus,  LayoutDashboard, MessageCircle, MessageSquare,  Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { FreeCounter } from "@/components/free-counter";
-import { UserButton, useUser } from "@clerk/nextjs"
+import { UserButton, useUser, useClerk } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils";
 import { GalleryHorizontal } from "lucide-react";
@@ -119,6 +119,10 @@ export const Sidebar = ({
 }) => {
   const pathname = usePathname();
   const { user } = useUser()
+  const { openUserProfile } = useClerk();
+  const handleSettingsClick = () => {
+    openUserProfile();
+  };
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
       <div className="px-3 py-2 flex-1">
@@ -160,7 +164,7 @@ export const Sidebar = ({
             <span className="text-sm font-medium">{user?.firstName} {user?.lastName}</span>
             <span className="text-xs text-muted-foreground">{user?.emailAddresses[0].emailAddress}</span>
           </div>
-          <Button variant="ghost" size="icon" className="ml-auto">
+          <Button variant="ghost" size="icon" className="ml-auto" onClick={handleSettingsClick}>
             <Settings className="h-5 w-5" />
           </Button>
         </div>

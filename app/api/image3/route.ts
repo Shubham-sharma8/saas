@@ -20,7 +20,7 @@ const storage = new Storage();
 export async function POST(req: Request) {
   try {
     // AI Platform endpoint
-    const endpoint = `projects/${projectID}/locations/${aiLocation}/publishers/google/models/imagen-3.0-fast-generate-001`;
+    const endpoint = `projects/${projectID}/locations/${aiLocation}/publishers/google/models/imagen-3.0-generate-001`;
 
     
     const { prompt } = await req.json();
