@@ -29,14 +29,14 @@ export const FreeCounter = ({
         <CardContent className="py-6">
           <div className="text-center text-sm text-white mb-4 space-y-2">
             <p>
-             Consider donating to development of this project.
+             Thank you for using our services.
             </p>
             
             </div>
             
           
           <div className="text-center" > 
-          <RazorpayButton />
+          
       </div>
         </CardContent>
       </Card>
