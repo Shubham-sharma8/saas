@@ -6,7 +6,7 @@ const {
   HarmCategory,
 } = require('@google-cloud/vertexai');
 
-const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'asia-south1' });
+const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'asia-south1' });
 
 const buildGoogleGenAIPrompt = (messages: Message[]) => ({
   contents: messages

@@ -3,7 +3,7 @@ const aiplatform = require('@google-cloud/aiplatform');
 const { Storage } = require('@google-cloud/storage');
 const util = require('util');
 
-const projectID = process.env.GOOGLE_PROJECT_ID;
+const projectID = 'ai-based-437315';
 const aiLocation = 'asia-south1'; // For AI image generation
 
 const { PredictionServiceClient } = aiplatform.v1;
