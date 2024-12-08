@@ -1,0 +1,16 @@
+steps:
+  # Install dependencies
+  - name: "node"
+    entrypoint: "npm"
+    args: ["install"]
+
+  # Build the Next.js project
+  - name: "node"
+    entrypoint: "npm"
+    args: ["run", "build"]
+
+  # Deploy to App Engine
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy", "app.yaml", "--quiet"]
+
+timeout: "900s"
