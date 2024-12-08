@@ -1,7 +1,7 @@
 import { VertexAI } from "@google-cloud/vertexai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
 
-const vertex_ai = new VertexAI({ project: process.env.GOOGLE_PROJECT_ID, location: 'asia-south1' });
+const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'asia-south1' });
 
 
 
