@@ -111,7 +111,7 @@ const TryIcon = (props: any) => (
             <Link href={"/conversation"}>
     <button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
       <Geminiicon className="h-7 w-7" />
-      <span>Gemini 1.5 Pro</span>
+      <span> Gemini 2.0</span>
     </button>
   </Link>
             <Link href={"/pdf"}>

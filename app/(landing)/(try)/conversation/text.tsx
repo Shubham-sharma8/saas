@@ -52,7 +52,7 @@ export function HeroHighlights() {
               <TypewriterComponent
                 options={{
                   strings: [
-                    "Gemini 1.5 Pro",
+                    "Gemini 2.0 ",
                     "Image Generation",
                     "Claude 3.5 Sonnet",
                     "GPT-4o",

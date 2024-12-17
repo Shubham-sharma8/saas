@@ -11,7 +11,7 @@ export const projects = [
   {
     title: "Conversation",
     description:
-    "At our core, we believe in making cutting-edge generative AI accessible to everyone, without barriers. With Gemini 1.5 Pro at the heart of our platform, we offer a truly free experience—no subscriptions, no hidden fees, no limits on usage. Plus, we prioritize a user-friendly environment, free from disruptive ads. We’re here to empower your creativity without distractions, giving you the freedom to explore AI's full potential effortlessly.",
+    "At our core, we believe in making cutting-edge generative AI accessible to everyone, without barriers. With Gemini 2.0 Flash at the heart of our platform, we offer a truly free experience—no subscriptions, no hidden fees, no limits on usage. Plus, we prioritize a user-friendly environment, free from disruptive ads. We’re here to empower your creativity without distractions, giving you the freedom to explore AI's full potential effortlessly.",
         link: "/conversation",
   },
   {
@@ -36,7 +36,7 @@ export const projects = [
   {
     title: "WebAi",
     description:
-      "Experience the next level of conversational AI with WebAI, powered by Gemini 1.5 Pro and Google integration. Our platform offers real-time, accurate responses by seamlessly accessing up-to-date information from the web. Whether you're looking for instant insights, answers to complex questions, or engaging in natural conversation, we deliver it all—completely free, without limits.",
+      "Experience the next level of conversational AI with WebAI, powered by Gemini 2.0 Flash(exp) and Google integration. Our platform offers real-time, accurate responses by seamlessly accessing up-to-date information from the web. Whether you're looking for instant insights, answers to complex questions, or engaging in natural conversation, we deliver it all—completely free, without limits.",
     link: "/webai",
   },
   {
