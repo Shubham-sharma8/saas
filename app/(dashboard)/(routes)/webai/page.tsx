@@ -255,7 +255,7 @@ const Chat = () => {
     <div>
       <Heading
         title="WebAI"
-        description="Power of Gemini-1.5 connected with Google. Best for recent searches."
+        description="Power of Gemini-2 connected with Google. Best for recent searches."
         icon={<img src="https://i.imgur.com/jZ4rmtt.png" alt="WebAi Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-black-500"
         bgColor="bg-violet-500/10"

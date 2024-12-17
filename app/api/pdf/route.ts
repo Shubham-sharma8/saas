@@ -3,7 +3,7 @@ import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
 import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 
-const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'asia-south1' });
+const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'us-central1' });
 
 export async function POST(req: Request) {
   const buildGoogleGenAIPrompt = (messages: Message[], image1: any) => ({
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         parts: [image1, { text: message.content }],
       })),
   });
-  const { messages, model = "gemini-1.5-flash-001", data } = await req.json();
+  const { messages, model = "gemini-2.0-flash-exp", data } = await req.json();
 
   const image1 = {
     file_data: {

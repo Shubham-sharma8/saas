@@ -11,7 +11,7 @@ export const modelOption = [
   {
     value: "gemini-1.5-flash-002",
     label: "Gemini-1.5-Flash-002",
-    data: "Our Most advanced model and it has the same high intelligence as Gemini-1.5 but is much more efficient—it generates text 2x faster. Up to Oct 2024"
+    data: "Our Most advanced model and it has the same high intelligence as Gemini-2 but is much more efficient—it generates text 2x faster. Up to Oct 2024"
 
   },
   {

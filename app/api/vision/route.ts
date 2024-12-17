@@ -3,10 +3,10 @@ import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
 
 export const dynamic = 'force-dynamic';
 
-const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'asia-south1' });
+const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'us-central1' });
 
 export async function POST(req: Request) {
-  const { messages, model = "gemini-1.5-flash-002", data } = await req.json();
+  const { messages, model = "gemini-2.0-flash-exp", data } = await req.json();
 
   // Build the image object directly
   const image1 = {

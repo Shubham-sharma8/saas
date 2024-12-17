@@ -111,7 +111,7 @@ const Chat = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gemini-1.5-flash-002",
+      model: "gemini-2.0-flash-exp",
     },
   });
   

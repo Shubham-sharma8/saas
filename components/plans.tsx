@@ -53,7 +53,7 @@ export const Plans = () =>{
                   
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited Gemini-1.5
+                    Unlimited Gemini-2
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
@@ -125,7 +125,7 @@ export const Plans = () =>{
                   
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited Gemini-1.5 Access
+                    Unlimited Gemini-2 Access
                   </li>
                 </ul>
               </CardItem>
@@ -185,7 +185,7 @@ export const Plans = () =>{
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />
-                    Unlimited Gemini-1.5 Access
+                    Unlimited Gemini-2 Access
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckIcon />

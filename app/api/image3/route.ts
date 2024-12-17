@@ -4,7 +4,7 @@ const { Storage } = require('@google-cloud/storage');
 const util = require('util');
 
 const projectID = 'ai-based-437315';
-const aiLocation = 'asia-south1'; // For AI image generation
+const aiLocation = 'us-central1'; // For AI image generation
 
 const { PredictionServiceClient } = aiplatform.v1;
 const { helpers } = aiplatform;
@@ -34,8 +34,6 @@ export async function POST(req: Request) {
     const parameter = {
       sampleCount: 1,
       aspectRatio: '1:1',
-      safetyFilterLevel: 'block_some',
-      personGeneration: 'allow_adult',
     };
     const parameters = helpers.toValue(parameter);
 
@@ -56,7 +54,7 @@ export async function POST(req: Request) {
       predictions.map(async (prediction: any, index: number) => {
         const base64String = prediction.structValue.fields.bytesBase64Encoded.stringValue;
         const buffer = Buffer.from(base64String, 'base64');
-        const filename = `google/output-${Date.now()}-${index}.png`;
+        const filename = `google/-${prompt}-${Date.now()}-${index}.png`;
 
         // Upload to GCS bucket
         const file = storage.bucket(process.env.GOOGLE_CLOUD_STORAGE_BUCKET).file(filename);
@@ -71,8 +69,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json(imageUrls);
 
-  } catch (error) {
-    
-    return new NextResponse("Internal Error", { status: 500 });
-  }
+  } catch (error: any) {
+    console.error("Error generating images:", error);
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
+}
 }

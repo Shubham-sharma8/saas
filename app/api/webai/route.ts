@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     model: model,
     generationConfig: {
     'maxOutputTokens': 5000,
-    'temperature': 1,
+    'temperature': 0,
     'topP': 0.95,
   },
   safetySettings: [{category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE}],
