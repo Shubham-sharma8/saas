@@ -43,7 +43,7 @@ export async function POST(
    
 
     return new NextResponse(JSON.stringify({ audio: `data:audio/mp3;base64,${audioBase64}` }), { headers: { "Content-Type": "application/json" } });  } catch (error) {
-    console.log('[MUSIC_ERROR]', error);
+   
     return new NextResponse("Internal Error", { status: 500 });
   }
 };

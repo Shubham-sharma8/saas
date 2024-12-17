@@ -15,12 +15,10 @@ export function PlaceholdersAndVanishInputDemo() {
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
   };
   
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submitted");
 window.location.href = "/conversation";  };
   return (
     <div className=" flex flex-col justify-center  items-center px-4">

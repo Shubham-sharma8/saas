@@ -21,12 +21,10 @@ export function HeroHighlights() {
   ];
   const { isSignedIn } = useAuth();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
   };
   
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submitted");
     window.location.href = "/conversation";
   };
 

@@ -5,8 +5,8 @@ import { OpenAIClient, AzureKeyCredential, } from '@azure/openai';
 import { ChatCompletionChunk } from "openai/resources";
 
 const client = new OpenAIClient(
-  'https://openaishubham.openai.azure.com/',
-  new AzureKeyCredential(process.env.AZURE_OPENAI_API_KEY_CHAT!),
+  'https://shubh-m48r4cia-eastus.openai.azure.com/',
+  new AzureKeyCredential(process.env.AZURE_OPENAI_API_KEY!),
 );
 
 export async function POST(
@@ -29,7 +29,7 @@ export async function POST(
     return new StreamingTextResponse(stream);
 
   } catch (error) {
-    console.log('[IMAGE_ERROR]', error);
+   
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
