@@ -79,6 +79,7 @@ import { Empty } from "@/components/ui/empty";
 import { formSchema } from "./constants";
 import { questionsByPage } from "./questions";
 import { modelOption} from "./constants";
+import { to } from "react-spring";
 
 const Chat = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat(
@@ -251,12 +252,10 @@ const Chat = () => {
 
         pdf.save("message.pdf");
       } else {
-        console.error(
-          "Either editedMessageRef is not defined or message is null or undefined."
-        );
+        toast.error("Failed to generate PDF");
       }
     } catch (error) {
-      console.error("An error occurred while generating PDF:", error);
+      toast.error("An error occurred while generating PDF:");
     }
   };
 
@@ -344,7 +343,7 @@ const Chat = () => {
                   <div className="text-sm whitespace-pre-wrap flex-1">
                   <ReactMarkdown
                   components={{
-                    pre: ({ node, ...props }) => (
+                    pre: (props: { [key: string]: any }) => (
                       <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
                         <pre {...props} />
                       </div>

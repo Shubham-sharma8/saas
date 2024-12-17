@@ -1,5 +1,6 @@
 import { TranslateBody } from '@/types/types';
 import { OpenAIStream } from '@/utils';
+import toast from 'react-hot-toast';
 
 export async function POST(
   req: Request
@@ -22,7 +23,7 @@ export async function POST(
 
     return new Response(stream);
   } catch (error) {
-    console.error(error);
+    toast.error(String(error));
     return new Response('Error', { status: 500 });
   }
 };

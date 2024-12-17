@@ -7,7 +7,7 @@ import { FiCopy } from 'react-icons/fi';
         const handleCopy = () => {
           navigator.clipboard.writeText(content)
             .then(() => setCopied(true))
-            .catch((err) => console.error('Copy failed', err));
+            
           setTimeout(() => setCopied(false), 2000); // Hide copied notification after 2 seconds
         };
         return (

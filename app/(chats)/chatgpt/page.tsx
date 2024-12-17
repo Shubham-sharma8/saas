@@ -250,12 +250,10 @@ const Chat = () => {
 
         pdf.save("message.pdf");
       } else {
-        console.error(
-          "Either editedMessageRef is not defined or message is null or undefined."
-        );
+        throw new Error("Message content is empty");
       }
     } catch (error) {
-      console.error("An error occurred while generating PDF:", error);
+      toast.error("Failed to convert message to PDF");
     }
   };
 
@@ -341,9 +339,9 @@ const Chat = () => {
                   <div className="text-sm whitespace-pre-wrap flex-1">
                   <ReactMarkdown
                   components={{
-                    pre: ({ node, ...props }) => (
+                    pre: (props: { [key: string]: any }) => (
                       <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
-                        <pre {...props} />
+                        <pre {...props as React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>} />
                       </div>
                     ),
                   }}

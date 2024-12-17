@@ -40,7 +40,7 @@ export async function sendNotification(message: string) {
     )
     return { success: true }
   } catch (error) {
-    console.error('Error sending push notification:', error)
+    
     return { success: false, error: 'Failed to send notification' }
   }
 }

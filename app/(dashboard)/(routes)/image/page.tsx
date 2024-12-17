@@ -212,7 +212,7 @@ const PhotoPage = () => {
       link.click(); // Trigger the download
       URL.revokeObjectURL(link.href); // Clean up URL object
     } catch (error) {
-      console.error("Failed to download the image", error);
+      toast.error("Failed to download the image");
     }
   }}
   variant="secondary"
@@ -235,7 +235,7 @@ const PhotoPage = () => {
           toast.error('Web Share API is not supported on this device.');
         }
       } catch (error) {
-        console.error("Failed to share the image", error);
+        toast.error("Failed to share the image");
       }
     }}
     variant="secondary"
