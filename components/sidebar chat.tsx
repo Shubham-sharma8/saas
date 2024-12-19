@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Montserrat } from 'next/font/google'
-import {   HomeIcon,  ImagePlus,  LayoutDashboard, MessageCircle, MessageSquare,  Settings } from "lucide-react";
+import {   GalleryHorizontalEnd, GlassWater, HomeIcon,  ImageMinus,  ImageOff,  ImagePlus,  LayoutDashboard, MessageCircle, MessageSquare,  Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { FreeCounter } from "@/components/free-counter";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs"
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils";
 import { GalleryHorizontal } from "lucide-react";
 import { Frame } from "lucide-react";
+import { GalleryVertical } from "lucide-react";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 
@@ -37,16 +38,34 @@ const routes = [
     color: "text-violet-500",
   },
   {
+    label: 'Gemini 2.0',
+    icon: MessageCircle,
+    href: '/gemini',
+    color: "text-white-500",
+  },
+  {
     label: 'GPT-4o',
     icon: MessageSquare,
     href: '/chatgpt',
     color: "text-pink-500",
   },
   {
+    label: 'Image 2.0',
+    icon: GalleryHorizontalEnd,
+    href: '/image2.0',
+    color: "text-green-500",
+  },
+  {
     label: 'Imagen3',
     icon: ImagePlus,
     href: '/imagen3',
     color: "text-red-500",
+  },
+  {
+    label: 'Vision 2.0',
+    icon: ImageMinus,
+    href: '/vision2.0',
+    color: "text-pink-500",
   },
   // {
   //   label: 'Image Generation',

@@ -4,16 +4,14 @@ import * as React from "react";
 import * as LR from "@uploadcare/blocks";
 import { PACKAGE_VERSION } from "@uploadcare/blocks";
 import { Heading } from "@/components/heading";
-import {  Highlight } from "@/components/ui/hero-highlight";
-
-import dynamic from 'next/dynamic';
-const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
-
 import * as z from "zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
-import {  useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { Textarea } from "@/components/ui/textarea";
-
+import { useRouter } from "next/navigation";
+import OpenAI from "openai";
 import { BotAvatar } from "@/components/bot-avatar";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,66 +23,81 @@ import { Empty } from "@/components/ui/empty";
 import { useProModal } from "@/hooks/use-pro-modal";
 import { formSchema } from "./constants";
 import st from "./styles.module.css";
+import { Eye, Image, ImageOff, MessageSquare } from "lucide-react";
 import Head from "next/head";
-import { useChat } from "ai/react";
-import  { ChangeEvent } from 'react';
-
-
 
 LR.registerBlocks(LR);
 
 function Minimal() {
-
-  const [files, setFiles] = React.useState<any[]>([]);
-  const ctxProviderRef = React.useRef<any>(null);
-  
-
-  useEffect(() => {
-    
-    const ctxProvider = ctxProviderRef.current;
-    if (!ctxProvider) return;
-    const handleChangeEvent = (e: any) => {
-      setFiles([...e.detail.allEntries.filter((f: any) => f.status === "success")]);
-    };
-    ctxProvider.addEventListener("change", handleChangeEvent);
-    return () => ctxProvider.removeEventListener("change", handleChangeEvent);
-  }, [setFiles]);
-  
-  
-      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
-      
-
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/vision",
-  });
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  // Function to adjust the height of the textarea
-  const adjustTextareaHeight = () => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }
-  };
-
-  useEffect(() => {
-    adjustTextareaHeight(); // Adjust height on component mount
-  }, [input]);
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    handleInputChange(event);
-    adjustTextareaHeight(); // Adjust height on content change
-  };
-
-
+  const router = useRouter();
   const proModal = useProModal();
+  const [messages, setMessages] = useState<
+    OpenAI.Chat.CreateChatCompletionRequestMessage[]
+  >([]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "gemini-2.0-flash-exp",
+      model: "gpt-4o",
     },
   });
+
+  const isLoading = form.formState.isSubmitting;
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const userMessage: OpenAI.Chat.CreateChatCompletionRequestMessage = {
+        role: "user",
+        content: values.prompt,
+      };
+      const newMessages = [...messages, userMessage];
+      //URL Which convert image to JPEG//
+      const fileUrls = files.map((file) => `${file.cdnUrl}-/format/jpeg/`);
+
+      if (fileUrls.length > 0) {
+        // If there are uploaded files, add their CDN URLs as separate user messages
+        fileUrls.forEach((url) => {
+          newMessages.push({ role: "user", content: url });
+        });
+      }
+
+      const response = await axios.post("/api/vision", {
+        messages: newMessages,
+      });
+      setMessages((current) => [...current, userMessage, response.data]);
+      form.reset();
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      router.refresh();
+    }
+  };
+
+const [files, setFiles] = React.useState<any[]>([]);
+  const ctxProviderRef = React.useRef<any>(null);
+
+  React.useEffect(() => {
+    const ctxProvider = ctxProviderRef.current;
+    if (!ctxProvider) return;
+
+    const handleChangeEvent = (e: any) => {
+      console.log("change event payload:", e);
+      setFiles([
+        ...e.detail.allEntries.filter((f: any) => f.status === "success"),
+      ]);
+    };
+
+    ctxProvider.addEventListener("change", handleChangeEvent);
+    return () => {
+      ctxProvider.removeEventListener("change", handleChangeEvent);
+    };
+  }, [setFiles]);
+
   const formatSize = (bytes: number) => {
     if (!bytes) return "0 Bytes";
 
@@ -95,9 +108,6 @@ function Minimal() {
 
     return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
   };
-  const isLoading = form.formState.isSubmitting;
-     
-
 
   return (
     <div className={st.pageWrapper}>
@@ -112,16 +122,13 @@ function Minimal() {
         title="Vision"
         description="Introducing our cutting-edge image interpretation and question-answering marvel"
         icon={<img src="https://i.imgur.com/JFYr4eR.png" alt="Vision Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-
         iconColor="text-blue-500"
-        bgColor="bg-violet-500/10"
+        bgColor="bg-blue-500/10"
       />
 
       <hr className={st.separator} />
       <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center gap-2">
-      <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center">
-          Upload an image to ask questions.
-        </Highlight>      
+      Upload images to ask questions.
       </div>
 
       <div className="justify-center ">
@@ -130,7 +137,7 @@ function Minimal() {
             ctx-name="my-uploader"
             pubkey="cd4fd5fd4190239a70a6"
             source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
-            multiple={false}
+            multiple={true}
             img-only="true"
           ></lr-config>
           <lr-file-uploader-inline
@@ -148,11 +155,7 @@ function Minimal() {
         <div>
           <Form {...form}>
             <form
-              onSubmit={e => {
-                handleSubmit(e, {
-                  data: { imageUrl: fileUrls.toString()},
-                });
-              }}
+              onSubmit={form.handleSubmit(onSubmit)}
               className="
             rounded-lg 
             border 
@@ -167,63 +170,96 @@ function Minimal() {
           "
             >
               <FormField
-              name="prompt"
-              render={() => (
-                <FormItem className="col-span-12 lg:col-span-10">
-                  <FormControl className="m-0 p-0">
-                  <Textarea
-                      ref={textareaRef}
-                      className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
-                      value={input}
-                      placeholder="Enter your message here"
-                      onChange={handleChange}
-                    />
+                name="prompt"
+                render={({ field }) => (
+                  <FormItem className="col-span-12 dark:text-black lg:col-span-10">
+                    <FormControl className="m-0 p-0">
+                      {/* Replace Input with Textarea */}
+                      <Textarea
+                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                        disabled={isLoading || files.length === 0} // Disable if loading or no files uploaded
+                        placeholder="Enter your message here"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
-                
               />
+
               <Button
-              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-              type="submit"
-                disabled={isLoading}
+                className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5"
+                type="submit"
+                disabled={isLoading || files.length === 0} // Disable if loading or no files uploaded
                 size="icon"
               >
                 Generate
               </Button>
-
-              
             </form>
-            </Form>
-            </div>
+          </Form>
+        </div>
         <div className="space-y-4 mt-4">
-          {isLoading && <Loader />}
-          {messages.length === 0 && !isLoading && <Empty label="No conversation started." />}
+          {isLoading && (
+            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+              <Loader />
+            </div>
+          )}
+          {messages.length === 0 && !isLoading && (
+            <Empty label="No conversation started." />
+          )}
+
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
-              <div key={index} className={cn("relative p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border dark:text-black border-black/10" : "bg-muted")}>
+              <div
+                key={index} // Using index as key is not recommended for dynamic lists, consider using a unique ID
+                className={cn(
+                  "relative p-8 w-full flex items-start gap-x-8 rounded-lg",
+                  message.role === "user"
+                    ? "bg-white border border-black/10"
+                    : "bg-muted"
+                )}
+              >
                 <div className="flex items-start gap-x-8">
                   {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                   <div className="text-sm whitespace-pre-wrap flex-1">
-                  <ReactMarkdown
-                  components={{
-                    pre: ({ node, ...props }) => (
-                      <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
-                        <pre {...props} />
-                      </div>
-                    ),
-                  }}
-                  className="text-sm overflow-hidden leading-7"
-                >
-                  {message.content?.toString()}
-                </ReactMarkdown>
-                    </div>
-                    </div>
-                    </div>
-          ))}
+                    {message.content
+                      ?.toString()
+                      .split("\n")
+                      .map((line, lineIndex) => {
+                        if (line.includes("###")) {
+                          return (
+                            <h1 key={lineIndex}>
+                              <strong>{line.replace(/###/g, "")}</strong>
+                            </h1>
+                          );
+                        } else if (line.includes("####")) {
+                          return (
+                            <h2 key={lineIndex}>
+                              <strong>{line.replace(/####/g, "")}</strong>
+                            </h2>
+                          );
+                        } else {
+                          return (
+                            <p key={lineIndex}>
+                              {line
+                                .split(/\*\*(.*?)\*\*/g)
+                                .map((text, textIndex) => {
+                                  return textIndex % 2 === 0 ? (
+                                    text
+                                  ) : (
+                                    <strong key={textIndex}>{text}</strong>
+                                  );
+                                })}
+                            </p>
+                          );
+                        }
+                      })}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-                    
-                    <div
+        <div
           className={st.previews}
           style={{
             display: "flex",
@@ -231,15 +267,13 @@ function Minimal() {
             alignItems: "center",
           }}
         >
-
           {files.length > 0 && ( // Check if files array is not empty
-            <div className="text-sm dark:text-white md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
+            <div className="text-sm md:text-xl font-bold text-zinc-800 flex justify-center items-center margin-auto">
               Uploaded Images
             </div>
           )}
         </div>
-
-<div className={st.previews}>
+        <div className={st.previews}>
           {/* Map through uploaded files */}
           {files.map((file) => (
             <div key={file.uuid} className={st.previewWrapper}>
@@ -274,16 +308,12 @@ function Minimal() {
                   View Image
                 </Button>
               </p>
-            
-                  </div>
-                
-               
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
-  
   );
 }
+
 export default Minimal;

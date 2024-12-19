@@ -6,7 +6,7 @@ import { UserButton, useUser, useClerk } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 
 import { Montserrat } from 'next/font/google'
-import {  Eye, FileCheck2,  HomeIcon, ImageIcon, LayoutDashboard, MessageCircle, MessageSquare, MessageSquarePlus, Music2, Settings } from "lucide-react";
+import {  Code2, Eye, FileCheck2,  HomeIcon, ImageIcon, LayoutDashboard, MessageCircle, MessageSquare, MessageSquareDashed, MessageSquarePlus, Music2, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -34,6 +34,13 @@ const routes = [
     icon: MessageSquare,
     href: '/conversation',
     color: "text-violet-500",
+  },
+  {
+    label: 'Cogify Pro',
+    icon: MessageSquareDashed,
+    color: "text-blue-500",
+    bgColor: "bg-pink-700/10",
+    href: 'https://try.cogify.social',
   },
   {
     label: 'Image Generation',
@@ -69,28 +76,19 @@ const routes = [
     color: "text-pink-700",
     href: '/audio',
   },
-  {
-    label: 'AdvanceGPT',
-    icon: MessageCircle,
-    color: "text-blue-500",
-    bgColor: "bg-pink-700/10",
-    href: 'https://try.cogify.social',
-  },
-  
- 
- 
+
   // {
   //   label: 'Text to speech Generation',
   //   icon: Megaphone,
   //   color: "text-emerald-500",
   //   href: '/text-to-speech',
   // },
-  // {
-  //   label: 'AI Code Translator',
-  //   icon: Code2,
-  //   color: "text-pink-700",
-  //   href: '/ai-code',
-  // },
+  {
+    label: 'AI Code Translator',
+    icon: Code2,
+    color: "text-pink-700",
+    href: '/codetranslate',
+  },
 
   // {
   //   label: 'Code Generation',

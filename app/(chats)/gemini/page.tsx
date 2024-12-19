@@ -4,12 +4,10 @@
 import { useChat } from "ai/react";
 
 import * as z from "zod";
-import axios from "axios";
 import dynamic from 'next/dynamic';  // <- Dynamically import ReactMarkdown
-import {ClaudeCard, Gpt4o} from '@/components/models'
-import {  Highlight } from "@/components/ui/hero-highlight";
 
-import { MessageSquare } from "lucide-react";
+import {ClaudeCard, Gpt4o} from '@/components/models'
+    
 import { useForm } from "react-hook-form";
 const ReactMarkdown = dynamic(() => import('react-markdown'), { loading: () => <p>Loading...</p> });
 import Prism from 'prismjs';
@@ -67,7 +65,6 @@ import jsPDF from "jspdf";
 
 import { Textarea } from "@/components/ui/textarea";
 
-import { useRouter } from "next/navigation";
 import OpenAI from "openai";
 
 import { BotAvatar } from "@/components/bot-avatar";
@@ -78,16 +75,16 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
-import { Empty } from "@/components/ui/empty";
-import { useProModal } from "@/hooks/use-pro-modal";
+
 
 import { formSchema } from "./constants";
 import { questionsByPage } from "./questions";
 import { modelOption} from "./constants";
 
 const Chat = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
-
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+      api: "/api/chat2.0",
+    });
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Function to adjust the height of the textarea
@@ -112,7 +109,7 @@ const Chat = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      model: "chatgpt-4o-latest",
+      model: "gemini-2.0-flash-exp",
     },
   });
   
@@ -250,21 +247,21 @@ const Chat = () => {
 
         pdf.save("message.pdf");
       } else {
-        console.error(
+        toast.error(
           "Either editedMessageRef is not defined or message is null or undefined."
         );
       }
     } catch (error) {
-      console.error("An error occurred while generating PDF:", error);
+      toast.error("An error occurred while generating PDF:");
     }
   };
 
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="Our most advanced conversation model based on Open AI"
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        title="Gemini 2.0"
+        description="The best and latest Gemini model with features for a wide range of tasks"
+        icon={<img src="https://mir-s3-cdn-cf.behance.net/projects/404/45862f197501329.Y3JvcCwyMDAzLDE1NjcsNDAxLDA.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -348,22 +345,10 @@ const Chat = () => {
               <Loader />
             </div>
           )}
-          {messages.length === 0 && !isLoading && (
-            <div>
-              <div className="text-sm md:text-xl font-bold dark:text-white text-zinc-800 flex justify-center items-center">
-                <Highlight className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center -mb-6">
-                  Try other models as well.
-                </Highlight>
-              </div>
-              <div className="lg:block xl:flex xl:justify-center xl:space-x-6 2xl:space-x-10">
-                {/* Align as row for xl and more space for 2xl */}
-                <ClaudeCard />
-                <Gpt4o />
-              </div>
-            </div>
-          )}
-
           
+          
+
+
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
               <div
@@ -381,7 +366,7 @@ const Chat = () => {
                   <div className="text-sm whitespace-pre-wrap flex-1">
                   <ReactMarkdown
                   components={{
-                    pre: ({ node, ...props }) => (
+                    pre: (props: { [key: string]: any }) => (
                       <div className="overflow-auto w-full my-2 bg-black p-2 rounded-lg">
                         <pre {...props} />
                       </div>

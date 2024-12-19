@@ -1,70 +1,73 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { AzureOpenAI } from "openai";
-import { Storage } from "@google-cloud/storage";
+import OpenAI from "openai";
 
-const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
-const apiKey = process.env.AZURE_OPENAI_API_KEY;
-const apiVersion = "2024-02-01";
-const deploymentName = "dall-e-3";
-const numberOfImagesToGenerate = 1;
 
-// Initialize Google Cloud Storage client
-const storage = new Storage();
 
-const getClient = (): AzureOpenAI => {
-  return new AzureOpenAI({
-    endpoint,
-    apiKey,
-    apiVersion,
-    deployment: deploymentName,
-  });
-};
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-export async function POST(req: Request) {
+export async function POST(
+  req: Request
+) {
   try {
     const { userId } = auth();
-    const { prompt } = await req.json();
+    const { prompt, amount = 1, resolution = "512x512", modelImage = "dall-e-2"} = await req.json();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const client = getClient();
-    const results = await client.images.generate({
-      prompt,
-      size: "1024x1024",
-      n: numberOfImagesToGenerate,
-      model: "",
-    });
+    if (!process.env.OPENAI_API_KEY) {
+      return new NextResponse("OpenAI API Key not configured.", { status: 500 });
+    }
 
-    const imageUrls = await Promise.all(
-      results.data.map(async (image: any, index: number) => {
-        const imageUrl = image.url || image.someOtherProperty;
+    if (!prompt) {
+      return new NextResponse("Prompt is required", { status: 400 });
+    }
 
-        // Fetch the image from the Azure OpenAI response
-        const response = await fetch(imageUrl);
-        const buffer = await response.arrayBuffer();
-        const filename = `openai/-${prompt}-${Date.now()}-${index}.png`;
+    if (!amount) {
+      return new NextResponse("Amount is required", { status: 400 });
+    }
 
-        // Upload to GCS bucket
-        const bucketName = process.env.GOOGLE_CLOUD_STORAGE_BUCKET;
-        if (!bucketName) {
-          throw new Error("Google Cloud Storage bucket name is not defined");
-        }
-        const file = storage.bucket(bucketName).file(filename);
-        await file.save(Buffer.from(buffer), {
-          contentType: 'image/png',
-        });
+    if (!resolution) {
+      return new NextResponse("Resolution is required", { status: 400 });
+    }
 
-        // Construct the public URL of the image
-        return `https://storage.googleapis.com/${process.env.GOOGLE_CLOUD_STORAGE_BUCKET}/${filename}`;
-      })
-    );
+    
+    
 
-    return NextResponse.json(imageUrls);
+    
+
+    const generateImage = async function(prompt:any, resolution:any, modelImage:any) {
+      const response = await openai.images.generate({
+        model: modelImage,
+        prompt,
+        n: 1, // one image per call as per API limitation
+        size: resolution,
+      });
+      return response.data;
+    }
+
+    // Initialize an array to hold the promises
+    let imagePromises = [];
+
+    // For the specified amount, push image generation promises into the array
+    for (let i = 0; i < parseInt(amount, 10); i++) {
+      imagePromises.push(generateImage(prompt, resolution, modelImage));
+    }
+
+    // Await all the image generation promises
+    const images = await Promise.all(imagePromises);
+
+    
+
+    const imageUrls = images.map(response => response[0]); // Access the first image URL directly from the response array
+    return NextResponse.json(imageUrls); // Respond with image URLs
 
   } catch (error) {
+    console.log('[IMAGE_ERROR]', error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

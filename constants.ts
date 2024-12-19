@@ -1,5 +1,5 @@
 
-import {  Eye, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2 } from "lucide-react";
+import { GalleryHorizontalEnd, Eye, ImagePlus, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2, MessagesSquare, Code2, MessageSquareDashed, ImageMinus } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -11,22 +11,81 @@ export const tools = [
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
+  
+  {
+    label: 'Gemini 2.0',
+    icon: MessageCircle,
+    href: '/gemini',
+    color: "text-white-500",
+    bgColor: "bg-violet-500/10",
+  },
+  {
+    label: 'GPT-4o',
+    icon: MessageSquare,
+    href: '/chatgpt',
+    color: "text-pink-500",
+    bgColor: "bg-violet-500/10",
+  },
+  {
+    label: 'Claude-3.5 Sonnet',
+    icon: MessagesSquare,
+    href: '/claude-3.5',
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
+  },
+  {
+    label: 'Cogify Pro',
+    icon: MessageSquareDashed,
+    color: "text-blue-500",
+    bgColor: "bg-violet-500/10",
+    href: 'https://try.cogify.social',
+  },
   {
     label: 'Image Generation',
     icon: ImageIcon,
     color: "text-green-500",
-    bgColor: "bg-green-500/10",
+    bgColor: "bg-violet-500/10",
     href: '/image',
   },
- 
+ {
+     label: 'Image 2.0',
+     icon: GalleryHorizontalEnd,
+     href: '/image2.0',
+     color: "text-green-500",
+     bgColor: "bg-violet-500/10",
+   },
+   {
+     label: 'Imagen3',
+     icon: ImagePlus,
+     href: '/imagen3',
+     color: "text-red-500",
+     bgColor: "bg-violet-500/10",
+   },
 
   {
     label: 'WebAI',
     icon: MessageSquarePlus,
     href: '/webai',
     color: "text-pink-700",
-    bgColor: "bg-pink-500/10",
+    bgColor: "bg-violet-500/10",
+
   },
+  {
+    label: 'vision',
+    icon: Eye,
+    color: "text-blue-500",
+    bgColor: "bg-violet-500/10",
+    href: '/vision',
+  },
+
+  {
+      label: 'Vision 2.0',
+      icon: ImageMinus,
+      href: '/vision2.0',
+      color: "text-pink-500",
+      bgColor: "bg-violet-500/10",
+    },
+
   {
     label: 'PDF Chat',
     icon: FileCheck2,
@@ -35,27 +94,22 @@ export const tools = [
     bgColor: "bg-violet-500/10",
   },
 
-  {
-    label: 'vision',
-    icon: Eye,
-    color: "text-blue-500",
-    bgColor: "bg-blue-500/10",
-    href: '/vision',
-  },
-
+  
   {
     label: 'Audio',
     icon: Music2,
     color: "text-pink-700",
-    bgColor: "bg-pink-700/10",
+    bgColor: "bg-violet-500/10",
     href: '/audio',
   },
+
+ 
   {
-    label: 'AdvanceGPT',
-    icon: MessageCircle,
-    color: "text-blue-500",
-    bgColor: "bg-blue-700/10",
-    href: 'https://try.cogify.social',
+    label: 'AI Code Translator',
+    icon: Code2,
+    href: '/codetranslate',
+    color: "text-pink-700",
+    bgColor: "bg-pink-700/10",
   },
 
   
@@ -66,13 +120,7 @@ export const tools = [
   //   color: "text-emerald-500",
   //   bgColor: "bg-emerald-500/10",
   // },
-  // {
-  //   label: 'AI Code Translator',
-  //   icon: Code2,
-  //   href: '/ai-code',
-  //   color: "text-pink-700",
-  //   bgColor: "bg-pink-700/10",
-  // },
+  
 
   // {
   //   label: 'Code Generation',

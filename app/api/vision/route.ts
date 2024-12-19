@@ -1,43 +1,64 @@
-import { VertexAI } from "@google-cloud/vertexai";
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { auth } from "@clerk/nextjs";
+import { NextResponse } from "next/server";
+import OpenAI from "openai";
 
-export const dynamic = 'force-dynamic';
 
-const vertex_ai = new VertexAI({ project: 'ai-based-437315', location: 'us-central1' });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function POST(req: Request) {
-  const { messages, model = "gemini-2.0-flash-exp", data } = await req.json();
+  try {
+    const { userId } = auth();
+    const body = await req.json();
+    const { messages } = body;
 
-  // Build the image object directly
-  const image1 = {
-    file_data: {
-      file_uri: new URL(data.imageUrl),
-      mime_type: 'image/jpeg',
-    },
-  };
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
 
-  // Pre-build the prompt based on incoming messages
-  const contents = messages
-    .filter((message:any) => message.role === "user" || message.role === "assistant")
-    .map((message:any) => ({
-      role: message.role === "user" ? "user" : "model",
-      parts: [image1, { text: message.content }],
-    }));
+    if (!process.env.OPENAI_API_KEY) {
+      return new NextResponse("OpenAI API Key not configured.", { status: 500 });
+    }
 
-  // Create the generative model instance
-  const generativeModel = vertex_ai.preview.getGenerativeModel({
-    model,
-    generationConfig: {
-      maxOutputTokens: 5000,
-      temperature: 0,
-      topP: 0.95,
-    },
-  });
+    if (!messages) {
+      return new NextResponse("Messages are required", { status: 400 });
+    }
 
-  // Stream the content directly with built prompt
-  const geminiStream = await generativeModel.generateContentStream({ contents });
-  const stream = GoogleGenerativeAIStream(geminiStream);
 
-  // Respond with the stream
-  return new StreamingTextResponse(stream);
+
+
+    const visionMessages = [];
+
+    // Iterate over each message
+    for (const msg of messages) {
+      if (msg.role === "user") {
+        if (typeof msg.content === "string" && msg.content.startsWith('http')) {
+          // If the content is a URL, create a separate message for each image URL
+          const urls = msg.content.split(','); // Split multiple URLs if provided
+          for (const url of urls) {
+            visionMessages.push({
+              role: "user",
+              content: [{ type: "image_url", image_url: { url: url.trim() } }]
+            });
+          }
+        } else {
+          // Otherwise, add other types of messages directly
+          visionMessages.push(msg);
+        }
+      }
+    }
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o", // Use the Vision model
+      messages: visionMessages // Pass the modified messages array directly
+    });
+
+
+
+    return NextResponse.json(response.choices[0].message);
+  } catch (error) {
+    console.log('[CONVERSATION_ERROR]', error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
 }

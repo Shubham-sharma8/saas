@@ -18,10 +18,10 @@ export const ModelSelect: FC<Props> = ({ model, onChange }) => {
       onChange={handleChange}
     >
       <option value="gpt-4o">GPT-4o</option>
-      <option value="gpt-4-turbo-2024-04-09">GPT-4-Turbo</option>
-      <option value="gpt-4-turbo-preview">GPT-4-Turbo-Preview</option>
+      <option value="gpt-4o-2024-11-20">GPT-4 Nov 24</option>
+      <option value="chatgpt-4o-latest">Chatgpt-4o Latest</option>
       <option value="gpt-4">GPT-4</option>
-      <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
+      <option value="gpt-4o-mini">GPT-4o Mini</option>
     </select>
   );
 };
