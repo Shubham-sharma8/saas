@@ -4,13 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
+import {   GalleryHorizontalEnd, GlassWater,  ImageMinus,  ImageOff,  ImagePlus } from "lucide-react";
+
 
 import { Montserrat } from 'next/font/google'
 import {  Code2, Eye, FileCheck2,  HomeIcon, ImageIcon, LayoutDashboard, MessageCircle, MessageSquare, MessageSquareDashed, MessageSquarePlus, Music2, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { FreeCounter } from "@/components/free-counter";
 
 const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 const routes = [
@@ -42,12 +43,48 @@ const routes = [
     bgColor: "bg-pink-700/10",
     href: 'https://try.cogify.social',
   },
+  
+  {
+    label: 'GPT-4o',
+    icon: MessageSquare,
+    href: '/chatgpt',
+    color: "text-pink-500",
+  },
+  
+  {
+    label: 'Gemini 2.0',
+    icon: MessageCircle,
+    href: '/gemini',
+    color: "text-white-500",
+  },
+ 
+ 
+  {
+    label: 'Claude-3.5 Sonnet',
+    icon: MessageSquare,
+    href: '/claude-3.5',
+    color: "text-violet-500",
+  },
   {
     label: 'Image Generation',
     icon: ImageIcon,
     href: '/image',
     color: "text-green-500",
   },
+  {
+    label: 'Imagen3',
+    icon: ImagePlus,
+    href: '/imagen3',
+    color: "text-red-500",
+  },
+  {
+    label: 'Image 2.0',
+    icon: GalleryHorizontalEnd,
+    href: '/image2.0',
+    color: "text-green-500",
+  },
+  
+  
  
   {
     label: 'WebAI',
@@ -61,6 +98,12 @@ const routes = [
     icon: Eye,
     color: "text-Blue-500",
     href: '/vision',
+  },
+  {
+    label: 'Vision 2.0',
+    icon: ImageMinus,
+    href: '/vision2.0',
+    color: "text-pink-500",
   },
   {
     label: 'PDF Chat',
@@ -139,7 +182,7 @@ export const Sidebar = () => {
           ))}
         </div>
       </div>
-      <FreeCounter />
+      
       {/* User Profile Section */}
       <div className="mt-auto p-4 border-t">
         <div className="flex items-center gap-4 px-3">

@@ -24,6 +24,6 @@
     },
     "types": ["@uploadcare/blocks/types/jsx"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js", "app/(dashboard)/(routes)/vision/page.tsx", "app/(chats)/gemini/improvent.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js", "app/(dashboard)/(routes)/vision/page.tsx", "app/(dashboard)/(routes)/gemini/improvent.jsx"],
   "exclude": ["node_modules"]
 }

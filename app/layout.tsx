@@ -4,7 +4,6 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
 
 
-
 import { ToasterProvider } from '@/components/toaster-provider';
 import { ModalProvider } from '@/components/modal-provider';
 import { CrispProvider } from '@/components/crisp-provider';
@@ -101,6 +100,7 @@ export default async function RootLayout({
             <ToasterProvider />
             <ModalProvider />
             {children}
+            
           </ThemeProvider> 
           </body>
         </html>

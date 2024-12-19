@@ -72,6 +72,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/settings'
         },
         {
+            url: 'https://cogify.social/vision2.0'
+        },
+        {
+            url: 'https://cogify.social/opengraph-image.png'
+        },
+        {
+            url: 'https://cogify.social/imagen3'
+        },
+        {
+            url: 'https://cogify.social/image2.0'
+        },
+        {
+            url: 'https://cogify.social/gift'
+        },
+        {
             url: 'https://iamclint.tech'
         },
 
