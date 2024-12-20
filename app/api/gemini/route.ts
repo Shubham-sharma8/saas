@@ -27,10 +27,10 @@ export async function POST(req: Request) {
 
   // Dynamically get the model based on the request
   const generativeModel = vertex_ai.preview.getGenerativeModel({
-    model, // use the model from the request body
+    model: model, // use the model from the request body
     generationConfig: {
       'maxOutputTokens': 8192,
-      'temperature': 0,
+      'temperature': 0.1,
       'topP': 0.95,
     },
   });

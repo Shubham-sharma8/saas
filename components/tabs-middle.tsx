@@ -36,7 +36,7 @@ export function TabsDemo() {
       title: "Webai",
       value: "webai",
       content: (
-        <Link href={'/webai'}> 
+        <Link href={'/conversation'}> 
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
           <p>WebAI</p>
           <DummyContent src="/webgpt_tab.svg" />

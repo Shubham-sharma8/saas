@@ -11,28 +11,9 @@ export const tools = [
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
+ 
   
-  {
-    label: 'Gemini 2.0',
-    icon: MessageCircle,
-    href: '/gemini',
-    color: "text-white-500",
-    bgColor: "bg-violet-500/10",
-  },
-  {
-    label: 'GPT-4o',
-    icon: MessageSquare,
-    href: '/chatgpt',
-    color: "text-pink-500",
-    bgColor: "bg-violet-500/10",
-  },
-  {
-    label: 'Claude-3.5 Sonnet',
-    icon: MessagesSquare,
-    href: '/claude-3.5',
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-  },
+  
   {
     label: 'Cogify Pro',
     icon: MessageSquareDashed,
@@ -40,6 +21,7 @@ export const tools = [
     bgColor: "bg-violet-500/10",
     href: 'https://try.cogify.social',
   },
+  
   {
     label: 'Image Generation',
     icon: ImageIcon,
@@ -62,14 +44,7 @@ export const tools = [
      bgColor: "bg-violet-500/10",
    },
 
-  {
-    label: 'WebAI',
-    icon: MessageSquarePlus,
-    href: '/webai',
-    color: "text-pink-700",
-    bgColor: "bg-violet-500/10",
-
-  },
+  
   {
     label: 'vision',
     icon: Eye,

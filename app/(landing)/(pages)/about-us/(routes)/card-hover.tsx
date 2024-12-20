@@ -37,7 +37,7 @@ export const projects = [
     title: "WebAi",
     description:
       "Experience the next level of conversational AI with WebAI, powered by Gemini 2.0 Flash(exp) and Google integration. Our platform offers real-time, accurate responses by seamlessly accessing up-to-date information from the web. Whether you're looking for instant insights, answers to complex questions, or engaging in natural conversation, we deliver it all—completely free, without limits.",
-    link: "/webai",
+    link: "/conversation",
   },
   {
     title: "Image Generation",

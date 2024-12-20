@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     model,
     generationConfig: {
       'maxOutputTokens': 5000,
-      'temperature': 0,
+      'temperature': 0.1,
       'topP': 0.95,
     },
     

@@ -2,9 +2,13 @@ import * as z from "zod";
 
 export const formSchema = z.object({
   prompt: z.string().min(1, {
-    message: "Prompt is required."
+    message: "Prompt is required and must not be empty."
+  }).max(1000, {
+    message: "Prompt must not exceed 1000 characters."
   }),
-  model: z.string().min(1),
+  model: z.string().min(1, {
+    message: "Model selection is required."
+  }),
 });
 
 export const modelOption = [
@@ -22,5 +26,4 @@ export const modelOption = [
     value: "gemini-1.5-flash-001",
     label: "Gemini-1.5-Flash",
   },
-
 ]

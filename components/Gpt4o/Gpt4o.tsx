@@ -7,16 +7,19 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { formSchema, modelOption } from './constants'
-import { MessageList } from './MessageList'
-import { ModelSelector } from './ModelSelector'
+import { MessageList } from '../Chat/MessageList'
 import { Heading } from '@/components/heading'
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
 
 
-export const Chat: React.FC = () => {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();
+export const Gpt4o: React.FC = () => {
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
+    {
+      api: "/api/Gpt4o",
+    }
+  );
   const [error, setError] = useState<string | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -50,9 +53,9 @@ export const Chat: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Enhanced Conversation"
-        description="Our most advanced conversation model with improved UI and functionality"
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-8 h-8 object-contain" />}
+        title="Conversation GPT-4o"
+        description="Unlock the next level of conversation with GPT-4o: Where every chat opens new doors to insights, creativity, and innovation!"
+        icon={<img src="https://pbs.twimg.com/media/GNiQhLVakAAmuhH.png" alt="gpt4o Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -77,7 +80,7 @@ export const Chat: React.FC = () => {
               md:px-6 
               focus-within:shadow-sm
               grid
-              grid-cols-12
+              grid-cols-10
               gap-2
             ">
                   <FormField
@@ -97,9 +100,7 @@ export const Chat: React.FC = () => {
                         </FormItem>
                       )}
                     />
-                  <div className="col-span-12 dark:text-black lg:col-span-2 mt-5">
-  <ModelSelector control={form.control} />
-  </div>
+                  
 <div className="col-span-12 lg:col-span-2 mt-5">
 
   <Button

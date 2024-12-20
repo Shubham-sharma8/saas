@@ -45,27 +45,6 @@ const routes = [
   },
   
   {
-    label: 'GPT-4o',
-    icon: MessageSquare,
-    href: '/chatgpt',
-    color: "text-pink-500",
-  },
-  
-  {
-    label: 'Gemini 2.0',
-    icon: MessageCircle,
-    href: '/gemini',
-    color: "text-white-500",
-  },
- 
- 
-  {
-    label: 'Claude-3.5 Sonnet',
-    icon: MessageSquare,
-    href: '/claude-3.5',
-    color: "text-violet-500",
-  },
-  {
     label: 'Image Generation',
     icon: ImageIcon,
     href: '/image',
@@ -86,13 +65,7 @@ const routes = [
   
   
  
-  {
-    label: 'WebAI',
-    icon: MessageSquarePlus,
-    href: '/webai',
-    color: "text-pink-700",
-    bgColor: "bg-black-500/10",
-  },
+  
   {
     label: 'Vision',
     icon: Eye,
@@ -191,9 +164,11 @@ export const Sidebar = () => {
             <span className="text-sm font-medium">{user?.firstName} {user?.lastName}</span>
             <span className="text-xs text-muted-foreground">{user?.emailAddresses[0].emailAddress}</span>
           </div>
-          <Button variant="ghost" size="icon" className="ml-auto" onClick={handleSettingsClick}>
+          <Link href={'/settings'}> 
+          <Button variant="ghost" size="icon" className="ml-auto" >
             <Settings className="h-5 w-5" />
           </Button>
+          </Link>
         </div>
       </div>
     </div>

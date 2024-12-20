@@ -37,7 +37,7 @@ function Navbar({ className }: { className?: string }) {
               />
               <ProductItem
                 title="Webai"
-                href="/webai"
+                href="/conversation"
                 src="/conversation.svg"
                 description= "Power of Gemini-2 connected with Google. Get more information from the web and CHATGPT combined."
               />

@@ -21,14 +21,15 @@ const buildGoogleGenAIPrompt = (messages: Message[]) => ({
 
 export async function POST(req: Request) {
   // Extract the `messages` and `model` from the body of the request
-  const { messages, model = "gemini-1.5-flash-002" } = await req.json();
+  const { messages,  } = await req.json();
+  const model = "gemini-1.5-flash-002"
 
   // Dynamically get the model based on the request
   const generativeModel = vertex_ai.preview.getGenerativeModel({
     model: model,
     generationConfig: {
     'maxOutputTokens': 5000,
-    'temperature': 0,
+    'temperature': 0.1,
     'topP': 0.95,
   },
   safetySettings: [{category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE}],

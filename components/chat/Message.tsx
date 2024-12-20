@@ -1,29 +1,38 @@
-import React, { useState } from 'react'
+'use client'
+
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Clipboard, Share, Speaker, Edit, Download, MoreHorizontal, X } from 'lucide-react'
+import { ChevronDown, ChevronUp, MoreHorizontal, X } from 'lucide-react'
 import { UserAvatar } from '@/components/user-avatar'
 import { BotAvatar } from '@/components/bot-avatar'
 import { Button } from '@/components/ui/button'
-import { toast } from 'react-hot-toast'
 import dynamic from 'next/dynamic'
+import { CodeBlock } from './code-block'
+import { cn } from "@/lib/utils"
+import React  from 'react'
+
+import { Clipboard, Share, Speaker, Edit, Download } from 'lucide-react'
+
+import { toast } from 'react-hot-toast'
 import clsx from 'clsx' // For conditional class management
 
 const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: false })
 
 interface MessageProps {
   message: any
+  isExpanded?: boolean
 }
 
-export const Message: React.FC<MessageProps> = ({ message }) => {
+export const Message: React.FC<MessageProps> = ({ message, isExpanded = true }) => {
+  const [expanded, setExpanded] = useState(isExpanded)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const isCodeBlock = message.content.includes('\`\`\`')
   const [isEditing, setIsEditing] = useState(false)
   const [editedContent, setEditedContent] = useState(message.content)
-  const [menuOpen, setMenuOpen] = useState(false) // State to toggle the collapsible menu
-
   const handleCopy = () => {
     navigator.clipboard.writeText(message.content)
     toast.success('Copied to clipboard')
   }
-
   const handleShare = () => {
     if (navigator.share) {
       navigator
@@ -71,49 +80,102 @@ export const Message: React.FC<MessageProps> = ({ message }) => {
     toast.success('Downloaded successfully')
   }
 
+  // Extract code blocks from message content
+  const parseCodeBlocks = (content: string) => {
+    const blocks = content.split('\`\`\`')
+    return blocks.map((block, index) => {
+      if (index % 2 === 1) {
+        const [language, ...code] = block.split('\n')
+        return {
+          type: 'code',
+          language: language.trim(),
+          content: code.join('\n').trim()
+        }
+      }
+      return {
+        type: 'text',
+        content: block
+      }
+    })
+  }
+
+  const blocks = isCodeBlock ? parseCodeBlocks(message.content) : []
+
   return (
-    <motion.div
-      className={clsx(
-        'p-4 rounded-lg transition-colors duration-300',
-        message.role === 'user' ? 'bg-violet-100' : 'bg-gray-100',
-      )}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="flex items-start space-x-4">
+    <div className="w-full max-w-10xl mx-auto mb-4">
+      <div className={cn(
+        "flex items-start gap-4 p-4 rounded-lg transition-colors",
+        message.role === 'user' 
+          ? "bg-blue-50 dark:bg-blue-900/20" 
+          : "bg-purple-50 dark:bg-purple-900/20",
+        "hover:bg-gray-50 dark:hover:bg-gray-900"
+      )}>
         {message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-        <div className="flex-grow">
-          {isEditing ? (
-            <textarea
-              value={editedContent}
-              onChange={(e) => setEditedContent(e.target.value)}
-              className={clsx(
-                'w-full p-2 rounded border',
+        <div className="flex-1">
+          <div className="flex items-center gap-4 justify-between">
+            <Button
+              variant="ghost"
+              className="px-0 hover:bg-transparent"
+              onClick={() => setExpanded(!expanded)}
+            >
+              <span className="font-medium text-left dark:text-white">
+                {message.role === 'user' ? 'You' : 'Cogify'}
+              </span>
+              {expanded ? (
+                <ChevronUp className="h-4 w-4 ml-2" />
+              ) : (
+                <ChevronDown className="h-4 w-4 ml-2" />
               )}
-            />
-          ) : (
-            <ReactMarkdown className="prose dark:text-black">{message.content}</ReactMarkdown>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMenuOpen(true)}
+              className="dark:text-white"
+            >
+              <MoreHorizontal className="h-5 w-5" />
+            </Button>
+          </div>
+          {expanded && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-2"
+            >
+              {isCodeBlock ? (
+                <div className="space-y-4">
+                  {blocks.map((block, index) => (
+                    <div key={index}>
+                      {block.type === 'code' ? (
+                        <CodeBlock
+                          language={block.language || ''}
+                          code={block.content}
+                        />
+                      ) : (
+                        <div className="dark:text-gray-200">
+                          <ReactMarkdown className="prose dark:prose-invert max-w-none">
+                            {block.content}
+                          </ReactMarkdown>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="dark:text-gray-200">
+                  <ReactMarkdown className="prose dark:prose-invert max-w-none">
+                    {message.content}
+                  </ReactMarkdown>
+                </div>
+              )}
+            </motion.div>
           )}
         </div>
-        <div>
-          {/* Main Button to Toggle Menu */}
-          <Button
-            size="icon"
-            variant="ghost"
-            onClick={() => setMenuOpen(true)}
-            aria-label="More options"
-          >
-            <MoreHorizontal className="w-5 h-5" />
-          </Button>
-        </div>
       </div>
-      {isEditing && (
-        <div className="mt-2 flex justify-end">
-          <Button onClick={handleSaveEdit}>Save</Button>
-        </div>
-      )}
 
+      {/* Overlay Menu */}
       {/* Overlay Menu */}
       {menuOpen && (
         <div
@@ -190,6 +252,7 @@ export const Message: React.FC<MessageProps> = ({ message }) => {
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   )
 }
+
