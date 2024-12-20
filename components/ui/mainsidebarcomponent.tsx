@@ -62,11 +62,11 @@ import {
             <GradientButton buttonText="Audio Insight" />
           </Link>
           </AccordionContent>
-          {/* <AccordionContent>
-            <Link href="/ai-code" > 
+          <AccordionContent>
+            <Link href="/codetranslate" > 
             <GradientButton buttonText="AI Code Translator" />
           </Link>
-          </AccordionContent> */}
+          </AccordionContent>
 
           
         </AccordionItem>
