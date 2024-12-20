@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Message } from './Chat/Message'
+import { Message } from './Message'
 
 interface MessageListProps {
   messages: any[]
