@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { formSchema, modelOption } from './constants'
-import { MessageList } from '../Chat/MessageList'
+import { MessageList } from '@/components/Chat/MessageList'
 import { ModelSelector } from './ModelSelector'
 import { Heading } from '@/components/heading'
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
