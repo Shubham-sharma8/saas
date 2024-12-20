@@ -36,13 +36,7 @@ export const tools = [
      color: "text-green-500",
      bgColor: "bg-violet-500/10",
    },
-   {
-     label: 'Imagen3',
-     icon: ImagePlus,
-     href: '/imagen3',
-     color: "text-red-500",
-     bgColor: "bg-violet-500/10",
-   },
+   
 
   
   {

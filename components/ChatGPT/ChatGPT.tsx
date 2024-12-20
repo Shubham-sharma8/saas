@@ -76,7 +76,7 @@ export const ChatGPT: React.FC = () => {
       <Heading
         title="Conversation-ChatGPT"
         description="Our most advanced conversation model with improved UI and functionality"
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-8 h-8 object-contain" />}
+        icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="OpenAI Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -106,13 +106,15 @@ export const ChatGPT: React.FC = () => {
               focus-within:shadow-sm
               grid
               grid-cols-12
-              gap-2"
+              gap-2 
+              "
+              
                 >
                   <FormField
                     control={form.control}
                     name="prompt"
                     render={({ field }) => (
-                      <FormItem className="col-span-12 dark:bg-black lg:col-span-8">
+                      <FormItem className="col-span-12 k lg:col-span-8">
                         <FormControl className="m-0 p-0">
                           <Textarea
                             ref={textareaRef}
@@ -137,10 +139,10 @@ export const ChatGPT: React.FC = () => {
                   </div>
                   <div className="col-span-12 lg:col-span-2 lg:mt-0 flex items-center">
                     <Button
-                          type="submit"
+                          variant="brutal"
                           disabled={isLoading}
-                          className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-                    
+                          className=" col-span-12 lg:col-span-2 w-full mt-5 "
+                                                                                       
                           >
                           {isLoading ? 'Generating...' : 'Generate'}
                         </Button>

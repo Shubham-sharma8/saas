@@ -1,5 +1,4 @@
-'use client'
-
+"use client";
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUser } from '@clerk/nextjs'
@@ -10,7 +9,7 @@ import { useSettings } from '@/hooks/useSettings'
 import { Sidebar } from '@/components/SettingSidebar'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { Toaster } from 'react-hot-toast'
+import {  toast } from 'react-hot-toast' // Import toast
 
 const SettingsPage = () => {
   const { user } = useUser()
@@ -18,11 +17,23 @@ const SettingsPage = () => {
   const [activeSection, setActiveSection] = useState('model')
   const router = useRouter()
 
+  // State variables for model selections
+  const [selectedChatModel, setSelectedChatModel] = useState(settings.defaultModel)
+  const [selectedImageModel, setSelectedImageModel] = useState(settings.defaultImageModel)
+
   useEffect(() => {
-    // This effect ensures that the component re-renders when settings change
+    // Update the selected models when settings change
+    setSelectedChatModel(settings.defaultModel)
+    setSelectedImageModel(settings.defaultImageModel)
   }, [settings])
 
   if (!user) return null
+
+  const handleSaveModelSelections = () => {
+    // Update settings with the selected models
+    updateSettings({ defaultModel: selectedChatModel, defaultImageModel: selectedImageModel })
+    toast.success('Model selections saved successfully')
+  }
 
   const renderContent = () => {
     switch (activeSection) {
@@ -34,11 +45,31 @@ const SettingsPage = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-semibold dark:text-black mb-4">AI Model Settings</h2>
+            <h2 className="text-2xl font-semibold dark:text-white mb-4">AI Model Settings</h2>
+
+            {/* Model Selector for Chat */}
             <ModelSelector
-              currentModel={settings.defaultModel}
-              onModelChange={(model) => updateSettings({ defaultModel: model })}
+              type="chat"
+              currentModel={selectedChatModel}
+              onModelChange={setSelectedChatModel}
             />
+
+            {/* Model Selector for Image */}
+            <ModelSelector
+              type="image"
+              currentModel={selectedImageModel}
+              onModelChange={setSelectedImageModel}
+            />
+
+            {/* Single Save Button */}
+            <Button
+            className="w-full mt-5 dark:text-black"
+              variant="brutal"
+              onClick={handleSaveModelSelections}
+            >
+              Save Model Selections
+            </Button>
+
             <AISettings settings={settings} updateSettings={updateSettings} />
           </motion.div>
         )
@@ -46,11 +77,11 @@ const SettingsPage = () => {
         return (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y:0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl dark:text-black font-semibold mb-4">Profile Settings</h2>
+            <h2 className="text-2xl dark:text-white font-semibold mb-4">Profile Settings</h2>
             <UserProfile />
           </motion.div>
         )
@@ -58,33 +89,38 @@ const SettingsPage = () => {
         return (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y:0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl dark:text-black  font-semibold mb-4">Help Center</h2>
-            <p className="mb-4 dark:text-black  ">Need assistance? Visit our help center for more information.</p>
-            <Button className=" dark:text-white  " onClick={() => router.push('/help')}>Get Help</Button>
+            <h2 className="text-2xl dark:text-white font-semibold mb-4">Help Center</h2>
+            <p className="mb-4 dark:text-white">Need assistance? Visit our help center for more information.</p>
+            <Button
+            variant="brutal"
+              className=" dark:text-black w-full mt-5"
+              onClick={() => router.push('/help')}
+            >
+              Get Help
+            </Button>
           </motion.div>
         )
+      default:
+        return null
     }
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
       <div className="flex-1 overflow-auto">
         <div className="max-w-3xl mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold mb-8">Settings</h1>
-          <AnimatePresence mode="wait">
-            {renderContent()}
-          </AnimatePresence>
+          <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
         </div>
       </div>
-      <Toaster position="bottom-right" />
+      
     </div>
   )
 }
 
 export default SettingsPage
-

@@ -102,7 +102,7 @@ function Minimal() {
       </Head>
       <Heading
         title="PDF Chat"
-        description="Introducing to play with audio. get audio diarization, translation, and more."
+        description="Introducing to you the new way to chat with your PDFs and Google Gemini for free!"
         icon={<img src="https://i.imgur.com/jvfAvP7.png" alt="PDF Chat Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-pink-700"
         bgColor="bg-violet-500/10"
@@ -174,8 +174,8 @@ function Minimal() {
                 
               />
               <Button
-              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-              type="submit"
+              className=" col-span-12 lg:col-span-2 w-full mt-5 "
+              variant="brutal"
                 disabled={isLoading}
                 size="icon"
               >

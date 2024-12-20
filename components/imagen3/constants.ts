@@ -27,11 +27,7 @@ export const amountOptions = [
 ];
 
 export const modelforImage = [
-  {
-    value: "dall-e-2",
-    label: "DALL-2",
-    image: "/logo.png"
-  },
+ 
   {
     value: "dall-e-3",
     label: "DALL-3",

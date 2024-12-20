@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Button } from '@/components/ui/button'
-import { toast } from 'react-hot-toast'
 
-const models = [
+const chatModels = [
   { value: 'openai', label: 'OpenAI' },
   { value: 'gemini', label: 'Gemini' },
   { value: 'gpt4o', label: 'GPT-4o' },
   { value: 'claude', label: 'Claude 3.5 Sonnet' },
 ]
+
+const imageModels = [
+  { value: 'dalle31', label: 'Dall-E-3.1' },
+  { value: 'imagen3', label: 'Imagen 3' },
+  { value: 'dalle3', label: 'Dall-E-3' },
+]
+
 interface ModelSelectorProps {
+  type: 'chat' | 'image'
   currentModel: string
   onModelChange: (model: string) => void
 }
 
-export const ModelSelector: React.FC<ModelSelectorProps> = ({ currentModel, onModelChange }) => {
-  const [selectedModel, setSelectedModel] = useState(currentModel)
-
-  useEffect(() => {
-    setSelectedModel(currentModel)
-  }, [currentModel])
-
-  const handleSave = () => {
-    onModelChange(selectedModel)
-    const modelLabel = models.find(model => model.value === selectedModel)?.label
-    toast.success(`Model changed to ${modelLabel}`)
-  }
+export const ModelSelector: React.FC<ModelSelectorProps> = ({ type, currentModel, onModelChange }) => {
+  const models = type === 'chat' ? chatModels : imageModels
+  const typeLabel = type === 'chat' ? 'Chat' : 'Image'
 
   return (
     <motion.div
@@ -36,22 +33,23 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ currentModel, onMo
       className="space-y-4"
     >
       <div className="mb-2">
-        <span className="dark:text-black  font-semibold">Current Model: </span>
-        <span className="text-violet-600">{models.find(model => model.value === currentModel)?.label}</span>
+        <span className="dark:text-white font-semibold">Current {typeLabel} Model: </span>
+        <span className="text-violet-600">
+          {models.find(model => model.value === currentModel)?.label}
+        </span>
       </div>
-      <Select value={selectedModel} onValueChange={setSelectedModel}>
-        <SelectTrigger className="dark:text-black  w-[200px]">
-          <SelectValue placeholder="dark:text-white  Select AI Model" />
+      <Select value={currentModel} onValueChange={onModelChange}>
+        <SelectTrigger className="dark:text-black bg-white border dark:border-black/10 rounded-md p-3 w-full">
+          <SelectValue placeholder={`Select ${typeLabel} AI Model`} />
         </SelectTrigger>
         <SelectContent>
-          {models.map((model) => (
+          {models.map(model => (
             <SelectItem key={model.value} value={model.value}>
               {model.label}
             </SelectItem>
           ))}
         </SelectContent>
       </Select>
-      <Button className="dark:text-white" onClick={handleSave}>Save Model Selection</Button>
     </motion.div>
   )
 }

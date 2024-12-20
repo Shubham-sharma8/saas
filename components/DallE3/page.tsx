@@ -32,8 +32,8 @@ import {
 import { audioquestionsByPage } from "./audioquestion";
 import { Textarea } from "@/components/ui/textarea";
 import Head from "next/head";
-import { Share } from "next/font/google";
-import { Share1Icon } from "@radix-ui/react-icons";
+import {ImageModal} from "../ui/image-modal";
+
 
 
 const getRandomQuestion = () => {
@@ -53,10 +53,12 @@ const getRandomQuestion = () => {
   return randomQuestion;
 };
 
-const PhotoPage = () => {
+export const DallE3: React.FC = () => {
   const proModal = useProModal();
   const router = useRouter();
   const [photos, setPhotos] = useState<string[]>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,7 +66,7 @@ const PhotoPage = () => {
       prompt: "",
       amount: "1",
       resolution: "512x512", // Default resolution for DALL-E 2
-      modelImage: "dall-e-2",
+      modelImage: "dall-e-3",
       styleOption: "Emotion",
       colorOption: "Tone",
     },
@@ -116,7 +118,7 @@ const PhotoPage = () => {
       </Head>
       <Heading
         title="Image Generation By DALL-E-3. "
-        description="Turn your prompt into an image with DALL-E-3."
+        description="Get AI based Image with DAll-e3: The best AI image generation model."
         icon={<img src="https://i.ibb.co/71jJqMR/icon-image-generation.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-green-700"
         bgColor="bg-violet-500/10"
@@ -155,8 +157,8 @@ const PhotoPage = () => {
             />
             
             <Button
-              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-              type="submit"
+              className="col-span-12 lg:col-span-2 w-full mt-5 "
+              variant="brutal"
                 disabled={isLoading}
                 size="icon"
               >
@@ -172,73 +174,61 @@ const PhotoPage = () => {
         )}
         
         
-        <div className="grid grid-cols-1 justify-items-center md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-20 gap-4 mt-8">
-          {photos.map((src) => (
-            <Card key={src} className="rounded-lg overflow-hidden">
-              <div className="relative aspect-square">
-              <Image
-              src={src}
-              onClick={() => window.open(src)}
-              alt="Generated Image"
-              layout="responsive"
-              width={1} // Example fixed width
-              height={1} // Example fixed height
-              objectFit="cover" // Adjust the image to cover the aspect ratio box
-              priority
-              />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+                  {photos.map((src) => (
+                    <Card key={src} className="rounded-lg overflow-hidden">
+                      <div
+                        className="relative aspect-square cursor-pointer"
+                        onClick={() => setSelectedImage(src)}
+                      >
+                        <Image
+                          src={src}
+                          alt="Generated Image"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
+                      <CardFooter className="p-2">
+                        <Button
+                          onClick={() => {
+                            const link = document.createElement("a");
+                            link.href = src;
+                            link.download = "generated-image.png";
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
+                          variant="secondary"
+                          className="w-full"
+                        >
+                          <Download className="h-4 w-4 mr-2" />
+                          Download
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+        
+                {selectedImage && (
+                  <ImageModal
+                    src={selectedImage}
+                    onClose={() => setSelectedImage(null)}
+                    onDownload={() => {
+                      const link = document.createElement("a");
+                      link.href = selectedImage;
+                      link.download = "generated-image.png";
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                  />
+                )}
               </div>
-              <CardFooter className="p-2 flex space-x-2">
-              <Button
-  onClick={async () => {
-    try {
-      const response = await fetch(src, { mode: 'cors' }); // Fetch the image
-      const blob = await response.blob(); // Convert to blob
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob); // Create a download link
-      link.download = 'image'; // Specify the download file name
-      link.click(); // Trigger the download
-      URL.revokeObjectURL(link.href); // Clean up URL object
-    } catch (error) {
-      toast.error("Failed to download the image");
-    }
-  }}
-  variant="secondary"
-  className="w-full"
->
-  <Download className="h-4 w-4 mr-2" />
-  Download
-</Button>
-<Button
-    onClick={async () => {
-      try {
-        if (navigator.share) {
-          await navigator.share({
-            title: 'Check out this image!',
-            text: 'Here is an image I generated from Cogify.Social. Take a look!',
-            url: src,
-          });
-          toast.success("Message shared successfully");
-        } else {
-          toast.error('Web Share API is not supported on this device.');
-        }
-      } catch (error) {
-        toast.error("Failed to share the image");
-      }
-    }}
-    variant="secondary"
-    className="w-full"
-  >
-    <Share2 className="h-4 w-4 mr-2" />
-    Share
-  </Button>
-</CardFooter>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-  );
-};
+            </div>
+          </div>
 
-export default PhotoPage;
+          );
+        };
+        
+        

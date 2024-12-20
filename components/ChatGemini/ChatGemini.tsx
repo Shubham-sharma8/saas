@@ -82,7 +82,7 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
       <Heading
          title="Conversation-Gemini"
          description="The best and latest Gemini 2.0 model ranked 3&apos;rd best AI in the world and connected with Realtime internet"
-         icon={<img src="https://mir-s3-cdn-cf.behance.net/projects/404/45862f197501329.Y3JvcCwyMDAzLDE1NjcsNDAxLDA.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+         icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
            iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -154,10 +154,10 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
 
     {/* Generate Button */}
     <Button
-      type="submit"
+     variant="brutal"
       disabled={isLoading}
-      className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-
+      className=" col-span-12 lg:col-span-2 w-full mt-5 "
+             
       >
       {isLoading ? 'Generating...' : 'Generate'}
     </Button>

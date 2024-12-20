@@ -175,8 +175,8 @@ function Minimal() {
                 
               />
               <Button
-              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-              type="submit"
+              className=" col-span-12 lg:col-span-2 w-full mt-5 "
+              variant="brutal"
                 disabled={isLoading}
                 size="icon"
               >

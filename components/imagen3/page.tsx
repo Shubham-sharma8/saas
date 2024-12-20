@@ -25,7 +25,7 @@ import {
 
 } from "./constants";
 
-import { audioquestionsByPage } from "./audioquestion";
+import { audioquestionsByPage } from "./Placeholder";
 import { Textarea } from "@/components/ui/textarea";
 import Head from "next/head";
 
@@ -47,7 +47,7 @@ const getRandomQuestion = () => {
   return randomQuestion;
 };
 
-const PhotoPage = () => {
+export const Imagen3: React.FC = () => {
   
   const [photos, setPhotos] = useState<string[]>([]);
 
@@ -57,7 +57,7 @@ const PhotoPage = () => {
       prompt: "",
       amount: "1",
       resolution: "512x512", // Default resolution for DALL-E 2
-      modelImage: "dall-e-2",
+      modelImage: "dall-e-3",
       styleOption: "Emotion",
       colorOption: "Tone",
     },
@@ -133,8 +133,9 @@ const PhotoPage = () => {
             />
             
             <Button
-              className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-              type="submit"
+              className="col-span-12 lg:col-span-2 w-full mt-5 "
+              variant="brutal"
+
                 disabled={isLoading}
                 size="icon"
               >
@@ -227,4 +228,3 @@ const PhotoPage = () => {
   );
 };
 
-export default PhotoPage;

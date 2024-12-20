@@ -1,15 +1,14 @@
 import * as z from "zod";
 
 export const formSchema = z.object({
-  prompt: z.string().min(1, {
-    message: "Photo prompt is required"
-  }),
-  amount: z.string().min(1),
-  resolution: z.string().min(1),
-  modelImage: z.string().min(1),
-  styleOption: z.string().min(1),
-  colorOption: z.string().min(1),
+  prompt: z.string().min(1, { message: "Prompt is required" }),
+  amount: z.string(),
+  resolution: z.string(),
+  modelImage: z.string(),
+  styleOption: z.string().optional(), // Make styleOption optional
+  colorOption: z.string().optional(), // Make colorOption optional
 });
+
 export const amountOptions = [
   {
     value: "1",
@@ -32,14 +31,23 @@ export const amountOptions = [
     label: "5 Images"
   },
   
+  {
+    value: "6",
+    label: "6 Images"
+  },
+  {
+    value: "7",
+    label: "7 Images"
+  },
+  {
+    value: "8",
+    label: "8 Images"
+  },
+
 ];
 
 export const modelforImage = [
-  {
-    value: "dall-e-2",
-    label: "DALL-2",
-    image: "/logo.png"
-  },
+  
   {
     value: "dall-e-3",
     label: "DALL-3",
@@ -48,14 +56,7 @@ export const modelforImage = [
 ];
 
 export const resolutionOptions = [
-  {
-    value: "256x256",
-    label: "256x256",
-  },
-  {
-    value: "512x512",
-    label: "512x512",
-  },
+  
   {
     value: "1024x1024",
     label: "1024x1024",

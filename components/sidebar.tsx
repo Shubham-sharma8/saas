@@ -56,18 +56,8 @@ const routes = [
     href: "/image",
     color: "text-green-500",
   },
-  {
-    label: "Imagen3",
-    icon: ImagePlus,
-    href: "/imagen3",
-    color: "text-red-500",
-  },
-  {
-    label: "Image 2.0",
-    icon: GalleryHorizontalEnd,
-    href: "/image2.0",
-    color: "text-green-500",
-  },
+  
+  
   {
     label: "Vision",
     icon: Eye,

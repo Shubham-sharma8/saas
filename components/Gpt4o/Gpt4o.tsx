@@ -53,9 +53,9 @@ export const Gpt4o: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Conversation GPT-4o"
+        title="Conversation-GPT-4o"
         description="Unlock the next level of conversation with GPT-4o: Where every chat opens new doors to insights, creativity, and innovation!"
-        icon={<img src="https://pbs.twimg.com/media/GNiQhLVakAAmuhH.png" alt="gpt4o Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="OpenAI Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
       />
@@ -106,8 +106,8 @@ export const Gpt4o: React.FC = () => {
   <Button
     type="submit"
     disabled={isLoading}
-    className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
-  >
+    className="rounded-md bg-black text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-black col-span-12 lg:col-span-2 w-full mt-5 "
+       >
     {isLoading ? 'Generating...' : 'Generate'}
   </Button>
 </div>

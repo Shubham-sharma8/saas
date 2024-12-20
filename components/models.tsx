@@ -73,7 +73,7 @@ export function ImagenCard() {
         >
 This brings Google&apos;s state of the art image generative AI, products that transform their user&apos;s imagination into high quality visual assets using AI generation, in seconds.      
 </CardItem>
-        <Link href="/imagen3" className="flex items-center">
+        <Link href="/image" className="flex items-center">
         <CardItem translateZ="100" className="w-full mt-4">
           <Image
          

@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 
 interface Settings {
   defaultModel: string
+  defaultImageModel: string
   temperature: number
   streamResponse: boolean
 }
 
 const defaultSettings: Settings = {
   defaultModel: 'openai',
+  defaultImageModel: 'dalle31',
   temperature: 0.8,
   streamResponse: true,
 }

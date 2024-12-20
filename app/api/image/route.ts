@@ -13,7 +13,7 @@ export async function POST(
 ) {
   try {
     const { userId } = auth();
-    const { prompt, amount = 1, resolution = "512x512", modelImage = "dall-e-2"} = await req.json();
+    const { prompt, amount = 1, resolution = "1025x1792", modelImage = "dall-e-3"} = await req.json();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
