@@ -8,9 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Download, ImageIcon, SearchX, Share2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import {ImagenCard} from '@/components/models'
-import {  Highlight } from "@/components/ui/hero-highlight";
+
 
 
 import { Heading } from "@/components/heading";
@@ -18,16 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loaderimage } from "@/components/loader";
-import { Empty } from "@/components/ui/empty";
 
-import { useProModal } from "@/hooks/use-pro-modal";
-
-import {
- 
-  formSchema,
-  resolutionOptions,
-
-} from "./constants";
 
 import { audioquestionsByPage } from "./audioquestion";
 import { Textarea } from "@/components/ui/textarea";
@@ -54,40 +43,22 @@ const getRandomQuestion = () => {
 };
 
 export const DallE3: React.FC = () => {
-  const proModal = useProModal();
-  const router = useRouter();
+
   const [photos, setPhotos] = useState<string[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-
+  const formSchema = z.object({
+    prompt: z.string().min(1, {
+      message: "Prompt is required."
+    }),
+    model: z.string().min(1),
+  });
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      prompt: "",
-      amount: "1",
-      resolution: "512x512", // Default resolution for DALL-E 2
-      modelImage: "dall-e-3",
-      styleOption: "Emotion",
-      colorOption: "Tone",
-    },
   });
 
-  const filteredResolutionOptions = (modelImage: string) => {
-    if (modelImage === "dall-e-3") {
-      // If DALL-E 3 is selected, exclude certain resolutions
-      return resolutionOptions.filter(
-        (option) => !["256x256", "512x512"].includes(option.value)
-      );
-    } else if (modelImage === "dall-e-2") {
-      // If DALL-E 2 is selected, exclude certain resolutions
-      return resolutionOptions.filter(
-        (option) => !["1024x1792", "1792x1024"].includes(option.value)
-      );
-    }
-    // Default case: return all resolution options
-    return resolutionOptions;
-  };
-
+  
   const isLoading = form.formState.isSubmitting;
 
 

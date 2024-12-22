@@ -34,7 +34,6 @@ export async function POST(req: Request) {
       return new StreamingTextResponse(stream);
     
   } catch (error: any) {
-    console.error("[CONVERSATION_ERROR]", error);
     return new NextResponse(error.message || "Internal Server Error", { status: 500 });
   }
 }

@@ -6,6 +6,8 @@ const chatModels = [
   { value: 'openai', label: 'OpenAI' },
   { value: 'gemini', label: 'Gemini' },
   { value: 'gpt4o', label: 'GPT-4o' },
+  { value: 'mistral', label: 'Mistral-Large-2411' },
+  { value: 'cohere', label: 'Cohere-Command R+' },
   { value: 'claude', label: 'Claude 3.5 Sonnet' },
 ]
 

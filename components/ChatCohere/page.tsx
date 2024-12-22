@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
-import { formSchema, modelOption } from './constants'
 import { MessageList } from '@/components/convo/MessageList'
 import { Heading } from '@/components/heading'
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -14,10 +13,11 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
 
 
-export const Gpt4o: React.FC = () => {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
+
+export const ChatCohere: React.FC = () => {
+    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
     {
-      api: "/api/Gpt4o",
+      api: "/api/cohere",
     }
   );
   const [error, setError] = useState<string | null>(null)
@@ -40,6 +40,13 @@ export const Gpt4o: React.FC = () => {
     handleInputChange(event);
     adjustTextareaHeight(); // Adjust height on content change
   };
+  const formSchema = z.object({
+    prompt: z.string().min(1, {
+      message: "Prompt is required."
+    }),
+    model: z.string().min(1),
+  });
+  
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,9 +60,9 @@ export const Gpt4o: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Conversation-GPT-4o"
-        description="Unlock the next level of conversation with GPT-4o: Where every chat opens new doors to insights, creativity, and innovation!"
-        icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="OpenAI Icon" className="w-full h-full object-contain" />}
+        title="Cohere Command R+"
+        description="Command R+: Innovative AI assistant, offering human-like text generation for creative, informative, and interactive purposes. It provides valuable insights and assistance.."
+        icon={<img src="https://pbs.twimg.com/profile_images/1650250832909152260/760DZ0cv_400x400.png" alt="Cohere Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
       />
@@ -104,10 +111,11 @@ export const Gpt4o: React.FC = () => {
 <div className="col-span-12 lg:col-span-2 mt-5">
 
   <Button
-    type="submit"
-    disabled={isLoading}
-    className="rounded-md bg-black text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-black col-span-12 lg:col-span-2 w-full mt-5 "
-       >
+   variant="brutal"
+   disabled={isLoading}
+   type="submit"
+   className=" col-span-12 lg:col-span-2 w-full mt-5 "
+   >
     {isLoading ? 'Generating...' : 'Send'}
   </Button>
 </div>

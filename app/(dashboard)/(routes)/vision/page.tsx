@@ -86,7 +86,7 @@ const [files, setFiles] = React.useState<any[]>([]);
     if (!ctxProvider) return;
 
     const handleChangeEvent = (e: any) => {
-      console.log("change event payload:", e);
+      
       setFiles([
         ...e.detail.allEntries.filter((f: any) => f.status === "success"),
       ]);

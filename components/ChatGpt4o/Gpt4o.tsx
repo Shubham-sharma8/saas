@@ -13,10 +13,10 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
 
 
-export const ChatClaude: React.FC = () => {
+export const Gpt4o: React.FC = () => {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
     {
-      api: "/api/claude",
+      api: "/api/Gpt4o",
     }
   );
   const [error, setError] = useState<string | null>(null)
@@ -58,10 +58,10 @@ export const ChatClaude: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Claude 3.5 Sonnet"
-        description="Anthropic's most powerful AI model. Claude 3.5 Sonnet outperforms competitor models and Claude 3 Opus at higher speeds"
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" alt="Claude 3.5 Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-               iconColor="text-violet-500"
+        title="GPT-4o"
+        description="Unlock the next level of conversation with GPT-4o: Where every chat opens new doors to insights, creativity, and innovation!"
+        icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="OpenAI Icon" className="w-full h-full object-contain" />}
+        iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="flex-grow overflow-hidden">
@@ -109,10 +109,10 @@ export const ChatClaude: React.FC = () => {
 <div className="col-span-12 lg:col-span-2 mt-5">
 
   <Button
-  variant={'brutal'}
+    variant="brutal"
     disabled={isLoading}
     className=" col-span-12 lg:col-span-2 w-full mt-5 "
-  >
+       >
     {isLoading ? 'Generating...' : 'Send'}
   </Button>
 </div>

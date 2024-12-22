@@ -6,7 +6,10 @@ import { useSettings } from '@/hooks/useSettings'
 import {ChatGPT} from '@/components/ChatGPT/ChatGPT'
 import {ChatGemini} from '@/components/ChatGemini/ChatGemini'
 import {ChatClaude} from '@/components/ChatClaude/ChatClaude'
-import {Gpt4o} from '@/components/Gpt4o/Gpt4o'
+import {Gpt4o} from '@/components/ChatGpt4o/Gpt4o'
+import {ChatMistral} from '@/components/ChatMistral/page'
+import {ChatCohere} from '@/components/ChatCohere/page'
+
 
 
 
@@ -21,6 +24,10 @@ const Chat: React.FC = () => {
         return <ChatGemini />
         case 'gpt4o':
         return <Gpt4o />
+        case 'mistral':
+        return <ChatMistral />
+        case 'cohere':
+          return <ChatCohere />
       case 'claude':
         return <ChatClaude />
       default:

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
-import { formSchema, modelOption } from '../ChatClaude/constants'
+import { formSchema } from './constants'
 import { MessageList } from '@/components/convo/MessageList'
 import { ModelSelector } from './ModelSelector'
 import { Heading } from '@/components/heading'
@@ -80,7 +80,7 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Conversation-Gemini"
+        title="Gemini"
         description="The best and latest Gemini 2.0 model ranked 3rd best AI in the world and connected with Realtime internet"
         icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"

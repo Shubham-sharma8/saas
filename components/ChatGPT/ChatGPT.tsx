@@ -74,7 +74,7 @@ export const ChatGPT: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Conversation-ChatGPT"
+        title="ChatGPT"
         description="Our most advanced conversation model with improved UI and functionality"
         icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="OpenAI Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500 "
