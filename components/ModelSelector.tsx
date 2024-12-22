@@ -8,6 +8,7 @@ const chatModels = [
   { value: 'gpt4o', label: 'GPT-4o' },
   { value: 'mistral', label: 'Mistral-Large-2411' },
   { value: 'cohere', label: 'Cohere-Command R+' },
+  { value: 'llama', label: 'Llama 3.3 70B ' },
   { value: 'claude', label: 'Claude 3.5 Sonnet' },
 ]
 

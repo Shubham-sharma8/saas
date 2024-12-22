@@ -9,6 +9,10 @@ import {ChatClaude} from '@/components/ChatClaude/ChatClaude'
 import {Gpt4o} from '@/components/ChatGpt4o/Gpt4o'
 import {ChatMistral} from '@/components/ChatMistral/page'
 import {ChatCohere} from '@/components/ChatCohere/page'
+import {ChatLlm} from '@/components/ChatLlm/page'
+
+
+
 
 
 
@@ -28,8 +32,12 @@ const Chat: React.FC = () => {
         return <ChatMistral />
         case 'cohere':
           return <ChatCohere />
+          case 'llama':
+            return <ChatLlm />
+
       case 'claude':
         return <ChatClaude />
+        
       default:
         return <ChatGPT /> // Fallback to OpenAI
     }
