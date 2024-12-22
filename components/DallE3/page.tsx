@@ -108,7 +108,7 @@ export const DallE3: React.FC = () => {
 
  
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <Head>
         <title>Image Generation - Cogify</title>
         <meta
@@ -120,8 +120,8 @@ export const DallE3: React.FC = () => {
         title="Image Generation By DALL-E-3. "
         description="Get AI based Image with DAll-e3: The best AI image generation model."
         icon={<img src="https://i.ibb.co/71jJqMR/icon-image-generation.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-        iconColor="text-green-700"
-        bgColor="bg-violet-500/10"
+        iconColor="text-violet-500 "
+        bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>

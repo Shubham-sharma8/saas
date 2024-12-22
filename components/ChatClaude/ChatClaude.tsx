@@ -57,7 +57,7 @@ export const ChatClaude: React.FC = () => {
         description="Anthropic's most powerful AI model. Claude 3.5 Sonnet outperforms competitor models and Claude 3 Opus at higher speeds"
         icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" alt="Claude 3.5 Icon" className="w-full h-full object-contain" />} // Use the image as the icon
                iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="flex-grow overflow-hidden">
         <AnimatePresence>
@@ -108,7 +108,7 @@ export const ChatClaude: React.FC = () => {
     disabled={isLoading}
     className="rounded-md bg-zinc-800 text-white font-bold transition duration-200 hover:bg-white hover:text-black border-2 border-transparent hover:border-blue-500 col-span-12 lg:col-span-2 w-full mt-5 "
   >
-    {isLoading ? 'Generating...' : 'Generate'}
+    {isLoading ? 'Generating...' : 'Send'}
   </Button>
 </div>
                  

@@ -84,7 +84,7 @@ export const Imagen3: React.FC = () => {
 
  
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <Head>
         <title>Image Generation By Imagen 3</title>
         <meta
@@ -96,8 +96,8 @@ export const Imagen3: React.FC = () => {
         title="Image Generation-Imagen 3"
         description="Experience the latest AI image generation with Google Imagen 3, available for free."
         icon={<img src="https://i.ibb.co/71jJqMR/icon-image-generation.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-        iconColor="text-green-700"
-        bgColor="bg-violet-500/10"
+        iconColor="text-violet-500 "
+        bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>

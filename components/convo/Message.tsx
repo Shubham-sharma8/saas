@@ -2,37 +2,63 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown, ChevronUp, MoreHorizontal, X } from 'lucide-react'
+import { ChevronDown, ChevronUp, ExternalLink, Info, MoreHorizontal, X } from 'lucide-react'
 import { UserAvatar } from '@/components/user-avatar'
 import { BotAvatar } from '@/components/bot-avatar'
 import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import dynamic from 'next/dynamic'
 import { CodeBlock } from './code-block'
 import { cn } from "@/lib/utils"
-import React  from 'react'
-
+import React from 'react'
 import { Clipboard, Share, Speaker, Edit, Download } from 'lucide-react'
-
 import { toast } from 'react-hot-toast'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 import clsx from 'clsx' // For conditional class management
 
 const ReactMarkdown = dynamic(() => import('react-markdown'), { ssr: false })
 
+interface GroundingSource {
+  url: string;
+  title: string;
+}
+
 interface MessageProps {
   message: any
   isExpanded?: boolean
+  groundingSources?: GroundingSource[]
 }
 
-export const Message: React.FC<MessageProps> = ({ message, isExpanded = true }) => {
+
+export const Message: React.FC<MessageProps> = ({ 
+  message, 
+  isExpanded = true,
+  groundingSources 
+}) => {
+  
   const [expanded, setExpanded] = useState(isExpanded)
   const [menuOpen, setMenuOpen] = useState(false)
   const isCodeBlock = message.content.includes('\`\`\`')
   const [isEditing, setIsEditing] = useState(false)
   const [editedContent, setEditedContent] = useState(message.content)
+
+  const processContent = (content: string) => {
+    return content.replace(/\[(\d+)\]/g, (match, num) => {
+      return `[${num}](${groundingSources?.[parseInt(num) - 1]?.url || '#'})`
+    })
+  }
   const handleCopy = () => {
+
     navigator.clipboard.writeText(message.content)
     toast.success('Copied to clipboard')
   }
+
   const handleShare = () => {
     if (navigator.share) {
       navigator
@@ -170,6 +196,33 @@ export const Message: React.FC<MessageProps> = ({ message, isExpanded = true }) 
                   </ReactMarkdown>
                 </div>
               )}
+              {groundingSources && groundingSources.length > 0 && (
+                <Card className="p-4 mt-4 bg-gray-50 dark:bg-gray-800/50">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Info className="w-4 h-4" />
+                    <h3 className="font-medium">Grounding Sources</h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {groundingSources.map((source, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <span className="text-sm text-muted-foreground">
+                          [{index + 1}]
+                        </span>
+                        <a 
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                        >
+                          {source.title}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              
             </motion.div>
           )}
         </div>

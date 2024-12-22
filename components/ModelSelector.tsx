@@ -10,7 +10,7 @@ const chatModels = [
 ]
 
 const imageModels = [
-  { value: 'dalle31', label: 'Dall-E-3.1' },
+  { value: 'dalle31', label: 'Dall-E-3 Advance' },
   { value: 'imagen3', label: 'Imagen 3' },
   { value: 'dalle3', label: 'Dall-E-3' },
 ]

@@ -80,11 +80,11 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-         title="Conversation-Gemini"
-         description="The best and latest Gemini 2.0 model ranked 3&apos;rd best AI in the world and connected with Realtime internet"
-         icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-           iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        title="Conversation-Gemini"
+        description="The best and latest Gemini 2.0 model ranked 3rd best AI in the world and connected with Realtime internet"
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />}
+        iconColor="text-violet-500"
+        bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="flex-grow overflow-hidden">
         <AnimatePresence>
@@ -98,73 +98,59 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
             <MessageList messages={messages} isLoading={isLoading} />
             <div className="p-4">
               <Form {...form}>
-                <form ref={formRef}
+                <form 
+                  ref={formRef}
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="
-                  rounded-lg 
-              border 
-              w-full 
-              p-4 
-              px-3 
-              md:px-6 
-              focus-within:shadow-sm
-              grid
-              grid-cols-12
-              gap-2
-            ">
+                  className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm space-y-4"
+                >
                   <FormField
                     control={form.control}
                     name="prompt"
                     render={({field}) => (
-                      <FormItem className="col-span-12 lg:col-span-8">
+                      <FormItem className="col-span-12">
                         <FormControl className="m-0 p-0">
-                        <Textarea
+                          <Textarea
                             ref={textareaRef}
                             className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
                             value={input}
-                            placeholder={'Type your message here...'}
+                            placeholder="Type your message here..."
                             onChange={(e) => {
                               handleInputChange(e);
                               field.onChange(e);
                               adjustTextareaHeight();
                             }}
                           />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  <div className="col-span-12 lg:col-span-12 mt-5 flex flex-col lg:flex-row items-center justify-between  space-y-0 mb:space-y-4 lg:space-y-0 lg:space-x-4">
-  {/* Grounding Toggle */}
-  <div className="flex items-center">
-    <GroundingToggle 
-      enabled={groundingEnabled} 
-      onToggle={setGroundingEnabled}
-    />
-  </div>
-
-  {/* Model Selector and Generate Button */}
-  <div className="flex flex-col lg:flex-row items-center lg:space-x-4 w-full lg:w-auto">
-    {/* Model Selector */}
-    <div className=" dark:text-black w-full lg:w-full">
-      <ModelSelector 
-                            control={form.control} 
-                            onChange={(value) => setSelectedModel(value)}
-                          />
-    </div>
-
-    {/* Generate Button */}
-    <Button
-     variant="brutal"
-      disabled={isLoading}
-      className=" col-span-12 lg:col-span-2 w-full mt-5 "
-             
-      >
-      {isLoading ? 'Generating...' : 'Generate'}
-    </Button>
-  </div>
-</div>
-
-                 
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    {/* Grounding Toggle */}
+                    <div className="w-full sm:w-auto">
+                      <GroundingToggle 
+                        enabled={groundingEnabled} 
+                        onToggle={setGroundingEnabled}
+                      />
+                    </div>
+                    {/* Model Selector and Generate Button */}
+                    <div className="flex flex-1 items-center gap-4 w-full">
+                      <div className="flex-1">
+                        <ModelSelector 
+                          control={form.control} 
+                          onChange={(value) => setSelectedModel(value)}
+                        />
+                      </div>
+                      <Button
+                        variant="brutal"
+                        disabled={isLoading}
+                        type="submit"
+                        className="w-[120px]"
+                      >
+                        {isLoading ? 'Generating...' : 'Send'}
+                      </Button>
+                    </div>
+                  </div>
                 </form>
               </Form>
               

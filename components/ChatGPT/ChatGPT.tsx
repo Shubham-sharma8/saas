@@ -72,13 +72,13 @@ export const ChatGPT: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-black">
+    <div className="flex flex-col h-full">
       <Heading
         title="Conversation-ChatGPT"
         description="Our most advanced conversation model with improved UI and functionality"
         icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="OpenAI Icon" className="w-full h-full object-contain" />}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        iconColor="text-violet-500 "
+        bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="flex-grow overflow-hidden">
         <AnimatePresence>
@@ -97,59 +97,47 @@ export const ChatGPT: React.FC = () => {
                 <form
                   ref={formRef}
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="rounded-lg 
-              border 
-              w-full 
-              p-4 
-              px-3 
-              md:px-6 
-              focus-within:shadow-sm
-              grid
-              grid-cols-12
-              gap-2 
-              "
-              
+                  className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid gap-4 dark:bg-gray-900 dark:border-gray-700"
                 >
-                  <FormField
-                    control={form.control}
-                    name="prompt"
-                    render={({ field }) => (
-                      <FormItem className="col-span-12 k lg:col-span-8">
-                        <FormControl className="m-0 p-0">
-                          <Textarea
-                            ref={textareaRef}
-                            className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden min-h-[40px]"
-                            placeholder="Type your message here..."
-                            value={input}
-                            onChange={(e) => {
-                              handleInputChange(e);
-                              field.onChange(e);
-                              adjustTextareaHeight();
-                            }}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <div className="col-span-12 lg:col-span-2 dark:text-black lg:mt-0 flex items-center">
-                    <ModelSelector 
-                      control={form.control} 
-                      onChange={(value) => setSelectedModel(value)}
+                  <div className="flex flex-col md:flex-row gap-4 w-full">
+                    <FormField
+                      control={form.control}
+                      name="prompt"
+                      render={({ field }) => (
+                        <FormItem className="flex-1">
+                          <FormControl className="m-0 p-0">
+                            <Textarea
+                              ref={textareaRef}
+                              className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden min-h-[40px] dark:bg-gray-900 dark:text-gray-100"
+                              placeholder="Type your message here..."
+                              value={input}
+                              onChange={(e) => {
+                                handleInputChange(e);
+                                field.onChange(e);
+                                adjustTextareaHeight();
+                              }}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div className="col-span-12 lg:col-span-2 lg:mt-0 flex items-center">
-                    <Button
-                          variant="brutal"
-                          disabled={isLoading}
-                          className=" col-span-12 lg:col-span-2 w-full mt-5 "
-                                                                                       
-                          >
-                          {isLoading ? 'Generating...' : 'Generate'}
-                        </Button>
+                    <div className="flex flex-col gap-4 md:w-[280px]">
+                      <ModelSelector 
+                        control={form.control} 
+                        onChange={(value) => setSelectedModel(value)}
+                      />
+                      <Button
+                        variant="brutal"
+                        disabled={isLoading}
+                        type="submit"
+                        className="w-full"
+                      >
+                        {isLoading ? 'Generating...' : 'Send'}
+                      </Button>
+                    </div>
                   </div>
                 </form>
               </Form>
-              
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -171,3 +159,4 @@ export const ChatGPT: React.FC = () => {
     </div>
   )
 }
+
