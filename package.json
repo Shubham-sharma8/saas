@@ -19,6 +19,7 @@
     "@ai-sdk/google": "^1.0.10",
     "@ai-sdk/mistral": "^1.0.6",
     "@ai-sdk/openai": "^1.0.8",
+    "@ai-sdk/openai-compatible": "^0.0.11",
     "@anthropic-ai/sdk": "^0.18.0",
     "@anthropic-ai/vertex-sdk": "^0.4.1",
     "@azure-rest/ai-inference": "^1.0.0-beta.4",
