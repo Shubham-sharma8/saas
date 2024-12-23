@@ -10,6 +10,8 @@ import {Gpt4o} from '@/components/ChatGpt4o/Gpt4o'
 import {ChatMistral} from '@/components/ChatMistral/page'
 import {ChatCohere} from '@/components/ChatCohere/page'
 import {ChatLlm} from '@/components/ChatLlm/page'
+import {ChatxAI} from '@/components/ChatxAI/page'
+
 
 
 
@@ -22,21 +24,22 @@ const Chat: React.FC = () => {
 
   const renderChat = () => {
     switch (settings.defaultModel) {
-      case 'openai':
-        return <ChatGPT />
-      case 'gemini':
-        return <ChatGemini />
+        case 'openai':
+          return <ChatGPT />
+        case 'gemini':
+          return <ChatGemini />
         case 'gpt4o':
-        return <Gpt4o />
+          return <Gpt4o />
         case 'mistral':
-        return <ChatMistral />
+          return <ChatMistral />
         case 'cohere':
           return <ChatCohere />
-          case 'llama':
-            return <ChatLlm />
-
-      case 'claude':
-        return <ChatClaude />
+        case 'llama':
+          return <ChatLlm />
+        case 'xai':
+          return <ChatxAI />
+        case 'claude':
+          return <ChatClaude />
         
       default:
         return <ChatGPT /> // Fallback to OpenAI

@@ -51,15 +51,17 @@ const SettingsPage = () => {
             <ModelSelector
               type="chat"
               currentModel={selectedChatModel}
-              onModelChange={setSelectedChatModel}
-            />
+              onModelChange={setSelectedChatModel} searchTerm={''} setSearchTerm={function (term: string): void {
+                throw new Error('Function not implemented.');
+              } }            />
 
             {/* Model Selector for Image */}
             <ModelSelector
               type="image"
               currentModel={selectedImageModel}
-              onModelChange={setSelectedImageModel}
-            />
+              onModelChange={setSelectedImageModel} searchTerm={''} setSearchTerm={function (term: string): void {
+                throw new Error('Function not implemented.');
+              } }            />
 
             {/* Single Save Button */}
             <Button

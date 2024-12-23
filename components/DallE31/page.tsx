@@ -166,7 +166,7 @@ export const DallE31: React.FC = () => {
       <Heading
         title="Image Generation"
         description="Get AI based Image with Dall-E3: The best AI image generation model."
-        icon={<img src="https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={<img src="https://thinglabs.io/wp-content/uploads/dall-e-logo1.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-violet-500 "
         bgColor="bg-violet-500/10 dark:bg-white"
       />

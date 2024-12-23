@@ -27,7 +27,17 @@ const nextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'assets.aceternity.com' },
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
-      { protocol: 'https', hostname: 'i.imgur.com' },
+      { protocol: 'https', hostname: 'mistral.ai' },
+      { protocol: 'https', hostname: 'cdn.prod.website-files.com' },
+      { protocol: 'https', hostname: 'encrypted-tbn0.gstatic.com' },
+      { protocol: 'https', hostname: 'upload.wikimedia.org' },
+      { protocol: 'https', hostname: 'thinglabs.io' },
+      { protocol: 'https', hostname: 'pbs.twimg.com' },
+      { protocol: 'https', hostname: '1000logos.net' },
+      { protocol: 'https', hostname: 'i.ibb.co' },
+      { protocol: 'https', hostname: 'miro.medium.com' },
+      { protocol: 'https', hostname: 'www.gstatic.com' },
+      { protocol: 'https', hostname: '1000logos.net' },
     ]
   },
   
