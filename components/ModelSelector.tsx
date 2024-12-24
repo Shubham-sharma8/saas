@@ -21,6 +21,7 @@ const chatModels: Model[] = [
   { value: 'claude', label: 'Claude 3.5 Sonnet', rating: 4.6, imageUrl: 'https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png' },
   { value: 'llama', label: 'Llama 3.3 70B', rating: 4.4, imageUrl: 'https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png' },
   { value: 'mistral', label: 'Mistral-Large-2411', rating: 4.2, imageUrl: 'https://mistral.ai/images/news/announcing-mistral.png' },
+  { value: 'perp', label: 'Perpexility', rating: 4.1, imageUrl: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/perplexity-ai-icon.png' },
   { value: 'xai', label: 'xAI Grok', rating: 4.0, imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKJdfl9u2KJAQckmHmNaEagW8j1I6fmzusFy48wvw7myt49C0zVhKGOB2txycjZFFyxF8&usqp=CAU' },
   { value: 'cohere', label: 'Cohere-Command R+', rating: 4.1, imageUrl: 'https://pbs.twimg.com/profile_images/1650250832909152260/760DZ0cv_400x400.png' },
 ]

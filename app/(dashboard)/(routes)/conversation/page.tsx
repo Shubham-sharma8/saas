@@ -11,13 +11,7 @@ import {ChatMistral} from '@/components/ChatMistral/page'
 import {ChatCohere} from '@/components/ChatCohere/page'
 import {ChatLlm} from '@/components/ChatLlm/page'
 import {ChatxAI} from '@/components/ChatxAI/page'
-
-
-
-
-
-
-
+import {ChatPerp} from '@/components/ChatPerp/page'
 
 const Chat: React.FC = () => {
   const { settings } = useSettings()
@@ -40,7 +34,8 @@ const Chat: React.FC = () => {
           return <ChatxAI />
         case 'claude':
           return <ChatClaude />
-        
+        case 'perp':
+          return <ChatPerp />   
       default:
         return <ChatGPT /> // Fallback to OpenAI
     }
