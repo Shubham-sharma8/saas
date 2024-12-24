@@ -13,7 +13,7 @@ const perplexity = createOpenAICompatible({
     try {
       const { messages } = await req.json();
         const text = await streamText({
-        model: perplexity('llama-3.1-sonar-large-32k-online'),
+        model: perplexity('llama-3.1-sonar-huge-128k-online'),
         messages,
       });
       return text.toDataStreamResponse();

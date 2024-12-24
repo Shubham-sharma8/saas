@@ -102,6 +102,7 @@
     "lucide-react": "^0.259.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "^14.1.4",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
     "openai": "^4.38.5",
     "postcss": "^8.4.35",
