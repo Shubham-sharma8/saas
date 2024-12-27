@@ -12,7 +12,6 @@ const Navbar = async () => {
       <div className="flex w-full items-center gap-4 justify-end list-none">
         <UserButton afterSignOutUrl="/" />
         <ModeToggle/>
-
       </div>
     </div>
    );

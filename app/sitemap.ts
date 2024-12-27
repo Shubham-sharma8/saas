@@ -70,9 +70,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     
         {
-            url: 'https://cogify.social/gift'
-        },
-        {
             url: 'https://iamclint.tech'
         },
 

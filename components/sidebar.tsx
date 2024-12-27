@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { GalleryHorizontalEnd, ImageMinus, ImagePlus } from "lucide-react";
+import { ImageMinus } from "lucide-react";
 
 import { Montserrat } from "next/font/google";
 import {
