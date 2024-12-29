@@ -135,7 +135,7 @@ const [files, setFiles] = React.useState<any[]>([]);
         <div className={st.center}>
           <lr-config
             ctx-name="my-uploader"
-            pubkey="cd4fd5fd4190239a70a6"
+            pubkey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
             source-list="local, url, camera, dropbox, gdrive, onedrive, gphotos, instagram, facebook"
             multiple={true}
             img-only="true"

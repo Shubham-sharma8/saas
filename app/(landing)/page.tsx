@@ -14,7 +14,6 @@ const LandingPage = () => {
   return (
     <div>
       <PageHome/>
-      <Navbar />
       <HeroHighlights/>
       <RetroGridFinal/>
       <TabsDemo />
