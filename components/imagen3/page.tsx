@@ -5,10 +5,9 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Download, ImageIcon, Share2 } from "lucide-react";
+import { Download, Share2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/ui/button";
@@ -25,20 +24,20 @@ import {
 
 } from "./constants";
 
-import { audioquestionsByPage } from "./Placeholder";
+import { QuestionsByPage } from "./Placeholder";
 import { Textarea } from "@/components/ui/textarea";
 import Head from "next/head";
 
 
 const getRandomQuestion = () => {
   // Randomly select a page
-  const pages = Object.keys(audioquestionsByPage);
+  const pages = Object.keys(QuestionsByPage);
   const randomPageIndex = Math.floor(Math.random() * pages.length);
   const randomPage = pages[randomPageIndex];
 
   // Randomly select a question from that page
   const questionsOnSelectedPage =
-    audioquestionsByPage[randomPage as keyof typeof audioquestionsByPage];
+  QuestionsByPage[randomPage as keyof typeof QuestionsByPage];
   const randomQuestionIndex = Math.floor(
     Math.random() * questionsOnSelectedPage.length
   );

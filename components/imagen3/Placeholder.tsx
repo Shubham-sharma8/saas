@@ -1,6 +1,6 @@
 import React from "react";
 
-export const audioquestionsByPage = {
+export const QuestionsByPage = {
   page1: [
     "A cozy cabin in a snowy forest.",
     "A futuristic cityscape at night.",

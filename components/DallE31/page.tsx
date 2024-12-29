@@ -33,7 +33,7 @@ import {
   colorOption,
 } from "./constants";
 
-import { audioquestionsByPage } from "./audioquestion";
+import { QuestionsByPage } from "./audioquestion";
 import { Textarea } from "@/components/ui/textarea";
 import Head from "next/head";
 import {ImageModal} from "../ui/image-modal";
@@ -41,13 +41,13 @@ import {ImageModal} from "../ui/image-modal";
 
 const getRandomQuestion = () => {
   // Randomly select a page
-  const pages = Object.keys(audioquestionsByPage);
+  const pages = Object.keys(QuestionsByPage);
   const randomPageIndex = Math.floor(Math.random() * pages.length);
   const randomPage = pages[randomPageIndex];
 
   // Randomly select a question from that page
   const questionsOnSelectedPage =
-    audioquestionsByPage[randomPage as keyof typeof audioquestionsByPage];
+  QuestionsByPage[randomPage as keyof typeof QuestionsByPage];
   const randomQuestionIndex = Math.floor(
     Math.random() * questionsOnSelectedPage.length
   );

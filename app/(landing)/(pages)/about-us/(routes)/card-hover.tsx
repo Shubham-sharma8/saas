@@ -49,7 +49,7 @@ export const projects = [
     title: "PDF And Gemini",
     description:
       " Our chat with PDF feature, allowing you to interact with PDF documents effortlessly. Simply upload your PDF, and Gemini will answer any questions based on its content. This powerful tool provides quick access to information, making it easier than ever to extract insights and engage with your documents",
-    link: "/pdf",
+    link: "/conversation",
   },
 
   {
@@ -62,7 +62,7 @@ export const projects = [
     title: "Audio",
     description:
       "Our platform goes beyond just generative AI—we enable you to upload audio files and unlock their full potential. Whether you need to convert speech to text or extract specific data, our AI-powered tools provide accurate results quickly. No limits, no interruptions—just seamless access to all the insights your audio holds",
-    link: "/audio",
+    link: "/conversation",
   },
 
   

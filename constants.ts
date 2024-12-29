@@ -29,13 +29,14 @@ export const tools = [
     bgColor: "bg-violet-500/10",
     href: '/image',
   },
- {
-     label: 'Image 2.0',
-     icon: GalleryHorizontalEnd,
-     href: '/image2.0',
-     color: "text-green-500",
-     bgColor: "bg-violet-500/10",
-   },
+  
+  {
+    label: 'OCR Document',
+    icon: ImageMinus,
+    color: "text-pink-500",
+    bgColor: "bg-violet-500/10",
+    href: '/ocr',
+  },
    
 
   
@@ -47,30 +48,10 @@ export const tools = [
     href: '/vision',
   },
 
-  {
-      label: 'Vision 2.0',
-      icon: ImageMinus,
-      href: '/vision2.0',
-      color: "text-pink-500",
-      bgColor: "bg-violet-500/10",
-    },
-
-  {
-    label: 'PDF Chat',
-    icon: FileCheck2,
-    href: '/pdf',
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-  },
+  
 
   
-  {
-    label: 'Audio',
-    icon: Music2,
-    color: "text-pink-700",
-    bgColor: "bg-violet-500/10",
-    href: '/audio',
-  },
+
 
  
   {

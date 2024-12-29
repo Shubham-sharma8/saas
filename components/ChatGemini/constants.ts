@@ -7,7 +7,7 @@ export const formSchema = z.object({
     message: "Prompt must not exceed 1000 characters."
   }),
   model: z.string().min(1, {
-    message: "Model selection is required."
+    message: "Model selection is required. "
   }),
 });
 

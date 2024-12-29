@@ -43,10 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/conversation'
         },
        
-        {
-            url: 'https://cogify.social/pdf'
-        },
-        
+       
         {
             url: 'https://cogify.social/image'
         },
@@ -55,18 +52,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/vision'
         },
        
-        {
-            url: 'https://cogify.social/audio'
-        },
+    
         {
             url: 'https://try.cogify.social'
         },
         
         {
             url: 'https://cogify.social/settings'
-        },
-        {
-            url: 'https://cogify.social/vision2.0'
         },
         {
             url: 'https://cogify.social/opengraph-image.png'

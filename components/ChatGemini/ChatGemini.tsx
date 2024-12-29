@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useChat } from 'ai/react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,7 +14,8 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
 import { GroundingToggle } from '@/components/ui/grounding-toggle'
-
+import { Widget } from "@uploadcare/react-widget";
+import { X } from 'lucide-react'
 
 export const ChatGemini: React.FC = () => {
     const [groundingEnabled, setGroundingEnabled] = useState(false)
@@ -22,19 +23,19 @@ export const ChatGemini: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
+    const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean } | null>(null);
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat(
-    {
-      api: groundingEnabled ? "/api/webai" : "/api/gemini",
-      onError: (error) => {
-        setError(error.message);
-      },
-      body: {
-        model: selectedModel,
-      },
-    }
-    
-  );
+  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
+    api: groundingEnabled ? "/api/webai" : "/api/gemini",
+    onError: (error) => {
+      setError(error.message);
+    },
+    body: {
+      model: selectedModel,
+      fileUrl: uploadedFile?.cdnUrl,
+    },
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,22 +53,24 @@ export const ChatGemini: React.FC = () => {
   };
 
   useEffect(() => {
-    adjustTextareaHeight(); // Adjust height on component mount
+    adjustTextareaHeight();
   }, [input]);
 
-
-  
-const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setError(null);
-      setSelectedModel(values.model); // Update selected model before submission
+      setSelectedModel(values.model);
+      
+      // Include the file information in the input if it exists
+      if (uploadedFile) {
+        setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
+      }
+      
       await handleSubmit(new Event('submit') as any);
       
-      // Only reset the prompt, keep the model
       form.setValue('prompt', '');
       setInput('');
       
-      // Reset textarea height
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
@@ -75,13 +78,25 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
       setError(error.message);
     }
   };
-  
+
+  const handleFileUpload = (info: any) => {
+    const isImage = info.isImage;
+    setUploadedFile({
+      cdnUrl: info.cdnUrl,
+      name: info.name,
+      isImage: isImage
+    });
+  };
+
+  const removeUploadedFile = () => {
+    setUploadedFile(null);
+  };
 
   return (
     <div className="flex flex-col h-full">
       <Heading
         title="Gemini"
-        description="The best and latest Gemini 2.0 model ranked 3rd best AI in the world and connected with Realtime internet"
+        description="The best and latest Gemini 2.0 model ranked support Images, PDF, Video, and more as input."
         icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
@@ -125,27 +140,53 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
                     )}
                   />
                   
-                  <div className="flex flex-col sm:flex-row items-center gap-4">
-                    {/* Grounding Toggle */}
-                    <div className="w-full sm:w-auto">
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <div className="w-full sm:w-auto order-1 sm:order-none">
                       <GroundingToggle 
                         enabled={groundingEnabled} 
                         onToggle={setGroundingEnabled}
                       />
                     </div>
-                    {/* Model Selector and Generate Button */}
-                    <div className="flex flex-1 items-center gap-4 w-full">
-                      <div className="flex-1">
+                    <div className="flex flex-col sm:flex-row flex-1 items-center gap-4 w-full">
+                      <div className="flex-1 w-full sm:w-auto">
                         <ModelSelector 
                           control={form.control} 
                           onChange={(value) => setSelectedModel(value)}
                         />
                       </div>
+                      <div className="w-full sm:w-auto order-first sm:order-none">
+                        {uploadedFile ? (
+                          <div className="relative inline-block">
+                            {uploadedFile.isImage ? (
+                              <img src={uploadedFile.cdnUrl} alt="Uploaded file" className="w-12 h-12 object-cover rounded" />
+                            ) : (
+                              <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs">
+                                {uploadedFile.name.split('.').pop()?.toUpperCase()}
+                              </div>
+                            )}
+                            <button
+                              onClick={removeUploadedFile}
+                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                        ) : (
+                          <Widget
+                          publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
+                            onChange={handleFileUpload}
+                            tabs="file camera url facebook gdrive gphotos"
+                            previewStep
+                            clearable
+                            
+                          />
+                        )}
+                      </div>
                       <Button
                         variant="brutal"
                         disabled={isLoading}
                         type="submit"
-                        className="w-[120px]"
+                        className="w-full sm:w-[120px]"
                       >
                         {isLoading ? 'Generating...' : 'Send'}
                       </Button>

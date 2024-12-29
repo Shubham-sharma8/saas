@@ -55,34 +55,20 @@ const routes = [
     icon: ImageIcon,
     href: "/image",
     color: "text-green-500",
+  },  
+  {
+    label: "OCR Document",
+    icon: ImageMinus,
+    href: "/ocr",
+    color: "text-pink-500",
   },
-  
-  
   {
     label: "Vision",
     icon: Eye,
     color: "text-blue-500",
     href: "/vision",
   },
-  {
-    label: "Vision 2.0",
-    icon: ImageMinus,
-    href: "/vision2.0",
-    color: "text-pink-500",
-  },
-  {
-    label: "PDF Chat",
-    icon: FileCheck2,
-    href: "/pdf",
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-  },
-  {
-    label: "Audio",
-    icon: Music2,
-    color: "text-pink-700",
-    href: "/audio",
-  },
+
   {
     label: "AI Code Translator",
     icon: Code2,
