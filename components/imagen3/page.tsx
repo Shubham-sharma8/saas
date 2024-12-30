@@ -5,7 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Download, Share2 } from "lucide-react";
+import { Download, Share2 } from 'lucide-react';
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
@@ -15,6 +15,7 @@ import { Card, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Loaderimage } from "@/components/loader";
 import { Empty } from "@/components/ui/empty";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 import {
@@ -50,15 +51,18 @@ export const Imagen3: React.FC = () => {
   
   const [photos, setPhotos] = useState<string[]>([]);
 
+  const formSchema = z.object({
+    prompt: z.string().min(1, { message: "Image prompt is required" }),
+    aspectRatio: z.string(),
+    numberOfImages: z.string(),
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: "",
-      amount: "1",
-      resolution: "512x512", // Default resolution for DALL-E 2
-      modelImage: "dall-e-3",
-      styleOption: "Emotion",
-      colorOption: "Tone",
+      aspectRatio: "1:1",
+      numberOfImages: "1",
     },
   });
 
@@ -102,8 +106,7 @@ export const Imagen3: React.FC = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="
-      rounded-lg 
+            className=" rounded-lg 
       border 
       w-full 
       p-4 
@@ -112,34 +115,68 @@ export const Imagen3: React.FC = () => {
       focus-within:shadow-sm
       grid
       grid-cols-12
-      gap-2
-    "
+      gap-2"
           >
             <FormField
               name="prompt"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-10">
+                <FormItem className="col-span-12 lg:col-span-6">
                   <FormControl className="m-0 p-0">
                     <Textarea
-                      className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                      className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent min-h-[40px] flex-1 resize-none"
                       disabled={isLoading}
                       placeholder={'Describe the image you want to create. For example: '+randomQuestion}
+                      rows={1}
                       {...field}
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
-            
+            <FormField
+              name="aspectRatio"
+              render={({ field }) => (
+                <FormItem className="col-span-12 lg:col-span-2">
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <SelectTrigger className="h-[40px]">
+                      <SelectValue placeholder="Aspect Ratio" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1:1">1:1 (1024x1024)</SelectItem>
+                      <SelectItem value="3:4">3:4 (896x1280)</SelectItem>
+                      <SelectItem value="4:3">4:3 (1280x896)</SelectItem>
+                      <SelectItem value="9:16">9:16 (768x1408)</SelectItem>
+                      <SelectItem value="16:9">16:9 (1408x768)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="numberOfImages"
+              render={({ field }) => (
+                <FormItem className="col-span-12 lg:col-span-2">
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <SelectTrigger className="h-[40px]">
+                      <SelectValue placeholder="Number of Images" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
             <Button
-              className="col-span-12 lg:col-span-2 w-full mt-5 "
-              variant="brutal"
-
-                disabled={isLoading}
-                size="icon"
-              >
-                Generate
-              </Button>
+              className="col-span-12 lg:col-span-2 w-full h-[40px]"
+              type="submit"
+              disabled={isLoading}
+            >
+              Generate
+            </Button>
           </form>
         </Form>
 
@@ -152,12 +189,12 @@ export const Imagen3: React.FC = () => {
           <Empty label="No images generated." />
         )}
         
-        <div className="grid grid-cols-1 justify-items-center md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-20 gap-4 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
         {Array.isArray(photos) && photos.length > 0 ? (
-  photos.map((src) => {
+  photos.map((src, index) => {
     
     return (
-      <Card key={src} className="rounded-lg overflow-hidden">
+      <Card key={`${src}-${index}`} className="rounded-lg overflow-hidden">
         <div className="relative aspect-square">
           <Image
             src={src}

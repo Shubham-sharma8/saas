@@ -9,8 +9,18 @@ const aiLocation = 'us-central1'; // For AI image generation
 
 const { PredictionServiceClient } = aiplatform.v1;
 const { helpers } = aiplatform;
+
+// Add type checking for the environment variables
+if (!process.env.GOOGLE_GENERATIVE_AI_EMAIL || !process.env.GOOGLE_GENERATIVE_AI_PRIVATE_KEY) {
+  throw new Error('Missing Generative AI credentials');
+}
+
 const clientOptions = {
   apiEndpoint: `${aiLocation}-aiplatform.googleapis.com`,
+  credentials: {
+    client_email: process.env.GOOGLE_GENERATIVE_AI_EMAIL,
+    private_key: process.env.GOOGLE_GENERATIVE_AI_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+  },
 };
 
 const predictionServiceClient = new PredictionServiceClient(clientOptions);
@@ -23,8 +33,7 @@ export async function POST(req: Request) {
     // AI Platform endpoint
     const endpoint = `projects/${projectID}/locations/${aiLocation}/publishers/google/models/imagen-3.0-generate-001`;
 
-    
-    const { prompt } = await req.json();
+    const { prompt, aspectRatio, numberOfImages } = await req.json();
 
     const promptText = {
       prompt: prompt,
@@ -33,8 +42,8 @@ export async function POST(req: Request) {
     const instances = [instanceValue];
 
     const parameter = {
-      sampleCount: 1,
-      aspectRatio: '1:1',
+      sampleCount: parseInt(numberOfImages, 10), // Convert string to number
+      aspectRatio: aspectRatio,
     };
     const parameters = helpers.toValue(parameter);
 
@@ -47,10 +56,8 @@ export async function POST(req: Request) {
     const [response] = await predictionServiceClient.predict(request);
     const predictions = response.predictions;
 
-    
-
     // Upload generated images to the GCS bucket located in Asia and return URLs
-    
+
     const imageUrls = await Promise.all(
       predictions.map(async (prediction: any, index: number) => {
         const base64String = prediction.structValue.fields.bytesBase64Encoded.stringValue;
@@ -75,3 +82,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
 }
 }
+

@@ -28,7 +28,7 @@ const chatModels: Model[] = [
 
 const imageModels: Model[] = [
   { value: 'dalle31', label: 'Dall-E-3 Advance', rating: 4.6, imageUrl: 'https://thinglabs.io/wp-content/uploads/dall-e-logo1.png' },
-  { value: 'imagen3', label: 'Imagen 3', rating: 4.5, imageUrl: 'https://miro.medium.com/v2/resize:fit:2000/1*z69PIsXW4hks_IGIXu2NiQ.png' },
+  { value: 'imagen3', label: 'Imagen 3', rating: 4.5, imageUrl: 'https://i.ibb.co/71jJqMR/icon-image-generation.png' },
   { value: 'flux', label: 'Flux Pro', rating: 4.2, imageUrl: 'https://avatars.githubusercontent.com/u/74630416?s=280&v=4' },
   { value: 'stable', label: 'Stable Diffusion', rating: 4.1, imageUrl: 'https://cdn.futurepedia.io/ee1c503ee8e96ba578b0b357c233eca97d07336f-400x400.jpg' },
   { value: 'dalle3', label: 'Dall-E-3', rating: 4.0, imageUrl: 'https://thinglabs.io/wp-content/uploads/dall-e-logo1.png' },

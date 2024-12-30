@@ -94,7 +94,7 @@ export const StableAI: React.FC = () => {
       <Heading
         title="Image Generation-Stable Diffusion"
         description="Experience the latest AI image generation with Stable Diffusion, available for free."
-        icon={<img src="https://avatars.githubusercontent.com/u/74630416?s=280&v=4" alt="Stable Diffusion Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={<img src="https://cdn.futurepedia.io/ee1c503ee8e96ba578b0b357c233eca97d07336f-400x400.jpg" alt="Stable Diffusion Icon" className="w-full h-full object-contain" />} // Use the image as the icon
         iconColor="text-violet-500 "
         bgColor="bg-violet-500/10 dark:bg-white"
       />

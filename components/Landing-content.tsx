@@ -13,11 +13,14 @@ import {
   Card1,
   Card2,
   Card3,
-  Card4
+  Card4,
+  Card5,
+  Card6,
+
 } from "@/components/ui/landing-items";
 
 export function LandingContent() {
-  const cardComponents = [Card1, Card2, Card3, Card4];
+  const cardComponents = [Card1, Card2, Card3, Card4, Card5,Card6,];
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -35,7 +38,6 @@ export function LandingContent() {
     });
   }, [api]);
 
-  const plugin = React.useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
   return (
     <div className="flex flex-col items-center"> {/* Center the carousel and slide */}
@@ -43,7 +45,7 @@ export function LandingContent() {
       <Carousel
         plugins={[
           Autoplay({
-            delay: 2000
+            delay: 5000
           })
         ]}
         className="w-full max-w-screen-lg"
@@ -51,7 +53,7 @@ export function LandingContent() {
       >
         {/* Increase total width */}
         <CarouselContent>
-          {Array.from({ length: 4 }).map((_, index) => (
+          {Array.from({ length: 7 }).map((_, index) => (
             <CarouselItem key={index} className="md:basis-1 lg:basis-1/2">
               <div className="p-1">
                 {/* Use Card1 and Card2 components instead of placeholders */}

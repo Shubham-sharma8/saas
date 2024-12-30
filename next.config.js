@@ -35,7 +35,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'pbs.twimg.com' },
       { protocol: 'https', hostname: '1000logos.net' },
       { protocol: 'https', hostname: 'i.ibb.co' },
-      { protocol: 'https', hostname: 'miro.medium.com' },
+      { protocol: 'https', hostname: 'media.licdn.com' },
       { protocol: 'https', hostname: 'www.gstatic.com' },
        { protocol: 'https', hostname: 'swiftask-prod-files.s3.eu-west-3.amazonaws.com' },
       { protocol: 'https', hostname:  'uxwing.com' },
