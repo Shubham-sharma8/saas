@@ -1,67 +1,111 @@
 'use client'
 
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
-import { useChat } from 'ai/react'
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageList } from '@/components/convo/MessageList'
 import { Heading } from '@/components/heading'
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Button } from '@/components/ui/button'
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
+type Message = {
+  role: 'user' | 'assistant'
+  content: string
+}
+
+const MODEL_OPTIONS = [
+  { value: 'claude35sonnet', label: 'Claude 3.5 Sonnet' },
+  { value: 'claude3haiku', label: 'Claude 3 Haiku' },
+  { value: 'claude3opus', label: 'Claude 3 Opus' },
+  { value: 'claudev21', label: 'Claude v2.1' },
+]
 
 export const ChatClaude: React.FC = () => {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
-    {
-      api: "/api/claude",
-    }
-  );
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const adjustTextareaHeight = () => {
-    const textarea = textareaRef.current;
+    const textarea = textareaRef.current
     if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.height = 'auto'
+      textarea.style.height = `${textarea.scrollHeight}px`
     }
-  };
+  }
 
   useEffect(() => {
-    adjustTextareaHeight(); // Adjust height on component mount
-  }, [input]);
-
+    adjustTextareaHeight()
+  }, [input])
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    handleInputChange(event);
-    adjustTextareaHeight(); // Adjust height on content change
-  };
+    setInput(event.target.value)
+    adjustTextareaHeight()
+  }
+
   const formSchema = z.object({
     prompt: z.string().min(1, {
       message: "Prompt is required."
     }),
     model: z.string().min(1),
-  });
+  })
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       prompt: '',
-      model: 'chatgpt-4o-latest',
+      model: 'claude35sonnet',
     },
   })
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!values.prompt.trim() || isLoading) return
+
+    setIsLoading(true)
+    setError(null)
+
+    const userMessage: Message = { role: 'user', content: values.prompt }
+    setMessages(prevMessages => [...prevMessages, userMessage])
+    setInput('')
+
+    try {
+      const response = await fetch('/api/claude', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          messages: [...messages, userMessage],
+          model: values.model
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      const assistantMessage: Message = { role: 'assistant', content: data.content }
+      setMessages(prevMessages => [...prevMessages, assistantMessage])
+    } catch (error) {
+      setError('An error occurred while processing your request. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Claude 3.5 Sonnet"
-        description="Anthropic's most powerful AI model. Claude 3.5 Sonnet outperforms competitor models and Claude 3 Opus at higher speeds"
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" alt="Claude 3.5 Icon" className="w-full h-full object-contain" />} // Use the image as the icon
-               iconColor="text-violet-500"
+        title="Claude AI Chat"
+        description="Chat with different Claude models. Streaming of data is not possible."
+        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" alt="Claude Icon" className="w-full h-full object-contain" />}
+        iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
       />
       <div className="flex-grow overflow-hidden">
@@ -76,47 +120,64 @@ export const ChatClaude: React.FC = () => {
             <MessageList messages={messages} isLoading={isLoading} />
             <div className="p-4">
               <Form {...form}>
-                <form onSubmit={handleSubmit} className="
-                  rounded-lg 
-              border 
-              w-full 
-              p-4 
-              px-3 
-              md:px-6 
-              focus-within:shadow-sm
-              grid
-              grid-cols-10
-              gap-2
-            ">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="
+                 rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid gap-4 dark:bg-gray-900 dark:border-gray-700
+                ">
+                  <div className='flex flex-col md:flex-row gap-4 w-full'>
                   <FormField
                     control={form.control}
                     name="prompt"
-                    render={() => (
-                      <FormItem className="col-span-12 lg:col-span-8">
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
                         <FormControl className="m-0 p-0">
-                        <Textarea
+                          <Textarea
+                            {...field}
                             ref={textareaRef}
-                            className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
-                            value={input}
+                            className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden min-h-[40px] dark:bg-gray-900 dark:text-gray-100"
                             placeholder={'Type your message here...'}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                              field.onChange(e)
+                              handleChange(e)
+                            }}
                           />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex flex-col gap-4 md:w-[280px]"> 
+                  <FormField
+                    control={form.control}
+                    name="model"
+                    render={({ field }) => (
+                      <FormItem className="">
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a model" />
+                            </SelectTrigger>
                           </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  
-<div className="col-span-12 lg:col-span-2 mt-5">
-
-  <Button
-  variant={'brutal'}
-    disabled={isLoading}
-    className=" col-span-12 lg:col-span-2 w-full mt-5 "
-  >
-    {isLoading ? 'Generating...' : 'Send'}
-  </Button>
-</div>
+                          <SelectContent>
+                            {MODEL_OPTIONS.map((option) => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
                  
+                  <Button
+                    variant={'brutal'}
+                    disabled={isLoading}
+                    className="w-full"
+                    type="submit"
+                  >
+                    {isLoading ? 'Generating...' : 'Send'}
+                  </Button>
+                  </div>
+                  </div>
                 </form>
               </Form>
               

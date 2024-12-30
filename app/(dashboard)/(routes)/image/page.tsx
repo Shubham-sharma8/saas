@@ -6,6 +6,8 @@ import { useSettings } from '@/hooks/useSettings'
 import { Imagen3 } from '@/components/imagen3/page'
 import { DallE3 } from '@/components/DallE3/page'
 import { DallE31 } from '@/components/DallE31/page'
+import { FluxAI } from '@/components/flux/page'
+import { StableAI } from '@/components/Stable/page'
 
 const ImageGeneration: React.FC = () => {
   const { settings } = useSettings()
@@ -14,6 +16,10 @@ const ImageGeneration: React.FC = () => {
     switch (settings.defaultImageModel) {
       case 'imagen3':
         return <Imagen3 />
+        case 'flux':
+        return <FluxAI />
+        case 'stable':
+        return <StableAI />
       case 'dalle3':
         return <DallE3 />
       case 'dalle31':
