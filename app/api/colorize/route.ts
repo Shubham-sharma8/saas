@@ -12,7 +12,6 @@ export async function POST(req: Request) {
       )
     }
 
-    console.log('Sending image URL to API:', imageUrl)
 
     // Make the request to SwiftAsk AI API
     const response = await fetch('https://graphql.swiftask.ai/api/ai/magiccolor', {
@@ -36,7 +35,6 @@ export async function POST(req: Request) {
     }
 
     const data = await response.json()
-    console.log('API Response:', JSON.stringify(data, null, 2))
 
     if (data.files && data.files.length > 0) {
       const colorizedUrls = data.files.map((file: any) => file.url)

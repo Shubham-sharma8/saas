@@ -29,13 +29,11 @@ export default function ColorizePage() {
       const transformedUrl = `${fileInfo.cdnUrl}-/format/jpeg/`
       setOriginalImage(transformedUrl)
       
-      console.log('Sending to API:', transformedUrl)
 
       const response = await axios.post("/api/colorize", {
         imageUrl: transformedUrl
       })
 
-      console.log('API Response:', response.data)
 
       if (response.data.colorizedUrls && response.data.colorizedUrls.length > 0) {
         setColorizedImages(response.data.colorizedUrls)
