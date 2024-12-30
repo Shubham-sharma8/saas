@@ -168,7 +168,7 @@ export const ChatGPT: React.FC = () => {
                           <Widget
                                                     publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
                                                       onChange={handleFileUpload}
-                                                      tabs="file camera url facebook gdrive gphotos"
+                                                      tabs="file camera url facebook gdrive gphotos dropbox onedrive"
                                                       previewStep
                                                       clearable
                                                       

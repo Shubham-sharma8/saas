@@ -90,7 +90,7 @@ export default function ColorizePage() {
                   clearable
                   imageShrink="800x800"
                   imagePreviewMaxSize={5 * 1024 * 1024}
-                  tabs="file camera url"
+                  tabs="file camera url facebook gdrive gphotos dropbox onedrive"
                   previewStep
                   validators={[
                     (fileInfo: any) => {
