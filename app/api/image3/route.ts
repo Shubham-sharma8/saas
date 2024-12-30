@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import toast from "react-hot-toast";
 const aiplatform = require('@google-cloud/aiplatform');
 const { Storage } = require('@google-cloud/storage');
-const util = require('util');
 
 const projectID = 'ai-based-437315';
 const aiLocation = 'us-central1'; // For AI image generation
@@ -74,12 +72,11 @@ export async function POST(req: Request) {
         return `https://storage.googleapis.com/${process.env.GOOGLE_CLOUD_STORAGE_BUCKET}/${filename}`;
       })
     );
-
     return NextResponse.json(imageUrls);
 
   } catch (error: any) {
-    toast.error("Error generating images:", error);
+    console.error("Error generating images:", error);
     return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
-}
+  }
 }
 
