@@ -15,6 +15,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/ocr'
         },
         {
+            url: 'https://cogify.social/colorize'
+        },
+        {
             url: 'https://cogify.social/about-us'
         },
        

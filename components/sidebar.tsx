@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { ImageMinus } from "lucide-react";
+import { Import } from "lucide-react";
 
 import { Montserrat } from "next/font/google";
 import {
@@ -58,9 +58,15 @@ const routes = [
   },  
   {
     label: "OCR Document",
-    icon: ImageMinus,
+    icon: Import,
     href: "/ocr",
     color: "text-pink-500",
+  },
+  {
+    label: "Image Colorizer",
+    icon: ImageIcon,
+    href: "/colorize",
+    color: "text-yellow-500",
   },
  
 

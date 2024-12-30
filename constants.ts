@@ -1,5 +1,5 @@
 
-import { GalleryHorizontalEnd, Eye, ImagePlus, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2, MessagesSquare, Code2, MessageSquareDashed, ImageMinus } from "lucide-react";
+import { GalleryHorizontalEnd, Eye, ImagePlus, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2, MessagesSquare, Code2, MessageSquareDashed, ImageMinus, Import } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -32,12 +32,18 @@ export const tools = [
   
   {
     label: 'OCR Document',
-    icon: ImageMinus,
+    icon: Import,
     color: "text-pink-500",
     bgColor: "bg-violet-500/10",
     href: '/ocr',
   },
-
+  {
+    label: 'Image Colorizer',
+    icon: ImageIcon,
+    color: "text-yellow-500",
+    bgColor: "bg-violet-500/10",
+    href: '/colorize',
+  },
   {
     label: 'AI Code Translator',
     icon: Code2,
