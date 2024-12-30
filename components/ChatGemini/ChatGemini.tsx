@@ -15,15 +15,15 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
 import { GroundingToggle } from '@/components/ui/grounding-toggle'
 import { Widget } from "@uploadcare/react-widget";
-import { X } from 'lucide-react'
+import { X, FileIcon, ImageIcon, FileAudioIcon as AudioIcon, VideoIcon } from 'lucide-react'
 
 export const ChatGemini: React.FC = () => {
     const [groundingEnabled, setGroundingEnabled] = useState(false)
     const formRef = useRef<HTMLFormElement>(null);
     const [error, setError] = useState<string | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
-    const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean } | null>(null);
+    const [selectedModel, setSelectedModel] = useState('gemini-2.0-flash-exp');
+    const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean, mimeType: string } | null>(null);
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: groundingEnabled ? "/api/webai" : "/api/gemini",
@@ -33,6 +33,8 @@ export const ChatGemini: React.FC = () => {
     body: {
       model: selectedModel,
       fileUrl: uploadedFile?.cdnUrl,
+      fileName: uploadedFile?.name,
+      fileMimeType: uploadedFile?.mimeType,
     },
   });
 
@@ -61,7 +63,6 @@ export const ChatGemini: React.FC = () => {
       setError(null);
       setSelectedModel(values.model);
       
-      // Include the file information in the input if it exists
       if (uploadedFile) {
         setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
       }
@@ -84,7 +85,8 @@ export const ChatGemini: React.FC = () => {
     setUploadedFile({
       cdnUrl: info.cdnUrl,
       name: info.name,
-      isImage: isImage
+      isImage: isImage,
+      mimeType: info.mimeType
     });
   };
 
@@ -92,11 +94,14 @@ export const ChatGemini: React.FC = () => {
     setUploadedFile(null);
   };
 
+
+
+
   return (
     <div className="flex flex-col h-full">
       <Heading
         title="Gemini"
-        description="The best and latest Gemini 2.0 model ranked support Images, PDF, Video, and more as input."
+        description="The latest Gemini 2.0 Flash model supports Images, PDF, Audio, Video, and more as input."
         icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"

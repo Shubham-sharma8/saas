@@ -37,23 +37,7 @@ export const tools = [
     bgColor: "bg-violet-500/10",
     href: '/ocr',
   },
-   
 
-  
-  {
-    label: 'vision',
-    icon: Eye,
-    color: "text-blue-500",
-    bgColor: "bg-violet-500/10",
-    href: '/vision',
-  },
-
-  
-
-  
-
-
- 
   {
     label: 'AI Code Translator',
     icon: Code2,

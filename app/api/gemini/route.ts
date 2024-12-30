@@ -1,98 +1,45 @@
-import {
-  VertexAI,
-  GenerateContentRequest,
-  Content,
-  Part,
-} from "@google-cloud/vertexai";
-import {
-  GoogleGenerativeAIStream,
-  Message,
-  StreamingTextResponse,
-} from "ai";
-import fetch from "node-fetch";
-import { fileTypeFromBuffer } from "file-type";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { NextRequest } from "next/server";
 
-// Initialize VertexAI with explicit credentials
-const vertex_ai = new VertexAI({
-  project: "ai-based-437315",
-  location: "us-central1",
-  // Removed keyFile; specify your credentials externally
-});
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
 
-export async function POST(req: Request) {
-  const buildGoogleGenAIPrompt = (
-    messages: Message[],
-    fileUrl: string | null
-  ): GenerateContentRequest => {
-    const contents: Content[] = messages
-      .filter(
-        (message) =>
-          message.role === "user" || message.role === "assistant"
-      )
-      .map((message) => ({
-        role: message.role === "user" ? "user" : "model",
-        parts: [{ text: message.content }],
-      }));
+export async function POST(req: NextRequest) {
+  const { messages, model = "gemini-2.0-flash-exp", fileUrl, fileName, fileMimeType } = await req.json();
 
-    if (fileUrl) {
-      contents.push({
-        role: "user",
-        parts: [{ text: `[Attached file: ${fileUrl}]` }],
-      });
-    }
+  let parts: any[] = [];
 
-    return { contents };
-  };
-
-  // Extract the `messages` and `model` from the body of the request
-  const {
-    messages,
-    model = "gemini-2.0-flash-exp",
-    fileUrl,
-  } = await req.json();
-
-  let fileContent: Buffer | null = null;
-  let fileType: string | null = null;
-
-  if (fileUrl) {
+  // Handle file upload
+  if (fileUrl && fileName && fileMimeType) {
     const response = await fetch(fileUrl);
-    fileContent = await response.buffer();
-    const fileTypeResult = await fileTypeFromBuffer(
-      new Uint8Array(fileContent)
-    );
-    fileType = fileTypeResult ? fileTypeResult.mime : null;
-  }
+    const fileBuffer = await response.arrayBuffer();
 
-  const generativeModel = vertex_ai.preview.getGenerativeModel({
-    model: model,
-    generationConfig: {
-      maxOutputTokens: 8192,
-      temperature: 0.1,
-      topP: 0.95,
-    },
-  });
-
-  const prompt = buildGoogleGenAIPrompt(messages, fileUrl);
-
-  if (fileContent && fileType) {
-    prompt.contents.push({
-      role: "user",
-      parts: [
-        { text: "Here's the content of the attached file:" },
-        {
-          inlineData: {
-            mimeType: fileType,
-            data: fileContent.toString("base64"),
-          },
-        },
-      ],
+    parts.push({
+      inlineData: {
+        data: Buffer.from(fileBuffer).toString('base64'),
+        mimeType: fileMimeType
+      }
     });
   }
 
-  const geminiStream = await generativeModel.generateContentStream(prompt);
+  // Add the text message
+  parts.push({ text: messages[messages.length - 1].content });
+
+  const geminiStream = await genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" }).generateContentStream({
+    contents: [
+      ...messages.slice(0, -1).map((message: Message) => ({
+        role: message.role === "user" ? "user" : "model",
+        parts: [{ text: message.content }],
+      })),
+      {
+        role: "user",
+        parts: parts,
+      },
+    ],
+  });
 
   const stream = GoogleGenerativeAIStream(geminiStream);
 
-  // Respond with the stream
   return new StreamingTextResponse(stream);
 }
+

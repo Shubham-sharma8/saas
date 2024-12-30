@@ -43,7 +43,7 @@ function Navbar({ className }: { className?: string }) {
               />
               <ProductItem
                 title="Vision"
-                href="/vision"
+                href="/conversation"
                 src="/imageins.svg"
                 description="Unlocking Vision: Simplifying Understanding with Intelligent Image Analysis."
               />

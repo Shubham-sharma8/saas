@@ -53,7 +53,7 @@ import {
           </Link>
           </AccordionContent>
           <AccordionContent>
-            <Link href="/vision" > 
+            <Link href="/conversation" > 
             <GradientButton buttonText="Vision" />
           </Link>
           </AccordionContent>

@@ -13,18 +13,24 @@ export const formSchema = z.object({
 
 export const modelOption = [
   {
-    value: "o1-preview",
-    label: "o1-Preview",
-    data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023"
-  },
-  {
     value: "o1-preview-2024-09-12",
     label: "o1 Preview Spt-24",
     data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023"
   },
   {
+    value: "o1-preview",
+    label: "o1-Preview",
+    data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023"
+  },
+ 
+  {
     value: "o1-mini-2024-09-12",
     label: "o1 Mini Spt-24",
+    data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023"
+  },
+  {
+    value: "o1-mini",
+    label: "o1 Mini",
     data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023"
   },
   {

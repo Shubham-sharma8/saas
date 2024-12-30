@@ -56,7 +56,7 @@ export const projects = [
     title: "Vision- Image and Gemini",
     description:
       "Our platform includes a vision feature where you can upload any image, and Gemini will provide detailed answers to your questions about it. Whether it's identifying objects, offering context, or explaining details, this AI-powered tool delivers accurate and insightful responses, all at your fingertips",
-    link: "/vision",
+    link: "/conversation",
   },
   {
     title: "Audio",

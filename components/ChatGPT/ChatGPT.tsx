@@ -14,13 +14,15 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle } from 'lucide-react'
+import { AlertCircle, X } from 'lucide-react'
+import { Widget } from "@uploadcare/react-widget";
 
 export const ChatGPT: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
+  const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean } | null>(null);
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/chat',
@@ -29,6 +31,7 @@ export const ChatGPT: React.FC = () => {
     },
     body: {
       model: selectedModel,
+      fileUrl: uploadedFile?.cdnUrl,
     },
   });
 
@@ -55,14 +58,17 @@ export const ChatGPT: React.FC = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setError(null);
-      setSelectedModel(values.model); // Update selected model before submission
+      setSelectedModel(values.model);
+      
+      if (uploadedFile) {
+        setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
+      }
+      
       await handleSubmit(new Event('submit') as any);
       
-      // Only reset the prompt, keep the model
       form.setValue('prompt', '');
       setInput('');
       
-      // Reset textarea height
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
@@ -70,6 +76,21 @@ export const ChatGPT: React.FC = () => {
       setError(error.message);
     }
   };
+
+  const handleFileUpload = (info: any) => {
+    const isImage = info.isImage;
+    setUploadedFile({
+      cdnUrl: info.cdnUrl,
+      name: info.name,
+      isImage: isImage
+    });
+  };
+
+  const removeUploadedFile = () => {
+    setUploadedFile(null);
+  };
+
+  const isFileUploadDisabled = ['o1-preview', 'o1-preview-2024-09-12', 'o1-mini', 'o1 Mini Spt-24'].includes(selectedModel);
 
   return (
     <div className="flex flex-col h-full">
@@ -126,14 +147,44 @@ export const ChatGPT: React.FC = () => {
                         control={form.control} 
                         onChange={(value) => setSelectedModel(value)}
                       />
-                      <Button
-                        variant="brutal"
-                        disabled={isLoading}
-                        type="submit"
-                        className="w-full"
-                      >
-                        {isLoading ? 'Generating...' : 'Send'}
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        {uploadedFile ? (
+                          <div className="relative inline-block">
+                            {uploadedFile.isImage ? (
+                              <img src={uploadedFile.cdnUrl} alt="Uploaded file" className="w-12 h-12 object-cover rounded" />
+                            ) : (
+                              <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs">
+                                {uploadedFile.name.split('.').pop()?.toUpperCase()}
+                              </div>
+                            )}
+                            <button
+                              onClick={removeUploadedFile}
+                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                        ) : (
+                          <Widget
+                                                    publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
+                                                      onChange={handleFileUpload}
+                                                      tabs="file camera url facebook gdrive gphotos"
+                                                      previewStep
+                                                      clearable
+                                                      
+                                                    />
+                            
+        
+                        )}
+                        <Button
+                          variant="brutal"
+                          disabled={isLoading}
+                          type="submit"
+                          className="w-full"
+                        >
+                          {isLoading ? 'Generating...' : 'Send'}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </form>

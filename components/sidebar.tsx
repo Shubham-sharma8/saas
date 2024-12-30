@@ -62,12 +62,7 @@ const routes = [
     href: "/ocr",
     color: "text-pink-500",
   },
-  {
-    label: "Vision",
-    icon: Eye,
-    color: "text-blue-500",
-    href: "/vision",
-  },
+ 
 
   {
     label: "AI Code Translator",

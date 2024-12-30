@@ -54,15 +54,15 @@ export function HeroHighlights() {
                   strings: [
                     "o1-Preview",
                     "Claude 3.5 Sonnet-V2",
-                    "Llama-3.3 Latest",
+                    "LLama-3.3 Latest",
                     "xAI Grok",
                     "Mistral Large",
-                    "GPT-4o",
                     "Gemini-2",
                     "Perplexity",
                     "Cohere",
                     "DALL-E 3",     
-                    "ChatGPT-Vision",               
+                    "GPT-4o", 
+                    "AI Code Translator",
                   ],
                   autoStart: true,
                   loop: true,
@@ -78,12 +78,11 @@ export function HeroHighlights() {
         </Link>
         </div>
 
-          {/* <div className="text-zinc-400 text-xs md:text-sm font-normal">
-            No credit card required*.
-          </div> */}
+          <div className="text-zinc-400 text-xs md:text-sm font-normal">
+            Free till 31 January 2025
+          </div>
         </div>
       </motion.h1>
-      
       <div className="flex flex-col justify-center space-y-6"> 
       <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 py-2 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
         at <Cover>warp speed</Cover>
