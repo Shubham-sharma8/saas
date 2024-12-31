@@ -16,9 +16,7 @@ export async function POST(
     const { userId } = auth();
     const { messages} = await req.json();
 
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
+    
     const response = await client.streamChatCompletions(
       'gpt-4o',
       messages,

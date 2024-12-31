@@ -17,10 +17,7 @@ export async function POST(req: Request) {
       return new NextResponse("Bad Request: Messages array is required", { status: 400 });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
-      return new NextResponse("OpenAI API key not configured", { status: 500 });
-    }
-
+ 
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
