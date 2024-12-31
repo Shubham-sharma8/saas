@@ -6,7 +6,6 @@ const xAI = createXai({
   apiKey: process.env.xAI_API_KEY || "",
 });
 
-
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
