@@ -41,7 +41,7 @@ export const Footer = () => {
           </div>
           <div className="text">
             <p>Building in public by <a href="https://iamclint.tech/founder" className={cn("text-light font-light ", font.className)}>Shubham Sharma</a></p>
-            <p>© 2024 Cogify. All rights reserved</p>
+            <p>© 2025 Cogify. All rights reserved</p>
           </div>
         </div>
         <div className="center items-center justify-center"> {/* Added flex and justify-center classes */}

@@ -1,6 +1,5 @@
 
 import { streamText } from 'ai';
-import { createAzure } from '@ai-sdk/azure';
 import { createCohere } from '@ai-sdk/cohere';
 
 const azure = createCohere({

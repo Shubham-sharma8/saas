@@ -1,60 +1,53 @@
-import { NextResponse } from 'next/server'
+import { streamText } from 'ai';
+import { createAnthropic } from '@ai-sdk/anthropic';
+import { NextRequest } from 'next/server';
 
-type SwiftAskResponse = {
-  text: string
-  botId: number
-  sessionId: number
-  totalBotUsage: number
-  usageDetail: {
-    totalInputTokens: number
-    totalOutputTokens: number
-  }
-  botSlug: string
-}
+const genAI = createAnthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY || "",
+});
 
-const MODEL_URLS = {
-  claude35sonnet: 'https://graphql.swiftask.ai/api/ai/claude35sonnet',
-  claude3haiku: 'https://graphql.swiftask.ai/api/ai/claude3haiku',
-  claude3opus: 'https://graphql.swiftask.ai/api/ai/claude3opus',
-  claudev21: 'https://graphql.swiftask.ai/api/ai/claudev21',
-}
-
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const { messages, model } = await req.json()
-    
-    const latestMessage = messages[messages.length - 1]
-    
-    const requestBody = {
-      input: latestMessage.content,
-      documentAnalysisMode: "SIMPLE",
-      messageHistory: messages.map((msg: any) => ({
-        role: msg.role,
-        content: msg.content
-      }))
+    const { messages, model = "claude-3-5-sonnet-20241022", fileUrl } = await req.json();
+
+    let fileContent: Buffer | null = null;
+    let mimeType: string | null = null;
+    if (fileUrl) {
+      const fileResponse = await fetch(fileUrl);
+      fileContent = Buffer.from(await fileResponse.arrayBuffer());
+      mimeType = fileResponse.headers.get('content-type');
     }
 
-    const modelUrl = MODEL_URLS[model as keyof typeof MODEL_URLS] || MODEL_URLS.claude35sonnet
+    const formattedMessages = messages.map((message: any) => ({
+      role: message.role,
+      content: message.content,
+    }));
 
-    const response = await fetch(modelUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.SWIFTASK_API_KEY}`
-      },
-      body: JSON.stringify(requestBody)
-    })
-
-    if (!response.ok) {
-      throw new Error(`SwiftAsk API error: ${response.status}`)
+    if (fileContent && mimeType) {
+      formattedMessages.push({
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: 'Please analyze the contents of the attached file.',
+          },
+          {
+            type: 'file',
+            data: fileContent,
+            mimeType: mimeType,
+          },
+        ],
+      });
     }
 
-    const data: SwiftAskResponse = await response.json()
+    const result = await streamText({
+      model: genAI(model),
+      messages: formattedMessages,
+    });
 
-    // Return the full response as JSON
-    return NextResponse.json({ content: data.text })
-    
+    return result.toDataStreamResponse();
   } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    console.error('Error in Claude API route:', error);
+    return new Response(JSON.stringify({ error: "An error occurred while processing your request" }), { status: 500 });
   }
 }

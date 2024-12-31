@@ -90,7 +90,6 @@ export const ChatGPT: React.FC = () => {
     setUploadedFile(null);
   };
 
-  const isFileUploadDisabled = ['o1-preview', 'o1-preview-2024-09-12', 'o1-mini', 'o1 Mini Spt-24'].includes(selectedModel);
 
   return (
     <div className="flex flex-col h-full">
