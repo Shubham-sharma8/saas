@@ -8,10 +8,6 @@ const aiLocation = 'us-central1'; // For AI image generation
 const { PredictionServiceClient } = aiplatform.v1;
 const { helpers } = aiplatform;
 
-// Add type checking for the environment variables
-if (!process.env.GOOGLE_GENERATIVE_AI_EMAIL || !process.env.GOOGLE_GENERATIVE_AI_PRIVATE_KEY) {
-  throw new Error('Missing Generative AI credentials');
-}
 
 const clientOptions = {
   apiEndpoint: `${aiLocation}-aiplatform.googleapis.com`,
