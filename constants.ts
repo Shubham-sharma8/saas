@@ -1,5 +1,5 @@
 
-import { GalleryHorizontalEnd, Eye, ImagePlus, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2, MessagesSquare, Code2, MessageSquareDashed, ImageMinus, Import } from "lucide-react";
+import { GalleryHorizontalEnd, Eye, ImagePlus, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2, MessagesSquare, Code2, MessageSquareDashed, ImageMinus, Import, KeySquareIcon } from "lucide-react";
 
 export const MAX_FREE_COUNTS = 500;
 
@@ -15,11 +15,11 @@ export const tools = [
   
   
   {
-    label: 'Cogify Pro',
-    icon: MessageSquareDashed,
-    color: "text-blue-500",
-    bgColor: "bg-violet-500/10",
-    href: 'https://try.cogify.social',
+    label: 'Advance Search',
+    icon: KeySquareIcon,
+    href: '/advance',
+    color: "text-emerald-900",
+    bgColor: "bg-emerald-500/10",
   },
   
   {

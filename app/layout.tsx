@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
+import { AppStateProvider } from '@/lib/utils/app-state'
 
 
 import { ToasterProvider } from '@/components/toaster-provider';
@@ -99,13 +100,18 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          
+            
             <ToasterProvider />
+            
             <ModalProvider />
             <Suspense fallback={<Loading />}> 
+            <AppStateProvider> 
+          
             {children}
+            </AppStateProvider>
             </Suspense>
           </ThemeProvider> 
+          
           </body>
         </html>
     </ClerkProvider>

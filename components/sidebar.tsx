@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Import } from "lucide-react";
+import { Import, KeySquareIcon } from "lucide-react";
 
 import { Montserrat } from "next/font/google";
 import {
@@ -44,12 +44,12 @@ const routes = [
     color: "text-violet-500",
   },
   {
-    label: "Cogify Pro",
-    icon: MessageSquareDashed,
-    color: "text-blue-500",
-    bgColor: "bg-pink-700/10",
-    href: "https://try.cogify.social",
-  },
+      label: 'Advance Search',
+      icon: KeySquareIcon,
+      href: '/advance',
+      color: "text-emerald-900",
+      bgColor: "bg-emerald-500/10",
+    },
   {
     label: "Image Generation",
     icon: ImageIcon,
