@@ -8,8 +8,14 @@ export interface Model {
 export const models: Model[] = [
  
   {
-    id: 'gpt-4o',
+    id: 'gpt-4o-2024-11-20',
     name: 'GPT-4o',
+    provider: 'OpenAI',
+    providerId: 'openai'
+  },
+  {
+    id: 'gpt-4o-mini',
+    name: 'GPT-4o Mini',
     provider: 'OpenAI',
     providerId: 'openai'
   },
@@ -25,19 +31,7 @@ export const models: Model[] = [
     provider: 'OpenAI',
     providerId: 'openai'
   },
-  
-  {
-    id: 'gpt-4o-mini',
-    name: 'GPT-4o Mini',
-    provider: 'OpenAI',
-    providerId: 'openai'
-  },
-  {
-    id: 'gpt-4o-mini-2024-07-18',
-    name: 'GPT-4o Mini July 2024',
-    provider: 'OpenAI',
-    providerId: 'openai'
-  },
+
   {
     id: 'claude-3-5-sonnet-20241022',
     name: 'Claude 3.5 Sonnet',
@@ -56,6 +50,18 @@ export const models: Model[] = [
     provider: 'Anthropic',
     providerId: 'anthropic'
   },
+  {
+    id: 'gemini-2.0-flash-exp',
+    name: 'Gemini 2.0 Flash (Experimental)',
+    provider: 'Google Generative AI',
+    providerId: 'google'
+  },
+  {
+    id: 'gemini-exp-1206',
+    name: 'Gemini Experimental',
+    provider: 'Google Generative AI',
+    providerId: 'google'
+  },
   
   {
     id: 'gemini-1.5-pro-latest',
@@ -63,12 +69,7 @@ export const models: Model[] = [
     provider: 'Google Generative AI',
     providerId: 'google'
   },
-  {
-    id: 'gemini-2.0-flash-exp',
-    name: 'Gemini 2.0 Flash (Experimental)',
-    provider: 'Google Generative AI',
-    providerId: 'google'
-  },
+ 
   
   // {
   //   id: process.env.NEXT_PUBLIC_OPENAI_COMPATIBLE_MODEL || 'undefined',

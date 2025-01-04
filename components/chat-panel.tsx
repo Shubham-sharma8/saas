@@ -16,7 +16,7 @@ import { ModelSelector } from './model-selector'
 import { models } from '@/lib/types/models'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import { getDefaultModelId } from '@/lib/utils'
-import { toast } from 'sonner'
+import {  toast } from 'react-hot-toast' // Import toast
 
 interface ChatPanelProps {
   messages: UIState
@@ -152,7 +152,7 @@ export function ChatPanel({ messages, query, onModelChange }: ChatPanelProps) {
   return (
     <div
       className={
-        'fixed bottom-8 left-0 right-0 top-10 mx-auto h-screen flex flex-col items-center justify-center'
+        ' bottom-8 left-0 right-0 top-10  h-screen flex flex-col items-center justify-center'
       }
     >
       <form onSubmit={handleSubmit} className="max-w-2xl w-full px-6">

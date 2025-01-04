@@ -13,7 +13,7 @@ import {
   DialogTitle
 } from './ui/dialog'
 import { shareChat } from '@/lib/actions/chat'
-import { toast } from 'sonner'
+import {  toast } from 'react-hot-toast' // Import toast
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { Spinner } from './ui/spinner'
 

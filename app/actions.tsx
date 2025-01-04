@@ -21,6 +21,7 @@ import { VideoSearchSection } from '@/components/video-search-section'
 import { AnswerSection } from '@/components/answer-section'
 import { workflow } from '@/lib/actions/workflow'
 import { isProviderEnabled } from '@/lib/utils/registry'
+import { saveChatUrl } from '@/lib/saveChatUrl'
 
 const MAX_MESSAGES = 6
 
@@ -174,6 +175,8 @@ export const AI = createAI<AIState, UIState>({
         ? JSON.parse(messages[0].content)?.input?.substring(0, 100) ||
           'Untitled'
         : 'Untitled'
+      // Call the separate function to save the chat URL
+    await saveChatUrl(chatId, title)
     // Add an 'end' message at the end to determine if the history needs to be reloaded
     const updatedMessages: AIMessage[] = [
       ...messages,

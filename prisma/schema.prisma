@@ -1,21 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgres"
-  url = env("DATABASE_URL")
-  relationMode = "prisma"
+model ChatUrl {
+  id        String   @id
+  userId    String
+  title     String
+  path      String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
-
-
-
-model Message {
-  id        String   @id @default(uuid())
+// Keep your existing Chat model if you need it for other purposes
+model Chat {
+  id        String   @id
   userId    String
-  question  String   @db.Text
-  answer    String   @db.Text
+  title     String
+  path      String
   createdAt DateTime @default(now())
+  messages  Json
+
+  @@index([userId])
 }
 

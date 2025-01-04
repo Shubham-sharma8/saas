@@ -13,12 +13,7 @@ import { cn } from "@/lib/utils"
 import React from 'react'
 import { Clipboard, Share, Speaker, Edit, Download } from 'lucide-react'
 import { toast } from 'react-hot-toast'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+
 
 import clsx from 'clsx' // For conditional class management
 
@@ -67,7 +62,7 @@ export const Message: React.FC<MessageProps> = ({
           text: message.content,
         })
         .then(() => toast.success('Shared successfully'))
-        .catch((error) => toast.error('Failed to share: ' + error.message))
+        .catch((error) => toast.error(error.message))
     } else {
       toast.error('Sharing is not supported in this browser')
     }

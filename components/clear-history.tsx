@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { clearChats } from '@/lib/actions/chat'
-import { toast } from 'sonner'
+import {  toast } from 'react-hot-toast' // Import toast
 import { Spinner } from './ui/spinner'
 
 type ClearHistoryProps = {

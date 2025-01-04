@@ -2,7 +2,6 @@ import React, { cache } from 'react'
 import HistoryItem from './history-item'
 import { Chat } from '@/lib/types/'
 import { getChats } from '@/lib/actions/chat'
-import { ClearHistory } from './clear-history'
 
 type HistoryListProps = {
   userId?: string
@@ -29,9 +28,7 @@ export async function HistoryList({ userId }: HistoryListProps) {
           )
         )}
       </div>
-      <div className="mt-auto">
-        <ClearHistory empty={!chats?.length} />
-      </div>
+      
     </div>
   )
 }
