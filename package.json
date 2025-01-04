@@ -88,6 +88,8 @@
     "@uploadcare/react-widget": "^2.4.7",
     "@upstash/redis": "^1.30.0",
     "@vercel/analytics": "^1.4.1",
+    "@types/jsdom": "^21.1.7",
+    "@types/uuid": "^10.0.0",
     "add": "^2.0.6",
     "ai": "^3.4.33",
     "autoprefixer": "10.4.14",
@@ -156,8 +158,7 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "@types/jsdom": "^21.1.7",
-    "@types/uuid": "^10.0.0",
+   
     "eslint": "^9.17.0"
   }
 }
