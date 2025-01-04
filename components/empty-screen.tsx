@@ -94,7 +94,7 @@ const exampleMessages = [
 ];
 
 // Utility function to get 5 random messages
-function getRandomMessages(messages: { heading: string; message: string; }[], count = 5) {
+function getRandomMessages(messages: { heading: string; message: string; }[], count = 4) {
   const shuffled = [...messages].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
