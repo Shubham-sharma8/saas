@@ -176,7 +176,7 @@ export const ChatGPT: React.FC = () => {
         
                         )}
                         <Button
-                          variant="brutal"
+                          variant="Sketch"
                           disabled={isLoading}
                           type="submit"
                           className="w-full"

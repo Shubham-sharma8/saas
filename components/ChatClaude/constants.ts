@@ -16,7 +16,6 @@ export const modelOption = [
     value: "claude-3-5-sonnet-20241022",
     label: "Claude-3-5-Sonnet-20241022",
     data: "Our Most advanced model and it has the same high intelligence as Gemini-1.5 but is much more efficient—it generates text 2x faster. Up to Oct 2024"
-
   },
   {
     value: "claude-3-5-sonnet-20240620",

@@ -111,7 +111,7 @@ export const ChatLlm: React.FC = () => {
 <div className="col-span-12 lg:col-span-2 mt-5">
 
   <Button
-   variant="brutal"
+   variant="Sketch"
    disabled={isLoading}
    type="submit"
    className=" col-span-12 lg:col-span-2 w-full mt-5 "

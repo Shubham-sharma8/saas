@@ -133,7 +133,7 @@ export const FluxAI: React.FC = () => {
             
             <Button
               className="col-span-12 lg:col-span-2 w-full mt-5 "
-              variant="brutal"
+              variant="Sketch"
 
                 disabled={isLoading}
                 size="icon"

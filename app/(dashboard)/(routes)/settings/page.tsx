@@ -10,6 +10,7 @@ import { Sidebar } from '@/components/SettingSidebar'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import {  toast } from 'react-hot-toast' // Import toast
+import Link from 'next/link';
 
 const SettingsPage = () => {
   const { user } = useUser()
@@ -66,11 +67,25 @@ const SettingsPage = () => {
             {/* Single Save Button */}
             <Button
             className="w-full mt-5 dark:text-black"
-              variant="brutal"
+              variant="Sketch"
               onClick={handleSaveModelSelections}
             >
               Save Model Selections
             </Button>
+            <div className="flex justify-end">
+        
+        <Button
+         className="w-[300px] mt-5 dark:text-black"
+
+         variant={'Sketch'}
+          size="sm"
+          asChild
+        >
+          <Link href="https://artificialanalysis.ai">
+            AI Model Analysis
+          </Link>
+        </Button>
+      </div>
 
             <AISettings settings={settings} updateSettings={updateSettings} />
           </motion.div>
@@ -98,7 +113,7 @@ const SettingsPage = () => {
             <h2 className="text-2xl dark:text-white font-semibold mb-4">Help Center</h2>
             <p className="mb-4 dark:text-white">Need assistance? Visit our help center for more information.</p>
             <Button
-            variant="brutal"
+            variant="Sketch"
               className=" dark:text-black w-full mt-5"
               onClick={() => router.push('/help')}
             >

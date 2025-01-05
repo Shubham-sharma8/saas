@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Import, KeySquareIcon } from "lucide-react";
+import { Import, SearchIcon } from "lucide-react";
 
 import { Montserrat } from "next/font/google";
 import {
@@ -45,10 +45,10 @@ const routes = [
   },
   {
       label: 'Advance Search',
-      icon: KeySquareIcon,
+      icon: SearchIcon,
       href: '/advance',
-      color: "text-emerald-900",
-      bgColor: "bg-emerald-500/10",
+      color: "text-violet-500",
+      bgColor: "bg-violet-500/10",
     },
   {
     label: "Image Generation",

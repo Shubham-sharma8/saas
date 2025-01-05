@@ -109,7 +109,7 @@ export const Gpt4o: React.FC = () => {
 <div className="col-span-12 lg:col-span-2 mt-5">
 
   <Button
-    variant="brutal"
+    variant="Sketch"
     disabled={isLoading}
     className=" col-span-12 lg:col-span-2 w-full mt-5 "
        >

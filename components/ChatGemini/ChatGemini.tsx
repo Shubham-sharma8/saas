@@ -188,7 +188,7 @@ export const ChatGemini: React.FC = () => {
                         )}
                       </div>
                       <Button
-                        variant="brutal"
+                        variant="Sketch"
                         disabled={isLoading}
                         type="submit"
                         className="w-full sm:w-[120px]"

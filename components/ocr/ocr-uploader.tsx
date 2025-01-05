@@ -187,7 +187,7 @@ export default function OCRUploader() {
                             Rendered Math
                           </div>
                           <Button
-                            variant="brutal"
+                            variant="Sketch"
                             size="sm"
                             onClick={() => setIsDialogOpen(true)} // Open dialog when clicked
                           >
@@ -230,7 +230,7 @@ export default function OCRUploader() {
                               MathML (MS Word) - Desktop only
                             </div>
                             <Button
-                              variant="brutal"
+                              variant="Sketch"
                               size="sm"
                               className="w-full sm:w-auto"
                               onClick={() => handleCopy(result.data?.find((item: { type: string }) => item.type === 'mathml')?.value || '', 'MathML')}
@@ -250,7 +250,7 @@ export default function OCRUploader() {
                               MathML
                             </div>
                             <Button
-                              variant="brutal"
+                              variant="Sketch"
                               size="sm"
                               className="w-full sm:w-auto"
                               onClick={() => handleCopy(result.data?.find((item: { type: string }) => item.type === 'mathml')?.value || '', 'MathML')}
@@ -270,7 +270,7 @@ export default function OCRUploader() {
                               AsciiMath
                             </div>
                             <Button
-                              variant="brutal"
+                              variant="Sketch"
                               size="sm"
                               className="w-full sm:w-auto"
                               onClick={() => handleCopy(result.data?.find((item: { type: string }) => item.type === 'asciimath')?.value || '', 'AsciiMath')}
@@ -290,7 +290,7 @@ export default function OCRUploader() {
                               HTML
                             </div>
                             <Button
-                              variant="brutal"
+                              variant="Sketch"
                               size="sm"
                               className="w-full sm:w-auto"
                               onClick={() => handleCopy(result.html || '', 'HTML')}
@@ -311,7 +311,7 @@ export default function OCRUploader() {
                             </div>
                             {uploadedUrl[index] && (
                               <Button
-                                variant="brutal"
+                                variant="Sketch"
                                 className="w-full sm:w-auto"
                                 onClick={() => window.open(uploadedUrl[index], '_blank')}
                               >

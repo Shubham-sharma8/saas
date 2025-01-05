@@ -1,7 +1,6 @@
 
-import { GalleryHorizontalEnd, Eye, ImagePlus, FileCheck2, ImageIcon,  MessageCircle, MessageSquare, MessageSquarePlus, Music2, MessagesSquare, Code2, MessageSquareDashed, ImageMinus, Import, KeySquareIcon } from "lucide-react";
+import {  ImageIcon,  MessageSquare,  Code2, Import, SearchIcon } from "lucide-react";
 
-export const MAX_FREE_COUNTS = 500;
 
 export const tools = [
   {
@@ -11,15 +10,13 @@ export const tools = [
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
- 
-  
-  
+
   {
     label: 'Advance Search',
-    icon: KeySquareIcon,
+    icon: SearchIcon,
     href: '/advance',
-    color: "text-emerald-900",
-    bgColor: "bg-emerald-500/10",
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
   },
   
   {

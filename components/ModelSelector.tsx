@@ -63,10 +63,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ type, currentModel
           {models.find(model => model.value === currentModel)?.label}
         </span>
       </div>
-      {/* <RelatedKeywords
-        keywords={['GPT', 'BERT', 'Transformer', 'NLP', 'Computer Vision']}
-        onKeywordClick={handleKeywordClick}
-      /> */}
+    
       <Select value={currentModel} onValueChange={onModelChange}>
         <SelectTrigger className="overflow-auto dark:text-black bg-white border dark:border-black/10 rounded-md p-3 w-full">
           <SelectValue placeholder={`Select ${typeLabel} AI Model`} />
@@ -86,27 +83,9 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ type, currentModel
           ))}
         </SelectContent>
       </Select>
-      <div className="flex justify-end">
-        {/* <Button
-          variant="outline"
-          size="sm"
-          asChild
-        >
-          <Link href={models.find(model => model.value === currentModel)?.url || '#'} target="_blank" rel="noopener noreferrer">
-            Learn More
-          </Link>
-        </Button> */}
-        <Button
-         variant={'brutal'}
-          size="sm"
-          asChild
-        >
-          <Link href="https://artificialanalysis.ai">
-            AI Model Analysis
-          </Link>
-        </Button>
-      </div>
+      
     </motion.div>
+    
   )
 }
 

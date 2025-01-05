@@ -387,7 +387,7 @@ export const DallE31: React.FC = () => {
 
             <Button
               className=" col-span-12 lg:col-span-12 w-full mt-5 "
-             variant="brutal"
+             variant="Sketch"
               disabled={isLoading}
               size="icon"
             >
