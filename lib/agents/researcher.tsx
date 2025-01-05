@@ -51,7 +51,7 @@ export async function researcher(
   } catch (error) {
     console.error('Error in researcher:', error)
     return {
-      text: 'An error has occurred. Please try again.',
+      text: 'Please use a different model for this type of question.',
       toolResults: []
     }
   }
@@ -95,7 +95,7 @@ export async function researcherWithOllama(
   } catch (error) {
     console.error('Error in researcherWithOllama:', error)
     return {
-      text: 'An error has occurred. Please try again.',
+      text: 'Please use a different model for this type of question.',
       toolResults: []
     }
   }
