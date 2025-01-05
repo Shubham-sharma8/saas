@@ -69,7 +69,24 @@ export const models: Model[] = [
     provider: 'Google Generative AI',
     providerId: 'google'
   },
- 
+  {
+    id: 'Mistral-Large-2411',
+    name: 'Mistral Large',
+    provider: 'mistral',
+    providerId: 'mistral'
+  },
+  {
+    id: 'Cohere-Command R+',
+    name: 'Cohere-Command R+',
+    provider: 'cohere',
+    providerId: 'cohere'
+  },
+  {
+    id: 'llama-3.3-70B-instruct',
+    name: 'Llama 3.3 70B',
+    provider: 'llama',
+    providerId: 'llama'
+  },
   
   // {
   //   id: process.env.NEXT_PUBLIC_OPENAI_COMPATIBLE_MODEL || 'undefined',

@@ -4,7 +4,6 @@ import { streamText } from 'ai';
 const mistral = createMistral({
   baseURL: process.env.AZURE_INFERENCE_ENDPOINT_MISTRAL || "",
   apiKey: process.env.AZURE_INFERENCE_CREDENTIAL_MISTRAL || "",
- 
 });
 
 export async function POST(req: Request) {
