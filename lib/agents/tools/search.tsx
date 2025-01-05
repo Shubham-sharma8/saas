@@ -4,7 +4,7 @@ import Exa from 'exa-js'
 import { searchSchema } from '@/lib/schema/search'
 import { SearchSection } from '@/components/search-section'
 import { ToolProps } from '.'
-import { sanitizeUrl } from '@/lib/utils'
+import { sanitizeUrl } from '@/lib/utilsAdvace'
 import {
   SearchResultImage,
   SearchResults,

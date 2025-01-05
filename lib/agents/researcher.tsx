@@ -1,7 +1,7 @@
 import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { CoreMessage, generateText, streamText } from 'ai'
 import { getTools } from './tools'
-import { getModel } from '../utils/registry'
+import { getModel } from '../utilsAdvace/registry'
 import { AnswerSection } from '@/components/answer-section'
 
 const SYSTEM_PROMPT = `As a professional search expert, you possess the ability to search for any information on the web. If there are any images relevant to your answer, be sure to include them as well.`

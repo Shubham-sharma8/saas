@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utilsAdvace";
 import Image from "next/image"
 import Link from "next/link"
 import { Montserrat } from "next/font/google";

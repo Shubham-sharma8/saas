@@ -76,10 +76,18 @@ export function HeroHighlights() {
             Start Generating For Free
           </Button>
         </Link>
+        
         </div>
+        
 
           <div className="text-zinc-400 text-xs md:text-sm font-normal">
-            Free till 31 January 2025
+          <Link href={"/realtime"}>
+          <Button 
+          
+          className="w-60 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm ">
+            Try our Realtime Conversation
+          </Button>
+        </Link>
           </div>
         </div>
       </motion.h1>

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utilsAdvace";
 
 import { tools } from "@/constants";
 import Head from "next/head";

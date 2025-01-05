@@ -4,7 +4,7 @@ import React from 'react'
 import { SheetDemo } from "./mainsidear";
 import { currentUser } from '@clerk/nextjs'
 import { Montserrat } from 'next/font/google';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utilsAdvace';
 import { NavbarDemo } from "@/components/ui/navitems";
 import { ModeToggle } from '..//mode-toggle'
 import { UserButton } from '@clerk/nextjs'

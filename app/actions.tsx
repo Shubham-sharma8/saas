@@ -20,7 +20,7 @@ import RetrieveSection from '@/components/retrieve-section'
 import { VideoSearchSection } from '@/components/video-search-section'
 import { AnswerSection } from '@/components/answer-section'
 import { workflow } from '@/lib/actions/workflow'
-import { isProviderEnabled } from '@/lib/utils/registry'
+import { isProviderEnabled } from '@/lib/utilsAdvace/registry'
 import { saveChatUrl } from '@/lib/saveChatUrl'
 
 const MAX_MESSAGES = 6

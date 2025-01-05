@@ -9,7 +9,7 @@ import {
 import { Button } from './ui/button'
 import { ChevronDown } from 'lucide-react'
 import { StreamableValue, useStreamableValue } from 'ai/rsc'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utilsAdvace'
 import { Separator } from './ui/separator'
 
 interface CollapsibleMessageProps {

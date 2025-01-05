@@ -1,5 +1,5 @@
 import { SelectPrimitive } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utilsAdvace";
 
 function Select({ className, position, ...props }: { className?: string; position?: "item-aligned" | "popper"; [key: string]: any }) {
   return (

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { UserButton, useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { Import, SearchIcon } from "lucide-react";
+import { Import, SearchIcon, SearchSlash, Server } from "lucide-react";
 
 import { Montserrat } from "next/font/google";
 import {
@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utilsAdvace";
 
 const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 const routes = [
@@ -44,10 +44,17 @@ const routes = [
     color: "text-violet-500",
   },
   {
+      label: 'Realtime Voice',
+      icon: Server,
+      href: '/realtime',
+      color: "text-white-100",
+      bgColor: "bg-violet-500/10",
+    },
+  {
       label: 'Advance Search',
-      icon: SearchIcon,
+      icon: SearchSlash,
       href: '/advance',
-      color: "text-violet-500",
+      color: "text-orange-500",
       bgColor: "bg-violet-500/10",
     },
   {
@@ -63,7 +70,7 @@ const routes = [
     color: "text-pink-500",
   },
   {
-    label: "Image Colorizer",
+    label: "Image Colorization",
     icon: ImageIcon,
     href: "/colorize",
     color: "text-yellow-500",
@@ -133,9 +140,9 @@ export const Sidebar = () => {
             <span className="text-sm font-medium">
               {user?.firstName} {user?.lastName}
             </span>
-            <span className="text-xs text-muted-foreground">
+            {/* <span className="text-xs text-muted-foreground">
               {user?.emailAddresses[0].emailAddress}
-            </span>
+            </span> */}
           </div>
           <Link href={"/settings"}>
             <Button variant="ghost" size="icon" className="ml-auto">

@@ -7,10 +7,10 @@ import { useActions, useUIState } from 'ai/rsc'
 import type { AI } from '@/app/actions'
 import { UserMessage } from './user-message'
 import { ArrowRight } from 'lucide-react'
-import { useAppState } from '@/lib/utils/app-state'
+import { useAppState } from '@/lib/utilsAdvace/app-state'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import { models } from '@/lib/types/models'
-import { getDefaultModelId } from '@/lib/utils'
+import { getDefaultModelId } from '@/lib/utilsAdvace'
 
 export function FollowupPanel() {
   const [input, setInput] = useState('')

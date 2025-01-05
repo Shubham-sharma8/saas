@@ -1,5 +1,5 @@
 
-import {  ImageIcon,  MessageSquare,  Code2, Import, SearchIcon } from "lucide-react";
+import {  ImageIcon,  MessageSquare,  Code2, Import, SearchSlash, Server } from "lucide-react";
 
 
 export const tools = [
@@ -10,12 +10,19 @@ export const tools = [
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
+  {
+    label: 'Realtime Voice',
+    icon: Server,
+    href: '/realtime',
+    color: "text-black-900",
+    bgColor: "bg-violet-500/10",
+  },
 
   {
     label: 'Advance Search',
-    icon: SearchIcon,
+    icon: SearchSlash,
     href: '/advance',
-    color: "text-violet-500",
+    color: "text-orange-500",
     bgColor: "bg-violet-500/10",
   },
   
@@ -35,7 +42,7 @@ export const tools = [
     href: '/ocr',
   },
   {
-    label: 'Image Colorizer',
+    label: 'Image Colorization',
     icon: ImageIcon,
     color: "text-yellow-500",
     bgColor: "bg-violet-500/10",
@@ -46,7 +53,7 @@ export const tools = [
     icon: Code2,
     href: '/codetranslate',
     color: "text-pink-700",
-    bgColor: "bg-pink-700/10",
+    bgColor: "bg-violet-500/10",
   },
 
   

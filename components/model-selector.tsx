@@ -11,7 +11,7 @@ import {
 } from './ui/select'
 import Image from 'next/image'
 import { Model, models } from '@/lib/types/models'
-import { createModelId } from '@/lib/utils'
+import { createModelId } from '@/lib/utilsAdvace'
 
 interface ModelSelectorProps {
   selectedModelId: string

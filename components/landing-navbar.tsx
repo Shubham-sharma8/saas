@@ -4,7 +4,7 @@ import { MenuIcon } from 'lucide-react'
 
 import { UserButton, currentUser } from '@clerk/nextjs'
 import { Montserrat } from 'next/font/google';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utilsAdvace';
 
 
 const font = Montserrat({ weight: '600', subsets: ['latin'] });

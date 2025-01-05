@@ -11,11 +11,11 @@ import {
 } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, Menu } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utilsAdvace'
 import { History as HistoryIcon } from 'lucide-react'
 import { Suspense } from 'react'
 import { HistorySkeleton } from './history-skeleton'
-import { useAppState } from '@/lib/utils/app-state'
+import { useAppState } from '@/lib/utilsAdvace/app-state'
 
 type HistoryProps = {
   location: 'sidebar' | 'header'

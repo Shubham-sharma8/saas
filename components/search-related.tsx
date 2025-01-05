@@ -16,7 +16,7 @@ import { Section } from './section'
 import { Skeleton } from './ui/skeleton'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import { models } from '@/lib/types/models'
-import { getDefaultModelId } from '@/lib/utils'
+import { getDefaultModelId } from '@/lib/utilsAdvace'
 
 export interface SearchRelatedProps {
   relatedQueries: StreamableValue<PartialRelated>

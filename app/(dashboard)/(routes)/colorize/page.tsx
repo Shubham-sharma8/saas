@@ -70,7 +70,7 @@ export default function ColorizePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <Heading
-        title="Image Colorizer"
+        title="Image Colorization"
         description="Upload a black and white image and see it come to life with AI-powered colorization"
         icon={<Upload className="w-10 h-10" />}
         iconColor="text-blue-500"

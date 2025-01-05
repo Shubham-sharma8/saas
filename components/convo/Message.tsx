@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import dynamic from 'next/dynamic'
 import { CodeBlock } from './code-block'
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utilsAdvace"
 import React from 'react'
 import { Clipboard, Share, Speaker, Edit, Download } from 'lucide-react'
 import { toast } from 'react-hot-toast'

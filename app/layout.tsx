@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
-import { AppStateProvider } from '@/lib/utils/app-state'
+import { AppStateProvider } from '@/lib/utilsAdvace/app-state'
 
 
 import { ToasterProvider } from '@/components/toaster-provider';
@@ -35,6 +35,7 @@ export const metadata: Metadata = {
   },
   description: "Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking.",
   metadataBase: new URL('https://cogify.social'),
+  creator: 'Shubham Sharma',
   openGraph: {
     type: 'website',
     url: 'https://cogify.social',

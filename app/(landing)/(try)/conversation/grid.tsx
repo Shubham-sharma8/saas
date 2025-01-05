@@ -7,7 +7,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utilsAdvace";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import Globe from "@/components/magicui/globe";
 import Marquee from "@/components/magicui/marquee";
