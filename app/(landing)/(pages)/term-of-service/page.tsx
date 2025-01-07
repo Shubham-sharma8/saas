@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const LandingPage = () => {
     return ( 
-        <div className="h-full ">
+        <div className="mt-12">
            
             {/* <LandingMiddle /> */}
             <SparklesPreview buttonText="Terms of Service" />

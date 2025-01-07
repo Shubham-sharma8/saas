@@ -67,12 +67,13 @@ const Navbar = async (props: Props) => {
         <ModeToggle /> 
       </nav>
 
-
-        <SheetDemo/>
+      <SheetDemo/>
+       
         
       </aside>
       
     </header>
+    
   )
 }
 

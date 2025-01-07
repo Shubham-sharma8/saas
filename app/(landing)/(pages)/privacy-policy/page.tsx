@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const termPage = () => {
   return ( 
-    <div className="h-full ">
+    <div className="mt-12">
             
             {/* <LandingMiddle />       */}
             <SparklesPreview buttonText="Privacy Policy" />

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const helpPage: React.FC = () => {
   return (
-    <div>
+    <div className="mt-12">
       
             
             {/* <LandingMiddle />    */}

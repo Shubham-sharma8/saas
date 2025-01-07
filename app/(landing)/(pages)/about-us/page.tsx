@@ -16,7 +16,7 @@ const LandingPage: React.FC = () => {
   return (
     
     
-    <div>
+    <div className="mt-12">
       
 
       <SparklesPreview buttonText="About us" />

@@ -6,17 +6,17 @@ const people = [
   {
     id: 1,
     name: "Shubham Sharma",
-    designation: "Founder and CEO",
+    designation: "Founder - Cogify",
     image:
-      "https://lh3.googleusercontent.com/pw/AP1GczM8nXkm8r6zOtjeHhgTgakOcQJi8btImZwrQF0cxYaRZFEHVJSa3MJkxN9QKGLHohwkzUPC3ra-t8ysV-YEa0g5HZ-UzCPb9jt9T2daB0l8j07pBj4B-iqqIgVe8tIUYi4R_nGF2C9PTC7L5Ml1d3isyg=w3160-h2106-s-no?authuser=0",
+      "https://i.imgur.com/TvbPAhP_d.webp?maxwidth=1520&fidelity=grand",
   },
-  // {
-  //   id: 2,
-  //   name: "Robert Johnson",
-  //   designation: "Product Manager",
-  //   image:
-  //     "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-  // },
+  {
+    id: 2,
+    name: "Vishal",
+    designation: "CEO and COO",
+    image:
+      "https://i.imgur.com/FFKpPli.jpeg",
+  },
   // {
   //   id: 3,
   //   name: "Jane Smith",

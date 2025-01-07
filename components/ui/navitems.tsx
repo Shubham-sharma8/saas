@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
-import { cn } from "@/lib/utilsAdvace";
 
 export function NavbarDemo() {
   return (
@@ -22,42 +21,43 @@ function Navbar({ className }: { className?: string }) {
           <MenuItem setActive={setActive} active={active} item="AI Services">
             <div className="  text-sm grid grid-cols-2 gap-10 p-2">
               <ProductItem
-                title="Conversation"
+                title="Chat with the AIs"
                 href="/conversation"
-                src="/conversation.svg"
+                src="/conversation.jpg"
                 
-                description= "Engage in enlightening dialogues with AI where curiosity meets intelligence."
+                description= "Unlimited Chat with O1-Preview, Claude 3.5, Gemini, Mistral, Perplexity, Llama 3,3 70B, Cohere and More ."
               />
-              
+               <ProductItem
+                title="Realtime Voice"
+                href="/realtime"
+                src="/realtime.jpg"
+                description="Realtime Voice Conversation with GPT-4o Realtime Voice. No Sign Up Required just Click and Talk."
+              />
+              <ProductItem
+                title="Advance Search"
+                href="/advance"
+                src="/advance.jpg"
+                description= "Web Search Search with GPT-4, Claude 3.5, Gemini, Mistral. WEB Scrapping and more advance features."
+              />
               <ProductItem
                 title="Image Generation"
                 href="/image"
-                src="/imagecartoon.svg"
-                description="Bring your ideas to life with our powerful Image Generation tool."
+                src="/image.jpg"
+                description="Unlimited Image Generation with Dall E 3, Imagen 3, Flux and More. Highest Quality Images and More."
               />
+              
               <ProductItem
-                title="Webai"
-                href="/conversation"
-                src="/conversation.svg"
-                description= "Power of Gemini-2 connected with Google. Get more information from the web and CHATGPT combined."
+                title="OCR Document"
+                href="/ocr"
+                src="/ocr.jpg"
+                description="Scan any Document and get it in any format. No signup, Get Mathtype and Latex Support."
               />
+             
               <ProductItem
-                title="Vision"
-                href="/conversation"
-                src="/imageins.svg"
-                description="Unlocking Vision: Simplifying Understanding with Intelligent Image Analysis."
-              />
-              <ProductItem
-                title="Text-to-Speech"
-                href="/text-to-speech"
-                src="/text.svg"
-                description="Transform text into lifelike speech with our advanced Text-to-Speech generation."
-              />
-              <ProductItem
-                title="Code Generation"
-                href="/code"
-                src="/codecartoon.svg"
-                description="Efficiently create code with our streamlined Code Generation tool."
+                title="Code Translation"
+                href="/codetranslate"
+                src="/code.jpg"
+                description="Translate any Code into 30 languages with AI. Translate into Assembly Language as well."
               />
             </div>
           </MenuItem>

@@ -1,7 +1,12 @@
 import React from 'react';
 
+
 interface GradientButtonProps {
+
   buttonText: string;
+
+  className?: string;
+
 }
 
 const GradientButton: React.FC<GradientButtonProps> = ({ buttonText }) => {

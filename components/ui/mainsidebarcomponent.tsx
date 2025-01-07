@@ -14,63 +14,116 @@ import {
     return (
         <div style={{ marginTop: '50px' }}>
 
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible className="w-full left-0">
         <AccordionItem value="item-1">
-          <AccordionTrigger>AI Services</AccordionTrigger>
+          <AccordionTrigger>Try without Sign-Up</AccordionTrigger>
           <AccordionContent>
-            <Link href="/conversation" > 
-            <GradientButton buttonText="Conversation" />
-          </Link>
-          </AccordionContent>
-          <AccordionContent>
-            <Link href="/claude-3.5" > 
-            <GradientButton buttonText="Claude 3.5 Sonnet" />
-          </Link>
-          </AccordionContent>
-          <AccordionContent>
-            <Link href="/gpt-4o" > 
-            <GradientButton buttonText="GPT-4o" />
+            <Link href="/realtime" > 
+            <GradientButton buttonText="Realtime Voice" />
           </Link>
           </AccordionContent>
           <AccordionContent>
             <Link href="https://try.cogify.social" > 
-            <GradientButton buttonText="AdvacanceGPT" />
+            <GradientButton buttonText="Try.Cogify" />
           </Link>
           </AccordionContent>
+          <AccordionContent>
+            <Link href="/ocr" > 
+            <GradientButton buttonText="OCR Document" />
+          </Link>
+          </AccordionContent>
+         
+          </AccordionItem>
+         
+
+          <AccordionItem value="item-2">
+          <AccordionTrigger>Conversation </AccordionTrigger>
           <AccordionContent>
             <Link href="/conversation" > 
-            <GradientButton buttonText="Webai" />
+            <GradientButton buttonText="O1-Preview" />
           </Link>
           </AccordionContent>
-          <AccordionContent>
-            <Link href="/image" > 
-            <GradientButton buttonText="Image Generation" />
-          </Link>
-          </AccordionContent>
-          <AccordionContent>
-            <Link href="/pdf" > 
-            <GradientButton buttonText="PDF Chat" />
-          </Link>
-          </AccordionContent>
+
           <AccordionContent>
             <Link href="/conversation" > 
-            <GradientButton buttonText="Vision" />
+            <GradientButton buttonText="Claude 3.5 Sonnet" />
           </Link>
           </AccordionContent>
+
           <AccordionContent>
-            <Link href="/audio" > 
-            <GradientButton buttonText="Audio Insight" />
+            <Link href="/conversation" > 
+            <GradientButton buttonText="Gemini" />
           </Link>
           </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/advance" > 
+            <GradientButton buttonText="Advance Search" />
+          </Link>
+          </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/conversation" > 
+            <GradientButton buttonText="Llama 3.3 70B" />
+          </Link>
+          </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/conversation" > 
+            <GradientButton buttonText="Mistral Large" />
+          </Link>
+          </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/conversation" > 
+            <GradientButton buttonText="Perpexility" />
+          </Link>
+          </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/conversation" > 
+            <GradientButton buttonText="Cohere Command R+" />
+          </Link>
+          </AccordionContent>
+
           <AccordionContent>
             <Link href="/codetranslate" > 
             <GradientButton buttonText="AI Code Translator" />
           </Link>
           </AccordionContent>
+          </AccordionItem>
 
+
+        <AccordionItem value="item-3">
+          <AccordionTrigger>Image Generation</AccordionTrigger>
+
+          <AccordionContent>
+            <Link href="/colorize" > 
+            <GradientButton buttonText="Image Colorization" />
+          </Link>
+          </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/image" > 
+            <GradientButton buttonText="Dall-E-3" />
+          </Link>
+          </AccordionContent>
           
+          <AccordionContent>
+            <Link href="/image" > 
+            <GradientButton buttonText="Imagen 3" />
+          </Link>
+          </AccordionContent>
+
+          <AccordionContent>
+            <Link href="/image" > 
+            <GradientButton buttonText="Flux" />
+          </Link>
+          </AccordionContent>
+
+
         </AccordionItem>
-        <AccordionItem value="item-2">
+        <AccordionItem value="item-4">
           <AccordionTrigger>Price</AccordionTrigger>
           <AccordionContent>
             <Link href="/price" > 
@@ -88,7 +141,7 @@ import {
           </Link>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-4">
+        <AccordionItem value="item-5">
           <AccordionTrigger>Contact Us</AccordionTrigger>
 
           <AccordionContent>

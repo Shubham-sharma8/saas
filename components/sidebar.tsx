@@ -140,9 +140,9 @@ export const Sidebar = () => {
             <span className="text-sm font-medium">
               {user?.firstName} {user?.lastName}
             </span>
-            {/* <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               {user?.emailAddresses[0].emailAddress}
-            </span> */}
+            </span>
           </div>
           <Link href={"/settings"}>
             <Button variant="ghost" size="icon" className="ml-auto">
