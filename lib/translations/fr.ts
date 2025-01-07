@@ -94,12 +94,15 @@ export const fr = {
         title: "Transcription en Direct"
     },
     voice: {
-        select: "Sélectionner une voix",
-        ash: "Ash - Douce et Professionnelle",
-        ballad: "Ballad - Chaleureuse et Engageante",
-        coral: "Coral - Claire et Amicale",
-        sage: "Sage - Autoritaire et Calme",
-        verse: "Verse - Dynamique et Expressive"
+        select: "Select a voice",
+        alloy: "Alloy - Friendly & Professional",
+        shimmer: "Shimmer - Clear & confident",
+        echo: "Echo - Warm & polite",
+        ash: "Ash - Gentle & Professional",
+        ballad: "Ballad - Warm & Engaging",
+        coral: "Coral - Clear & Friendly",
+        sage: "Sage - Authoritative & Calm",
+        verse: "Verse - Dynamic & Expressive"
     },
     language: "Français",
     languagePrompt: "Parlez et répondez uniquement en français. Il est crucial que vous mainteniez vos réponses en français. Si l'utilisateur parle dans d'autres langues, vous devriez toujours répondre en français. (French only)"

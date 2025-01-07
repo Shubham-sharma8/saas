@@ -95,6 +95,9 @@ export const zh = {
     },
     voice: {
         select: "选择语音",
+        alloy: "Alloy - 专业自信",
+        shimmer: "Shimmer - 温暖亲切",
+        echo: "Echo - 清晰自信",
         ash: "Ash - 温和专业",
         ballad: "Ballad - 温暖动人",
         coral: "Coral - 清晰友好",

@@ -94,13 +94,16 @@ export const es = {
     title: "Transcripción en Vivo"
   },
   voice: {
-    select: "Seleccionar una voz",
-    ash: "Ash - Suave y Profesional",
-    ballad: "Ballad - Cálida y Cautivadora",
-    coral: "Coral - Clara y Amigable",
-    sage: "Sage - Autoritaria y Tranquila",
-    verse: "Verse - Dinámica y Expresiva"
-  },
+    select: "Select a voice",
+    alloy: "Alloy - Friendly & Professional",
+    shimmer: "Shimmer - Clear & confident",
+    echo: "Echo - Warm & polite",
+    ash: "Ash - Gentle & Professional",
+    ballad: "Ballad - Warm & Engaging",
+    coral: "Coral - Clear & Friendly",
+    sage: "Sage - Authoritative & Calm",
+    verse: "Verse - Dynamic & Expressive"
+},
   language: "Spanish",
   languagePrompt: "Habla y responde solo en español. Es crucial que mantengas tus respuestas en español. Si el usuario habla en otros idiomas, deberías responder en español. (Spanish only)"
 } 

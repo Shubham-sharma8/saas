@@ -1,3 +1,5 @@
+import { E } from "@upstash/redis/zmscore-Dc6Llqgr";
+
 export const en = {
     broadcast: {
         end: "End listening",
@@ -6,7 +8,7 @@ export const en = {
     },
     header: {
         title: "About",
-        about: "This is a project that aims to demonstrate how to use OpenAI Realtime API with WebRTC in a modern Next 14 project.",
+        about: "This is a project that aims to  use OpenAI Realtime API with WebRTC in a modern Next 14 project.",
         banner: "This is currently a beta version and may contain some errors!",
         bannerLink: "Learn more →",
         beta: "Beta",
@@ -21,8 +23,8 @@ export const en = {
     },
     hero: {
         badge: "Realtime by Cogify",
-        subtitle: "Demo by clicking the button below and try available tools",
-        title: "OpenAI Realtime Starter"
+        subtitle: "This is a project that aims to  use OpenAI Realtime API with WebRTC in a modern Next 14 project",
+        title: "Realtime by Cogify"
     },
     messageControls: {
         content: "Content",
@@ -96,6 +98,9 @@ export const en = {
     },
     voice: {
         select: "Select a voice",
+        alloy: "Alloy - Friendly & Professional",
+        shimmer: "Shimmer - Clear & confident",
+        echo: "Echo - Warm & polite",
         ash: "Ash - Gentle & Professional",
         ballad: "Ballad - Warm & Engaging",
         coral: "Coral - Clear & Friendly",
