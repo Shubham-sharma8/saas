@@ -69,7 +69,7 @@ const WhatsAppIcon = (props: any) => (
       </svg>
     )
     const FreeIcon = (props: any) => (
-<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" x="0px" y="0px" width="100" height="100" viewBox="0 0 256 256" {...props}>
+<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" alt="Gemini Icon" x="0px" y="0px" width="100" height="100" viewBox="0 0 256 256" {...props}>
 </img>      )
 const TryIcon = (props: any) => (
   <img 

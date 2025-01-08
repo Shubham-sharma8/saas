@@ -4,7 +4,6 @@ import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 import TypewriterComponent from "typewriter-effect";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
-import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 
@@ -98,11 +97,7 @@ export function HeroHighlights() {
       </div>
       <div>
 
-        <PlaceholdersAndVanishInput
-          placeholders={placeholders}
-          onChange={handleChange}
-          onSubmit={onSubmit}
-        />
+      
       </div>
     </HeroHighlight>
     

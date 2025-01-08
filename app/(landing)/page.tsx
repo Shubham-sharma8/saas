@@ -1,9 +1,10 @@
+
 import { LandingContent } from "@/components/Landing-content";
 import { TabsDemo } from "@/components/tabs-middle";
 import { Footer } from "@/components/footer";
 import { TypewriterEffectSmoothDemo } from "@/components/typing-effect";
 import Navbar from "@/components/ui/navbar";
-import { HeroHighlights } from "./(try)/conversation/text";
+import  {HeroHighlights}  from "./(try)/conversation/text";
 import  RetroGridFinal  from "@/components/magicui/retro";
 import PageHome from './(try)/conversation/addHome'
 
