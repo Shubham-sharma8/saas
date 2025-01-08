@@ -32,17 +32,17 @@ const font = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title:  {
-    default: 'Cogify',
+    default: 'Cogify.Social - Unlimited AI Generation with no ads.',
     template: '%s - Cogify',
   },
-  description: "Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking.",
+  description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads.",
   metadataBase: new URL('https://cogify.social'),
   creator: 'Shubham Sharma',
   openGraph: {
     type: 'website',
     url: 'https://cogify.social',
     title: 'Cogify',
-    description: "Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking.",
+    description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads",
     images: [
       {
         url: 'https://cogify.social/logo.png',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@shubhamsharmaui',
     title: 'Cogify',
-    description: "Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking.",
+    description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads",
     images: 'https://cogify.social/logo.png',
   },
   alternates: {
@@ -77,13 +77,13 @@ export default async function RootLayout({
           <script id='google-analytics'> {` window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-62YCN954BN'); `}</script>
           <link rel="shortcut icon" href="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           <link rel="icon" href="/favicon.ico" />
-          <meta name="description" content="Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking." />
+          <meta name="description" content="Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads" />
           <meta name="keywords" content="gemini-2, gemini-2-flash, GPT-4o, Claude, Sonnet, cohere, Perpexility, Llama, xAI Grok, o1-preview,  DALL-E 3, GPT-4o free, Cogify, cogify.social, AI creativity, AI prompt generation, AI text-to-speech, GPT-4o plus internet, AI code generation, AI entertainment, free AI services, unlimited AI, no ads AI, no tracking AI" />
           <meta name="author" content="Shubham Sharma" />
 
           {/* Open Graph meta tags */}
           <meta property="og:title" content="Cogify" />
-          <meta property="og:description" content="Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking." />
+          <meta property="og:description" content="Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://cogify.social" />
           <meta property="og:image" content="https://cogify.social/logo.png" />
@@ -94,7 +94,7 @@ export default async function RootLayout({
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@shubhamsharmaui" />
           <meta name="twitter:title" content="Cogify" />
-          <meta name="twitter:description" content="Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking." />
+          <meta name="twitter:description" content="Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads" />
           <meta name="twitter:image" content="https://cogify.social/logo.png" />
         </head>
         <CrispProvider />

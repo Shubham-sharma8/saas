@@ -99,14 +99,14 @@ export default function CookieConsent() {
           >
             <div className="container mx-auto flex items-center justify-between ">
               <p className="text-sm text-muted-foreground">
-                We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
+                We use cookies to enhance your experience.
               </p>
               <div className="flex items-center space-x-2">
                 <Button variant="outline" size="sm" onClick={handleDeclineAll}>
-                  Decline All
+                  Decline
                 </Button>
                 <Button size="sm" onClick={handleAcceptAll}>
-                  Accept All
+                  Accept
                 </Button>
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                   <DialogTrigger asChild>

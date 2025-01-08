@@ -65,9 +65,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: 'https://cogify.social/opengraph-image.png'
         },
     
-        {
-            url: 'https://iamclint.tech'
-        },
-
     ]
 }
