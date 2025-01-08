@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import GoogleCaptchaWrapper from '@/app/GoogleCaptchaWrapper';
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 
@@ -10,7 +11,9 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
       </div>
       <main className="md:pl-72 pb-10">
         <Navbar />
-        {children}
+        <GoogleCaptchaWrapper>
+                           {children}
+                         </GoogleCaptchaWrapper> 
       </main>
     </div>
   );
