@@ -11,18 +11,52 @@ import { Heading } from '@/components/heading'
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
-
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 
 export const ChatPerp: React.FC = () => {
-    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
+  const { messages, input, handleInputChange, handleSubmit: chatHandleSubmit, isLoading, setInput } = useChat(
     {
       api: "/api/perp",
     }
   );
   const [error, setError] = useState<string | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setError(null);
+      
+      if (!executeRecaptcha) {
+        console.error('Recaptcha has not been loaded');
+        toast.error('ReCAPTCHA failed to load. Please try again.');
+        return;
+      }
+      
+      const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
+      
+      const recaptchaResponse = await axios.post("/api/recaptchaSubmit", {
+        gRecaptchaToken,
+      });
 
+      if (recaptchaResponse.data.success) {
+        await chatHandleSubmit();
+        form.setValue('prompt', '');
+        setInput('');
+      } else {
+        toast.error('ReCAPTCHA verification failed. Please try again.');
+      }
+    } catch (error: any) {
+      setError(error.message || 'An error occurred while submitting the form');
+      toast.error('Failed to submit form. Please try again.');
+    } finally {
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
+    }
+  };
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
     if (textarea) {
@@ -78,7 +112,7 @@ export const ChatPerp: React.FC = () => {
             <MessageList messages={messages} isLoading={isLoading} />
             <div className="p-4">
               <Form {...form}>
-                <form onSubmit={handleSubmit} className="
+                <form onSubmit={form.handleSubmit(onSubmit)} className="
                   rounded-lg 
               border 
               w-full 
@@ -93,7 +127,7 @@ export const ChatPerp: React.FC = () => {
                   <FormField
                     control={form.control}
                     name="prompt"
-                    render={() => (
+                    render={({ field }) => (
                       <FormItem className="col-span-12 lg:col-span-8">
                         <FormControl className="m-0 p-0">
                         <Textarea
@@ -101,7 +135,10 @@ export const ChatPerp: React.FC = () => {
                             className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
                             value={input}
                             placeholder={'Type your message here...'}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              handleChange(e);
+                            }}
                           />
                           </FormControl>
                         </FormItem>

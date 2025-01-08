@@ -17,7 +17,7 @@ import axios from 'axios';
 
 
 export const Gpt4o: React.FC = () => {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat(
+  const { messages, input, handleInputChange, handleSubmit: chatHandleSubmit, isLoading, setInput } = useChat(
     {
       api: "/api/Gpt4o",
     }
@@ -49,21 +49,14 @@ export const Gpt4o: React.FC = () => {
       
       const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
       
-      const recaptchaResponse = await axios({
-        method: "post",
-        url: "/api/recaptchaSubmit",
-        data: {
-          gRecaptchaToken,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const recaptchaResponse = await axios.post("/api/recaptchaSubmit", {
+        gRecaptchaToken,
       });
 
       if (recaptchaResponse.data.success) {
-        await handleSubmit(new Event('submit') as any);
+        await chatHandleSubmit();
         form.setValue('prompt', '');
-       
+        setInput('');
       } else {
         toast.error('ReCAPTCHA verification failed. Please try again.');
       }
@@ -118,7 +111,7 @@ export const Gpt4o: React.FC = () => {
             <MessageList messages={messages} isLoading={isLoading} />
             <div className="p-4">
               <Form {...form}>
-                <form onSubmit={handleSubmit} className="
+                <form onSubmit={form.handleSubmit(onSubmit)} className="
                   rounded-lg 
               border 
               w-full 
@@ -133,16 +126,18 @@ export const Gpt4o: React.FC = () => {
                   <FormField
                     control={form.control}
                     name="prompt"
-                    render={() => (
+                    render={({ field }) => (
                       <FormItem className="col-span-12 lg:col-span-8">
                         <FormControl className="m-0 p-0">
                         <Textarea
                             ref={textareaRef}
-                            onSubmit={form.handleSubmit(onSubmit)}
                             className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
                             value={input}
                             placeholder={'Type your message here...'}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              handleChange(e);
+                            }}
                           />
                           </FormControl>
                         </FormItem>
