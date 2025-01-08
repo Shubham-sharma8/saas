@@ -1,3 +1,4 @@
+import 'server-only'
 import OpenAI from "openai";
 
 import { auth } from "@clerk/nextjs";
@@ -15,7 +16,8 @@ export async function POST(
     const { userId } = auth();
     const body = await req.json();
     const { prompt, model = "alloy"  } = body;
-
+    
+        
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }

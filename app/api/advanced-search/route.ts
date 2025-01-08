@@ -1,3 +1,5 @@
+import 'server-only'
+import { auth } from "@clerk/nextjs";
 import { NextResponse } from 'next/server'
 import http from 'http'
 import https from 'https'
@@ -125,6 +127,10 @@ async function cleanupExpiredCache() {
 setInterval(cleanupExpiredCache, CACHE_EXPIRATION_CHECK_INTERVAL)
 
 export async function POST(request: Request) {
+  const { userId } = auth();
+  if (!userId) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
   const { query, maxResults, searchDepth, includeDomains, excludeDomains } =
     await request.json()
 

@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs'
 import prisma from '@/lib/prisma'

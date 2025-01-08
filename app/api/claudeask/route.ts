@@ -1,3 +1,6 @@
+import 'server-only'
+import { auth } from "@clerk/nextjs";
+
 import { NextResponse } from 'next/server'
 
 type SwiftAskResponse = {
@@ -22,6 +25,13 @@ const MODEL_URLS = {
 export async function POST(req: Request) {
   try {
     const { messages, model } = await req.json()
+    const { userId } = auth();
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return new NextResponse("Bad Request: Messages array is required", { status: 400 });
+    }
     
     const latestMessage = messages[messages.length - 1]
     

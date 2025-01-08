@@ -1,6 +1,8 @@
-import { VertexAI } from "@google-cloud/vertexai";
+import 'server-only';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { auth } from '@clerk/nextjs';
+import { NextResponse } from 'next/server';
 const {
   FunctionDeclarationSchemaType,
   HarmBlockThreshold,
@@ -24,7 +26,17 @@ export async function POST(req: Request) {
   // Extract the `messages` and `model` from the body of the request
   const { messages,  } = await req.json();
   const model = "gemini-1.5-pro-002"
-
+const { userId } = auth();
+            
+                if (!userId) {
+                  return new NextResponse("Unauthorized", { status: 401 });
+                }
+                if (!messages) {
+                  return new NextResponse("Messages are required", { status: 400 });
+                }
+                if (!model) {
+                  return new NextResponse("model is required", { status: 400 });
+                }
   // Dynamically get the model based on the request
   const generativeModel = vertex_ai.getGenerativeModel({
     model: model,

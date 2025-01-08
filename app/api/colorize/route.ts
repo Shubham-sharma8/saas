@@ -1,9 +1,18 @@
+import 'server-only'
+import { auth } from "@clerk/nextjs";
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
     const imageUrl = body.imageUrl
+    const { userId } = auth();
+    
+        if (!userId) {
+          return new NextResponse("Unauthorized", { status: 401 });
+        }
+    
+  
     
     if (!imageUrl) {
       return NextResponse.json(

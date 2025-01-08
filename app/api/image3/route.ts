@@ -1,3 +1,5 @@
+import 'server-only'
+import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 const aiplatform = require('@google-cloud/aiplatform');
 const { Storage } = require('@google-cloud/storage');
@@ -22,9 +24,19 @@ export async function POST(req: Request) {
   try {
     // AI Platform endpoint
     const endpoint = `projects/${projectID}/locations/${aiLocation}/publishers/google/models/imagen-3.0-generate-001`;
-
+    const { userId } = auth();
+    
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    
     const { prompt, aspectRatio, numberOfImages } = await req.json();
-
+    if (!prompt) {
+      return new NextResponse("Messages are required", { status: 400 });
+    }
+    if (!Array.isArray(prompt) || prompt.length === 0) {
+      return new NextResponse("Bad Request: Messages array is required", { status: 400 });
+    }
     const promptText = {
       prompt: prompt,
     };

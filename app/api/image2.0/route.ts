@@ -30,6 +30,10 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    if (!prompt) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    
     const client = getClient();
     const results = await client.images.generate({
       prompt,

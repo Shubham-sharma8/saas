@@ -1,6 +1,8 @@
+import 'server-only'
+import { auth } from "@clerk/nextjs";
 import { streamText } from 'ai';
 import { createAnthropic } from '@ai-sdk/anthropic';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const genAI = createAnthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || "",
@@ -8,7 +10,18 @@ const genAI = createAnthropic({
 
 export async function POST(req: NextRequest) {
   try {
+    const { userId } = auth();
+    if (!userId) {
+          return new NextResponse("Unauthorized", { status: 401 });
+        }
+
     const { messages, model = "claude-3-5-sonnet-20241022", fileUrl } = await req.json();
+    if (!messages) {
+      return new NextResponse("Messages are required", { status: 400 });
+    }
+    if (!Array.isArray(messages) || messages.length === 0) {
+      return new NextResponse("Bad Request: Messages array is required", { status: 400 });
+    }
 
     let fileContent: Buffer | null = null;
     let mimeType: string | null = null;

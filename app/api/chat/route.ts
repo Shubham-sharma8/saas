@@ -1,3 +1,4 @@
+import 'server-only'
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -6,8 +7,9 @@ import fetch from 'node-fetch';
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
     const { messages, model = 'chatgpt-4o-latest', fileUrl } = await req.json();
+
+    const { userId } = auth();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -15,6 +17,12 @@ export async function POST(req: Request) {
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return new NextResponse("Bad Request: Messages array is required", { status: 400 });
+    }
+    if (!messages) {
+      return new NextResponse("Messages are required", { status: 400 });
+    }
+    if (!process.env.OPENAI_API_KEY) {
+      return new NextResponse("OpenAI API Key not configured.", { status: 500 });
     }
 
  
