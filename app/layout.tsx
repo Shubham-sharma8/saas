@@ -73,6 +73,8 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <head>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-62YCN954BN"></script>
+          <script id='google-analytics'> {` window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-62YCN954BN'); `}</script>
           <link rel="shortcut icon" href="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Try all new Gemini-2 and other models like o1-preview, gemini-2-flash, GPT-4o, Claude Sonnet, Cohere, Perpexility, Llama3.3, Mistral Large, xAI Grok and services Dall 3 image generation at free and unlimited usage. No ads, no tracking." />
