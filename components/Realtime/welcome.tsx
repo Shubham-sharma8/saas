@@ -8,12 +8,10 @@ export const Welcome = () => {
   return (
     <div className="text-center mb-8 rounded-lg p-4">
       <div className="flex justify-center items-center mx-auto gap-2 h-full w-full mb-2">
-        <Badge className="text-xl font-medium motion-preset-slide-left-md">
+        <Badge className="text-xl dark:text-white font-medium motion-preset-slide-left-md">
           {t('hero.badge')}
         </Badge>
-        <Link href="https://github.com/cameronking4/shadcn-openai-realtime-webrtc">
-          
-        </Link>
+        
       </div>
       <h1 className="text-4xl font-bold mb-4 motion-preset-slide-up-lg">
         {t('hero.title')}

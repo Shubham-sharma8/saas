@@ -91,7 +91,7 @@ function ConversationItem({ message }: { message: Conversation }) {
      initial={{ opacity: 0, x: isUser ? 20 : -20, y: 10 }}
      animate={{ opacity: 1, x: 0, y: 0 }}
      transition={{ duration: 0.3, ease: "easeOut" }}
-     className={`flex items-start gap-3 ${isUser ? "justify-end" : ""}`}
+     className={`flex items-start dark:text-white gap-3 ${isUser ? "justify-end" : ""}`}
    >
      {/* Assistant Avatar */}
      {isAssistant && (
@@ -128,7 +128,7 @@ function ConversationItem({ message }: { message: Conversation }) {
 
      {/* User Avatar */}
      {isUser && (
-       <Avatar className="w-8 h-8 shrink-0">
+       <Avatar className="w-8 h-8  shrink-0">
          {/* <AvatarImage src="/placeholder-user.jpg" /> */}
          <AvatarFallback>You</AvatarFallback>
        </Avatar>
@@ -162,7 +162,7 @@ export default function Transcriber({ conversation }: TranscriberProps) {
    <div className="flex flex-col w-full h-full mx-auto bg-background rounded-lg shadow-lg overflow-hidden dark:bg-background">
      {/* Header */}
      <div className="bg-secondary px-4 py-3 flex items-center justify-between dark:bg-secondary">
-       <div className="font-medium text-foreground dark:text-foreground">
+       <div className="font-medium dark:text-white text-foreground dark:text-foreground">
         {t('transcriber.title')}
        </div>
      </div>
@@ -170,7 +170,7 @@ export default function Transcriber({ conversation }: TranscriberProps) {
      {/* Body */}
      <div
        ref={scrollRef}
-       className="flex-1 h-full overflow-y-auto p-4 space-y-4 z-50 scrollbar-thin scrollbar-thumb-primary"
+       className="flex-1 h-full dark:text-white overflow-y-auto p-4 space-y-4 z-50 scrollbar-thin scrollbar-thumb-primary"
      >
        <AnimatePresence>
          {displayableMessages.map((message) => (
