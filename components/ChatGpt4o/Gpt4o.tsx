@@ -11,6 +11,9 @@ import { Heading } from '@/components/heading'
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
 import { Textarea } from "@/components/ui/textarea";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 
 export const Gpt4o: React.FC = () => {
@@ -21,6 +24,7 @@ export const Gpt4o: React.FC = () => {
   );
   const [error, setError] = useState<string | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
@@ -33,7 +37,45 @@ export const Gpt4o: React.FC = () => {
   useEffect(() => {
     adjustTextareaHeight(); // Adjust height on component mount
   }, [input]);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setError(null);
+      
+      if (!executeRecaptcha) {
+        console.error('Recaptcha has not been loaded');
+        toast.error('ReCAPTCHA failed to load. Please try again.');
+        return;
+      }
+      
+      const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
+      
+      const recaptchaResponse = await axios({
+        method: "post",
+        url: "/api/recaptchaSubmit",
+        data: {
+          gRecaptchaToken,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
+      if (recaptchaResponse.data.success) {
+        await handleSubmit(new Event('submit') as any);
+        form.setValue('prompt', '');
+       
+      } else {
+        toast.error('ReCAPTCHA verification failed. Please try again.');
+      }
+    } catch (error: any) {
+      setError(error.message || 'An error occurred while submitting the form');
+      toast.error('Failed to submit form. Please try again.');
+    } finally {
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
+    }
+  };
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     handleInputChange(event);
@@ -96,6 +138,7 @@ export const Gpt4o: React.FC = () => {
                         <FormControl className="m-0 p-0">
                         <Textarea
                             ref={textareaRef}
+                            onSubmit={form.handleSubmit(onSubmit)}
                             className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
                             value={input}
                             placeholder={'Type your message here...'}

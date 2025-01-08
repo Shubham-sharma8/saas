@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
-import { formSchema, modelOption } from './constants'
+import { formSchema } from './constants'
 import { MessageList } from '@/components/convo/MessageList'
 import { ModelSelector } from './ModelSelector'
 import { Heading } from '@/components/heading'
@@ -16,6 +16,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle, X } from 'lucide-react'
 import { Widget } from "@uploadcare/react-widget";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 export const ChatGPT: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -23,6 +26,7 @@ export const ChatGPT: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
   const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean } | null>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/chat',
@@ -64,16 +68,39 @@ export const ChatGPT: React.FC = () => {
         setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
       }
       
-      await handleSubmit(new Event('submit') as any);
+      if (!executeRecaptcha) {
+        console.error('Recaptcha has not been loaded');
+        toast.error('ReCAPTCHA failed to load. Please try again.');
+        return;
+      }
       
-      form.setValue('prompt', '');
-      setInput('');
+      const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
       
+      const recaptchaResponse = await axios({
+        method: "post",
+        url: "/api/recaptchaSubmit",
+        data: {
+          gRecaptchaToken,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (recaptchaResponse.data.success) {
+        await handleSubmit(new Event('submit') as any);
+        form.setValue('prompt', '');
+        setInput('');
+      } else {
+        toast.error('ReCAPTCHA verification failed. Please try again.');
+      }
+    } catch (error: any) {
+      setError(error.message || 'An error occurred while submitting the form');
+      toast.error('Failed to submit form. Please try again.');
+    } finally {
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
-    } catch (error: any) {
-      setError(error.message);
     }
   };
 
@@ -89,7 +116,6 @@ export const ChatGPT: React.FC = () => {
   const removeUploadedFile = () => {
     setUploadedFile(null);
   };
-
 
   return (
     <div className="flex flex-col h-full">
@@ -165,15 +191,12 @@ export const ChatGPT: React.FC = () => {
                           </div>
                         ) : (
                           <Widget
-                                                    publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
-                                                      onChange={handleFileUpload}
-                                                      tabs="file camera url facebook gdrive gphotos dropbox onedrive"
-                                                      previewStep
-                                                      clearable
-                                                      
-                                                    />
-                            
-        
+                            publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
+                            onChange={handleFileUpload}
+                            tabs="file camera url facebook gdrive gphotos dropbox onedrive"
+                            previewStep
+                            clearable
+                          />
                         )}
                         <Button
                           variant="Sketch"

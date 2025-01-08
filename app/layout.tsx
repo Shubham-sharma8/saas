@@ -14,6 +14,8 @@ import Loading from './loading';
 
 import './globals.css';
 
+import GoogleCaptchaWrapper from './GoogleCaptchaWrapper';
+
 
 export const viewport: Viewport = {
   themeColor: [
@@ -107,8 +109,9 @@ export default async function RootLayout({
             <ModalProvider />
             <Suspense fallback={<Loading />}> 
             <AppStateProvider> 
-          
+              <GoogleCaptchaWrapper>
             {children}
+          </GoogleCaptchaWrapper> 
             </AppStateProvider>
             </Suspense>
           </ThemeProvider> 
