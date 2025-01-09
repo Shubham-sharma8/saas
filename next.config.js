@@ -1,12 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  env: {
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-    AZURE_OPENAI_API_KEY: process.env.AZURE_OPENAI_API_KEY,
-    // BING_API_KEY: process.env.BING_API_KEY,
-    // GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
-   
-  },
 
   async rewrites() {
 
