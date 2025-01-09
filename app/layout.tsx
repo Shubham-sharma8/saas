@@ -35,6 +35,8 @@ export const metadata: Metadata = {
     default: 'Cogify.Social - Unlimited AI Generation with no ads.',
     template: '%s - Cogify',
   },
+  keywords: ["cogify.social", "OpenAI Blocks", "Blocks", "OpenAI Realtime API", "OpenAI Realtime", "OpenAI WebRTC", "Livekit", "cogify", "Generative ai", "Voice AI", "Voice AI components", "web components", "UI components", "UI Library", "shadcn", "aceternity", "AI", "Next.js", "React", "Tailwind CSS", "Framer Motion", "TypeScript", "Design engineer", "shadcn ai", "cogify", "cogify.social"],
+
   description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads.",
   metadataBase: new URL('https://cogify.social'),
   creator: 'Shubham Sharma',

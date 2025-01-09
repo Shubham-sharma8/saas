@@ -1,69 +1,122 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from 'next'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    return [
-        {
-            url: 'https://cogify.social/'
-        },
-        {
-            url: 'https://www.cogify.social/'
-        },
-        {
-            url: 'https://cogify.social/help'
-        },
-        {
-            url: 'https://cogify.social/ocr'
-        },
-        {
-            url: 'https://cogify.social/colorize'
-        },
-        {
-            url: 'https://cogify.social/about-us'
-        },
-       
-        {
-            url: 'https://cogify.social/feedback'
-        },
-        {
-            url: 'https://cogify.social/join-us'
-        },
-        {
-            url: 'https://cogify.social/privacy-policy'
-        },
-        {
-            url: 'https://cogify.social/term-of-service'
-        },
-        {
-            url: 'https://cogify.social/refund'
-        },
-        {
-            url: 'https://cogify.social/price'
-        },
-        {
-            url: 'https://cogify.social/dashboard'
-        },
-        {
-            url: 'https://cogify.social/conversation'
-        },
-       
-       
-        {
-            url: 'https://cogify.social/image'
-        },
-      
-     
-       
-    
-        {
-            url: 'https://try.cogify.social'
-        },
-        
-        {
-            url: 'https://cogify.social/settings'
-        },
-        {
-            url: 'https://cogify.social/opengraph-image.png'
-        },
-    
-    ]
+export default function sitemap(): MetadataRoute.Sitemap {
+  const currentDate = new Date();
+
+  return [
+    {
+      url: 'https://cogify.social',
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 1,
+    },
+    {
+      url: 'https://www.cogify.social/',
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 1,
+    },
+    {
+      url: 'https://cogify.social/help',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://cogify.social/ocr',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+        url: 'https://cogify.social/realtime',
+        lastModified: currentDate,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+      },
+    {
+      url: 'https://cogify.social/colorize',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://cogify.social/about-us',
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://cogify.social/feedback',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: 'https://cogify.social/join-us',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: 'https://cogify.social/privacy-policy',
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://cogify.social/term-of-service',
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://cogify.social/refund',
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.5,
+    },
+    {
+      url: 'https://cogify.social/price',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: 'https://cogify.social/dashboard',
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://cogify.social/conversation',
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://cogify.social/image',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://try.cogify.social',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://cogify.social/settings',
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: 'https://cogify.social/opengraph-image.png',
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+  ];
 }
