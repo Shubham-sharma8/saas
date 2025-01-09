@@ -13,8 +13,6 @@ COPY package.json package-lock.json ./
 # Step 5: Install only production dependencies
 RUN npm install --production
 
-# Step 6: Generate Prisma client (if you're using Prisma)
-RUN npx prisma generate
 
 # Step 7: Copy the rest of the application files
 COPY . .
