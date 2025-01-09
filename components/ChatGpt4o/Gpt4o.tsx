@@ -19,7 +19,7 @@ import axios from 'axios';
 export const Gpt4o: React.FC = () => {
   const { messages, input, handleInputChange, handleSubmit: chatHandleSubmit, isLoading, setInput } = useChat(
     {
-      api: "/api/gpt4o",
+      api: "/api/gpt",
     }
   );
   const [error, setError] = useState<string | null>(null)
