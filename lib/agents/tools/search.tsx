@@ -56,7 +56,7 @@ export const searchTool = ({ uiStream, fullResponse }: ToolProps) =>
           // API route for advanced SearXNG search
           const baseUrl =
             process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-          const response = await fetch(`${baseUrl}/api/advanced-search`, {
+          const response = await fetch(`${baseUrl}/api/advanced`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

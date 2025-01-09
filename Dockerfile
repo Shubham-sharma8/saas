@@ -13,14 +13,17 @@ COPY package.json package-lock.json ./
 # Step 5: Install only production dependencies
 RUN npm install --production
 
-# Step 6: Copy the rest of the application files
+# Step 6: Generate Prisma client (if you're using Prisma)
+RUN npx prisma generate
+
+# Step 7: Copy the rest of the application files
 COPY . .
 
-# Step 7: Build the Next.js application
+# Step 8: Build the Next.js application
 RUN npm run build
 
-# Step 8: Expose the application port
+# Step 9: Expose the application port
 EXPOSE 3000
 
-# Step 9: Start the application
+# Step 10: Start the application
 CMD ["npm", "run", "start"]
