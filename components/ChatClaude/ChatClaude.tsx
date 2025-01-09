@@ -125,7 +125,7 @@ export const ChatClaude: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Heading
-        title="Claude 3.5"
+        title="Anthropic Claude"
         description="Claude is a generative AI model that can generate text based on the input you provide. You can also upload PDF File for Claude to analyze."
         icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png" alt="Anthropic Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500 "

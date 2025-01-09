@@ -19,26 +19,26 @@ export const modelOption = [
   },
   {
     value: "claude-3-5-sonnet-20240620",
-    label: "claude 3.5 sonnet",
+    label: "Claude 3.5 Sonnet",
     data: "Our Most advanced model and it has the same high intelligence as Gemini-1.5 but is much more efficient—it generates text 2x faster. Up to Oct 2024"
 
   },
   {
     value: "claude-3-5-haiku-20241022",
-    label: "claude 3.5 haiku",
+    label: "Claude 3.5 Haiku",
     data: "Our Most advanced model and it has the same high intelligence as Gemini-1.5 but is much more efficient—it generates text 2x faster. Up to Oct 2024"
 
   },
   {
     value: "claude-3-opus-20240229",
-    label: "claude 3 opus",
+    label: "Claude 3 Opus",
   },
   {
     value: "claude-3-sonnet-20240229",
-    label: "claude 3 sonnet",
+    label: "Claude 3 Sonnet",
   },
   {
     value: "claude-3-haiku-20240307",
-    label: "claude 3 haiku",
+    label: "Claude 3 Haiku",
   },
 ]
