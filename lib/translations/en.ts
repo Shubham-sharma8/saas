@@ -8,7 +8,7 @@ export const en = {
     },
     header: {
         title: "About",
-        about: "This is a project that aims to  use OpenAI Realtime API with WebRTC in a modern Next 14 project.",
+        about: "Have conversation with the AI in real-time using OpenAI's Realtime API. Just press the button and start talking!",
         banner: "This is currently a beta version and may contain some errors!",
         bannerLink: "Learn more →",
         beta: "Beta",
@@ -23,7 +23,7 @@ export const en = {
     },
     hero: {
         badge: "Realtime by Cogify",
-        subtitle: "This is a project that aims to  use OpenAI Realtime API with WebRTC in a modern Next 14 project",
+        subtitle: "Have conversation with the AI in real-time using OpenAI's Realtime API. Just press the button and start talking",
         title: "Realtime by Cogify"
     },
     messageControls: {
