@@ -1,14 +1,24 @@
-# Install dependencies and build
-FROM node:18 as builder
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# Base image
+FROM node:18-alpine AS base
 
-# Run the app
-FROM node:18
+# Set working directory
 WORKDIR /app
-COPY --from=builder /app ./
-EXPOSE 8080
-CMD ["npm", "run", "start"]
+
+# Install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the entire application
+COPY . .
+
+# Base environment
+ENV NODE_ENV=development
+
+# Default command
+CMD ["npm", "run", "dev"]
+
+# Builder stage (for production builds)
+FROM base AS builder
+ENV NODE_ENV=production
+RUN npm run build
+CMD ["npm", "start"]
