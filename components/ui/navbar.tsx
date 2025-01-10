@@ -5,11 +5,10 @@ import { SheetDemo } from "./mainsidear";
 import { currentUser } from '@clerk/nextjs'
 import { Montserrat } from 'next/font/google';
 import { cn } from '@/lib/utilsAdvace';
-import { NavbarDemo } from "@/components/ui/navitems";
+import { NavigationMenuMain } from "@/components/ui/navitems";
 import { ModeToggle } from '..//mode-toggle'
 import { UserButton } from '@clerk/nextjs'
 
-import { MenuIcon } from 'lucide-react'
 
 
 
@@ -23,13 +22,17 @@ type Props = {}
 const Navbar = async (props: Props) => {
   const user = await currentUser()
   return (
-    <header className="fixed right-0 left-0 top-0 py-4 px-4 dark:bg-black bg-white z-[100] flex items-center border-b-[1px] border-neutral-900 justify-between">
+    <header className="fixed right-0 left-0 top-0 h-16 px-4 bg-white dark:bg-black z-[100] flex items-center border-b border-neutral-200 dark:border-neutral-800 justify-between">
       <Link href="/" className="flex items-center">
-        <div className="relative p-4 h-8 w-8 mr-4 left-2 ">
-          <Image fill alt="Logo" 
-           className="block dark:hidden"
-           src="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
-           <Image
+        <div className="relative h-8 w-8 mr-2">
+          <Image 
+            fill 
+            alt="Logo" 
+            src="/logo.png" 
+            className="block dark:hidden"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          <Image
             fill
             alt="Dark Mode Logo"
             src="/logo_white.png"
@@ -37,44 +40,33 @@ const Navbar = async (props: Props) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
-        <div className="relative" >
-          <h1 className={cn('text-2xl font-bold  ', font.className)}>Cogify</h1>
-        </div>
+        <h1 className={cn('text-xl font-bold', font.className)}>Cogify</h1>
       </Link>
-      
 
-      <nav className="absolute left-[50%] top-[50%] transform translate-x-[-50%] translate-y-[-50%] hidden md:block">
-        <div className='flex items-center gap-4 list-none'> 
-        <NavbarDemo/>
-        </div>
+      <nav className="hidden  md:block">
+        <NavigationMenuMain />
       </nav>
       
-      <aside className="flex items-center gap-4">
+      <div className="flex items-center gap-4">
         <Link
           href="/dashboard"
-          className="relative w-30 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm "
+          className="relative h-9 rounded-lg bg-black dark:bg-white text-white dark:text-black text-sm px-4 flex items-center justify-center"
         >
-          {/* <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" /> */}
-          <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+          <span className="relative z-10">
             {user ? 'Dashboard' : 'Get Started'}
           </span>
-          
         </Link>
         
-        {user ? <UserButton afterSignOutUrl="/" /> : null}
-        <nav className="hidden md:flex items-center gap-4">
-       
-        <ModeToggle /> 
-      </nav>
-
-      <SheetDemo/>
-       
-        
-      </aside>
-      
+        {user && <UserButton afterSignOutUrl="/" />}
+        <div className="hidden md:block">
+          <ModeToggle />
+        </div>
+        <div className="md:hidden">
+          <SheetDemo />
+        </div>
+      </div>
     </header>
-    
   )
 }
 
-export default Navbar;
+export default Navbar
