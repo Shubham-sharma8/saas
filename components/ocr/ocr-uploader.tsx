@@ -42,6 +42,8 @@ export default function OCRUploader() {
   const [svg, setSvg] = useState<string>('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const { toast } = useToast()
+  const [copyingComplete, setCopyingComplete] = useState(false);
+
 
   const ctxProviderRef = useRef<any>(null)
 
@@ -89,26 +91,35 @@ export default function OCRUploader() {
   }
 
   const handleCopy = async (text: string, format: string) => {
-    setCopying({ ...copying, [format]: true })
-    const success = await copyToClipboard(text)
-    
+    if (format === 'Complete Output') {
+      setCopyingComplete(true);
+    } else {
+      setCopying({ ...copying, [format]: true });
+    }
+
+    const success = await copyToClipboard(text);
+
     if (success) {
       toast({
         title: "Copied!",
-        description: `${format} copied to clipboard. You can now paste it in ${format === 'Word Equation' ? 'Microsoft Word' : 'your document'}.`,
-      })
+        description: `${format} copied to clipboard.`,
+      });
     } else {
       toast({
         variant: "destructive",
         title: "Error",
         description: "Failed to copy to clipboard",
-      })
+      });
     }
 
     setTimeout(() => {
-      setCopying({ ...copying, [format]: false })
-    }, 2000)
-  }
+      if (format === 'Complete Output') {
+        setCopyingComplete(false);
+      } else {
+        setCopying({ ...copying, [format]: false });
+      }
+    }, 2000);
+  };
 
   return (
     <div className="space-y-6 max-w-full overflow-x-hidden">
