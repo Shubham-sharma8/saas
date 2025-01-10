@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { TranslateBody } from '@/types/types';
 import { OpenAIStream } from '@/utils';
 import toast from 'react-hot-toast';

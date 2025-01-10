@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { Chat } from '@/components/chat'
 import { generateId } from 'ai'
 import { AI } from '@/app/actions'

@@ -1,3 +1,6 @@
+import 'server-only';
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { auth } from '@clerk/nextjs';
 import { streamText } from 'ai';

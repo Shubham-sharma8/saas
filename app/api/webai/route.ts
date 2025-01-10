@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import 'server-only';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";

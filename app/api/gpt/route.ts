@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse,streamText } from 'ai';

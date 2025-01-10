@@ -1,4 +1,6 @@
 import 'server-only';
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { streamText } from 'ai';
 import { createXai } from '@ai-sdk/xai';
 import { auth } from '@clerk/nextjs';

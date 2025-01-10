@@ -1,3 +1,6 @@
+import 'server-only';
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { AzureOpenAI } from "openai";

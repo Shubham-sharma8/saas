@@ -1,4 +1,6 @@
 import 'server-only'
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { NextResponse } from "next/server";
 import axios from "axios";
 

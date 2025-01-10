@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // Prevents static optimization
+
 import { notFound, redirect } from 'next/navigation'
 import { Chat } from '@/components/chat'
 import { getChat } from '@/lib/actions/chat'
