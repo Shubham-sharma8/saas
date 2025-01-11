@@ -124,7 +124,7 @@ export default function OCRUploader() {
   return (
     <div className="space-y-6 max-w-full overflow-x-hidden">
       <Heading
-              title="OCR Processor"
+              title="OCR Scanner"
               description="AI powered OCR document processor that extracts text, math equations, and tables from images."
               icon={<img src="https://cdn-icons-png.flaticon.com/128/5261/5261894.png" alt="OCR Icon" className="w-full h-full object-contain" />}
               iconColor="text-violet-500"
