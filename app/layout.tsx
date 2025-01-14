@@ -9,8 +9,6 @@ import { ToasterProvider } from '@/components/toaster-provider';
 import { ModalProvider } from '@/components/modal-provider';
 import { CrispProvider } from '@/components/crisp-provider';
 
-import { Suspense } from 'react';
-import Loading from './loading';
 
 import './globals.css';
 
@@ -111,13 +109,13 @@ export default async function RootLayout({
             <ToasterProvider />
             
             <ModalProvider />
-            <Suspense fallback={<Loading />}> 
+           
             <AppStateProvider> 
               <GoogleCaptchaWrapper>
             {children}
           </GoogleCaptchaWrapper> 
             </AppStateProvider>
-            </Suspense>
+           
           </ThemeProvider> 
           
           </body>

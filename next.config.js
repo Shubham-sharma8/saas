@@ -1,12 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   
-  experimental: {
-    appDir: true, // Ensure the app directory is enabled
-  },
-  async generateStaticParams() {
-    return []; // Avoid generating static paths for dynamic routes
-  },
+  
 
   async rewrites() {
 
