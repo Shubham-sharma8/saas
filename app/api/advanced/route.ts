@@ -1,8 +1,8 @@
 import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from 'next/server'
+import { getAuth } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from 'next/server'
 import http from 'http'
 import https from 'https'
 import { JSDOM, VirtualConsole } from 'jsdom'
@@ -128,8 +128,8 @@ async function cleanupExpiredCache() {
 // Set up periodic cache cleanup
 setInterval(cleanupExpiredCache, CACHE_EXPIRATION_CHECK_INTERVAL)
 
-export async function POST(request: Request) {
-  const { userId } = auth();
+export async function POST(request: NextRequest) {
+  const { userId } =  getAuth(request)
   if (!userId) {
     return new NextResponse("Unauthorized", { status: 401 });
   }

@@ -1,8 +1,8 @@
-import { auth } from '@clerk/nextjs'
+import { auth, getAuth } from '@clerk/nextjs/server'
 import prisma from './prisma'
 
 export async function saveChatUrl(chatId: string, title: string) {
-  const { userId } = auth()
+  const { userId } = await auth()
   if (!userId) {
     console.error('User not authenticated')
     return

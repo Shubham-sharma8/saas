@@ -3,16 +3,17 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { streamText } from 'ai';
 import { createXai } from '@ai-sdk/xai';
-import { auth } from '@clerk/nextjs';
+import { getAuth } from '@clerk/nextjs/server';
+import { NextRequest } from 'next/server';
 
 const xAI = createXai({
   apiKey: process.env.xAI_API_KEY || "",
 });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
         
         if (!userId) {
           return new Response("Unauthorized", { status: 401 });

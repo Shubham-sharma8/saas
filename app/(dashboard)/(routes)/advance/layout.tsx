@@ -1,12 +1,13 @@
 import { ShareActions } from '@/components/share-actions'
 import prisma from '@/lib/prisma'
-import { auth } from '@clerk/nextjs'
+import { auth, getAuth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
+import { NextRequest } from 'next/server';
 
 
 
-const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-    const { userId } = auth()
+const DashboardLayout = async ({ children }: { children: React.ReactNode },) => {
+    const { userId } = await auth()
     if (!userId) {
         redirect('/sign-in')
       }

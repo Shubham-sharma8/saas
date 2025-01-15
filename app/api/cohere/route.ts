@@ -1,10 +1,10 @@
 import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
-import { auth } from "@clerk/nextjs";
+import { getAuth } from '@clerk/nextjs/server'
 import { streamText } from 'ai';
 import { createCohere } from '@ai-sdk/cohere';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const azure = createCohere({
   baseURL: process.env.AZURE_INFERENCE_ENDPOINT_COHERE || "",
@@ -12,11 +12,11 @@ const azure = createCohere({
 });
 
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
 
     const { messages } = await req.json();
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
     
         if (!userId) {
           return new NextResponse("Unauthorized", { status: 401 });

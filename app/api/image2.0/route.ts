@@ -1,8 +1,8 @@
 import 'server-only';
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import { getAuth } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from "next/server";
 import { AzureOpenAI } from "openai";
 import { Storage } from "@google-cloud/storage";
 
@@ -24,9 +24,9 @@ const getClient = (): AzureOpenAI => {
   });
 };
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
     const { prompt } = await req.json();
 
     if (!userId) {

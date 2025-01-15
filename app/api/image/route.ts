@@ -1,5 +1,5 @@
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import { getAuth } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
@@ -11,10 +11,10 @@ const openai = new OpenAI({
 });
 
 export async function POST(
-  req: Request
+  req: NextRequest
 ) {
   try {
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
     const { prompt, amount = 1, resolution = "1025x1792", modelImage = "dall-e-3"} = await req.json();
 
     if (!userId) {

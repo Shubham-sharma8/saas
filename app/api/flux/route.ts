@@ -1,14 +1,14 @@
 import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
-import { auth } from "@clerk/nextjs";
+import { getAuth } from '@clerk/nextjs/server'
 
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
     
         if (!userId) {
           return new NextResponse("Unauthorized", { status: 401 });

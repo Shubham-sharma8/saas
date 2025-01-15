@@ -32,7 +32,7 @@
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@clerk/clerk-sdk-node": "^4.10.15",
-    "@clerk/nextjs": "^4.21.15",
+    "@clerk/nextjs": "^6.9.10",
     "@codemirror/legacy-modes": "^6.3.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",

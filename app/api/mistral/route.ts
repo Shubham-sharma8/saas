@@ -2,19 +2,19 @@ import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { createMistral } from '@ai-sdk/mistral';
-import { auth } from '@clerk/nextjs';
+import { getAuth } from '@clerk/nextjs/server';
 import { streamText } from 'ai';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 const mistral = createMistral({
   baseURL: process.env.AZURE_INFERENCE_ENDPOINT_MISTRAL || "",
   apiKey: process.env.AZURE_INFERENCE_CREDENTIAL_MISTRAL || "",
 });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
         
             if (!userId) {
               return new NextResponse("Unauthorized", { status: 401 });

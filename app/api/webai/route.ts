@@ -3,8 +3,8 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 import 'server-only';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
-import { auth } from '@clerk/nextjs';
-import { NextResponse } from 'next/server';
+import { getAuth } from '@clerk/nextjs/server';
+import { NextRequest, NextResponse } from 'next/server';
 const {
   FunctionDeclarationSchemaType,
   HarmBlockThreshold,
@@ -24,11 +24,11 @@ const buildGoogleGenAIPrompt = (messages: Message[]) => ({
     })),
 });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   // Extract the `messages` and `model` from the body of the request
   const { messages,  } = await req.json();
   const model = "gemini-1.5-pro-002"
-const { userId } = auth();
+const { userId } =  getAuth(req)
             
                 if (!userId) {
                   return new NextResponse("Unauthorized", { status: 401 });

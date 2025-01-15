@@ -1,7 +1,7 @@
 import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
-import { auth } from "@clerk/nextjs";
+import { getAuth } from '@clerk/nextjs/server'
 import { streamText } from 'ai';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,7 +12,7 @@ const genAI = createAnthropic({
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
     if (!userId) {
           return new NextResponse("Unauthorized", { status: 401 });
         }

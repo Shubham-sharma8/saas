@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
-import { auth } from "@clerk/nextjs";
-import { NextResponse } from "next/server";
+import { getAuth } from '@clerk/nextjs/server'
+import { NextRequest, NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse,streamText } from 'ai';
 import { OpenAIClient, AzureKeyCredential, } from '@azure/openai';
 import { ChatCompletionChunk } from "openai/resources";
@@ -12,10 +12,10 @@ const client = new OpenAIClient(
 );
 
 export async function POST(
-  req: Request
+  req: NextRequest
 ) {
   try {
-    const { userId } = auth();
+    const { userId } =  getAuth(req)
     const { messages} = await req.json();
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
