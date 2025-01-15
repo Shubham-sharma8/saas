@@ -103,6 +103,7 @@
     "cobe": "^0.6.3",
     "cookie": "^1.0.2",
     "crisp-sdk-web": "^1.0.19",
+    "dicons": "^1.1.7",
     "embla-carousel-autoplay": "^8.0.0",
     "embla-carousel-react": "^8.0.0",
     "endent": "^2.1.0",
