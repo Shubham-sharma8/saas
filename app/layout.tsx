@@ -30,19 +30,19 @@ const font = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title:  {
-    default: 'Cogify.Social - Unlimited AI Generation with no ads.',
+    default: 'Unlimited AI Generation with Cogify.Social',
     template: '%s - Cogify',
   },
-  keywords: ["cogify.social", "OpenAI Blocks", "Blocks", "OpenAI Realtime API", "OpenAI Realtime", "OpenAI WebRTC", "Livekit", "cogify", "Generative ai", "Voice AI", "Voice AI components", "web components", "UI components", "UI Library", "shadcn", "aceternity", "AI", "Next.js", "React", "Tailwind CSS", "Framer Motion", "TypeScript", "Design engineer", "shadcn ai", "cogify", "cogify.social"],
+  keywords: ["cogify.social", "openAI", "generative AI", "AI Tools", "Claude", "Gemini", "AI Text Generation", "AI Image Generation", "no-ads ai", "realtime ai", "web ai"],
 
-  description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads.",
+  description: "Enjoy unlimited AI-generated text and images without ads on Cogify.Social, featuring models like Claude 3.5, O1-Preview, Gemini-2, and DALL-E 3..",
   metadataBase: new URL('https://cogify.social'),
   creator: 'Shubham Sharma',
   openGraph: {
     type: 'website',
     url: 'https://cogify.social',
     title: 'Cogify',
-    description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads",
+    description: "Enjoy unlimited AI-generated text and images without ads on Cogify.Social, featuring models like Claude 3.5, O1-Preview, Gemini-2, and DALL-E 3.",
     images: [
       {
         url: 'https://cogify.social/logo.png',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@shubhamsharmaui',
     title: 'Cogify',
-    description: "Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads",
+    description: "Enjoy unlimited AI-generated text and images without ads on Cogify.Social, featuring models like Claude 3.5, O1-Preview, Gemini-2, and DALL-E 3.",
     images: 'https://cogify.social/logo.png',
   },
   alternates: {

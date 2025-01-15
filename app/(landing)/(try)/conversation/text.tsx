@@ -46,7 +46,7 @@ export function HeroHighlights() {
       >
         <div className="text-white font-bold py-10 text-center space-y-5">
           <div className="text-4xl sm:text-5xl dark:text-white text-zinc-900 md:text-6xl lg:text-7xl space-y-5 font-extrabold">
-            The Best AI Tool with
+           Unlock the Power of AI  with
             <div className="bg-clip-text text-blue-500 dark:text-blue-500">
               <TypewriterComponent
                 options={{

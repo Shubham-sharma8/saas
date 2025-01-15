@@ -14,7 +14,7 @@ export function TextRevealCardPreview() {
         revealText="we'll script the story."
       >
         <TextRevealCardTitle>
-        Experience the Unveiling.
+        Explore Our Cutting-Edge AI Models
         </TextRevealCardTitle>
         <TextRevealCardDescription>
         Delve into the mystery; uncover the secrets hidden beneath the surface.
