@@ -153,7 +153,7 @@ export function DataConnect() {
                         </span>
                       </Link>
                       <Link
-                        href="https://wa.me/917678432186"
+                        href="http://t.me/cogify_bot"
                         target="_blank"
                         className={cn(
                           buttonVariants({
