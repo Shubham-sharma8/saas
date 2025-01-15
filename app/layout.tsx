@@ -70,7 +70,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+   
       <html lang="en" suppressHydrationWarning>
         <head>
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-62YCN954BN"></script>
@@ -111,15 +111,17 @@ export default async function RootLayout({
             <ModalProvider />
            
             <AppStateProvider> 
+            <ClerkProvider>
               <GoogleCaptchaWrapper>
             {children}
           </GoogleCaptchaWrapper> 
+          </ClerkProvider>
             </AppStateProvider>
            
           </ThemeProvider> 
           
           </body>
         </html>
-    </ClerkProvider>
+   
   );
 }
