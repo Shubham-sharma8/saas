@@ -49,7 +49,7 @@ const Navbar = async (props: Props) => {
       
       <div className="flex items-center gap-4">
         <Link
-          href="/dashboard"
+           href="/sign-up"
           className="relative h-9 rounded-lg bg-black dark:bg-white text-white dark:text-black text-sm px-4 flex items-center justify-center"
         >
           <span className="relative z-10">
