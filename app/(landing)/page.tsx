@@ -6,15 +6,14 @@ import {DataConnect} from "@/components/improved/highlighterComponent";
 import  {HeroHighlights}  from "./(try)/conversation/text";
 import  RetroGridFinal  from "@/components/magicui/retro";
 import PageHome from './(try)/conversation/addHome'
-
+import {SplineSceneBasic} from '@/components/improved/3d/maindemo'
 import CookieConsent from '@/components/cookie-consent'
 
 
 const LandingPage = () => {
   return (
     <div>
-      <PageHome/>
-      <HeroHighlights/>
+      <SplineSceneBasic/>
       <RetroGridFinal/>
       <TabsDemo />
       <CookieConsent />

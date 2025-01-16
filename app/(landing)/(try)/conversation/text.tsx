@@ -8,25 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 
 export function HeroHighlights() {
-  const placeholders = [
-    "What's the first rule of Fight Club?",
-    "Who is Tyler Durden?",
-    "Where is Andrew Laeddis Hiding?",
-    "Write a Javascript method to reverse a string",
-    "How to assemble your own PC?",
-    "Write a letter to your boss asking for a leave extension.",
-    "Write a poem about the beauty of friendship.",
-    "How can I improve my problem-solving skills?",
-  ];
-  const { isSignedIn } = useAuth();
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  };
   
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    window.location.href = "/conversation";
-  };
-
+  const { isSignedIn } = useAuth();
+ 
+ 
   return (
     <HeroHighlight>
       <motion.h1
