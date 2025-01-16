@@ -115,7 +115,7 @@ export function DataConnect() {
                         />
                       </svg>
                       <span className="bg-ali relative -top-1 left-3 rounded-3xl px-2 py-1 text-xs text-white">
-                        Ali
+                        Shubham Sharma
                       </span>
                     </div>
                   </div>
