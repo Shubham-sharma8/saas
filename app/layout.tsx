@@ -30,7 +30,7 @@ const font = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title:  {
-    default: 'Unlimited AI Generation with Cogify.Social',
+    default: 'Cogify.Social- Get Unlimited AI Generation for free',
     template: '%s - Cogify',
   },
   keywords: ["cogify.social", "openAI", "generative AI", "AI Tools", "Claude", "Gemini", "AI Text Generation", "AI Image Generation", "no-ads ai", "realtime ai", "web ai"],
