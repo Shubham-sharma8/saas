@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/landing-items";
 
 export function LandingContent() {
-  const cardComponents = [Card1, Card2, Card3, Card4, Card5,Card6,];
+  const cardComponents = [Card1, Card2, Card3, Card4, Card5, Card6,];
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -53,7 +53,7 @@ export function LandingContent() {
       >
         {/* Increase total width */}
         <CarouselContent>
-          {Array.from({ length: 7 }).map((_, index) => (
+          {Array.from({ length: 6 }).map((_, index) => (
             <CarouselItem key={index} className="md:basis-1 lg:basis-1/2">
               <div className="p-1">
                 {/* Use Card1 and Card2 components instead of placeholders */}
