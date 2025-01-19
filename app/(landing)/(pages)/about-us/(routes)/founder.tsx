@@ -10,20 +10,20 @@ const people = [
     image:
       "https://lh3.googleusercontent.com/pw/AP1GczPNdzh4KBaFuG6JdIR1H6HPA_8WB_X_slJJi7vpv-GYVaPyVaunbHmyRRRalgq_V1owcaLirOGwHJVcAP6Y4Mmon5FYTSy7RQcFpJGSglIeHEmDEE2k3imOmLGGHQqXozQqxMIjNMA6gzAf9zyyNmoO=w1498-h2082-s-no?authuser=0",
   },
-  {
-    id: 2,
-    name: "Vishal",
-    designation: "Developer - Cogify",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczOeN-JlFLQYD11gDr5vvLo45HVc2WY_yASVP3tplc_DYftcEEkBs-rowc0mDy8GhtZvF0gB0b3iejWBEGWgLinuJvBiSQ9mPIYtOonq2eBXu0oSJvWFapZcirYHkdSoaYIVI30sJEIA2yruP1tepk4P=w1030-h1280-s-no?authuser=0",
-  },
-  {
-    id: 3,
-    name: "Saswatayu Sengupta",
-    designation: "Developer - Cogify",
-    image:
-      "https://lh3.googleusercontent.com/pw/AP1GczOB8OK5EDaoNGIVP_aM7mW23ki_yEBzZYbG8nO3ea8XNov3oxusWStzfxvPcfbScHbVOtRouSEVeIiPY76Wp_70Tu77TJQN5aYtxVbnCs6YP_g5E73e71AK0NkqWfW0dNitrakePqrOaoYKep3oZ7d1=w959-h1280-s-no?authuser=0",
-  },
+  // {
+  //   id: 2,
+  //   name: "Vishal",
+  //   designation: "Developer - Cogify",
+  //   image:
+  //     "https://lh3.googleusercontent.com/pw/AP1GczOeN-JlFLQYD11gDr5vvLo45HVc2WY_yASVP3tplc_DYftcEEkBs-rowc0mDy8GhtZvF0gB0b3iejWBEGWgLinuJvBiSQ9mPIYtOonq2eBXu0oSJvWFapZcirYHkdSoaYIVI30sJEIA2yruP1tepk4P=w1030-h1280-s-no?authuser=0",
+  // },
+  // {
+  //   id: 3,
+  //   name: "Saswatayu Sengupta",
+  //   designation: "Developer - Cogify",
+  //   image:
+  //     "https://lh3.googleusercontent.com/pw/AP1GczOB8OK5EDaoNGIVP_aM7mW23ki_yEBzZYbG8nO3ea8XNov3oxusWStzfxvPcfbScHbVOtRouSEVeIiPY76Wp_70Tu77TJQN5aYtxVbnCs6YP_g5E73e71AK0NkqWfW0dNitrakePqrOaoYKep3oZ7d1=w959-h1280-s-no?authuser=0",
+  // },
   // {
   //   id: 4,
   //   name: "Emily Davis",
