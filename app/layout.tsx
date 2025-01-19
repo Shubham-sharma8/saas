@@ -12,7 +12,6 @@ import { CrispProvider } from '@/components/crisp-provider';
 
 import './globals.css';
 
-import GoogleCaptchaWrapper from './GoogleCaptchaWrapper';
 
 
 export const viewport: Viewport = {
@@ -112,9 +111,9 @@ export default async function RootLayout({
            
             <AppStateProvider> 
             <ClerkProvider>
-              <GoogleCaptchaWrapper>
+              
             {children}
-          </GoogleCaptchaWrapper> 
+         
           </ClerkProvider>
             </AppStateProvider>
            

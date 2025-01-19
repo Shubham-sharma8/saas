@@ -9,7 +9,6 @@ import { TranslationsProvider } from "@/components/Realtime/translations-context
 import { Banner } from "@/components/Realtime/banner";
 import Navbar from "@/components/ui/navbar";
 
-import GoogleCaptchaWrapper from '@/app/GoogleCaptchaWrapper';
 
 
 
@@ -49,9 +48,7 @@ export default function RootLayout({
               
               <Banner />
               <main className="flex flex-1 justify-center items-start">
-               <GoogleCaptchaWrapper>
-                                          {children}
-                                        </GoogleCaptchaWrapper> 
+                 {children}                     
               </main>
             </div>
             <Toaster />
