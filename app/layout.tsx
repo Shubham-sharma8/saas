@@ -8,6 +8,7 @@ import { AppStateProvider } from '@/lib/utilsAdvace/app-state'
 import { ToasterProvider } from '@/components/toaster-provider';
 import { ModalProvider } from '@/components/modal-provider';
 import { CrispProvider } from '@/components/crisp-provider';
+import GoogleCaptchaWrapper from './GoogleCaptchaWrapper';
 
 
 import './globals.css';
@@ -111,9 +112,9 @@ export default async function RootLayout({
            
             <AppStateProvider> 
             <ClerkProvider>
-              
+            <GoogleCaptchaWrapper>
             {children}
-         
+            </GoogleCaptchaWrapper> 
           </ClerkProvider>
             </AppStateProvider>
            
