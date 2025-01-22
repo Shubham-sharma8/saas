@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Cogify Social',
     short_name: 'Cogify',
-    description: 'Experience the power of AI with  Gemini 2.0Flash (exp, Claude 3.5, DALL-E 3, and more in one chatbot.',
+    description: 'Experience the power of AI with  Gemini 2.0 Flash (exp, Claude 3.5, DALL-E 3, and more in one chatbot.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

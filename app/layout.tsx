@@ -96,7 +96,7 @@ export default async function RootLayout({
           <meta name="twitter:title" content="Cogify" />
           <meta name="twitter:description" content="Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads" />
           <meta name="twitter:image" content="https://cogify.social/logo.png" />
-        </head>
+        
         <CrispProvider />
           <body className={font.className}>
           <ThemeProvider
@@ -121,6 +121,7 @@ export default async function RootLayout({
           </ThemeProvider> 
           
           </body>
+          </head>
         </html>
    
   );
