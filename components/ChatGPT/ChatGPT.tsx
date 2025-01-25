@@ -16,7 +16,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle, X } from 'lucide-react'
 import { Widget } from "@uploadcare/react-widget";
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
@@ -26,7 +25,6 @@ export const ChatGPT: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
   const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean } | null>(null);
-  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: '/api/chatdead',
@@ -68,32 +66,16 @@ export const ChatGPT: React.FC = () => {
         setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
       }
       
-      if (!executeRecaptcha) {
-        console.error('Recaptcha has not been loaded');
-        toast.error('ReCAPTCHA failed to load. Please try again.');
-        return;
-      }
       
-      const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
       
-      const recaptchaResponse = await axios({
-        method: "post",
-        url: "/api/recaptchaSubmit",
-        data: {
-          gRecaptchaToken,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      
+      
 
-      if (recaptchaResponse.data.success) {
+      
         await handleSubmit(new Event('submit') as any);
         form.setValue('prompt', '');
         setInput('');
-      } else {
-        toast.error('ReCAPTCHA verification failed. Please try again.');
-      }
+      
     } catch (error: any) {
       setError(error.message || 'An error occurred while submitting the form');
       toast.error('Failed to submit form. Please try again.');
