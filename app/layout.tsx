@@ -3,11 +3,11 @@ import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
 import { AppStateProvider } from '@/lib/utilsAdvace/app-state'
+import Script from "next/script";
 
 
 import { ToasterProvider } from '@/components/toaster-provider';
 import { ModalProvider } from '@/components/modal-provider';
-import { CrispProvider } from '@/components/crisp-provider';
 import GoogleCaptchaWrapper from './GoogleCaptchaWrapper';
 
 
@@ -74,6 +74,7 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head>
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-62YCN954BN"></script>
+          
           <script id='google-analytics'> {` window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-62YCN954BN'); `}</script>
           <link rel="shortcut icon" href="/logo.png" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
           <link rel="icon" href="/favicon.ico" />
@@ -97,8 +98,16 @@ export default async function RootLayout({
           <meta name="twitter:description" content="Claude 3.5, O1-Preview, Gemini-2, DALL-E 3, GPT-Realtime, and more. Enjoy unlimited generations, including text and images, without ads" />
           <meta name="twitter:image" content="https://cogify.social/logo.png" />
         
-        <CrispProvider />
+       
           <body className={font.className}>
+            {/* Chatbase Script */}
+        <Script
+          id="chatbase-script"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="SoBqdrpGyIGxLm-lXMcfE";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();`,
+          }}
+        />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
