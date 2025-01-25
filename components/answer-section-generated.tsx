@@ -11,7 +11,7 @@ export function AnswerSectionGenerated({ result }: AnswerSectionProps) {
   return (
     <div>
       <Section title="Answer">
-        <BotMessage content={result} />
+        <BotMessage message={result} />
       </Section>
     </div>
   )

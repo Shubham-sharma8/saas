@@ -29,7 +29,7 @@ export const ChatGPT: React.FC = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
-    api: '/api/chat',
+    api: '/api/chatdead',
     onError: (error) => {
       setError(error.message);
     },

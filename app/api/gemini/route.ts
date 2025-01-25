@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { getAuth } from '@clerk/nextjs/server'
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { streamText, Message } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
@@ -52,8 +52,21 @@ export async function POST(req: NextRequest) {
     ],
   });
 
-  const stream = GoogleGenerativeAIStream(geminiStream);
 
-  return new StreamingTextResponse(stream);
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        for await (const chunk of geminiStream.stream) {
+          const text = chunk.text();
+          controller.enqueue(text);
+        }
+        controller.close();
+      } catch (error) {
+        controller.error(error);
+      }
+    },
+  });
+
+  return new Response(stream);
 }
 

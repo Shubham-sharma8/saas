@@ -20,7 +20,7 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel'
-import { SerperSearchResultItem, SerperSearchResults } from '@/lib/types/'
+import { SerperSearchResultItem, SerperSearchResults } from '@/lib/types/index'
 import { PlusCircle } from 'lucide-react'
 
 export interface VideoSearchResultsProps {

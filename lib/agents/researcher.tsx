@@ -1,102 +1,55 @@
-import { createStreamableUI, createStreamableValue } from 'ai/rsc'
-import { CoreMessage, generateText, streamText } from 'ai'
-import { getTools } from './tools'
+import { CoreMessage, smoothStream, streamText } from 'ai'
+import { retrieveTool } from '../tools/retrieve'
+import { searchTool } from '../tools/search'
+import { videoSearchTool } from '../tools/video-search'
 import { getModel } from '../utilsAdvace/registry'
-import { AnswerSection } from '@/components/answer-section'
 
-const SYSTEM_PROMPT = `As a professional search expert, you possess the ability to search for any information on the web. If there are any images relevant to your answer, be sure to include them as well.`
+const SYSTEM_PROMPT = `
+Instructions:
 
-export async function researcher(
-  uiStream: ReturnType<typeof createStreamableUI>,
-  messages: CoreMessage[],
+You are a helpful AI assistant with access to real-time web search, content retrieval, and video search capabilities.
+When asked a question, you should:
+1. Search for relevant information using the search tool when needed
+2. Use the retrieve tool to get detailed content from specific URLs
+3. Use the video search tool when looking for video content
+4. Analyze all search results to provide accurate, up-to-date information
+5. Always cite sources using the [number](url) format, matching the order of search results. If multiple sources are relevant, include all of them, and comma separate them. Only use information that has a URL available for citation.
+6. If results are not relevant or helpful, rely on your general knowledge
+7. Provide comprehensive and detailed responses based on search results, ensuring thorough coverage of the user's question
+8. Use markdown to structure your responses. Use headings to break up the content into sections.
+9. Include relevant images that support your explanations, but avoid using images frequently. Use images only when they actively aid the user's understanding.
+10. **Use the retrieve tool only with user-provided URLs.**
+
+Citation Format:
+<cite_format>[number](url)</cite_format>
+`
+
+type ResearcherReturn = Parameters<typeof streamText>[0]
+
+export function researcher({
+  messages,
+  model
+}: {
+  messages: CoreMessage[]
   model: string
-) {
+}): ResearcherReturn {
   try {
-    let fullResponse = ''
-    const streamableText = createStreamableValue<string>()
-    let toolResults: any[] = []
-
     const currentDate = new Date().toLocaleString()
-    const result = await streamText({
-      model: getModel(model),
-      system: `${SYSTEM_PROMPT} Current date and time: ${currentDate}`,
-      messages: messages,
-      tools: getTools({
-        uiStream,
-        fullResponse
-      }),
-      maxSteps: 5,
-      onStepFinish: async event => {
-        if (event.stepType === 'initial') {
-          if (event.toolCalls && event.toolCalls.length > 0) {
-            uiStream.append(<AnswerSection result={streamableText.value} />)
-            toolResults = event.toolResults
-          } else {
-            uiStream.update(<AnswerSection result={streamableText.value} />)
-          }
-        }
-      }
-    })
 
-    for await (const delta of result.fullStream) {
-      if (delta.type === 'text-delta' && delta.textDelta) {
-        fullResponse += delta.textDelta
-        streamableText.update(fullResponse)
-      }
-    }
-
-    streamableText.done(fullResponse)
-
-    return { text: fullResponse, toolResults }
-  } catch (error) {
-    console.error('Error in researcher:', error)
     return {
-      text: 'Please use a different model for this type of question.',
-      toolResults: []
-    }
-  }
-}
-
-export async function researcherWithOllama(
-  uiStream: ReturnType<typeof createStreamableUI>,
-  messages: CoreMessage[],
-  model: string
-) {
-  try {
-    const fullResponse = ''
-    const streamableText = createStreamableValue<string>()
-    let toolResults: any[] = []
-
-    const currentDate = new Date().toLocaleString()
-    const result = await generateText({
       model: getModel(model),
-      system: `${SYSTEM_PROMPT} Current date and time: ${currentDate}`,
-      messages: messages,
-      tools: getTools({
-        uiStream,
-        fullResponse
-      }),
+      system: `${SYSTEM_PROMPT}\nCurrent date and time: ${currentDate}`,
+      messages,
+      tools: {
+        search: searchTool,
+        retrieve: retrieveTool,
+        videoSearch: videoSearchTool
+      },
       maxSteps: 5,
-      onStepFinish: async event => {
-        if (event.stepType === 'initial') {
-          if (event.toolCalls) {
-            uiStream.append(<AnswerSection result={streamableText.value} />)
-            toolResults = event.toolResults
-          } else {
-            uiStream.update(<AnswerSection result={streamableText.value} />)
-          }
-        }
-      }
-    })
-
-    streamableText.done(result.text)
-
-    return { text: result.text, toolResults }
-  } catch (error) {
-    console.error('Error in researcherWithOllama:', error)
-    return {
-      text: 'Please use a different model for this type of question.',
-      toolResults: []
+      experimental_transform: smoothStream()
     }
+  } catch (error) {
+    console.error('Error in chatResearcher:', error)
+    throw error
   }
 }

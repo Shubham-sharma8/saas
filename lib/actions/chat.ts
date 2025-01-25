@@ -2,11 +2,16 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { type Chat } from '@/lib/types/'
+import { type Chat } from '@/lib/types/index'
 import { getRedisClient, RedisWrapper } from '@/lib/redis/config'
 
 async function getRedis(): Promise<RedisWrapper> {
   return await getRedisClient()
+}
+
+const CHAT_VERSION = 'v2'
+function getUserChatKey(userId: string) {
+  return `user:${CHAT_VERSION}:chat:${userId}`
 }
 
 export async function getChats(userId?: string | null) {
@@ -16,7 +21,7 @@ export async function getChats(userId?: string | null) {
 
   try {
     const redis = await getRedis()
-    const chats = await redis.zrange(`user:chat:${userId}`, 0, -1, {
+    const chats = await redis.zrange(getUserChatKey(userId), 0, -1, {
       rev: true
     })
 
@@ -86,7 +91,8 @@ export async function clearChats(
   userId: string = 'anonymous'
 ): Promise<{ error?: string }> {
   const redis = await getRedis()
-  const chats = await redis.zrange(`user:chat:${userId}`, 0, -1)
+  const userChatKey = getUserChatKey(userId)
+  const chats = await redis.zrange(userChatKey, 0, -1)
   if (!chats.length) {
     return { error: 'No chats to clear' }
   }
@@ -94,7 +100,7 @@ export async function clearChats(
 
   for (const chat of chats) {
     pipeline.del(chat)
-    pipeline.zrem(`user:chat:${userId}`, chat)
+    pipeline.zrem(userChatKey, chat)
   }
 
   await pipeline.exec()
@@ -114,7 +120,7 @@ export async function saveChat(chat: Chat, userId: string = 'anonymous') {
     }
 
     pipeline.hmset(`chat:${chat.id}`, chatToSave)
-    pipeline.zadd(`user:chat:${userId}`, Date.now(), `chat:${chat.id}`)
+    pipeline.zadd(getUserChatKey(userId), Date.now(), `chat:${chat.id}`)
 
     const results = await pipeline.exec()
 
@@ -145,7 +151,7 @@ export async function shareChat(id: string, userId: string = 'anonymous') {
 
   const payload = {
     ...chat,
-    sharePath: `advance/share/${id}`
+    sharePath: `/advance/share/${id}`
   }
 
   await redis.hmset(`chat:${id}`, payload)

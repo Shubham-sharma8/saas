@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import 'server-only';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
+import { Message } from "ai";
 import { getAuth } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 const {
@@ -11,7 +11,7 @@ const {
   HarmCategory,
 } = require('@google-cloud/vertexai');
 
-const vertex_ai = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
+const vertex_ai = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY || "");
 
 const buildGoogleGenAIPrompt = (messages: Message[]) => ({
   contents: messages
@@ -59,8 +59,19 @@ const { userId } =  getAuth(req)
     buildGoogleGenAIPrompt(messages)
   );
 
-  const stream = GoogleGenerativeAIStream(geminiStream);
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        for await (const chunk of geminiStream.stream) {
+          const text = chunk.text();
+          controller.enqueue(text);
+        }
+        controller.close();
+      } catch (error) {
+        controller.error(error);
+      }
+    },
+  });
 
-  // Respond with the stream
-  return new StreamingTextResponse(stream);
+  return new Response(stream);
 }

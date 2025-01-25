@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { clearChats } from '@/lib/actions/chat'
-import {  toast } from 'react-hot-toast' // Import toast
+import { toast } from 'sonner'
 import { Spinner } from './ui/spinner'
 
 type ClearHistoryProps = {
@@ -27,9 +27,7 @@ export function ClearHistory({ empty }: ClearHistoryProps) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" className="w-full" disabled={empty}>
-          Clear History
-        </Button>
+        
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

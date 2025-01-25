@@ -20,14 +20,8 @@ export const models: Model[] = [
     providerId: 'openai'
   },
   {
-    id: 'gpt-4o-2024-08-06',
-    name: 'GPT-4o Aug-2024',
-    provider: 'OpenAI',
-    providerId: 'openai'
-  },
-  {
     id: 'gpt-4o-turbo',
-    name: 'GPT-4 Turbo',
+    name: 'GPT-4o Turbo',
     provider: 'OpenAI',
     providerId: 'openai'
   },
