@@ -10,11 +10,11 @@ export default function Page() {
       <main className="flex-1 container py-16">
         <div className="max-w-[980px] mx-auto text-center mb-12">
           <h1 className="text-3xl sm:text-5xl font-bold mb-4">
-            Try Best AI Tool {" "}
+            Advance Search {" "}
             <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">Cogify</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Try our basic chat features here.
+            Search anything realted to any topic, and get the best results.
           </p>
           
         </div>

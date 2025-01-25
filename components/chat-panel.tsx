@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import { cn } from '@/lib/utils'
-import { Message } from 'ai'
-import { ArrowUp, Plus, Square } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
-import Textarea from 'react-textarea-autosize'
-import { EmptyScreen } from './empty-screen'
-import { ModelSelector } from './model-selector'
-import { Button } from './ui/button'
+import { cn } from "@/lib/utils"
+import type { Message } from "ai"
+import { ArrowUp, Plus, Square } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+import Textarea from "react-textarea-autosize"
+import { EmptyScreen } from "./empty-screen"
+import { ModelSelector } from "./model-selector"
+import { Button } from "./ui/button"
 
 interface ChatPanelProps {
   input: string
@@ -31,7 +31,7 @@ export function ChatPanel({
   setMessages,
   query,
   stop,
-  append
+  append,
 }: ChatPanelProps) {
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
   const router = useRouter()
@@ -52,15 +52,15 @@ export function ChatPanel({
 
   const handleNewChat = () => {
     setMessages([])
-    router.push('/')
+    router.push("/advance")
   }
 
   // if query is not empty, submit the query
   useEffect(() => {
     if (isFirstRender.current && query && query.trim().length > 0) {
       append({
-        role: 'user',
-        content: query
+        role: "user",
+        content: query,
       })
       isFirstRender.current = false
     }
@@ -70,18 +70,15 @@ export function ChatPanel({
   return (
     <div
       className={cn(
-        'mx-auto w-full',
+        "mx-auto w-full",
         messages.length > 0
-          ? 'fixed bottom-0 left-0 right-0 bg-background'
-          : 'fixed bottom-8 left-0 right-0 top-24 flex flex-col items-center justify-center'
+          ? "fixed bottom-0 left-0 right-0 bg-background md:left-[--sidebar-width]" // Add md:left-[--sidebar-width] to account for sidebar
+          : "fixed bottom-8 left-0 right-0 top-24 flex flex-col items-center justify-center",
       )}
     >
       <form
         onSubmit={handleSubmit}
-        className={cn(
-          'max-w-3xl w-full mx-auto',
-          messages.length > 0 ? 'px-0 py-4' : 'px-6'
-        )}
+        className={cn("max-w-3xl w-full mx-auto", messages.length > 0 ? "px-0 py-4" : "px-6")}
       >
         <div className="relative flex items-center w-full gap-2">
           {messages.length > 0 && (
@@ -108,14 +105,14 @@ export function ChatPanel({
             spellCheck={false}
             value={input}
             className="resize-none w-full min-h-12 rounded-fill bg-muted border border-input pl-4 pr-10 pt-3 pb-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-            onChange={e => {
+            onChange={(e) => {
               handleInputChange(e)
               setShowEmptyScreen(e.target.value.length === 0)
             }}
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               // Enter should submit the form, but disable it right after IME input confirmation
               if (
-                e.key === 'Enter' &&
+                e.key === "Enter" &&
                 !e.shiftKey &&
                 !isComposing && // Not in composition
                 !enterDisabled // Not within the delay after confirmation
@@ -130,7 +127,7 @@ export function ChatPanel({
                 textarea.form?.requestSubmit()
               }
             }}
-            onHeightChange={height => {
+            onHeightChange={(height) => {
               // Ensure inputRef.current is defined
               if (!inputRef.current) return
 
@@ -144,20 +141,16 @@ export function ChatPanel({
               // Decrease the border radius by 4px for each 20px height increase
               const newBorder = initialBorder - 4 * multiple
               // The lowest border radius will be 8px
-              inputRef.current.style.borderRadius =
-                Math.max(8, newBorder) + 'px'
+              inputRef.current.style.borderRadius = Math.max(8, newBorder) + "px"
             }}
             onFocus={() => setShowEmptyScreen(true)}
             onBlur={() => setShowEmptyScreen(false)}
           />
           <Button
-            type={isLoading ? 'button' : 'submit'}
-            size={'icon'}
-            variant={'ghost'}
-            className={cn(
-              'absolute right-2 top-1/2 transform -translate-y-1/2',
-              isLoading && 'animate-pulse'
-            )}
+            type={isLoading ? "button" : "submit"}
+            size={"icon"}
+            variant={"ghost"}
+            className={cn("absolute right-2 top-1/2 transform -translate-y-1/2", isLoading && "animate-pulse")}
             disabled={input.length === 0 && !isLoading}
             onClick={isLoading ? stop : undefined}
           >
@@ -166,15 +159,16 @@ export function ChatPanel({
         </div>
         {messages.length === 0 && (
           <EmptyScreen
-            submitMessage={message => {
+            submitMessage={(message) => {
               handleInputChange({
-                target: { value: message }
+                target: { value: message },
               } as React.ChangeEvent<HTMLTextAreaElement>)
             }}
-            className={cn(showEmptyScreen ? 'visible' : 'invisible')}
+            className={cn(showEmptyScreen ? "visible" : "invisible")}
           />
         )}
       </form>
     </div>
   )
 }
+

@@ -22,6 +22,7 @@ import {
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utilsAdvace";
+import { Settings2 } from "dicons";
 
 const poppins = Montserrat({ weight: "600", subsets: ["latin"] });
 const routes = [
@@ -83,6 +84,13 @@ const routes = [
     color: "text-pink-700",
     href: "/codetranslate",
   },
+  {
+    label: 'Settings',
+    icon: Settings,
+    href: '/settings',
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
 ];
 
 export const Sidebar = () => {
@@ -133,7 +141,7 @@ export const Sidebar = () => {
       </div>
 
       {/* Footer (User Profile Section) */}
-      <div className="p-4 border-t">
+      <div className="p-3 border-t">
         <div className="flex items-center gap-4 px-3">
           <UserButton afterSignOutUrl="/" />
           <div className="flex flex-col">
@@ -144,11 +152,6 @@ export const Sidebar = () => {
               {user?.emailAddresses[0].emailAddress}
             </span>
           </div>
-          <Link href={"/settings"}>
-            <Button variant="ghost" size="icon" className="ml-auto">
-              <Settings className="h-5 w-5" />
-            </Button>
-          </Link>
         </div>
       </div>
     </div>

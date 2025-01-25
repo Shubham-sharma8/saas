@@ -1,22 +1,28 @@
-'use client'
+"use client"
 
-import { cn } from '@/lib/utilsAdvace'
+import { cn } from "@/lib/utils"
+import Image from "next/image"
 
-function IconLogo({ className, ...props }: React.ComponentProps<'svg'>) {
+function IconLogo({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <svg
-      fill="currentColor"
-      viewBox="0 0 256 256"
-      role="img"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn('h-4 w-4', className)}
-      {...props}
-    >
-      <circle cx="128" cy="128" r="128" fill="black"></circle>
-      <circle cx="102" cy="128" r="18" fill="white"></circle>
-      <circle cx="154" cy="128" r="18" fill="white"></circle>
-    </svg>
+    <div className={cn("h-4 w-4 relative", className)} {...props}>
+      <Image
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-VPOiuifncEzyj5kKuHKzlbXFptn14f.png"
+        alt="Logo"
+        fill
+        className="object-contain dark:hidden"
+        priority
+      />
+      <Image
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo_white-Klgaru1s384NeCx8TdfU1CIcKB7JRM.png"
+        alt="Logo"
+        fill
+        className="object-contain hidden dark:block"
+        priority
+      />
+    </div>
   )
 }
 
 export { IconLogo }
+

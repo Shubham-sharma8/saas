@@ -1,4 +1,5 @@
 
+import { Settings } from "dicons";
 import {  ImageIcon,  MessageSquare,  Code2, Import, SearchSlash, Server } from "lucide-react";
 
 
@@ -57,13 +58,13 @@ export const tools = [
   },
 
   
-  // {
-  //   label: 'Text to speech',
-  //   icon: Megaphone,
-  //   href: '/text-to-speech',
-  //   color: "text-emerald-500",
-  //   bgColor: "bg-emerald-500/10",
-  // },
+  {
+    label: 'Settings',
+    icon: Settings,
+    href: '/settings',
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
   
 
   // {
