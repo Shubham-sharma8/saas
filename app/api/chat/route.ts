@@ -11,6 +11,7 @@ import {
   streamText
 } from 'ai'
 import { cookies } from 'next/headers'
+import { saveChatUrl } from '@/lib/saveChatUrl'
 
 export const maxDuration = 30
 
@@ -99,6 +100,7 @@ export async function POST(req: Request) {
                   },
                   responseMessages[responseMessages.length - 1]
                 ] as ExtendedCoreMessage[]
+                const title = messages[0].content
 
                 // Get the chat from the database if it exists, otherwise create a new one
                 const savedChat = (await getChat(chatId)) ?? {
@@ -109,6 +111,8 @@ export async function POST(req: Request) {
                   title: messages[0].content,
                   id: chatId
                 }
+                await saveChatUrl(chatId, title)
+
 
                 // Save chat with complete response and related questions
                 await saveChat({
