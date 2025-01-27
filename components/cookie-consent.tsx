@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ChevronDown, ChevronUp, Settings } from 'lucide-react'
+import { Settings } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { CookieIcon } from './cookie-icon'
 
@@ -41,7 +40,6 @@ const cookieCategories: CookieCategory[] = [
 export default function CookieConsent() {
   const [isOpen, setIsOpen] = useState(false)
   const [showQuickConsent, setShowQuickConsent] = useState(false)
-  const [expanded, setExpanded] = useState(false)
   const [preferences, setPreferences] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
@@ -105,7 +103,7 @@ export default function CookieConsent() {
                 <Button variant="outline" size="sm" onClick={handleDeclineAll}>
                   Decline
                 </Button>
-                <Button size="sm" onClick={handleAcceptAll}>
+                <Button variant="outline" size="sm" onClick={handleAcceptAll}>
                   Accept
                 </Button>
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -138,7 +136,9 @@ export default function CookieConsent() {
                       ))}
                     </div>
                     <DialogFooter>
-                      <Button onClick={handleSave}>Save preferences</Button>
+                      <Button 
+                        
+                      onClick={handleSave}>Save preferences</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -177,7 +177,7 @@ export default function CookieConsent() {
           </div>
           
           <DialogFooter className="flex justify-between ">
-            <div className=" justify-item items-center">
+            <div className=" justify-item items-center dark:text-white">
               <Button variant="outline" onClick={handleDeclineAll} className="mr-2">
                 Decline All
               </Button>
@@ -185,7 +185,7 @@ export default function CookieConsent() {
                 Accept All
               </Button>
             </div>
-            <Button onClick={handleSave}>Save Preferences</Button>
+            <Button variant="outline" onClick={handleSave}>Save Preferences</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
