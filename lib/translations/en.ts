@@ -1,4 +1,3 @@
-import { E } from "@upstash/redis/zmscore-Dc6Llqgr";
 
 export const en = {
     broadcast: {

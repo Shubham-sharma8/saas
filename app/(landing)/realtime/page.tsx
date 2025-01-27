@@ -13,6 +13,7 @@ import { ToolsEducation } from "@/components/Realtime/tools-education"
 import { TextInput } from "@/components/Realtime/text-input"
 import { motion } from "framer-motion"
 import { useToolsFunctions } from "@/hooks/use-tools"
+import { LanguageSwitcher } from "@/components/Realtime/language-switcher";
 
 const App: React.FC = () => {
   // State for voice selection
@@ -57,6 +58,7 @@ const App: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
         <Welcome />
+        <LanguageSwitcher />
         
         <motion.div 
           className="w-full max-w-md bg-card text-card-foreground rounded-xl border shadow-sm p-6 space-y-4"

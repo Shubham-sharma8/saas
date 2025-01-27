@@ -17,6 +17,9 @@ export function VoiceSelector({ value, onValueChange }: VoiceSelectorProps) {
           <SelectValue placeholder={t('voice.select')} />
         </SelectTrigger>
         <SelectContent>
+        <SelectItem value="alloy">{t('voice.alloy')}</SelectItem>
+          <SelectItem value="shimmer">{t('voice.shimmer')}</SelectItem>
+          <SelectItem value="echo">{t('voice.echo')}</SelectItem>
           <SelectItem value="ash">{t('voice.ash')}</SelectItem>
           <SelectItem value="ballad">{t('voice.ballad')}</SelectItem>
           <SelectItem value="coral">{t('voice.coral')}</SelectItem>

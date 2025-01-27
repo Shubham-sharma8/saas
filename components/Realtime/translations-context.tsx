@@ -5,6 +5,8 @@ import { en } from '@/lib/translations/en'
 import { es } from '@/lib/translations/es'
 import { fr } from '@/lib/translations/fr'
 import { zh } from '@/lib/translations/zh'
+import { hi } from '@/lib/translations/hi'
+import { ur } from '@/lib/translations/ur'
 
 type TranslationValue = string | { [key: string]: TranslationValue }
 
@@ -16,7 +18,9 @@ const translations: { [key: string]: Translations } = {
   en,
   es,
   fr,
-  zh
+  zh,
+  hi,
+  ur,
 }
 
 type TranslationsContextType = {

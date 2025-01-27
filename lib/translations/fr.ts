@@ -1,98 +1,98 @@
 export const fr = {
     broadcast: {
-        end: "Arrêter la Diffusion",
-        live: "En Direct",
-        start: "Démarrer la Diffusion"
+        end: "Arrêter d'écouter",
+        live: "En direct",
+        start: "Commencer à écouter"
     },
     header: {
         title: "À propos",
-        about: "Ce projet vise à démontrer comment utiliser l'API OpenAI Realtime avec WebRTC dans un projet Next 15 moderne. Il dispose déjà des composants shadcn/ui installés et du hook de session audio WebRTC implémenté. Clonez le projet et définissez vos propres outils.",
-        banner: "🎉 Découvrez la nouvelle bibliothèque OpenAI Realtime Blocks UI pour Next.js !",
+        about: "Discutez avec l'IA en temps réel en utilisant l'API Realtime d'OpenAI. Appuyez simplement sur le bouton et commencez à parler !",
+        banner: "Ceci est actuellement une version bêta et peut contenir quelques erreurs !",
         bannerLink: "En savoir plus →",
         beta: "Bêta",
         dark: "Sombre",
-        github: "Étoile sur GitHub",
+        github: "Mettre une étoile sur GitHub",
         language: "Langue",
         light: "Clair",
         logo: "OpenAI Realtime Starter",
         system: "Système",
         theme: "Changer le thème",
-        twitter: "Suivre sur"
+        twitter: "Suivez-nous sur"
     },
     hero: {
-        badge: "Realtime by Cogify",
-        subtitle: "Faites une démo en cliquant sur le bouton ci-dessous et essayez les outils disponibles",
-        title: " OpenAI Realtime Starter"
+        badge: "Temps réel par Cogify",
+        subtitle: "Discutez avec l'IA en temps réel en utilisant l'API Realtime d'OpenAI. Appuyez simplement sur le bouton et commencez à parler",
+        title: "Temps réel par Cogify"
     },
     messageControls: {
         content: "Contenu",
         filter: "Filtrer par type",
-        log: "Journal dans la Console",
-        logs: "Journaux de Conversation",
+        log: "Enregistrer dans la console",
+        logs: "Journaux de conversation",
         search: "Rechercher des messages...",
-        type: "Type",
-        view: "Voir les Journaux"
+        type: "Type"
     },
     status: {
         error: "Oups !",
-        info: "Basculement de l'Assistant Vocal...",
+        info: "Activation de l'assistant vocal...",
         language: "Langue changée de",
         session: "Session établie",
-        success: "Nous sommes en direct !",
-        toggle: "Basculement de l'Assistant Vocal..."
+        success: "Prêt à démarrer !",
+        toggle: "Activation de l'assistant vocal..."
     },
     tokenUsage: {
-        input: "Tokens d'Entrée",
-        output: "Tokens de Sortie",
-        total: "Tokens Totaux",
-        usage: "Utilisation des Tokens"
+        input: "Jetons d'entrée",
+        output: "Jetons de sortie",
+        total: "Total des jetons",
+        usage: "Utilisation des jetons"
     },
     tools: {
         availableTools: {
-            title: "Outils Disponibles",
+            title: "Outils disponibles",
             copyFn: {
-                description: 'Dites "Copier ça dans le presse-papiers" pour le coller quelque part.',
-                name: "Fonction Copier"
+                description: 'Dites "Copiez ça dans le presse-papier" pour le coller ailleurs.',
+                name: "Copier Fn"
             },
             getTime: {
-                description: 'Demandez "Quelle heure est-il ?" pour obtenir l\'heure actuelle.',
-                name: "Obtenir l'Heure"
+                description: 'Demandez "Quelle heure est-il ?" pour obtenir l’heure actuelle.',
+                name: "Obtenir l'heure"
             },
             launchWebsite: {
-                description: '"Emmène-moi sur [site web]" pour ouvrir un site dans un nouvel onglet.',
-                name: "Lancer un Site Web"
+                description: '"Ouvrir [site web]" pour ouvrir un site dans un nouvel onglet.',
+                name: "Ouvrir un site web"
             },
             partyMode: {
-                description: 'Dites "Activer le mode fête" pour une animation de confettis dynamique !',
-                name: "Mode Fête"
+                description: 'Dites "Activer le mode fête" pour une animation dynamique de confettis !',
+                name: "Mode fête"
             },
             themeSwitcher: {
-                description: 'Dites "Changer le fond" ou "Passer en mode sombre" ou "Passer en mode clair".',
-                name: "Changeur de Thème"
+                description: 'Dites "Changer l’arrière-plan", "Passer en mode sombre" ou "Passer en mode clair".',
+                name: "Changer de thème"
             },
             scrapeWebsite: {
-                name: "Extracteur de Site Web",
-                description: 'Dites "Extraire le contenu de [URL du site]" pour récupérer le contenu d\'une page web.'
+                name: "Scraper de site web",
+                description: 'Dites "Extraire le contenu de [URL du site web]" pour récupérer le contenu d’une page web.'
             }
         },
         clipboard: {
-            description: "Vous pouvez maintenant le coller quelque part.",
-            success: "Texte copié dans le presse-papiers. Demandez à l'utilisateur de le coller quelque part.",
-            toast: "Texte copié dans le presse-papiers !"
+            description: "Vous pouvez maintenant le coller ailleurs.",
+            success: "Texte copié dans le presse-papier. Demandez à l'utilisateur de le coller quelque part.",
+            toast: "Texte copié dans le presse-papier !"
         },
         launchWebsite: {
-            description: "Échec du lancement du site web",
-            success: "Site lancé ! Informez l'utilisateur qu'il a été lancé.",
-            toast: "Lancement du site web "
+            description: "Échec de l'ouverture du site web",
+            success: "Site ouvert ! Informez l'utilisateur qu'il a été ouvert.",
+            toast: "Ouverture du site web "
         },
         partyMode: {
             description: "Échec de l'activation du mode fête",
             success: "Mode fête activé",
-            toast: "Mode fête !"
+            toast: "Mode fête !",
+            failed: "Échec de l'activation du mode fête",
         },
         switchTheme: "Thème changé en ",
         themeFailed: "Échec du changement de thème",
-        time: "Annoncer à l'utilisateur : L'heure actuelle est ",
+        time: "Annoncez à l'utilisateur : L'heure actuelle est ",
         scrapeWebsite: {
             success: "Contenu du site web extrait avec succès",
             description: "Échec de l'extraction du contenu du site web",
@@ -100,19 +100,19 @@ export const fr = {
         }
     },
     transcriber: {
-        title: "Transcription en Direct"
+        title: "Transcription en direct"
     },
     voice: {
-        select: "Select a voice",
-        alloy: "Alloy - Friendly & Professional",
-        shimmer: "Shimmer - Clear & confident",
-        echo: "Echo - Warm & polite",
-        ash: "Ash - Gentle & Professional",
-        ballad: "Ballad - Warm & Engaging",
-        coral: "Coral - Clear & Friendly",
-        sage: "Sage - Authoritative & Calm",
-        verse: "Verse - Dynamic & Expressive"
+        select: "Sélectionnez une voix",
+        alloy: "Alloy - Amical et professionnel",
+        shimmer: "Shimmer - Clair et confiant",
+        echo: "Echo - Chaleureux et poli",
+        ash: "Ash - Doux et professionnel",
+        ballad: "Ballad - Chaleureux et engageant",
+        coral: "Coral - Clair et amical",
+        sage: "Sage - Autoritaire et calme",
+        verse: "Verse - Dynamique et expressif"
     },
     language: "Français",
-    languagePrompt: "Parlez et répondez uniquement en français. Il est crucial que vous mainteniez vos réponses en français. Si l'utilisateur parle dans d'autres langues, vous devriez toujours répondre en français. (French only)"
+    languagePrompt: "Parlez et répondez uniquement en français. Il est crucial que vous mainteniez vos réponses en français. Si l'utilisateur parle dans d'autres langues, vous devez tout de même répondre en français."
 }
