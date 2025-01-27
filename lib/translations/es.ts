@@ -69,6 +69,10 @@ export const es = {
       themeSwitcher: {
         description: 'Di "Cambiar fondo" o "Cambiar a modo oscuro" o "Cambiar a modo claro".',
         name: "Cambiar Tema"
+      },
+      scrapeWebsite: {
+        name: "Extractor de Sitios Web",
+        description: 'Di "Extraer contenido de [URL del sitio]" para obtener contenido de una página web.'
       }
     },
     clipboard: {
@@ -88,7 +92,12 @@ export const es = {
     },
     switchTheme: "Tema cambiado a ",
     themeFailed: "Error al cambiar el tema",
-    time: "Anunciar al usuario: La hora actual es "
+    time: "Anunciar al usuario: La hora actual es ",
+    scrapeWebsite: {
+      success: "Contenido del sitio web extraído exitosamente",
+      description: "Error al extraer contenido del sitio web",
+      toast: "Extrayendo contenido del sitio web..."
+    }
   },
   transcriber: {
     title: "Transcripción en Vivo"

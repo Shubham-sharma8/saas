@@ -16,13 +16,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Message as MessageType } from "@/types/index"
+import { Message as MessageType } from "@/types"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 import { Terminal } from "lucide-react"
-import { useTranslations } from "@/components/Realtime/translations-context"
+import { useTranslations } from "./translations-context"
 
 function FilterControls({
   typeFilter,

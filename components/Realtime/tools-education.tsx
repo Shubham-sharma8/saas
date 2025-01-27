@@ -12,7 +12,7 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table"
-import { useTranslations } from "@/components/Realtime/translations-context"
+import { useTranslations } from "./translations-context"
 
 
 export function ToolsEducation() {
@@ -38,6 +38,10 @@ export function ToolsEducation() {
     {
       name: t('tools.availableTools.launchWebsite.name'),
       description: t('tools.availableTools.launchWebsite.description'),
+    },
+    {
+      name: t('tools.availableTools.scrapeWebsite.name'),
+      description: t('tools.availableTools.scrapeWebsite.description'),
     },
   ] as const;
 

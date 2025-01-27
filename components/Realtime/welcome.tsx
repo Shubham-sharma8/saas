@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
 import { useTranslations } from "@/components/Realtime/translations-context"
 
 export const Welcome = () => {

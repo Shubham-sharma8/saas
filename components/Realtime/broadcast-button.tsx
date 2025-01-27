@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { useTranslations } from "@/components/Realtime/translations-context";
+import { useTranslations } from "./translations-context";
 
 interface BroadcastButtonProps {
   isSessionActive: boolean
@@ -12,7 +12,7 @@ export function BroadcastButton({ isSessionActive, onClick }: BroadcastButtonPro
   return (
     <Button
       variant={isSessionActive ? "destructive" : "default"}
-      className="w-full py-6 text-lg dark:text-white font-medium flex items-center justify-center gap-2 motion-preset-shake"
+      className="w-full py-6 text-lg font-medium flex items-center justify-center gap-2 motion-preset-shake"
       onClick={onClick}
     >
       {isSessionActive && (

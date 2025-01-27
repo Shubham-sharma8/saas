@@ -32,8 +32,7 @@ export const en = {
         log: "Log to Console",
         logs: "Conversation Logs",
         search: "Search messages...",
-        type: "Type",
-        view: "System Logs"
+        type: "Type"
     },
     status: {
         error: "Whoops!",
@@ -71,6 +70,10 @@ export const en = {
             themeSwitcher: {
                 description: 'Say "Change background" or "Switch to dark mode" or "Switch to light mode".',
                 name: "Theme Switcher"
+            },
+            scrapeWebsite: {
+                name: "Website Scraper",
+                description: 'Say "Scrape [website URL]" to extract content from a webpage.'
             }
         },
         clipboard: {
@@ -91,7 +94,12 @@ export const en = {
         },
         switchTheme: "Theme switched to ",
         themeFailed: "Failed to switch theme",
-        time: "Announce to user: The current time is "
+        time: "Announce to user: The current time is ",
+        scrapeWebsite: {
+            success: "Website content extracted successfully",
+            description: "Failed to scrape website content",
+            toast: "Scraping website..."
+        }
     },
     transcriber: {
         title: "Live Transcript"

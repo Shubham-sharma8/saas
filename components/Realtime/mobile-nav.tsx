@@ -13,7 +13,7 @@ import { MenuIcon } from "lucide-react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Badge } from "../ui/badge";
-import { useTranslations } from "@/components/Realtime/translations-context"
+import { useTranslations } from "./translations-context"
 
 export function MobileNav() {
   const { t } = useTranslations();

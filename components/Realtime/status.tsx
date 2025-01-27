@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { toast } from 'sonner'
-import { useTranslations } from "@/components/Realtime/translations-context"
+import { useTranslations } from "./translations-context"
 
 interface StatusDisplayProps {
   status: string

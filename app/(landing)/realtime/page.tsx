@@ -10,6 +10,7 @@ import { StatusDisplay } from "@/components/Realtime/status"
 import { TokenUsageDisplay } from "@/components/Realtime/token-usage"
 import { MessageControls } from "@/components/Realtime/message-controls"
 import { ToolsEducation } from "@/components/Realtime/tools-education"
+import { TextInput } from "@/components/Realtime/text-input"
 import { motion } from "framer-motion"
 import { useToolsFunctions } from "@/hooks/use-tools"
 
@@ -24,7 +25,8 @@ const App: React.FC = () => {
     registerFunction,
     handleStartStopClick,
     msgs,
-    conversation
+    conversation,
+    sendTextMessage
   } = useWebRTCAudioSession(voice, tools)
 
   // Get all tools functions
@@ -38,7 +40,8 @@ const App: React.FC = () => {
         backgroundFunction: 'changeBackgroundColor',
         partyFunction: 'partyMode',
         launchWebsite: 'launchWebsite', 
-        copyToClipboard: 'copyToClipboard'
+        copyToClipboard: 'copyToClipboard',
+        scrapeWebsite: 'scrapeWebsite'
       };
       
       registerFunction(functionNames[name], func);
@@ -79,6 +82,10 @@ const App: React.FC = () => {
               transition={{ duration: 0.3 }}
             >
               <MessageControls conversation={conversation} msgs={msgs} />
+              <TextInput 
+                onSubmit={sendTextMessage}
+                disabled={!isSessionActive}
+              />
             </motion.div>
           )}
         </motion.div>

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/select"
 import { toast } from "sonner"
 import { Languages } from "lucide-react"
-import { useTranslations } from "@/components/Realtime/translations-context"
+import { useTranslations } from "./translations-context"
 
 export function LanguageSwitcher() {
   const { t, locale, setLocale } = useTranslations()

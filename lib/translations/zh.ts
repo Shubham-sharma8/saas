@@ -69,6 +69,10 @@ export const zh = {
             themeSwitcher: {
                 description: '说"更换背景"或"切换到深色模式"或"切换到浅色模式"。',
                 name: "主题切换器"
+            },
+            scrapeWebsite: {
+                name: "网页内容提取器",
+                description: '说"提取[网站URL]的内容"来获取网页内容。'
             }
         },
         clipboard: {
@@ -88,7 +92,12 @@ export const zh = {
         },
         switchTheme: "主题已切换至 ",
         themeFailed: "主题切换失败",
-        time: "向用户播报：当前时间是 "
+        time: "向用户播报：当前时间是 ",
+        scrapeWebsite: {
+            success: "网页内容提取成功",
+            description: "网页内容提取失败",
+            toast: "正在提取网页内容..."
+        }
     },
     transcriber: {
         title: "实时转录"
