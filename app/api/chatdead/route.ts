@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic" // Prevents static optimization
 
 import { getAuth } from "@clerk/nextjs/server"
 import { type NextRequest, NextResponse } from "next/server"
-import { streamText } from "ai"
+import { smoothStream, streamText } from 'ai';
 import { openai } from "@ai-sdk/openai"
 
 export async function POST(req: NextRequest) {
@@ -50,6 +50,8 @@ export async function POST(req: NextRequest) {
     const stream = await streamText({
       model: openai(model),
       messages: updatedMessages,
+      experimental_transform: smoothStream(),
+
     })
 
     return stream.toDataStreamResponse()

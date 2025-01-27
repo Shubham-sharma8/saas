@@ -2,7 +2,7 @@ import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { getAuth } from '@clerk/nextjs/server'
-import { streamText } from 'ai';
+import { smoothStream, streamText } from 'ai';
 import { createCohere } from '@ai-sdk/cohere';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -31,6 +31,8 @@ export async function POST(req: NextRequest) {
       const text = await streamText({
       model: azure('command-r-plus-08-2024'),
       messages,
+      experimental_transform: smoothStream(),
+
     });
    
     return text.toDataStreamResponse();

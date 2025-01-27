@@ -12,24 +12,24 @@ import { ModelSelector } from './ModelSelector'
 import { Heading } from '@/components/heading'
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from '@/components/ui/button'
-import { Textarea } from "@/components/ui/textarea";
-import { GroundingToggle } from '@/components/ui/grounding-toggle'
+import { Textarea } from "@/components/ui/textarea"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AlertCircle, X } from 'lucide-react'
 import { Widget } from "@uploadcare/react-widget";
-import { X,  FileAudioIcon as AudioIcon, VideoIcon } from 'lucide-react'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { Switch } from "@/components/ui/switch"
 
 export const ChatGemini: React.FC = () => {
-    const [groundingEnabled, setGroundingEnabled] = useState(false)
-    const formRef = useRef<HTMLFormElement>(null);
-    const [error, setError] = useState<string | null>(null);
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const [selectedModel, setSelectedModel] = useState('gemini-2.0-flash-exp');
-    const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean, mimeType: string } | null>(null);
-    const { executeRecaptcha } = useGoogleReCaptcha();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [error, setError] = useState<string | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
+  const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean, mimeType: string } | null>(null);
+  const [useSearchGrounding, setUseSearchGrounding] = useState(false);
+
   const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
-    api: groundingEnabled ? "/api/webai" : "/api/gemini",
+    api: '/api/gemini',
     onError: (error) => {
       setError(error.message);
     },
@@ -38,6 +38,7 @@ export const ChatGemini: React.FC = () => {
       fileUrl: uploadedFile?.cdnUrl,
       fileName: uploadedFile?.name,
       fileMimeType: uploadedFile?.mimeType,
+      useSearchGrounding,
     },
   });
 
@@ -47,7 +48,7 @@ export const ChatGemini: React.FC = () => {
       prompt: '',
       model: 'gemini-2.0-flash-exp',
     },
-  })
+  });
 
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
@@ -67,35 +68,19 @@ export const ChatGemini: React.FC = () => {
       setSelectedModel(values.model);
       
       if (uploadedFile) {
-        setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
+        setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}] (${uploadedFile.mimeType})`);
       }
       
-      if (!executeRecaptcha) {
-        console.error('Recaptcha has not been loaded');
-        toast.error('ReCAPTCHA failed to load. Please try again.');
-        return;
-      }
       
-      const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
       
-      const recaptchaResponse = await axios({
-        method: "post",
-        url: "/api/recaptchaSubmit",
-        data: {
-          gRecaptchaToken,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      
+      
 
-      if (recaptchaResponse.data.success) {
+      
         await handleSubmit(new Event('submit') as any);
         form.setValue('prompt', '');
         setInput('');
-      } else {
-        toast.error('ReCAPTCHA verification failed. Please try again.');
-      }
+      
     } catch (error: any) {
       setError(error.message || 'An error occurred while submitting the form');
       toast.error('Failed to submit form. Please try again.');
@@ -108,11 +93,12 @@ export const ChatGemini: React.FC = () => {
 
   const handleFileUpload = (info: any) => {
     const isImage = info.isImage;
+    const mimeType = info.mimeType || (isImage ? 'image/jpeg' : 'application/octet-stream');
     setUploadedFile({
       cdnUrl: info.cdnUrl,
       name: info.name,
       isImage: isImage,
-      mimeType: info.mimeType
+      mimeType: mimeType
     });
   };
 
@@ -121,13 +107,11 @@ export const ChatGemini: React.FC = () => {
   };
 
 
-
-
   return (
     <div className="flex flex-col h-full">
       <Heading
         title="Gemini"
-        description="The latest Gemini 2.0 Flash model supports Images, PDF, Audio, Video, and more as input."
+        description="The latest Gemini 2.0 model supports Images, PDF, Audio, Video, and more as input. Also support google search to latest output"
         icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
@@ -141,55 +125,58 @@ export const ChatGemini: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="h-full flex flex-col"
           >
-            <MessageList messages={messages} isLoading={isLoading} />
-            <div className="p-4">
+            <div className="flex-1 overflow-y-auto px-4 py-2">
+              <MessageList messages={messages} isLoading={isLoading} />
+            </div>
+            <div className="p-4 border-t">
               <Form {...form}>
-                <form 
+                <form
                   ref={formRef}
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm space-y-4"
+                  className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid gap-4 dark:bg-gray-900 dark:border-gray-700"
                 >
-                  <FormField
-                    control={form.control}
-                    name="prompt"
-                    render={({field}) => (
-                      <FormItem className="col-span-12">
-                        <FormControl className="m-0 p-0">
-                          <Textarea
-                            ref={textareaRef}
-                            className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
-                            value={input}
-                            placeholder="Type your message here..."
-                            onChange={(e) => {
-                              handleInputChange(e);
-                              field.onChange(e);
-                              adjustTextareaHeight();
-                            }}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <div className="flex flex-col sm:flex-row items-start gap-4">
-                    <div className="w-full sm:w-auto order-1 sm:order-none">
-                      <GroundingToggle 
-                        enabled={groundingEnabled} 
-                        onToggle={setGroundingEnabled}
+                  <div className="flex flex-col md:flex-row gap-4 w-full">
+                    <FormField
+                      control={form.control}
+                      name="prompt"
+                      render={({ field }) => (
+                        <FormItem className="flex-1">
+                          <FormControl className="m-0 p-0">
+                            <Textarea
+                              ref={textareaRef}
+                              className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden min-h-[40px] dark:bg-gray-900 dark:text-gray-100"
+                              placeholder="Type your message here..."
+                              value={input}
+                              onChange={(e) => {
+                                handleInputChange(e);
+                                field.onChange(e);
+                                adjustTextareaHeight();
+                              }}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <div className="flex flex-col gap-4 md:w-[280px]">
+                      <ModelSelector 
+                        control={form.control} 
+                        onChange={(value) => setSelectedModel(value)}
                       />
-                    </div>
-                    <div className="flex flex-col sm:flex-row flex-1 items-center gap-4 w-full">
-                      <div className="flex-1 w-full sm:w-auto">
-                        <ModelSelector 
-                          control={form.control} 
-                          onChange={(value) => setSelectedModel(value)}
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          id="search-grounding"
+                          checked={useSearchGrounding}
+                          onCheckedChange={setUseSearchGrounding}
                         />
+                        <label htmlFor="search-grounding" className="text-sm font-medium">
+                          Enable Google Search
+                        </label>
                       </div>
-                      <div className="w-full sm:w-auto order-first sm:order-none">
+                      <div className="flex items-center gap-2">
                         {uploadedFile ? (
                           <div className="relative inline-block">
                             {uploadedFile.isImage ? (
-                              <img src={uploadedFile.cdnUrl} alt="Uploaded file" className="w-12 h-12 object-cover rounded" />
+                              <img src={uploadedFile.cdnUrl || "/placeholder.svg"} alt="Uploaded file" className="w-12 h-12 object-cover rounded" />
                             ) : (
                               <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs">
                                 {uploadedFile.name.split('.').pop()?.toUpperCase()}
@@ -204,36 +191,41 @@ export const ChatGemini: React.FC = () => {
                           </div>
                         ) : (
                           <Widget
-                          publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
-                            onChange={handleFileUpload}
-                            tabs="file camera url facebook gdrive gphotos dropbox onedrive"
-                            previewStep
-                            clearable
+                                                    publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
+                                                      onChange={handleFileUpload}
+                                                      tabs="file camera url facebook gdrive gphotos dropbox onedrive"
+                                                      previewStep
+                                                      clearable
+                                                      
+                                                    />
                             
-                          />
+        
                         )}
+                        <Button
+                          variant="Sketch"
+                          disabled={isLoading}
+                          type="submit"
+                          className="w-full"
+                        >
+                          {isLoading ? 'Generating...' : 'Send'}
+                        </Button>
                       </div>
-                      <Button
-                        variant="Sketch"
-                        disabled={isLoading}
-                        type="submit"
-                        className="w-full sm:w-[120px]"
-                      >
-                        {isLoading ? 'Generating...' : 'Send'}
-                      </Button>
                     </div>
                   </div>
                 </form>
               </Form>
-              
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="mt-4 p-2 bg-red-100 text-red-700 rounded-md"
+                  className="mt-4"
                 >
-                  {error}
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertTitle>Error</AlertTitle>
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
                 </motion.div>
               )}
             </div>
@@ -243,4 +235,3 @@ export const ChatGemini: React.FC = () => {
     </div>
   )
 }
-

@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { createMistral } from '@ai-sdk/mistral';
 import { getAuth } from '@clerk/nextjs/server';
-import { streamText } from 'ai';
+import { smoothStream, streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 
 const mistral = createMistral({
@@ -29,6 +29,8 @@ export async function POST(req: NextRequest) {
     const text = await streamText({
       model: model,
       messages,
+      experimental_transform: smoothStream(),
+
     });
    
     return text.toDataStreamResponse();

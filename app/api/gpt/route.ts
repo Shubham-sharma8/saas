@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { getAuth } from '@clerk/nextjs/server'
 import { NextRequest, NextResponse } from "next/server";
-import { streamText } from 'ai';
+import { smoothStream, streamText } from 'ai';
 import { createAzure } from '@ai-sdk/azure';
 
 
@@ -29,8 +29,10 @@ export async function POST(req: NextRequest) {
     const  text  = await streamText({
       model: client('gpt-4o'),
       prompt: messages,
+      experimental_transform: smoothStream(),
+
     });
-    //tsignore
+   
     
     return text.toDataStreamResponse();
 

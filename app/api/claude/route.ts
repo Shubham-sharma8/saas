@@ -2,7 +2,7 @@ import 'server-only'
 export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { getAuth } from '@clerk/nextjs/server'
-import { streamText } from 'ai';
+import { smoothStream, streamText } from 'ai';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
     const result = await streamText({
       model: genAI(model),
       messages: formattedMessages,
+      experimental_transform: smoothStream(),
     });
 
     return result.toDataStreamResponse();

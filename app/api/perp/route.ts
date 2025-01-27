@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'; // Prevents static optimization
 
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { getAuth } from '@clerk/nextjs/server';
-import { streamText } from 'ai';
+import { smoothStream, streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 
 const perplexity = createOpenAICompatible({
@@ -31,6 +31,7 @@ const perplexity = createOpenAICompatible({
         const text = await streamText({
         model: perplexity('llama-3.1-sonar-huge-128k-online'),
         messages,
+        experimental_transform: smoothStream(),
       });
       return text.toDataStreamResponse();
       
