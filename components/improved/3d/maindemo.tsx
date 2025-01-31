@@ -63,16 +63,14 @@ export function SplineSceneBasic() {
                   <TypewriterComponent
                     options={{
                       strings: [
+                        "o3-Mini",
                         "o1-Preview",
                         "Claude 3.5 Sonnet",
                         "LLama-3.3",
-                        "xAI Grok",
                         "Mistral Large",
                         "Gemini",
-                        "Perplexity",
                         "Cohere",
-                        "DALL-E 3",     
-                        "GPT-4o", 
+                        "DALL-E 3",
                         "AI Code Translator",
                       ],
                       autoStart: true,
