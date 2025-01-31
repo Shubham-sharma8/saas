@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         if (!messages) {
           return new NextResponse("Messages are required", { status: 400 });
         }
-      const text = await streamText({
+      const text =  streamText({
       model: azure('command-r-plus-08-2024'),
       messages,
       experimental_transform: smoothStream(),

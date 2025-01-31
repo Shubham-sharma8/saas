@@ -7,8 +7,8 @@ import { createAzure } from '@ai-sdk/azure';
 
 
 const client =  createAzure({
-  resourceName: 'shubh-m48r4cia-eastus',
-  apiKey: process.env.AZURE_OPENAI_API_KEY!,
+  apiKey: process.env.AZURE_API_KEY,
+  resourceName: process.env.AZURE_RESOURCE_NAME
 }
 );
 
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     }
     
 
-    const  text  = await streamText({
+    const  text  =  streamText({
       model: client('gpt-4o'),
       prompt: messages,
       experimental_transform: smoothStream(),

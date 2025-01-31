@@ -42,25 +42,12 @@ export const ChatCohere: React.FC = () => {
     try {
       setError(null);
       
-      if (!executeRecaptcha) {
-        console.error('Recaptcha has not been loaded');
-        toast.error('ReCAPTCHA failed to load. Please try again.');
-        return;
-      }
+     
       
-      const gRecaptchaToken = await executeRecaptcha('inquirySubmit');
-      
-      const recaptchaResponse = await axios.post("/api/recaptchaSubmit", {
-        gRecaptchaToken,
-      });
-
-      if (recaptchaResponse.data.success) {
-        await chatHandleSubmit();
+      chatHandleSubmit();
         form.setValue('prompt', '');
         setInput('');
-      } else {
-        toast.error('ReCAPTCHA verification failed. Please try again.');
-      }
+        adjustTextareaHeight();
     } catch (error: any) {
       setError(error.message || 'An error occurred while submitting the form');
       toast.error('Failed to submit form. Please try again.');
