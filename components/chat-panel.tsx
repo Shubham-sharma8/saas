@@ -1,14 +1,15 @@
-"use client"
+'use client'
 
-import { cn } from "@/lib/utils"
-import type { Message } from "ai"
-import { ArrowUp, Plus, Square } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
-import Textarea from "react-textarea-autosize"
-import { EmptyScreen } from "./empty-screen"
-import { ModelSelector } from "./model-selector"
-import { Button } from "./ui/button"
+import { cn } from '@/lib/utils'
+import { Message } from 'ai'
+import { ArrowUp, MessageCircle, Square } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import Textarea from 'react-textarea-autosize'
+import { EmptyScreen } from './empty-screen'
+import { ModelSelector } from './model-selector'
+import { SearchModeToggle } from './search-mode-toggle'
+import { Button } from './ui/button'
 
 interface ChatPanelProps {
   input: string
@@ -31,7 +32,7 @@ export function ChatPanel({
   setMessages,
   query,
   stop,
-  append,
+  append
 }: ChatPanelProps) {
   const [showEmptyScreen, setShowEmptyScreen] = useState(false)
   const router = useRouter()
@@ -52,15 +53,15 @@ export function ChatPanel({
 
   const handleNewChat = () => {
     setMessages([])
-    router.push("/advance")
+    router.push('/advance')
   }
 
   // if query is not empty, submit the query
   useEffect(() => {
     if (isFirstRender.current && query && query.trim().length > 0) {
       append({
-        role: "user",
-        content: query,
+        role: 'user',
+        content: query
       })
       isFirstRender.current = false
     }
@@ -70,33 +71,25 @@ export function ChatPanel({
   return (
     <div
       className={cn(
-        "mx-auto w-full",
+        'mx-auto w-full',
         messages.length > 0
-          ? "fixed bottom-0 left-0 right-0 bg-background md:left-[--sidebar-width]" // Add md:left-[--sidebar-width] to account for sidebar
-          : "fixed bottom-8 left-0 right-0 top-0 flex flex-col items-center justify-center",
+          ? 'fixed bottom-0 left-0 right-0 bg-background'
+          : 'fixed bottom-8 left-0 right-0 top-6 flex flex-col items-center justify-center'
       )}
     >
+      
       <form
         onSubmit={handleSubmit}
-        className={cn("max-w-3xl w-full mx-auto", messages.length > 0 ? "px-0 py-4" : "px-6")}
+        className={cn(
+          'max-w-3xl w-full mx-auto',
+          messages.length > 0 ? 'px-2 py-4' : 'px-6'
+        )}
       >
-        <div className="relative flex items-center w-full gap-2">
-          {messages.length > 0 && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleNewChat}
-              className="shrink-0 rounded-full group"
-              type="button"
-            >
-              <Plus className="size-4 group-hover:rotate-90 transition-all" />
-            </Button>
-          )}
-          {messages.length === 0 && <ModelSelector />}
+        <div className="relative flex flex-col w-full gap-2 bg-muted rounded-3xl border border-input">
           <Textarea
             ref={inputRef}
             name="input"
-            rows={1}
+            rows={2}
             maxRows={5}
             tabIndex={0}
             onCompositionStart={handleCompositionStart}
@@ -104,20 +97,18 @@ export function ChatPanel({
             placeholder="Ask a question..."
             spellCheck={false}
             value={input}
-            className="resize-none w-full min-h-12 rounded-fill bg-muted border border-input pl-4 pr-10 pt-3 pb-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-            onChange={(e) => {
+            className="resize-none w-full min-h-12 bg-transparent border-0 px-4 py-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            onChange={e => {
               handleInputChange(e)
               setShowEmptyScreen(e.target.value.length === 0)
             }}
-            onKeyDown={(e) => {
-              // Enter should submit the form, but disable it right after IME input confirmation
+            onKeyDown={e => {
               if (
-                e.key === "Enter" &&
+                e.key === 'Enter' &&
                 !e.shiftKey &&
-                !isComposing && // Not in composition
-                !enterDisabled // Not within the delay after confirmation
+                !isComposing &&
+                !enterDisabled
               ) {
-                // Prevent the default action to avoid adding a new line
                 if (input.trim().length === 0) {
                   e.preventDefault()
                   return
@@ -127,48 +118,54 @@ export function ChatPanel({
                 textarea.form?.requestSubmit()
               }
             }}
-            onHeightChange={(height) => {
-              // Ensure inputRef.current is defined
-              if (!inputRef.current) return
-
-              // The initial height and left padding is 70px and 2rem
-              const initialHeight = 70
-              // The initial border radius is 32px
-              const initialBorder = 32
-              // The height is incremented by multiples of 20px
-              const multiple = (height - initialHeight) / 20
-
-              // Decrease the border radius by 4px for each 20px height increase
-              const newBorder = initialBorder - 4 * multiple
-              // The lowest border radius will be 8px
-              inputRef.current.style.borderRadius = Math.max(8, newBorder) + "px"
-            }}
             onFocus={() => setShowEmptyScreen(true)}
             onBlur={() => setShowEmptyScreen(false)}
           />
-          <Button
-            type={isLoading ? "button" : "submit"}
-            size={"icon"}
-            variant={"ghost"}
-            className={cn("absolute right-2 top-1/2 transform -translate-y-1/2", isLoading && "animate-pulse")}
-            disabled={input.length === 0 && !isLoading}
-            onClick={isLoading ? stop : undefined}
-          >
-            {isLoading ? <Square size={20} /> : <ArrowUp size={20} />}
-          </Button>
+
+          {/* Bottom menu area */}
+          <div className="flex items-center justify-between p-3">
+            <div className="flex items-center gap-2">
+              <ModelSelector />
+              <SearchModeToggle />
+            </div>
+            <div className="flex items-center gap-2">
+              {messages.length > 0 && (
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleNewChat}
+                  className="shrink-0 rounded-full group"
+                  type="button"
+                  disabled={isLoading}
+                >
+                  <MessageCircle className="size-4 group-hover:rotate-12 transition-all" />
+                </Button>
+              )}
+              <Button
+                type={isLoading ? 'button' : 'submit'}
+                size={'icon'}
+                variant={'outline'}
+                className={cn(isLoading && 'animate-pulse', 'rounded-full')}
+                disabled={input.length === 0 && !isLoading}
+                onClick={isLoading ? stop : undefined}
+              >
+                {isLoading ? <Square size={20} /> : <ArrowUp size={20} />}
+              </Button>
+            </div>
+          </div>
         </div>
+
         {messages.length === 0 && (
           <EmptyScreen
-            submitMessage={(message) => {
+            submitMessage={message => {
               handleInputChange({
-                target: { value: message },
+                target: { value: message }
               } as React.ChangeEvent<HTMLTextAreaElement>)
             }}
-            className={cn(showEmptyScreen ? "visible" : "invisible")}
+            className={cn(showEmptyScreen ? 'visible' : 'invisible')}
           />
         )}
       </form>
     </div>
   )
 }
-

@@ -12,7 +12,7 @@ const cohere = createOpenAICompatible({
     headers: {
       Authorization: `Bearer ${process.env.AZURE_INFERENCE_CREDENTIAL_COHERE}`,
     },
-    baseURL: process.env.AZURE_INFERENCE_ENDPOINT_COHERE,
+    baseURL: process.env.AZURE_INFERENCE_ENDPOINT_COHEREV,
   });
 
   export async function POST(req: NextRequest) {

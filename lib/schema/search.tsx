@@ -13,13 +13,11 @@ export const searchSchema = z.object({
     ),
   include_domains: z
     .array(z.string())
-    
     .describe(
       'A list of domains to specifically include in the search results. Default is None, which includes all domains.'
     ),
   exclude_domains: z
     .array(z.string())
-   
     .describe(
       "A list of domains to specifically exclude from the search results. Default is None, which doesn't exclude any domains."
     )

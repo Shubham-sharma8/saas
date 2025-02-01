@@ -8,8 +8,15 @@ import remarkMath from 'remark-math'
 import { Citing } from './custom-link'
 import { CodeBlock } from './ui/codeblock'
 import { MemoizedReactMarkdown } from './ui/markdown'
+import { cn } from '@/lib/utilsAdvace'
 
-export function BotMessage({ message }: { message: string }) {
+export function BotMessage({
+  message,
+  className
+}: {
+  message: string
+  className?: string
+}) {
   // Check if the content contains LaTeX patterns
   const containsLaTeX = /\\\[([\s\S]*?)\\\]|\\\(([\s\S]*?)\\\)/.test(
     message || ''
@@ -26,7 +33,10 @@ export function BotMessage({ message }: { message: string }) {
           [rehypeKatex]
         ]}
         remarkPlugins={[remarkGfm, remarkMath]}
-        className="prose-sm prose-neutral prose-a:text-accent-foreground/50"
+        className={cn(
+          'prose-sm prose-neutral prose-a:text-accent-foreground/50',
+          className
+        )}
       >
         {processedData}
       </MemoizedReactMarkdown>

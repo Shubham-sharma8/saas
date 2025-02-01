@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Chat } from '@/lib/types/index'
+import { Chat } from '@/lib/types/'
 import { cn } from '@/lib/utils'
 
 type HistoryItemProps = {

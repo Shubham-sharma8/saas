@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/components/theme-provider'
-import { AppStateProvider } from '@/lib/utilsAdvace/app-state'
 import Script from "next/script";
 
 
@@ -119,14 +118,12 @@ export default async function RootLayout({
             
             <ModalProvider />
            
-            <AppStateProvider> 
+           
             <ClerkProvider>
             <GoogleCaptchaWrapper>
             {children}
             </GoogleCaptchaWrapper> 
           </ClerkProvider>
-            </AppStateProvider>
-           
           </ThemeProvider> 
           
           </body>
