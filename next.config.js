@@ -45,8 +45,9 @@ const nextConfig = {
       { protocol: 'https', hostname: 'cdn.futurepedia.io' },
       { protocol: 'https', hostname: 'ucarecdn.com' },
       { protocol: 'https', hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com' },
+      { protocol: 'https', hostname: 'custom.typingmind.com' },
+      // { protocol: 'https', hostname: 'custom.typingmind.com' },
 
-      // { protocol: 'https', hostname: 'i.imgur.com' },
 
 
       

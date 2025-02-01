@@ -7,12 +7,12 @@ import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { smoothStream, streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 
-const cohere = createOpenAICompatible({
-    name: 'cohere',
+const deepseek = createOpenAICompatible({
+    name: 'deepseek',
     headers: {
-      Authorization: `Bearer ${process.env.AZURE_INFERENCE_CREDENTIAL_COHERE}`,
+      Authorization: `Bearer ${process.env.AZURE_INFERENCE_CREDENTIAL_DEEPSEEK}`,
     },
-    baseURL: process.env.AZURE_INFERENCE_ENDPOINT_COHERE,
+    baseURL: process.env.AZURE_INFERENCE_ENDPOINT_DEEPSEEK,
   });
 
   export async function POST(req: NextRequest) {
@@ -29,8 +29,8 @@ const cohere = createOpenAICompatible({
               if (!Array.isArray(messages) || messages.length === 0) {
                 return new NextResponse("Bad Request: Messages array is required", { status: 400 });
               }
-        const text = await streamText({
-        model: cohere('Cohere-command-r-08-2024'),
+        const text = streamText({
+        model: deepseek('DeepSeek-R1'),
         messages,
         experimental_transform: smoothStream(),
       });

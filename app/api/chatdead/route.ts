@@ -51,7 +51,6 @@ export async function POST(req: NextRequest) {
       model: openai(model),
       messages: updatedMessages,
       experimental_transform: smoothStream(),
-
     })
 
     return stream.toDataStreamResponse()

@@ -16,6 +16,7 @@ const chatModels: Model[] = [
   { value: 'openai', label: 'OpenAI', rating: 4.9, imageUrl: 'https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg' },
   { value: 'gemini', label: 'Gemini', rating: 4.8, imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg' },
   { value: 'claude', label: 'Anthropic Claude', rating: 4.6, imageUrl: 'https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-anthropic.png' },
+  { value: 'deepseek', label: 'DeepSeek R1', rating: 4.9, imageUrl: 'https://custom.typingmind.com/assets/models/deepseek.png' },
   { value: 'gpt4o', label: 'GPT-4o Latest', rating: 4.7, imageUrl: 'https://cdn.prod.website-files.com/5f6bc60e665f54db361e52a9/65fde68748ee62e29dcf7a4e_logo-openai.svg' },
   { value: 'llama', label: 'Llama 3.3 70B', rating: 4.4, imageUrl: 'https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png' },
   { value: 'mistral', label: 'Mistral-Large-2411', rating: 4.2, imageUrl: 'https://mistral.ai/images/news/announcing-mistral.png' },

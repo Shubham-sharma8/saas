@@ -17,7 +17,7 @@ export const registry = createProviderRegistry({
     apiKey: process.env.AZURE_INFERENCE_CREDENTIAL_MISTRAL || ""
   }),
   cohere: createCohere({
-    baseURL: process.env.AZURE_INFERENCE_ENDPOINT_COHERE || "",
+    baseURL: process.env.AZURE_INFERENCE_ENDPOINT_COHEREV || "",
     apiKey: process.env.AZURE_INFERENCE_CREDENTIAL_COHERE || "",
   }),
 
@@ -65,7 +65,7 @@ export function isProviderEnabled(providerId: string): boolean {
     case 'mistral':
       return !!process.env.AZURE_INFERENCE_ENDPOINT_MISTRAL && !!process.env.AZURE_INFERENCE_CREDENTIAL_MISTRAL
     case 'cohere':
-      return !!process.env.AZURE_INFERENCE_ENDPOINT_COHERE && !!process.env.AZURE_INFERENCE_CREDENTIAL_COHERE
+      return !!process.env.AZURE_INFERENCE_ENDPOINT_COHEREV && !!process.env.AZURE_INFERENCE_CREDENTIAL_COHERE
     case 'llama':
       return (
         !!process.env.AZURE_INFERENCE_CREDENTIAL_LLAMA &&

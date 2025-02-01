@@ -12,6 +12,8 @@ import {ChatCohere} from '@/components/ChatCohere/page'
 import {ChatLlm} from '@/components/ChatLlm/page'
 import {ChatxAI} from '@/components/ChatxAI/page'
 import {ChatPerp} from '@/components/ChatPerp/page'
+import {ChatDeep} from '@/components/ChatDeep/ChatDeep'
+
 
 const Chat: React.FC = () => {
   const { settings } = useSettings()
@@ -30,6 +32,8 @@ const Chat: React.FC = () => {
           return <ChatCohere />
         case 'llama':
           return <ChatLlm />
+          case 'deepseek':
+          return <ChatDeep />
         case 'xai':
           return <ChatxAI />
         case 'claude':
