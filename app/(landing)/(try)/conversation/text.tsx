@@ -40,6 +40,7 @@ export function HeroHighlights() {
                         "o1-Preview",
                         "Claude 3.5 Sonnet",
                         "LLama-3.3",
+                        "DeepSeek",
                         "Mistral Large",
                         "Gemini",
                         "Cohere",
