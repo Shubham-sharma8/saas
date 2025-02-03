@@ -182,12 +182,12 @@ export const ChatGemini: React.FC = () => {
                                 {uploadedFile.name.split('.').pop()?.toUpperCase()}
                               </div>
                             )}
-                            <button
+                            <Button
                               onClick={removeUploadedFile}
                               className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
                             >
                               <X size={12} />
-                            </button>
+                            </Button>
                           </div>
                         ) : (
                           <Widget

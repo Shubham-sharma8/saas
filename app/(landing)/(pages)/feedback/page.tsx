@@ -25,10 +25,17 @@ const helpPage: React.FC = () => {
             <div>
             <div style={{ textAlign: 'left', marginLeft: '25%', marginRight: '25%', marginTop: '5vh' }}>
         
-          <p style={{ textAlign: 'center',  }}>
-          Write us at <a  href="mailto:feedback@cogify.social?subject=I%20have%20a%20suggestion%20to.">feedback@cogify.social</a> for strong feedback
-             
-             </p>
+            <p style={{ textAlign: 'center' }}>
+  Write us at{' '}
+  <a 
+    href="mailto:feedback@cogify.social?subject=I%20have%20a%20suggestion%20to." 
+    style={{ color: '#A020F0', fontWeight: 'bold' }}
+  >
+    feedback@cogify.social
+  </a>{' '}
+  for strong feedback.
+</p>
+
              <div className="flex justify-center" style={{ width: '100%', marginTop: '20px' }}> 
              <Link href={'mailto:mailto:feedback@cogify.social?subject=I%20have%20a%20suggestion%20to.'}>
 

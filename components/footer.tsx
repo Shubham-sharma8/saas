@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Montserrat } from "next/font/google";
 import { TextRevealCardPreview } from "./ui/TextRevealCard";
+import { Button } from '@/components/ui/button'
 
 
 const font = Montserrat({ weight: '600', subsets: ['latin'] });
@@ -35,12 +36,8 @@ export const Footer = () => {
           <div className="text">
             
           </div>
+
           <div className="text">
-            <p>A product by <a href="https://www.iamclint.tech" className={cn("text-light font-light ", font.className)}>
-                Clint Tech</a></p>
-          </div>
-          <div className="text">
-            <p>Building in public by <a href="https://iamclint.tech/founder" className={cn("text-light font-light ", font.className)}>Shubham Sharma</a></p>
             <p>© 2025 Cogify. All rights reserved</p>
           </div>
         </div>
@@ -51,32 +48,32 @@ export const Footer = () => {
         <div className="flex-col space-y-2 flex " >
           <div className="right flex-col space-y-2 flex ">
             <Link href="/about-us" >
-            <button className="px-4 py-2 rounded-md border border-black bg-white text-neutarl-700 text-sm dark:text-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <Button className="px-4 py-2 rounded-md border border-black bg-white text-neutarl-700 text-sm dark:text-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
                 About us 
-            </button>
+            </Button>
             </Link>
             
 
             <Link href="/privacy-policy" className="flex items-center">
-            <button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <Button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
                 Privacy Policy
-                </button>
+                </Button>
             </Link>
             <Link href="/term-of-service" className="flex items-center">
-            <button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <Button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
     Terms of Service
-</button>
+</Button>
             </Link>
             <Link href="/refund" className="flex items-center">
-            <button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <Button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
     Refund 
-</button>
+</Button>
 
             </Link>
             <Link href="/" className="flex items-center">
-            <button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+            <Button className="px-4 py-2 rounded-md border border-black bg-white dark:text-black text-neutarl-700 text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
     Careers
-</button>
+</Button>
 
             </Link>
             

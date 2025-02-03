@@ -7,6 +7,7 @@ import { OpenAIModel, TranslateBody } from '@/types/types';
 import Head from 'next/head';
 import { Heading } from "@/components/heading";
 import { toast } from "react-hot-toast";
+import { Button } from "@/components/ui/button";
 
 
 import { useEffect, useState } from 'react';
@@ -156,13 +157,13 @@ export default function Home() {
         <div className="mt-2 flex items-center space-x-2">
           <ModelSelect model={model} onChange={(value) => setModel(value)} />
 
-          <button
+          <Button
             className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
             onClick={() => handleTranslate()}
             disabled={loading}
           >
             {loading ? 'Translating...' : 'Translate'}
-          </button>
+          </Button>
         </div>
 
         <div className="mt-2 text-center text-black text-xs">

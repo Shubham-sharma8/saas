@@ -74,17 +74,17 @@ const SettingsPage = () => {
             </Button>
             <div className="flex justify-end">
         
-        <Button
-         className="w-[300px] mt-5 dark:text-black"
+            <Button
+  className="w-[300px] mt-5 dark:text-black"
+  variant="Sketch"
+  size="sm"
+  asChild
+>
+  <Link href="https://artificialanalysis.ai">
+    AI Model Analysis
+  </Link>
+</Button>
 
-         variant={'Sketch'}
-          size="sm"
-          asChild
-        >
-          <Link href="https://artificialanalysis.ai">
-            AI Model Analysis
-          </Link>
-        </Button>
       </div>
 
             <AISettings settings={settings} updateSettings={updateSettings} />

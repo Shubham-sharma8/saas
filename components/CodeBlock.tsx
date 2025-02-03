@@ -3,6 +3,7 @@ import { go } from '@codemirror/legacy-modes/mode/go';
 import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 import CodeMirror from '@uiw/react-codemirror';
 import { FC, useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button'
 
 interface Props {
   code: string;
@@ -27,7 +28,7 @@ export const CodeBlock: FC<Props> = ({
 
   return (
     <div className="relative">
-      <button
+      <Button
         className="absolute right-0 top-0 z-10 rounded bg-[#1A1B26] p-1 text-xs text-white hover:bg-[#2D2E3A] active:bg-[#2D2E3A]"
         onClick={() => {
           navigator.clipboard.writeText(code);
@@ -35,7 +36,7 @@ export const CodeBlock: FC<Props> = ({
         }}
       >
         {copyText}
-      </button>
+      </Button>
 
       <CodeMirror
         editable={editable}

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const WhatsAppIcon = (props: any) => (
     <svg
@@ -85,21 +86,21 @@ const TryIcon = (props: any) => (
 
   
   <Link href={"https://try.cogify.social"}>
-              <button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
+              <Button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
                 <TryIcon className="h-7 w-7" />
                 <span>Try without signup!</span>
-              </button>
+              </Button>
               <Link href={"https://t.me/Cogify_Bot"}>
-              <button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
+              <Button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
                 <TelegramIcon className="h-7 w-7" />
                 <span>Say &apos;hi&apos; on Telegram!</span>
-              </button>
+              </Button>
             </Link>
   <Link href={"https://wa.me/919831047163?text=Hi"}>
-    <button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
+    <Button className="w-60 h-10 rounded-xl bg-black border border-green-whatsapp text-white text-sm flex items-center justify-center space-x-2 mb-4"> {/* Reduced mb here */}
       <WhatsAppIcon className="h-7 w-7" />
       <span>Say &apos;hi&apos; on Whatsapp!</span>
-    </button>
+    </Button>
   </Link>
   
             </Link>
