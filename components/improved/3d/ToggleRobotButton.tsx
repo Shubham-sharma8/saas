@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, X } from 'lucide-react';
+import { Eye, EyeOff, X } from "lucide-react";
 
 interface ToggleRobotButtonProps {
   isRobotVisible: boolean;
@@ -7,7 +7,11 @@ interface ToggleRobotButtonProps {
   onRemove: () => void;
 }
 
-export function ToggleRobotButton({ isRobotVisible, onToggle, onRemove }: ToggleRobotButtonProps) {
+export function ToggleRobotButton({
+  isRobotVisible,
+  onToggle,
+  onRemove,
+}: ToggleRobotButtonProps) {
   return (
     <div className="absolute top-4 right-4 z-20 flex space-x-2">
       <Button

@@ -1,1 +1,1 @@
-export const CHAT_ID = 'search' as const
+export const CHAT_ID = "search" as const;

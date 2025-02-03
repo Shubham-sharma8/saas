@@ -20,13 +20,16 @@ export const Heading = ({
     <div className="px-4 lg:px-8 flex items-center gap-x-3 mb-8">
       <div className={cn("p-2 w-fit rounded-md", bgColor)}>
         {icon && (
-          <div className={cn("w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10", iconColor)}>
+          <div
+            className={cn("w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10", iconColor)}
+          >
             {icon} {/* Render the icon here */}
           </div>
         )}
       </div>
       <div>
-        <h2 className="text-3xl font-bold mb-1">{title}</h2> {/* Add margin bottom to title */}
+        <h2 className="text-3xl font-bold mb-1">{title}</h2>{" "}
+        {/* Add margin bottom to title */}
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
     </div>

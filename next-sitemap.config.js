@@ -1,4 +1,4 @@
 module.exports = {
-    siteUrl: 'https://cogify.social',
-    generateRobotsTxt: true,
-  };
+  siteUrl: "https://cogify.social",
+  generateRobotsTxt: true,
+};

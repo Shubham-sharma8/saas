@@ -1,53 +1,55 @@
-'use client'
+"use client";
 
-import { Model, models } from '@/lib/types/models'
-import { getCookie, setCookie } from '@/lib/utilsAdvace/cookies'
-import { isReasoningModel } from '@/lib/utilsAdvace/registry'
-import { Check, ChevronsUpDown, Lightbulb } from 'lucide-react'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { createModelId } from '../lib/utilsAdvace'
-import { Button } from './ui/button'
+import { Model, models } from "@/lib/types/models";
+import { getCookie, setCookie } from "@/lib/utilsAdvace/cookies";
+import { isReasoningModel } from "@/lib/utilsAdvace/registry";
+import { Check, ChevronsUpDown, Lightbulb } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { createModelId } from "../lib/utilsAdvace";
+import { Button } from "./ui/button";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList
-} from './ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+  CommandList,
+} from "./ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 function groupModelsByProvider(models: Model[]) {
   return models.reduce((groups, model) => {
-    const provider = model.provider
+    const provider = model.provider;
     if (!groups[provider]) {
-      groups[provider] = []
+      groups[provider] = [];
     }
-    groups[provider].push(model)
-    return groups
-  }, {} as Record<string, Model[]>)
+    groups[provider].push(model);
+    return groups;
+  }, {} as Record<string, Model[]>);
 }
 
 export function ModelSelector() {
-  const [open, setOpen] = useState(false)
-  const [selectedModelId, setSelectedModelId] = useState<string>('')
+  const [open, setOpen] = useState(false);
+  const [selectedModelId, setSelectedModelId] = useState<string>("");
 
   useEffect(() => {
-    const savedModel = getCookie('selected-model')
+    const savedModel = getCookie("selected-model");
     if (savedModel) {
-      setSelectedModelId(savedModel)
+      setSelectedModelId(savedModel);
     }
-  }, [])
+  }, []);
 
   const handleModelSelect = (id: string) => {
-    setSelectedModelId(id === selectedModelId ? '' : id)
-    setCookie('selected-model', id)
-    setOpen(false)
-  }
+    setSelectedModelId(id === selectedModelId ? "" : id);
+    setCookie("selected-model", id);
+    setOpen(false);
+  };
 
-  const groupedModels = groupModelsByProvider(models)
-  const selectedModel = models.find(m => createModelId(m) === selectedModelId)
+  const groupedModels = groupModelsByProvider(models);
+  const selectedModel = models.find(
+    (m) => createModelId(m) === selectedModelId
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -73,7 +75,7 @@ export function ModelSelector() {
               )}
             </div>
           ) : (
-            'Select model'
+            "Select model"
           )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -85,8 +87,8 @@ export function ModelSelector() {
             <CommandEmpty>No model found.</CommandEmpty>
             {Object.entries(groupedModels).map(([provider, models]) => (
               <CommandGroup key={provider} heading={provider}>
-                {models.map(model => {
-                  const modelId = createModelId(model)
+                {models.map((model) => {
+                  const modelId = createModelId(model);
                   return (
                     <CommandItem
                       key={modelId}
@@ -109,12 +111,12 @@ export function ModelSelector() {
                       <Check
                         className={`h-4 w-4 ${
                           selectedModelId === modelId
-                            ? 'opacity-100'
-                            : 'opacity-0'
+                            ? "opacity-100"
+                            : "opacity-0"
                         }`}
                       />
                     </CommandItem>
-                  )
+                  );
                 })}
               </CommandGroup>
             ))}
@@ -122,5 +124,5 @@ export function ModelSelector() {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

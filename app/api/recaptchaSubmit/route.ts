@@ -1,5 +1,5 @@
-import 'server-only'
-export const dynamic = 'force-dynamic'; // Prevents static optimization
+import "server-only";
+export const dynamic = "force-dynamic"; // Prevents static optimization
 
 import { NextResponse } from "next/server";
 import axios from "axios";
@@ -11,7 +11,10 @@ export async function POST(request: Request) {
 
   if (!secretKey) {
     console.error("RECAPTCHA_SECRET_KEY is not set");
-    return NextResponse.json({ success: false, error: "reCAPTCHA secret key is missing" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "reCAPTCHA secret key is missing" },
+      { status: 500 }
+    );
   }
 
   try {
@@ -34,10 +37,16 @@ export async function POST(request: Request) {
       });
     } else {
       console.log("reCAPTCHA verification failed:", res.data);
-      return NextResponse.json({ success: false, error: "reCAPTCHA verification failed" });
+      return NextResponse.json({
+        success: false,
+        error: "reCAPTCHA verification failed",
+      });
     }
   } catch (error) {
     console.error("Error verifying reCAPTCHA:", error);
-    return NextResponse.json({ success: false, error: "Error verifying reCAPTCHA" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Error verifying reCAPTCHA" },
+      { status: 500 }
+    );
   }
 }

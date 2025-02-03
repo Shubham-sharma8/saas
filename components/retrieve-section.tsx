@@ -1,29 +1,29 @@
-'use client'
+"use client";
 
-import { Section, ToolArgsSection } from '@/components/section'
-import { SearchResults } from '@/components/search-results'
-import { SearchResults as SearchResultsType } from '@/lib/types/'
-import { ToolInvocation } from 'ai'
-import { DefaultSkeleton } from './default-skeleton'
-import { CollapsibleMessage } from './collapsible-message'
+import { Section, ToolArgsSection } from "@/components/section";
+import { SearchResults } from "@/components/search-results";
+import { SearchResults as SearchResultsType } from "@/lib/types/";
+import { ToolInvocation } from "ai";
+import { DefaultSkeleton } from "./default-skeleton";
+import { CollapsibleMessage } from "./collapsible-message";
 
 interface RetrieveSectionProps {
-  tool: ToolInvocation
-  isOpen: boolean
-  onOpenChange: (open: boolean) => void
+  tool: ToolInvocation;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function RetrieveSection({
   tool,
   isOpen,
-  onOpenChange
+  onOpenChange,
 }: RetrieveSectionProps) {
-  const isLoading = tool.state === 'call'
+  const isLoading = tool.state === "call";
   const data: SearchResultsType =
-    tool.state === 'result' ? tool.result : undefined
-  const url = tool.args.url as string | undefined
+    tool.state === "result" ? tool.result : undefined;
+  const url = tool.args.url as string | undefined;
 
-  const header = <ToolArgsSection tool="retrieve">{url}</ToolArgsSection>
+  const header = <ToolArgsSection tool="retrieve">{url}</ToolArgsSection>;
 
   return (
     <CollapsibleMessage
@@ -41,7 +41,7 @@ export function RetrieveSection({
         <DefaultSkeleton />
       )}
     </CollapsibleMessage>
-  )
+  );
 }
 
-export default RetrieveSection
+export default RetrieveSection;

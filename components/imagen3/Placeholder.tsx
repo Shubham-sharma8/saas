@@ -13,7 +13,6 @@ export const QuestionsByPage = {
     "A vibrant market square in Morocco.",
     "A tranquil lake surrounded by autumn trees.",
     "A futuristic city skyline with flying cars.",
-   
   ],
   // Add more pages as needed
 };

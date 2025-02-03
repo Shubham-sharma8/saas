@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
-import Image from "next/image"
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 function IconLogo({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -21,8 +21,7 @@ function IconLogo({ className, ...props }: React.ComponentProps<"div">) {
         priority
       />
     </div>
-  )
+  );
 }
 
-export { IconLogo }
-
+export { IconLogo };

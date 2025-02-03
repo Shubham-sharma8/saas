@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
-import { CHAT_ID } from '@/lib/constants'
-import { Message, useChat } from 'ai/react'
-import { useEffect } from 'react'
-import { toast } from 'sonner'
-import { ChatMessages } from './chat-messages'
-import { ChatPanel } from './chat-panel'
+import { CHAT_ID } from "@/lib/constants";
+import { Message, useChat } from "ai/react";
+import { useEffect } from "react";
+import { toast } from "sonner";
+import { ChatMessages } from "./chat-messages";
+import { ChatPanel } from "./chat-panel";
 
 export function Chat({
   id,
   savedMessages = [],
-  query
+  query,
 }: {
-  id: string
-  savedMessages?: Message[]
-  query?: string
+  id: string;
+  savedMessages?: Message[];
+  query?: string;
 }) {
   const {
     messages,
@@ -26,38 +26,38 @@ export function Chat({
     stop,
     append,
     data,
-    setData
+    setData,
   } = useChat({
     initialMessages: savedMessages,
     id: CHAT_ID,
     body: {
-      id
+      id,
     },
     onFinish: () => {
-      window.history.replaceState({}, '', `/advance/search/${id}`)
+      window.history.replaceState({}, "", `/advance/search/${id}`);
     },
-    onError: error => {
-      toast.error(`Error in chat: ${error.message}`)
+    onError: (error) => {
+      toast.error(`Error in chat: ${error.message}`);
     },
-    sendExtraMessageFields: false // Disable extra message fields
-  })
+    sendExtraMessageFields: false, // Disable extra message fields
+  });
 
   useEffect(() => {
-    setMessages(savedMessages)
-  }, [id])
+    setMessages(savedMessages);
+  }, [id]);
 
   const onQuerySelect = (query: string) => {
     append({
-      role: 'user',
-      content: query
-    })
-  }
+      role: "user",
+      content: query,
+    });
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setData(undefined) // reset data to clear tool call
-    handleSubmit(e)
-  }
+    e.preventDefault();
+    setData(undefined); // reset data to clear tool call
+    handleSubmit(e);
+  };
 
   return (
     <div className="flex flex-col w-full  pt-14 pb-60 mx-auto stretch">
@@ -80,5 +80,5 @@ export function Chat({
         append={append}
       />
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { Skeleton } from './ui/skeleton'
+import React from "react";
+import { Skeleton } from "./ui/skeleton";
 
 export const SearchSkeleton = () => {
   return (
@@ -26,5 +26,5 @@ export const SearchSkeleton = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

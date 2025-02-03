@@ -15,13 +15,14 @@ export function Card1() {
         >
           Image Generation
         </CardItem>
-      
+
         <CardItem
           as="p"
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-          Claymation-style elderly woman watering a garden with an orange watering can surrounded by flowers and trees.{" "}
+          Claymation-style elderly woman watering a garden with an orange
+          watering can surrounded by flowers and trees.{" "}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image
@@ -67,13 +68,14 @@ export function Card2() {
         >
           Image Generation
         </CardItem>
-        
+
         <CardItem
           as="p"
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-         Hot air balloon floating over Cappadocia&apos;s arid landscape with unique rock formations under a clear blue sky{" "}
+          Hot air balloon floating over Cappadocia&apos;s arid landscape with
+          unique rock formations under a clear blue sky{" "}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image
@@ -118,13 +120,16 @@ export function Card3() {
         >
           Image Generation
         </CardItem>
-        
+
         <CardItem
           as="p"
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-Whimsical wooden robot with glowing eyes, covered in grass and flowers, holding a bluebird in a vibrant meadow with a waterfall and trees in the background.        </CardItem>
+          Whimsical wooden robot with glowing eyes, covered in grass and
+          flowers, holding a bluebird in a vibrant meadow with a waterfall and
+          trees in the background.{" "}
+        </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image
             src="https://ucarecdn.com/ef90e63e-ce43-4592-831f-83bf25982861/-/preview/960x672/"
@@ -173,7 +178,9 @@ export function Card4() {
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-          Whimsical wooden robot with glowing eyes, covered in grass and flowers, holding a bluebird in a vibrant meadow with a waterfall and trees in the background.{" "}
+          Whimsical wooden robot with glowing eyes, covered in grass and
+          flowers, holding a bluebird in a vibrant meadow with a waterfall and
+          trees in the background.{" "}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image
@@ -223,7 +230,8 @@ export function Card5() {
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-          A stunning still-life with vibrant flowers in a blue porcelain vase, fruits on the table, and a dark background in classic Dutch style{" "}
+          A stunning still-life with vibrant flowers in a blue porcelain vase,
+          fruits on the table, and a dark background in classic Dutch style{" "}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image
@@ -273,7 +281,8 @@ export function Card6() {
           translateZ="60"
           className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
         >
-          Comic-style sunset scene with two figures standing on a grassy hill and a speech bubble saying, 'The sun will rise again..{" "}
+          Comic-style sunset scene with two figures standing on a grassy hill
+          and a speech bubble saying, 'The sun will rise again..{" "}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
           <Image

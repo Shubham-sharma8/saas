@@ -1,33 +1,37 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
-import { useChat } from 'ai/react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { motion, AnimatePresence } from 'framer-motion'
-import { MessageList } from '@/components/convo/MessageList'
-import { Heading } from '@/components/heading'
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useChat } from "ai/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageList } from "@/components/convo/MessageList";
+import { Heading } from "@/components/heading";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { toast } from 'react-hot-toast';
-
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { toast } from "react-hot-toast";
 
 export const ChatLlm: React.FC = () => {
-  const { messages, input, handleInputChange, handleSubmit: chatHandleSubmit, isLoading, setInput } = useChat(
-    {
-      api: "/api/llama",
-    }
-  );
-  const [error, setError] = useState<string | null>(null)
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit: chatHandleSubmit,
+    isLoading,
+    setInput,
+  } = useChat({
+    api: "/api/llama",
+  });
+  const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = 'auto';
+      textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   };
@@ -39,19 +43,17 @@ export const ChatLlm: React.FC = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setError(null);
-      
-      
-      
-        chatHandleSubmit();
-        form.setValue('prompt', '');
-        setInput('');
-        adjustTextareaHeight();
+
+      chatHandleSubmit();
+      form.setValue("prompt", "");
+      setInput("");
+      adjustTextareaHeight();
     } catch (error: any) {
-      setError(error.message || 'An error occurred while submitting the form');
-      toast.error('Failed to submit form. Please try again.');
+      setError(error.message || "An error occurred while submitting the form");
+      toast.error("Failed to submit form. Please try again.");
     } finally {
       if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
+        textareaRef.current.style.height = "auto";
       }
     }
   };
@@ -61,27 +63,31 @@ export const ChatLlm: React.FC = () => {
   };
   const formSchema = z.object({
     prompt: z.string().min(1, {
-      message: "Prompt is required."
+      message: "Prompt is required.",
     }),
     model: z.string().min(1),
   });
-  
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: '',
-      model: 'chatgpt-4o-latest',
+      prompt: "",
+      model: "chatgpt-4o-latest",
     },
-  })
-
+  });
 
   return (
     <div className="flex flex-col h-full">
       <Heading
         title="Llama 3.3 70B"
         description="Llama 3.3 is a large multimodal model trained on 70 Billions parameters. It is capable of generating great quality text at higher speed."
-        icon={<img src="https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png" alt="Cohere Icon" className="w-full h-full object-contain" />}
+        icon={
+          <img
+            src="https://1000logos.net/wp-content/uploads/2021/10/logo-Meta.png"
+            alt="Cohere Icon"
+            className="w-full h-full object-contain"
+          />
+        }
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
       />
@@ -97,7 +103,9 @@ export const ChatLlm: React.FC = () => {
             <MessageList messages={messages} isLoading={isLoading} />
             <div className="p-4">
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="
                   rounded-lg 
               border 
               w-full 
@@ -108,43 +116,42 @@ export const ChatLlm: React.FC = () => {
               grid
               grid-cols-10
               gap-2
-            ">
+            "
+                >
                   <FormField
                     control={form.control}
                     name="prompt"
                     render={({ field }) => (
                       <FormItem className="col-span-12 lg:col-span-8">
                         <FormControl className="m-0 p-0">
-                        <Textarea
+                          <Textarea
                             ref={textareaRef}
                             className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent resize-none overflow-hidden"
                             value={input}
-                            placeholder={'Type your message here...'}
+                            placeholder={"Type your message here..."}
                             onChange={(e) => {
                               field.onChange(e);
                               handleChange(e);
                             }}
                           />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  
-<div className="col-span-12 lg:col-span-2 mt-5">
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
 
-  <Button
-   variant="Sketch"
-   disabled={isLoading}
-   type="submit"
-   className=" col-span-12 lg:col-span-2 w-full mt-5 "
-   >
-    {isLoading ? 'Generating...' : 'Send'}
-  </Button>
-</div>
-                 
+                  <div className="col-span-12 lg:col-span-2 mt-5">
+                    <Button
+                      variant="Sketch"
+                      disabled={isLoading}
+                      type="submit"
+                      className=" col-span-12 lg:col-span-2 w-full mt-5 "
+                    >
+                      {isLoading ? "Generating..." : "Send"}
+                    </Button>
+                  </div>
                 </form>
               </Form>
-              
+
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -160,6 +167,5 @@ export const ChatLlm: React.FC = () => {
         </AnimatePresence>
       </div>
     </div>
-  )
-}
-
+  );
+};

@@ -1,27 +1,33 @@
-import { cn } from '@/lib/utils'
-import { AnchorHTMLAttributes, DetailedHTMLProps, ClassAttributes, ReactNode } from 'react'
+import { cn } from "@/lib/utils";
+import {
+  AnchorHTMLAttributes,
+  DetailedHTMLProps,
+  ClassAttributes,
+  ReactNode,
+} from "react";
 
 type CustomLinkProps = Omit<
   DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>,
-  'ref'
+  "ref"
 > & {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export function Citing({
   href,
   children,
   className,
   ...props
-}: ClassAttributes<HTMLAnchorElement> & AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const childrenText = children?.toString() || ''
-  const isNumber = /^\d+$/.test(childrenText)
+}: ClassAttributes<HTMLAnchorElement> &
+  AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const childrenText = children?.toString() || "";
+  const isNumber = /^\d+$/.test(childrenText);
   const linkClasses = cn(
     isNumber
-      ? 'text-[10px] bg-muted text-muted-froreground rounded-full w-4 h-4 px-0.5 inline-flex items-center justify-center hover:bg-muted/50 duration-200 no-underline -translate-y-0.5'
-      : 'hover:underline inline-flex items-center gap-1.5',
+      ? "text-[10px] bg-muted text-muted-froreground rounded-full w-4 h-4 px-0.5 inline-flex items-center justify-center hover:bg-muted/50 duration-200 no-underline -translate-y-0.5"
+      : "hover:underline inline-flex items-center gap-1.5",
     className
-  )
+  );
 
   return (
     <a
@@ -33,5 +39,5 @@ export function Citing({
     >
       {children}
     </a>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import 'server-only';
-export const dynamic = 'force-dynamic'; // Prevents static optimization
+import "server-only";
+export const dynamic = "force-dynamic"; // Prevents static optimization
 
-import { getAuth } from '@clerk/nextjs/server'
+import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import { AzureOpenAI } from "openai";
 import { Storage } from "@google-cloud/storage";
@@ -26,7 +26,7 @@ const getClient = (): AzureOpenAI => {
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId } =  getAuth(req)
+    const { userId } = getAuth(req);
     const { prompt } = await req.json();
 
     if (!userId) {
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     if (!prompt) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    
+
     const client = getClient();
     const results = await client.images.generate({
       prompt,
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         }
         const file = storage.bucket(bucketName).file(filename);
         await file.save(Buffer.from(buffer), {
-          contentType: 'image/png',
+          contentType: "image/png",
         });
 
         // Construct the public URL of the image
@@ -70,7 +70,6 @@ export async function POST(req: NextRequest) {
     );
 
     return NextResponse.json(imageUrls);
-
   } catch (error) {
     return new NextResponse("Internal Error", { status: 500 });
   }

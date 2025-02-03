@@ -1,25 +1,24 @@
-import { Badge } from "@/components/ui/badge"
-import { useTranslations } from "@/components/Realtime/translations-context"
+import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "@/components/Realtime/translations-context";
 
 export const Welcome = () => {
-  const { t } = useTranslations()
-  
+  const { t } = useTranslations();
+
   return (
     <div className="text-center mb-8 rounded-lg p-4">
       <div className="flex justify-center items-center mx-auto gap-2 h-full w-full mb-2">
         <Badge className="text-xl dark:text-white font-medium motion-preset-slide-left-md">
-          {t('hero.badge')}
+          {t("hero.badge")}
         </Badge>
-        
       </div>
       <h1 className="text-4xl font-bold mb-4 motion-preset-slide-up-lg">
-        {t('hero.title')}
+        {t("hero.title")}
       </h1>
       <p className="max-w-2xl mx-auto motion-preset-slide-down">
-        {t('hero.subtitle')}
+        {t("hero.subtitle")}
       </p>
     </div>
-  )
-} 
+  );
+};
 
 export default Welcome;

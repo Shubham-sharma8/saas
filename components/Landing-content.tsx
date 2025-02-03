@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { type CarouselApi } from "@/components/ui/carousel";
@@ -7,7 +7,7 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
   Card1,
@@ -16,11 +16,10 @@ import {
   Card4,
   Card5,
   Card6,
-
 } from "@/components/ui/landing-items";
 
 export function LandingContent() {
-  const cardComponents = [Card1, Card2, Card3, Card4, Card5, Card6,];
+  const cardComponents = [Card1, Card2, Card3, Card4, Card5, Card6];
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -38,15 +37,16 @@ export function LandingContent() {
     });
   }, [api]);
 
-
   return (
-    <div className="flex flex-col items-center"> {/* Center the carousel and slide */}
+    <div className="flex flex-col items-center">
+      {" "}
+      {/* Center the carousel and slide */}
       <div className="mb-4 text-center"></div>
       <Carousel
         plugins={[
           Autoplay({
-            delay: 5000
-          })
+            delay: 5000,
+          }),
         ]}
         className="w-full max-w-screen-lg"
         setApi={setApi}
@@ -57,7 +57,9 @@ export function LandingContent() {
             <CarouselItem key={index} className="md:basis-1 lg:basis-1/2">
               <div className="p-1">
                 {/* Use Card1 and Card2 components instead of placeholders */}
-                {React.createElement(cardComponents[index % cardComponents.length])}
+                {React.createElement(
+                  cardComponents[index % cardComponents.length]
+                )}
               </div>
             </CarouselItem>
           ))}

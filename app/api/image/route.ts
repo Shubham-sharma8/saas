@@ -1,27 +1,26 @@
-import { getAuth } from '@clerk/nextjs/server'
+import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-export const dynamic = 'force-dynamic'; // Prevents static optimization
-
-
-
+export const dynamic = "force-dynamic"; // Prevents static optimization
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(
-  req: NextRequest
-) {
+export async function POST(req: NextRequest) {
   try {
-    const { userId } =  getAuth(req)
-    const { prompt, amount = 1, resolution = "1025x1792", modelImage = "dall-e-3"} = await req.json();
+    const { userId } = getAuth(req);
+    const {
+      prompt,
+      amount = 1,
+      resolution = "1025x1792",
+      modelImage = "dall-e-3",
+    } = await req.json();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-  
     if (!prompt) {
       return new NextResponse("Prompt is required", { status: 400 });
     }
@@ -34,12 +33,11 @@ export async function POST(
       return new NextResponse("Resolution is required", { status: 400 });
     }
 
-    
-    
-
-    
-
-    const generateImage = async function(prompt:any, resolution:any, modelImage:any) {
+    const generateImage = async function (
+      prompt: any,
+      resolution: any,
+      modelImage: any
+    ) {
       const response = await openai.images.generate({
         model: modelImage,
         prompt,
@@ -47,7 +45,7 @@ export async function POST(
         size: resolution,
       });
       return response.data;
-    }
+    };
 
     // Initialize an array to hold the promises
     let imagePromises = [];
@@ -60,11 +58,8 @@ export async function POST(
     // Await all the image generation promises
     const images = await Promise.all(imagePromises);
 
-    
-
-    const imageUrls = images.map(response => response[0]); // Access the first image URL directly from the response array
+    const imageUrls = images.map((response) => response[0]); // Access the first image URL directly from the response array
     return NextResponse.json(imageUrls); // Respond with image URLs
-
   } catch (error) {
     return new NextResponse("Internal Error", { status: 500 });
   }

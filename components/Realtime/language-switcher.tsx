@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Select,
@@ -6,37 +6,35 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { toast } from "sonner"
-import { Languages } from "lucide-react"
-import { useTranslations } from "./translations-context"
+} from "@/components/ui/select";
+import { toast } from "sonner";
+import { Languages } from "lucide-react";
+import { useTranslations } from "./translations-context";
 
 export function LanguageSwitcher() {
-  const { t, locale, setLocale } = useTranslations()
+  const { t, locale, setLocale } = useTranslations();
 
   const languages = [
-    { code: 'en', label: 'English', icon: '🇬🇧' },
-    { code: 'hi', label: 'हिन्दी', icon: '🇮🇳' },
-    { code: 'es', label: 'Español', icon: '🇪🇸' },
-    { code: 'fr', label: 'Français', icon: '🇫🇷' },
-    { code: 'zh', label: '中文', icon: '🇨🇳' },
-    { code: 'ur', label: 'اردو', icon: '🇵🇰' },
-  ]
+    { code: "en", label: "English", icon: "🇬🇧" },
+    { code: "hi", label: "हिन्दी", icon: "🇮🇳" },
+    { code: "es", label: "Español", icon: "🇪🇸" },
+    { code: "fr", label: "Français", icon: "🇫🇷" },
+    { code: "zh", label: "中文", icon: "🇨🇳" },
+    { code: "ur", label: "اردو", icon: "🇵🇰" },
+  ];
 
-  const selectedLanguage = languages.find(lang => lang.code === locale)
+  const selectedLanguage = languages.find((lang) => lang.code === locale);
 
   const onSelect = (value: string) => {
     setLocale(value);
-    toast.success(`${t('status.language')} ${locale}`)
-  }
+    toast.success(`${t("status.language")} ${locale}`);
+  };
 
   return (
     <Select value={locale} onValueChange={onSelect}>
       <SelectTrigger className="max-w-24">
         <Languages className="mr-2 h-4 w-4" />
-        <SelectValue>
-          {selectedLanguage?.icon}
-        </SelectValue>
+        <SelectValue>{selectedLanguage?.icon}</SelectValue>
       </SelectTrigger>
       <SelectContent>
         {languages.map((language) => (
@@ -46,5 +44,5 @@ export function LanguageSwitcher() {
         ))}
       </SelectContent>
     </Select>
-  )
-} 
+  );
+}

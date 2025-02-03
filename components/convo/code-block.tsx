@@ -1,38 +1,38 @@
-'use client'
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Download, Copy, Check, Expand } from 'lucide-react'
-import { useState } from "react"
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { cn } from "@/lib/utilsAdvace"
+import { Button } from "@/components/ui/button";
+import { Download, Copy, Check, Expand } from "lucide-react";
+import { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { cn } from "@/lib/utilsAdvace";
 
 interface CodeBlockProps {
-  language: string
-  code: string
+  language: string;
+  code: string;
 }
 
 export function CodeBlock({ language, code }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [copied, setCopied] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleDownload = () => {
-    const blob = new Blob([code], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `code.${language}`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }
+    const blob = new Blob([code], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `code.${language}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="relative rounded-md">
@@ -69,10 +69,12 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
           </Button>
         </div>
       </div>
-      <div className={cn(
-        "relative overflow-x-auto",
-        !isExpanded && "max-h-[400px]"
-      )}>
+      <div
+        className={cn(
+          "relative overflow-x-auto",
+          !isExpanded && "max-h-[400px]"
+        )}
+      >
         <SyntaxHighlighter
           language={language}
           style={oneDark}
@@ -86,5 +88,5 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
         </SyntaxHighlighter>
       </div>
     </div>
-  )
+  );
 }

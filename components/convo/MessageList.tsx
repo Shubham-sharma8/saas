@@ -1,22 +1,25 @@
-import React, { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { Message } from './Message'
+import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Message } from "./Message";
 
 interface MessageListProps {
-  messages: any[]
-  isLoading: boolean
+  messages: any[];
+  isLoading: boolean;
 }
 
-export const MessageList: React.FC<MessageListProps> = ({ messages, isLoading }) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+export const MessageList: React.FC<MessageListProps> = ({
+  messages,
+  isLoading,
+}) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div className="flex-grow overflow-y-auto bg-gray-50 dark:bg-gray-900">
@@ -28,8 +31,8 @@ export const MessageList: React.FC<MessageListProps> = ({ messages, isLoading })
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
-            <Message 
-              message={message} 
+            <Message
+              message={message}
               isExpanded={index === messages.length - 1}
             />
           </motion.div>
@@ -37,6 +40,5 @@ export const MessageList: React.FC<MessageListProps> = ({ messages, isLoading })
       </div>
       <div ref={messagesEndRef} />
     </div>
-  )
-}
-
+  );
+};

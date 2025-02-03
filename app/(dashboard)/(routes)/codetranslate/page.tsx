@@ -1,51 +1,48 @@
-"use client"
-import { CodeBlock } from '@/components/CodeBlock';
-import { LanguageSelect } from '@/components/LanguageSelect';
-import { ModelSelect } from '@/components/ModelSelect';
-import { TextBlock } from '@/components/TextBlock';
-import { OpenAIModel, TranslateBody } from '@/types/types';
-import Head from 'next/head';
+"use client";
+import { CodeBlock } from "@/components/CodeBlock";
+import { LanguageSelect } from "@/components/LanguageSelect";
+import { ModelSelect } from "@/components/ModelSelect";
+import { TextBlock } from "@/components/TextBlock";
+import { OpenAIModel, TranslateBody } from "@/types/types";
+import Head from "next/head";
 import { Heading } from "@/components/heading";
 import { toast } from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 
-
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [inputLanguage, setInputLanguage] = useState<string>('JavaScript');
-  const [outputLanguage, setOutputLanguage] = useState<string>('Python');
-  const [inputCode, setInputCode] = useState<string>('');
-  const [outputCode, setOutputCode] = useState<string>('');
-  const [model, setModel] = useState<OpenAIModel>('gpt-4o');
+  const [inputLanguage, setInputLanguage] = useState<string>("JavaScript");
+  const [outputLanguage, setOutputLanguage] = useState<string>("Python");
+  const [inputCode, setInputCode] = useState<string>("");
+  const [outputCode, setOutputCode] = useState<string>("");
+  const [model, setModel] = useState<OpenAIModel>("gpt-4o");
   const [loading, setLoading] = useState<boolean>(false);
   const [hasTranslated, setHasTranslated] = useState<boolean>(false);
-  const [apiKey, setApiKey] = useState<string>('');
+  const [apiKey, setApiKey] = useState<string>("");
 
   const handleTranslate = async () => {
-    const maxCodeLength = model === 'gpt-4o' ? 6000 : 12000;
-
-    
+    const maxCodeLength = model === "gpt-4o" ? 6000 : 12000;
 
     if (inputLanguage === outputLanguage) {
-      toast.error('Please select different languages.');
+      toast.error("Please select different languages.");
       return;
     }
 
     if (!inputCode) {
-      toast.error('Please enter some code.');
+      toast.error("Please enter some code.");
       return;
     }
 
     if (inputCode.length > maxCodeLength) {
       toast.error(
-        `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputCode.length} characters.`,
+        `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputCode.length} characters.`
       );
       return;
     }
 
     setLoading(true);
-    setOutputCode('');
+    setOutputCode("");
 
     const controller = new AbortController();
 
@@ -57,10 +54,10 @@ export default function Home() {
       apiKey,
     };
 
-    const response = await fetch('/api/translate/', {
-      method: 'POST',
+    const response = await fetch("/api/translate/", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       signal: controller.signal,
       body: JSON.stringify(body),
@@ -68,7 +65,7 @@ export default function Home() {
 
     if (!response.ok) {
       setLoading(false);
-      alert('Something went wrong.');
+      alert("Something went wrong.");
       return;
     }
 
@@ -76,14 +73,14 @@ export default function Home() {
 
     if (!data) {
       setLoading(false);
-      alert('Something went wrong.');
+      alert("Something went wrong.");
       return;
     }
 
     const reader = data.getReader();
     const decoder = new TextDecoder();
     let done = false;
-    let code = '';
+    let code = "";
 
     while (!done) {
       const { value, done: doneReading } = await reader.read();
@@ -101,18 +98,18 @@ export default function Home() {
   };
 
   const copyToClipboard = (text: string) => {
-    const el = document.createElement('textarea');
+    const el = document.createElement("textarea");
     el.value = text;
     document.body.appendChild(el);
     el.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(el);
   };
 
   const handleApiKeyChange = (value: string) => {
     setApiKey(value);
 
-    localStorage.setItem('apiKey', value);
+    localStorage.setItem("apiKey", value);
   };
 
   useEffect(() => {
@@ -122,7 +119,7 @@ export default function Home() {
   }, [outputLanguage]);
 
   useEffect(() => {
-    const apiKey = localStorage.getItem('apiKey');
+    const apiKey = localStorage.getItem("apiKey");
 
     if (apiKey) {
       setApiKey(apiKey);
@@ -143,16 +140,22 @@ export default function Home() {
       <Heading
         title="AI Code Translator"
         description="Use AI to translate code from one language to another."
-        icon={<img src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png" alt="Gemini Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={
+          <img
+            src="https://www.gstatic.com/pantheon/images/aiplatform/model_garden/icons/icon-gemini.png"
+            alt="Gemini Icon"
+            className="w-full h-full object-contain"
+          />
+        } // Use the image as the icon
         iconColor="text-pink-700"
         bgColor="bg-pink-700/10"
       />
       <div className="flex h-full min-h-screen flex-col items-center px-4 pb-20 text-neutral-200 sm:px-10">
         <div className="mt-1 flex flex-col items-center justify-center sm:mt-20">
-          <div className="text-4xl font-semibold text-black">Select the model</div>
+          <div className="text-4xl font-semibold text-black">
+            Select the model
+          </div>
         </div>
-
-       
 
         <div className="mt-2 flex items-center space-x-2">
           <ModelSelect model={model} onChange={(value) => setModel(value)} />
@@ -162,33 +165,35 @@ export default function Home() {
             onClick={() => handleTranslate()}
             disabled={loading}
           >
-            {loading ? 'Translating...' : 'Translate'}
+            {loading ? "Translating..." : "Translate"}
           </Button>
         </div>
 
         <div className="mt-2 text-center text-black text-xs">
           {loading
-            ? 'Translating...'
+            ? "Translating..."
             : hasTranslated
-            ? 'Output copied to clipboard!'
+            ? "Output copied to clipboard!"
             : 'Enter some code and click "Translate"'}
         </div>
 
         <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
           <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
-            <div className="text-center text-xl text-black font-semibold">Input</div>
+            <div className="text-center text-xl text-black font-semibold">
+              Input
+            </div>
 
             <LanguageSelect
               language={inputLanguage}
               onChange={(value) => {
                 setInputLanguage(value);
                 setHasTranslated(false);
-                setInputCode('');
-                setOutputCode('');
+                setInputCode("");
+                setOutputCode("");
               }}
             />
 
-            {inputLanguage === 'Natural Language' ? (
+            {inputLanguage === "Natural Language" ? (
               <TextBlock
                 text={inputCode}
                 editable={!loading}
@@ -209,17 +214,19 @@ export default function Home() {
             )}
           </div>
           <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
-            <div className="text-center text-xl text-black font-semibold ">Output</div>
+            <div className="text-center text-xl text-black font-semibold ">
+              Output
+            </div>
 
             <LanguageSelect
               language={outputLanguage}
               onChange={(value) => {
                 setOutputLanguage(value);
-                setOutputCode('');
+                setOutputCode("");
               }}
             />
 
-            {outputLanguage === 'Natural Language' ? (
+            {outputLanguage === "Natural Language" ? (
               <TextBlock text={outputCode} />
             ) : (
               <CodeBlock code={outputCode} />

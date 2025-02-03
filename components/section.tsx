@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 import {
   Book,
   Check,
@@ -9,54 +9,54 @@ import {
   MessageCircle,
   Newspaper,
   Repeat2,
-  Search
-} from 'lucide-react'
-import React from 'react'
-import { ToolBadge } from './tool-badge'
-import { Badge } from './ui/badge'
-import { Separator } from './ui/separator'
-import { StatusIndicator } from './ui/status-indicator'
+  Search,
+} from "lucide-react";
+import React from "react";
+import { ToolBadge } from "./tool-badge";
+import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
+import { StatusIndicator } from "./ui/status-indicator";
 
 type SectionProps = {
-  children: React.ReactNode
-  className?: string
-  size?: 'sm' | 'md' | 'lg'
-  title?: string
-  separator?: boolean
-}
+  children: React.ReactNode;
+  className?: string;
+  size?: "sm" | "md" | "lg";
+  title?: string;
+  separator?: boolean;
+};
 
 export const Section: React.FC<SectionProps> = ({
   children,
   className,
-  size = 'md',
+  size = "md",
   title,
-  separator = false
+  separator = false,
 }) => {
-  const iconSize = 16
-  const iconClassName = 'mr-1.5 text-muted-foreground'
-  let icon: React.ReactNode
+  const iconSize = 16;
+  const iconClassName = "mr-1.5 text-muted-foreground";
+  let icon: React.ReactNode;
   switch (title) {
-    case 'Images':
+    case "Images":
       // eslint-disable-next-line jsx-a11y/alt-text
-      icon = <Image size={iconSize} className={iconClassName} />
-      break
-    case 'Videos':
-      icon = <Film size={iconSize} className={iconClassName} />
-      break
-    case 'Sources':
-      icon = <Newspaper size={iconSize} className={iconClassName} />
-      break
-    case 'Answer':
-      icon = <Book size={iconSize} className={iconClassName} />
-      break
-    case 'Related':
-      icon = <Repeat2 size={iconSize} className={iconClassName} />
-      break
-    case 'Follow-up':
-      icon = <MessageCircle size={iconSize} className={iconClassName} />
-      break
+      icon = <Image size={iconSize} className={iconClassName} />;
+      break;
+    case "Videos":
+      icon = <Film size={iconSize} className={iconClassName} />;
+      break;
+    case "Sources":
+      icon = <Newspaper size={iconSize} className={iconClassName} />;
+      break;
+    case "Answer":
+      icon = <Book size={iconSize} className={iconClassName} />;
+      break;
+    case "Related":
+      icon = <Repeat2 size={iconSize} className={iconClassName} />;
+      break;
+    case "Follow-up":
+      icon = <MessageCircle size={iconSize} className={iconClassName} />;
+      break;
     default:
-      icon = <Search size={iconSize} className={iconClassName} />
+      icon = <Search size={iconSize} className={iconClassName} />;
   }
 
   return (
@@ -64,7 +64,7 @@ export const Section: React.FC<SectionProps> = ({
       {separator && <Separator className="my-2 bg-primary/10" />}
       <section
         className={cn(
-          ` ${size === 'sm' ? 'py-1' : size === 'lg' ? 'py-4' : 'py-1'}`,
+          ` ${size === "sm" ? "py-1" : size === "lg" ? "py-4" : "py-1"}`,
           className
         )}
       >
@@ -80,17 +80,17 @@ export const Section: React.FC<SectionProps> = ({
         {children}
       </section>
     </>
-  )
-}
+  );
+};
 
 export function ToolArgsSection({
   children,
   tool,
-  number
+  number,
 }: {
-  children: React.ReactNode
-  tool: string
-  number?: number
+  children: React.ReactNode;
+  tool: string;
+  number?: number;
 }) {
   return (
     <Section size="sm" className="py-0 flex items-center justify-between">
@@ -101,5 +101,5 @@ export function ToolArgsSection({
         </StatusIndicator>
       )}
     </Section>
-  )
+  );
 }

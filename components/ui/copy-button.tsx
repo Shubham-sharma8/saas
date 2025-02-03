@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Check, Copy } from 'lucide-react'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Check, Copy } from "lucide-react";
 
 interface CopyButtonProps {
-  value: string
+  value: string;
 }
 
 export function CopyButton({ value }: CopyButtonProps) {
-  const [isCopied, setIsCopied] = useState(false)
+  const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(value)
-      setIsCopied(true)
-      setTimeout(() => setIsCopied(false), 2000)
+      await navigator.clipboard.writeText(value);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy text: ', err)
+      console.error("Failed to copy text: ", err);
     }
-  }
+  };
 
   return (
     <Button variant="outline" size="sm" onClick={copyToClipboard}>
@@ -35,6 +35,5 @@ export function CopyButton({ value }: CopyButtonProps) {
         </>
       )}
     </Button>
-  )
+  );
 }
-

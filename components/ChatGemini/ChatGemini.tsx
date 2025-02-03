@@ -1,35 +1,47 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { useChat } from 'ai/react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { motion, AnimatePresence } from 'framer-motion'
-import { formSchema } from './constants'
-import { MessageList } from '@/components/convo/MessageList'
-import { ModelSelector } from './ModelSelector'
-import { Heading } from '@/components/heading'
+import React, { useState, useEffect, useRef } from "react";
+import { useChat } from "ai/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { motion, AnimatePresence } from "framer-motion";
+import { formSchema } from "./constants";
+import { MessageList } from "@/components/convo/MessageList";
+import { ModelSelector } from "./ModelSelector";
+import { Heading } from "@/components/heading";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Button } from '@/components/ui/button'
-import { Textarea } from "@/components/ui/textarea"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle, X } from 'lucide-react'
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle, X } from "lucide-react";
 import { Widget } from "@uploadcare/react-widget";
-import { toast } from 'react-hot-toast';
-import axios from 'axios';
-import { Switch } from "@/components/ui/switch"
+import { toast } from "react-hot-toast";
+import axios from "axios";
+import { Switch } from "@/components/ui/switch";
 
 export const ChatGemini: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedModel, setSelectedModel] = useState('chatgpt-4o-latest');
-  const [uploadedFile, setUploadedFile] = useState<{ cdnUrl: string, name: string, isImage: boolean, mimeType: string } | null>(null);
+  const [selectedModel, setSelectedModel] = useState("chatgpt-4o-latest");
+  const [uploadedFile, setUploadedFile] = useState<{
+    cdnUrl: string;
+    name: string;
+    isImage: boolean;
+    mimeType: string;
+  } | null>(null);
   const [useSearchGrounding, setUseSearchGrounding] = useState(false);
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
-    api: '/api/gemini',
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    setInput,
+  } = useChat({
+    api: "/api/gemini",
     onError: (error) => {
       setError(error.message);
     },
@@ -45,15 +57,15 @@ export const ChatGemini: React.FC = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: '',
-      model: 'gemini-2.0-flash-exp',
+      prompt: "",
+      model: "gemini-2.0-flash-exp",
     },
   });
 
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = 'auto';
+      textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   };
@@ -66,39 +78,36 @@ export const ChatGemini: React.FC = () => {
     try {
       setError(null);
       setSelectedModel(values.model);
-      
-      if (uploadedFile) {
-        setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}] (${uploadedFile.mimeType})`);
-      }
-      
-      
-      
-      
-      
 
-      
-        await handleSubmit(new Event('submit') as any);
-        form.setValue('prompt', '');
-        setInput('');
-      
+      if (uploadedFile) {
+        setInput(
+          (prev) =>
+            `${prev}\n[Attached file: ${uploadedFile.name}] (${uploadedFile.mimeType})`
+        );
+      }
+
+      await handleSubmit(new Event("submit") as any);
+      form.setValue("prompt", "");
+      setInput("");
     } catch (error: any) {
-      setError(error.message || 'An error occurred while submitting the form');
-      toast.error('Failed to submit form. Please try again.');
+      setError(error.message || "An error occurred while submitting the form");
+      toast.error("Failed to submit form. Please try again.");
     } finally {
       if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
+        textareaRef.current.style.height = "auto";
       }
     }
   };
 
   const handleFileUpload = (info: any) => {
     const isImage = info.isImage;
-    const mimeType = info.mimeType || (isImage ? 'image/jpeg' : 'application/octet-stream');
+    const mimeType =
+      info.mimeType || (isImage ? "image/jpeg" : "application/octet-stream");
     setUploadedFile({
       cdnUrl: info.cdnUrl,
       name: info.name,
       isImage: isImage,
-      mimeType: mimeType
+      mimeType: mimeType,
     });
   };
 
@@ -106,13 +115,18 @@ export const ChatGemini: React.FC = () => {
     setUploadedFile(null);
   };
 
-
   return (
     <div className="flex flex-col h-full">
       <Heading
         title="Gemini"
         description="The latest Gemini 2.0 model supports Images, PDF, Audio, Video, and more as input. Also support google search to latest output"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Gemini Icon" className="w-full h-full object-contain" />}
+        icon={
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"
+            alt="Gemini Icon"
+            className="w-full h-full object-contain"
+          />
+        }
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10 dark:bg-white"
       />
@@ -158,8 +172,8 @@ export const ChatGemini: React.FC = () => {
                       )}
                     />
                     <div className="flex flex-col gap-4 md:w-[280px]">
-                      <ModelSelector 
-                        control={form.control} 
+                      <ModelSelector
+                        control={form.control}
                         onChange={(value) => setSelectedModel(value)}
                       />
                       <div className="flex items-center gap-2">
@@ -168,7 +182,10 @@ export const ChatGemini: React.FC = () => {
                           checked={useSearchGrounding}
                           onCheckedChange={setUseSearchGrounding}
                         />
-                        <label htmlFor="search-grounding" className="text-sm font-medium">
+                        <label
+                          htmlFor="search-grounding"
+                          className="text-sm font-medium"
+                        >
                           Enable Google Search
                         </label>
                       </div>
@@ -176,10 +193,17 @@ export const ChatGemini: React.FC = () => {
                         {uploadedFile ? (
                           <div className="relative inline-block">
                             {uploadedFile.isImage ? (
-                              <img src={uploadedFile.cdnUrl || "/placeholder.svg"} alt="Uploaded file" className="w-12 h-12 object-cover rounded" />
+                              <img
+                                src={uploadedFile.cdnUrl || "/placeholder.svg"}
+                                alt="Uploaded file"
+                                className="w-12 h-12 object-cover rounded"
+                              />
                             ) : (
                               <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs">
-                                {uploadedFile.name.split('.').pop()?.toUpperCase()}
+                                {uploadedFile.name
+                                  .split(".")
+                                  .pop()
+                                  ?.toUpperCase()}
                               </div>
                             )}
                             <Button
@@ -191,15 +215,14 @@ export const ChatGemini: React.FC = () => {
                           </div>
                         ) : (
                           <Widget
-                                                    publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
-                                                      onChange={handleFileUpload}
-                                                      tabs="file camera url facebook gdrive gphotos dropbox onedrive"
-                                                      previewStep
-                                                      clearable
-                                                      
-                                                    />
-                            
-        
+                            publicKey={
+                              process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!
+                            }
+                            onChange={handleFileUpload}
+                            tabs="file camera url facebook gdrive gphotos dropbox onedrive"
+                            previewStep
+                            clearable
+                          />
                         )}
                         <Button
                           variant="Sketch"
@@ -207,7 +230,7 @@ export const ChatGemini: React.FC = () => {
                           type="submit"
                           className="w-full"
                         >
-                          {isLoading ? 'Generating...' : 'Send'}
+                          {isLoading ? "Generating..." : "Send"}
                         </Button>
                       </div>
                     </div>
@@ -233,5 +256,5 @@ export const ChatGemini: React.FC = () => {
         </AnimatePresence>
       </div>
     </div>
-  )
-}
+  );
+};

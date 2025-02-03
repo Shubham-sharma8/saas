@@ -1,12 +1,15 @@
-import React from 'react'
-import { Badge } from '@/components/ui/badge'
+import React from "react";
+import { Badge } from "@/components/ui/badge";
 
 interface RelatedKeywordsProps {
-  keywords: string[]
-  onKeywordClick: (keyword: string) => void
+  keywords: string[];
+  onKeywordClick: (keyword: string) => void;
 }
 
-export const RelatedKeywords: React.FC<RelatedKeywordsProps> = ({ keywords, onKeywordClick }) => {
+export const RelatedKeywords: React.FC<RelatedKeywordsProps> = ({
+  keywords,
+  onKeywordClick,
+}) => {
   return (
     <div className="flex flex-wrap gap-2 mt-2">
       {keywords.map((keyword, index) => (
@@ -20,6 +23,5 @@ export const RelatedKeywords: React.FC<RelatedKeywordsProps> = ({ keywords, onKe
         </Badge>
       ))}
     </div>
-  )
-}
-
+  );
+};

@@ -1,5 +1,5 @@
-import OCRUploader from '@/components/ocr/ocr-uploader'
-import { Card, CardContent } from "@/components/ui/card"
+import OCRUploader from "@/components/ocr/ocr-uploader";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function Home() {
   return (
@@ -12,6 +12,5 @@ export default function Home() {
         </Card>
       </div>
     </main>
-  )
+  );
 }
-

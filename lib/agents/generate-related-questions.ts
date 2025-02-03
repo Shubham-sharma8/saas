@@ -1,24 +1,24 @@
-import { relatedSchema } from '@/lib/schema/related'
-import { CoreMessage, generateObject } from 'ai'
+import { relatedSchema } from "@/lib/schema/related";
+import { CoreMessage, generateObject } from "ai";
 import {
   getModel,
   getToolCallModel,
-  isToolCallSupported
-} from '../utilsAdvace/registry'
+  isToolCallSupported,
+} from "../utilsAdvace/registry";
 
 export async function generateRelatedQuestions(
   messages: CoreMessage[],
   model: string
 ) {
-  const lastMessages = messages.slice(-1).map(message => ({
+  const lastMessages = messages.slice(-1).map((message) => ({
     ...message,
-    role: 'user'
-  })) as CoreMessage[]
+    role: "user",
+  })) as CoreMessage[];
 
-  const supportedModel = isToolCallSupported(model)
+  const supportedModel = isToolCallSupported(model);
   const currentModel = supportedModel
     ? getModel(model)
-    : getToolCallModel(model)
+    : getToolCallModel(model);
 
   const result = await generateObject({
     model: currentModel,
@@ -29,8 +29,8 @@ export async function generateRelatedQuestions(
     Aim to create queries that progressively delve into more specific aspects, implications, or adjacent topics related to the initial query. The goal is to anticipate the user's potential information needs and guide them towards a more comprehensive understanding of the subject matter.
     Please match the language of the response to the user's language.`,
     messages: lastMessages,
-    schema: relatedSchema
-  })
+    schema: relatedSchema,
+  });
 
-  return result
+  return result;
 }

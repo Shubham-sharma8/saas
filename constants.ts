@@ -1,71 +1,74 @@
-
 import { Settings } from "dicons";
-import {  ImageIcon,  MessageSquare,  Code2, Import, SearchSlash, Server } from "lucide-react";
-
+import {
+  ImageIcon,
+  MessageSquare,
+  Code2,
+  Import,
+  SearchSlash,
+  Server,
+} from "lucide-react";
 
 export const tools = [
   {
-    label: 'Conversation',
+    label: "Conversation",
     icon: MessageSquare,
-    href: '/conversation',
+    href: "/conversation",
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
   },
   {
-    label: 'Realtime Voice',
+    label: "Realtime Voice",
     icon: Server,
-    href: '/realtime',
+    href: "/realtime",
     color: "text-black-900",
     bgColor: "bg-violet-500/10",
   },
 
   {
-    label: 'Advance Search',
+    label: "Advance Search",
     icon: SearchSlash,
-    href: '/advance',
+    href: "/advance",
     color: "text-orange-500",
     bgColor: "bg-violet-500/10",
   },
-  
+
   {
-    label: 'Image Generation',
+    label: "Image Generation",
     icon: ImageIcon,
     color: "text-green-500",
     bgColor: "bg-violet-500/10",
-    href: '/image',
+    href: "/image",
   },
-  
+
   {
-    label: 'OCR Document',
+    label: "OCR Document",
     icon: Import,
     color: "text-pink-500",
     bgColor: "bg-violet-500/10",
-    href: '/ocr',
+    href: "/ocr",
   },
   {
-    label: 'Image Colorization',
+    label: "Image Colorization",
     icon: ImageIcon,
     color: "text-yellow-500",
     bgColor: "bg-violet-500/10",
-    href: '/colorize',
+    href: "/colorize",
   },
   {
-    label: 'AI Code Translator',
+    label: "AI Code Translator",
     icon: Code2,
-    href: '/codetranslate',
+    href: "/codetranslate",
     color: "text-pink-700",
     bgColor: "bg-violet-500/10",
   },
 
-  
   {
-    label: 'Settings',
+    label: "Settings",
     icon: Settings,
-    href: '/settings',
+    href: "/settings",
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
   },
-  
 
   // {
   //   label: 'Code Generation',
@@ -74,8 +77,4 @@ export const tools = [
   //   bgColor: "bg-green-700/10",
   //   href: '/code',
   // },
-  
 ];
-
-
-

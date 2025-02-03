@@ -48,7 +48,7 @@ export function DataConnect() {
       ],
       {
         repeat: Number.POSITIVE_INFINITY,
-      },
+      }
     );
   }, [animate]);
   return (
@@ -89,7 +89,7 @@ export function DataConnect() {
                       id="typescript"
                       className="absolute bottom-20 right-1 rounded-3xl border border-slate-400 bg-slate-200 px-2 py-1.5 text-xs opacity-50 dark:border-slate-600 dark:bg-slate-800"
                     >
-                     Gemini
+                      Gemini
                     </div>
                     <div
                       id="javascript"
@@ -128,14 +128,9 @@ export function DataConnect() {
                         </span>
                       </h3>
                     </div>
-                    <p className="mb-4 text-slate-400">
-                      Feel free to try us!
-                    </p>
+                    <p className="mb-4 text-slate-400">Feel free to try us!</p>
                     <div className="flex flex-wrap gap-2">
-                      <Link
-                        href={"/dashboard"}
-                        target="_blank"
-                      >
+                      <Link href={"/dashboard"} target="_blank">
                         <Button>Try Now</Button>
                       </Link>
                       <Link
@@ -145,7 +140,7 @@ export function DataConnect() {
                           buttonVariants({
                             variant: "outline",
                             size: "icon",
-                          }),
+                          })
                         )}
                       >
                         <span className="flex items-center gap-1">
@@ -159,7 +154,7 @@ export function DataConnect() {
                           buttonVariants({
                             variant: "outline",
                             size: "icon",
-                          }),
+                          })
                         )}
                       >
                         <span className="flex items-center gap-1">
@@ -179,4 +174,4 @@ export function DataConnect() {
       </HighlightGroup>
     </section>
   );
-};
+}

@@ -1,16 +1,16 @@
-import endent from 'endent';
+import endent from "endent";
 import {
   createParser,
   ParsedEvent,
   ReconnectInterval,
-} from 'eventsource-parser';
+} from "eventsource-parser";
 
 const createPrompt = (
   inputLanguage: string,
   outputLanguage: string,
-  inputCode: string,
+  inputCode: string
 ) => {
-  if (inputLanguage === 'Natural Language') {
+  if (inputLanguage === "Natural Language") {
     return endent`
     You are an expert programmer in all programming languages. Translate the natural language to "${outputLanguage}" code. Do not include \`\`\`.
 
@@ -29,7 +29,7 @@ const createPrompt = (
 
     ${outputLanguage} code (no \`\`\`):
     `;
-  } else if (outputLanguage === 'Natural Language') {
+  } else if (outputLanguage === "Natural Language") {
     return endent`
       You are an expert programmer in all programming languages. Translate the "${inputLanguage}" code to natural language in plain English that the average adult could understand. Respond as bullet points starting with -.
   
@@ -76,18 +76,18 @@ export const OpenAIStream = async (
   outputLanguage: string,
   inputCode: string,
   model: string,
-  key: string,
+  key: string
 ) => {
   const prompt = createPrompt(inputLanguage, outputLanguage, inputCode);
 
-  const system = { role: 'system', content: prompt };
+  const system = { role: "system", content: prompt };
 
   const res = await fetch(`https://api.openai.com/v1/chat/completions`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${key || process.env.OPENAI_API_KEY}`,
     },
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({
       model,
       messages: [system],
@@ -105,17 +105,17 @@ export const OpenAIStream = async (
     throw new Error(
       `OpenAI API returned an error: ${
         decoder.decode(result?.value) || statusText
-      }`,
+      }`
     );
   }
 
   const stream = new ReadableStream({
     async start(controller) {
       const onParse = (event: ParsedEvent | ReconnectInterval) => {
-        if (event.type === 'event') {
+        if (event.type === "event") {
           const data = event.data;
 
-          if (data === '[DONE]') {
+          if (data === "[DONE]") {
             controller.close();
             return;
           }

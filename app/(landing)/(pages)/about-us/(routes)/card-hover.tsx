@@ -11,8 +11,8 @@ export const projects = [
   {
     title: "Conversation",
     description:
-    "At our core, we believe in making cutting-edge generative AI accessible to everyone, without barriers. With Gemini 2.0 Flash at the heart of our platform, we offer a truly free experience—no subscriptions, no hidden fees, no limits on usage. Plus, we prioritize a user-friendly environment, free from disruptive ads. We’re here to empower your creativity without distractions, giving you the freedom to explore AI's full potential effortlessly.",
-        link: "/conversation",
+      "At our core, we believe in making cutting-edge generative AI accessible to everyone, without barriers. With Gemini 2.0 Flash at the heart of our platform, we offer a truly free experience—no subscriptions, no hidden fees, no limits on usage. Plus, we prioritize a user-friendly environment, free from disruptive ads. We’re here to empower your creativity without distractions, giving you the freedom to explore AI's full potential effortlessly.",
+    link: "/conversation",
   },
   {
     title: "Claude 3.5 Sonnet",
@@ -65,14 +65,6 @@ export const projects = [
     link: "/conversation",
   },
 
-  
-  
-  
-  
-
-
- 
- 
   {
     title: "More?",
     description: "More stunning features comming soon.",

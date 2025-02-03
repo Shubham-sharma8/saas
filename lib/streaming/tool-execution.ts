@@ -3,18 +3,18 @@ import {
   DataStreamWriter,
   generateId,
   generateText,
-  JSONValue
-} from 'ai'
-import { z } from 'zod'
-import { searchSchema } from '../schema/search'
-import { search } from '../tools/search'
-import { ExtendedCoreMessage } from '../types/'
-import { getToolCallModel } from '../utilsAdvace/registry'
-import { parseToolCallXml } from './parse-tool-call'
+  JSONValue,
+} from "ai";
+import { z } from "zod";
+import { searchSchema } from "../schema/search";
+import { search } from "../tools/search";
+import { ExtendedCoreMessage } from "../types/";
+import { getToolCallModel } from "../utilsAdvace/registry";
+import { parseToolCallXml } from "./parse-tool-call";
 
 interface ToolExecutionResult {
-  toolCallDataAnnotation: ExtendedCoreMessage | null
-  toolCallMessages: CoreMessage[]
+  toolCallDataAnnotation: ExtendedCoreMessage | null;
+  toolCallMessages: CoreMessage[];
 }
 
 export async function executeToolCall(
@@ -25,26 +25,26 @@ export async function executeToolCall(
 ): Promise<ToolExecutionResult> {
   // If search mode is disabled, return empty tool call
   if (!searchMode) {
-    return { toolCallDataAnnotation: null, toolCallMessages: [] }
+    return { toolCallDataAnnotation: null, toolCallMessages: [] };
   }
 
-  const toolCallModel = getToolCallModel(model)
+  const toolCallModel = getToolCallModel(model);
   // Convert Zod schema to string representation
   const searchSchemaString = Object.entries(searchSchema.shape)
     .map(([key, value]) => {
-      const description = value.description
-      const isOptional = value instanceof z.ZodOptional
-      return `- ${key}${isOptional ? ' (optional)' : ''}: ${description}`
+      const description = value.description;
+      const isOptional = value instanceof z.ZodOptional;
+      return `- ${key}${isOptional ? " (optional)" : ""}: ${description}`;
     })
-    .join('\n')
-  const defaultMaxResults = model?.includes('ollama') ? 5 : 20
+    .join("\n");
+  const defaultMaxResults = model?.includes("ollama") ? 5 : 20;
 
   // Generate tool selection using XML format
   const toolSelectionResponse = await generateText({
     model: toolCallModel,
     system: `You are an intelligent assistant that analyzes conversations to select the most appropriate tools and their parameters.
             You excel at understanding context to determine when and how to use available tools, including crafting effective search queries.
-            Current date: ${new Date().toISOString().split('T')[0]}
+            Current date: ${new Date().toISOString().split("T")[0]}
 
             Do not include any other text in your response.
             Respond in XML format with the following structure:
@@ -65,64 +65,64 @@ export async function executeToolCall(
             ${searchSchemaString}
 
             If you don't need a tool, respond with <tool_call><tool></tool></tool_call>`,
-    messages: coreMessages
-  })
+    messages: coreMessages,
+  });
 
   // Parse the tool selection XML using the search schema
-  const toolCall = parseToolCallXml(toolSelectionResponse.text, searchSchema)
+  const toolCall = parseToolCallXml(toolSelectionResponse.text, searchSchema);
 
-  if (!toolCall || toolCall.tool === '') {
-    return { toolCallDataAnnotation: null, toolCallMessages: [] }
+  if (!toolCall || toolCall.tool === "") {
+    return { toolCallDataAnnotation: null, toolCallMessages: [] };
   }
 
   const toolCallAnnotation = {
-    type: 'tool_call',
+    type: "tool_call",
     data: {
-      state: 'call',
+      state: "call",
       toolCallId: `call_${generateId()}`,
       toolName: toolCall.tool,
-      args: JSON.stringify(toolCall.parameters)
-    }
-  }
-  dataStream.writeData(toolCallAnnotation)
+      args: JSON.stringify(toolCall.parameters),
+    },
+  };
+  dataStream.writeData(toolCallAnnotation);
 
   // Support for search tool only for now
   const searchResults = await search(
-    toolCall.parameters?.query ?? '',
+    toolCall.parameters?.query ?? "",
     toolCall.parameters?.max_results,
-    toolCall.parameters?.search_depth as 'basic' | 'advanced',
+    toolCall.parameters?.search_depth as "basic" | "advanced",
     toolCall.parameters?.include_domains,
     toolCall.parameters?.exclude_domains
-  )
+  );
 
   const updatedToolCallAnnotation = {
     ...toolCallAnnotation,
     data: {
       ...toolCallAnnotation.data,
       result: JSON.stringify(searchResults),
-      state: 'result'
-    }
-  }
-  dataStream.writeMessageAnnotation(updatedToolCallAnnotation)
+      state: "result",
+    },
+  };
+  dataStream.writeMessageAnnotation(updatedToolCallAnnotation);
 
   const toolCallDataAnnotation: ExtendedCoreMessage = {
-    role: 'data',
+    role: "data",
     content: {
-      type: 'tool_call',
-      data: updatedToolCallAnnotation.data
-    } as JSONValue
-  }
+      type: "tool_call",
+      data: updatedToolCallAnnotation.data,
+    } as JSONValue,
+  };
 
   const toolCallMessages: CoreMessage[] = [
     {
-      role: 'assistant',
-      content: `Tool call result: ${JSON.stringify(searchResults)}`
+      role: "assistant",
+      content: `Tool call result: ${JSON.stringify(searchResults)}`,
     },
     {
-      role: 'user',
-      content: 'Now answer the user question.'
-    }
-  ]
+      role: "user",
+      content: "Now answer the user question.",
+    },
+  ];
 
-  return { toolCallDataAnnotation, toolCallMessages }
+  return { toolCallDataAnnotation, toolCallMessages };
 }

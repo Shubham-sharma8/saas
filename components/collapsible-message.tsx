@@ -1,22 +1,22 @@
-import { cn } from '@/lib/utils'
-import { ChevronDown, UserCircle2 } from 'lucide-react'
+import { cn } from "@/lib/utils";
+import { ChevronDown, UserCircle2 } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
-} from './ui/collapsible'
-import { IconLogo } from './ui/icons'
-import { Separator } from './ui/separator'
+  CollapsibleTrigger,
+} from "./ui/collapsible";
+import { IconLogo } from "./ui/icons";
+import { Separator } from "./ui/separator";
 
 interface CollapsibleMessageProps {
-  children: React.ReactNode
-  role: 'user' | 'assistant'
-  isCollapsible?: boolean
-  isOpen?: boolean
-  header?: React.ReactNode
-  onOpenChange?: (open: boolean) => void
-  showBorder?: boolean
-  showIcon?: boolean
+  children: React.ReactNode;
+  role: "user" | "assistant";
+  isCollapsible?: boolean;
+  isOpen?: boolean;
+  header?: React.ReactNode;
+  onOpenChange?: (open: boolean) => void;
+  showBorder?: boolean;
+  showIcon?: boolean;
 }
 
 export function CollapsibleMessage({
@@ -27,16 +27,16 @@ export function CollapsibleMessage({
   header,
   onOpenChange,
   showBorder = true,
-  showIcon = true
+  showIcon = true,
 }: CollapsibleMessageProps) {
-  const content = <div className="py-2 flex-1">{children}</div>
+  const content = <div className="py-2 flex-1">{children}</div>;
 
   return (
     <div className="flex gap-3">
       <div className="relative flex flex-col items-center">
-        <div className={cn('mt-[10px] w-5', role === 'assistant' && 'mt-4')}>
+        <div className={cn("mt-[10px] w-5", role === "assistant" && "mt-4")}>
           {showIcon &&
-            (role === 'user' ? (
+            (role === "user" ? (
               <UserCircle2 size={20} className="text-muted-foreground" />
             ) : (
               <IconLogo className="size-5" />
@@ -47,8 +47,8 @@ export function CollapsibleMessage({
       {isCollapsible ? (
         <div
           className={cn(
-            'flex-1 rounded-2xl p-4',
-            showBorder && 'border border-border/50'
+            "flex-1 rounded-2xl p-4",
+            showBorder && "border border-border/50"
           )}
         >
           <Collapsible
@@ -72,5 +72,5 @@ export function CollapsibleMessage({
         <div className="flex-1 rounded-2xl px-4">{content}</div>
       )}
     </div>
-  )
+  );
 }

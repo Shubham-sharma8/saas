@@ -1,56 +1,59 @@
-import { researcher } from '@/lib/agents/researcher'
+import { researcher } from "@/lib/agents/researcher";
 import {
   convertToCoreMessages,
   createDataStreamResponse,
   DataStreamWriter,
-  streamText
-} from 'ai'
-import { getMaxAllowedTokens, truncateMessages } from '../utilsAdvace/context-window'
-import { isReasoningModel } from '../utilsAdvace/registry'
-import { handleStreamFinish } from './handle-stream-finish'
-import { BaseStreamConfig } from './types'
+  streamText,
+} from "ai";
+import {
+  getMaxAllowedTokens,
+  truncateMessages,
+} from "../utilsAdvace/context-window";
+import { isReasoningModel } from "../utilsAdvace/registry";
+import { handleStreamFinish } from "./handle-stream-finish";
+import { BaseStreamConfig } from "./types";
 
 export function createToolCallingStreamResponse(config: BaseStreamConfig) {
   return createDataStreamResponse({
     execute: async (dataStream: DataStreamWriter) => {
-      const { messages, model, chatId, searchMode } = config
+      const { messages, model, chatId, searchMode } = config;
 
       try {
-        const coreMessages = convertToCoreMessages(messages)
+        const coreMessages = convertToCoreMessages(messages);
         const truncatedMessages = truncateMessages(
           coreMessages,
           getMaxAllowedTokens(model)
-        )
+        );
 
         let researcherConfig = await researcher({
           messages: truncatedMessages,
           model,
-          searchMode
-        })
+          searchMode,
+        });
 
         const result = streamText({
           ...researcherConfig,
-          onFinish: async result => {
+          onFinish: async (result) => {
             await handleStreamFinish({
               responseMessages: result.response.messages,
               originalMessages: messages,
               model,
               chatId,
               dataStream,
-              skipRelatedQuestions: isReasoningModel(model)
-            })
-          }
-        })
+              skipRelatedQuestions: isReasoningModel(model),
+            });
+          },
+        });
 
-        result.mergeIntoDataStream(dataStream)
+        result.mergeIntoDataStream(dataStream);
       } catch (error) {
-        console.error('Stream execution error:', error)
-        throw error
+        console.error("Stream execution error:", error);
+        throw error;
       }
     },
-    onError: error => {
-      console.error('Stream error:', error)
-      return error instanceof Error ? error.message : String(error)
-    }
-  })
+    onError: (error) => {
+      console.error("Stream error:", error);
+      return error instanceof Error ? error.message : String(error);
+    },
+  });
 }

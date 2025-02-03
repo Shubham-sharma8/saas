@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { X } from 'lucide-react';
+import { X } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Download } from 'lucide-react';
+import { Download } from "lucide-react";
 
 interface ImageModalProps {
   src: string;
@@ -25,8 +25,8 @@ export const ImageModal = ({ src, onClose, onDownload }: ImageModalProps) => {
   return (
     <div className="fixed inset-0 overflow-auto bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="relative w-full max-w-4xl max-h-[90vh] rounded-lg ">
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           className="absolute top-2 right-2 z-10 bg-black/50 hover:bg-black/70 text-white"
           onClick={onClose}
         >
@@ -52,4 +52,3 @@ export const ImageModal = ({ src, onClose, onDownload }: ImageModalProps) => {
     </div>
   );
 };
-

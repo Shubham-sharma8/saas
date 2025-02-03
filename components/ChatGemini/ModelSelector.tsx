@@ -1,21 +1,29 @@
-import React from 'react'
-import { Control } from 'react-hook-form'
+import React from "react";
+import { Control } from "react-hook-form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
-import { modelOption } from './constants'
+} from "@/components/ui/select";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { modelOption } from "./constants";
 
 interface ModelSelectorProps {
-  control: Control<any>
-  onChange?: (value: string) => void
+  control: Control<any>;
+  onChange?: (value: string) => void;
 }
 
-export const ModelSelector: React.FC<ModelSelectorProps> = ({ control, onChange }) => {
+export const ModelSelector: React.FC<ModelSelectorProps> = ({
+  control,
+  onChange,
+}) => {
   return (
     <FormField
       control={control}
@@ -48,6 +56,5 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ control, onChange 
         </FormItem>
       )}
     />
-  )
-}
-
+  );
+};

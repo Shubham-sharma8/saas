@@ -1,9 +1,9 @@
-import katex from 'katex';
+import katex from "katex";
 
 export function renderMathContent(content: string): string {
   const mathRegex = /\$(.*?)\$/g;
   let lastIndex = 0;
-  let result = '';
+  let result = "";
 
   content.replace(mathRegex, (match, latex, offset) => {
     // Add text content before the math
@@ -13,7 +13,7 @@ export function renderMathContent(content: string): string {
     try {
       result += katex.renderToString(latex, { displayMode: false });
     } catch (error) {
-      console.error('Error rendering math:', error);
+      console.error("Error rendering math:", error);
       result += match; // Fallback to original latex if rendering fails
     }
 

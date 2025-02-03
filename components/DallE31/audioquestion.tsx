@@ -1,7 +1,5 @@
-
 export const QuestionsByPage = {
   page1: [
-    
     "A charming street in a historic European city.",
     "A peaceful Japanese garden with cherry blossoms.",
     "A magical portal in the middle of a forest.",

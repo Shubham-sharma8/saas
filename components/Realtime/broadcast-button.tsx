@@ -1,13 +1,16 @@
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useTranslations } from "./translations-context";
 
 interface BroadcastButtonProps {
-  isSessionActive: boolean
-  onClick: () => void
+  isSessionActive: boolean;
+  onClick: () => void;
 }
 
-export function BroadcastButton({ isSessionActive, onClick }: BroadcastButtonProps) {
+export function BroadcastButton({
+  isSessionActive,
+  onClick,
+}: BroadcastButtonProps) {
   const { t } = useTranslations();
   return (
     <Button
@@ -16,11 +19,14 @@ export function BroadcastButton({ isSessionActive, onClick }: BroadcastButtonPro
       onClick={onClick}
     >
       {isSessionActive && (
-        <Badge variant="secondary" className="animate-pulse bg-red-100 text-red-700">
-          {t('broadcast.live')}
+        <Badge
+          variant="secondary"
+          className="animate-pulse bg-red-100 text-red-700"
+        >
+          {t("broadcast.live")}
         </Badge>
       )}
-      {isSessionActive ? t('broadcast.end') : t('broadcast.start')}
+      {isSessionActive ? t("broadcast.end") : t("broadcast.start")}
     </Button>
-  )
-} 
+  );
+}

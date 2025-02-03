@@ -29,7 +29,6 @@ export const QuestionsByPage = {
     "A whimsical carousel in a city park.",
   ],
   page2: [
-    
     "A magical forest with glowing fireflies.",
     "A charming cafe on a cobblestone street.",
   ],

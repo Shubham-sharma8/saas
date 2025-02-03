@@ -1,47 +1,41 @@
-"use client"
+"use client";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from "@/components/ui/table"
-import { useTranslations } from "./translations-context"
-
+} from "@/components/ui/accordion";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { useTranslations } from "./translations-context";
 
 export function ToolsEducation() {
   const { t } = useTranslations();
 
   const AVAILABLE_TOOLS = [
     {
-      name: t('tools.availableTools.copyFn.name'),
-      description: t('tools.availableTools.copyFn.description'),
+      name: t("tools.availableTools.copyFn.name"),
+      description: t("tools.availableTools.copyFn.description"),
     },
     {
-      name: t('tools.availableTools.getTime.name'),
-      description: t('tools.availableTools.getTime.description'),
+      name: t("tools.availableTools.getTime.name"),
+      description: t("tools.availableTools.getTime.description"),
     },
     {
-      name: t('tools.availableTools.themeSwitcher.name'),
-      description: t('tools.availableTools.themeSwitcher.description'),
+      name: t("tools.availableTools.themeSwitcher.name"),
+      description: t("tools.availableTools.themeSwitcher.description"),
     },
     {
-      name: t('tools.availableTools.partyMode.name'),
-      description: t('tools.availableTools.partyMode.description'),
+      name: t("tools.availableTools.partyMode.name"),
+      description: t("tools.availableTools.partyMode.description"),
     },
     {
-      name: t('tools.availableTools.launchWebsite.name'),
-      description: t('tools.availableTools.launchWebsite.description'),
+      name: t("tools.availableTools.launchWebsite.name"),
+      description: t("tools.availableTools.launchWebsite.description"),
     },
     {
-      name: t('tools.availableTools.scrapeWebsite.name'),
-      description: t('tools.availableTools.scrapeWebsite.description'),
+      name: t("tools.availableTools.scrapeWebsite.name"),
+      description: t("tools.availableTools.scrapeWebsite.description"),
     },
   ] as const;
 
@@ -49,7 +43,7 @@ export function ToolsEducation() {
     <div className="w-full max-w-lg mt-4">
       <Accordion type="single" collapsible>
         <AccordionItem value="tools">
-          <AccordionTrigger>{t('tools.availableTools.title')}</AccordionTrigger>
+          <AccordionTrigger>{t("tools.availableTools.title")}</AccordionTrigger>
           <AccordionContent>
             <Table>
               <TableBody>
@@ -67,5 +61,5 @@ export function ToolsEducation() {
         </AccordionItem>
       </Accordion>
     </div>
-  )
-} 
+  );
+}

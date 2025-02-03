@@ -1,8 +1,8 @@
-import { CoreMessage, smoothStream, streamText } from 'ai'
-import { retrieveTool } from '../tools/retrieve'
-import { searchTool } from '../tools/search'
-import { videoSearchTool } from '../tools/video-search'
-import { getModel } from '../utilsAdvace/registry'
+import { CoreMessage, smoothStream, streamText } from "ai";
+import { retrieveTool } from "../tools/retrieve";
+import { searchTool } from "../tools/search";
+import { videoSearchTool } from "../tools/video-search";
+import { getModel } from "../utilsAdvace/registry";
 
 const SYSTEM_PROMPT = `
 Instructions:
@@ -21,21 +21,21 @@ When asked a question, you should:
 
 Citation Format:
 [number](url)
-`
+`;
 
-type ResearcherReturn = Parameters<typeof streamText>[0]
+type ResearcherReturn = Parameters<typeof streamText>[0];
 
 export function researcher({
   messages,
   model,
-  searchMode
+  searchMode,
 }: {
-  messages: CoreMessage[]
-  model: string
-  searchMode: boolean
+  messages: CoreMessage[];
+  model: string;
+  searchMode: boolean;
 }): ResearcherReturn {
   try {
-    const currentDate = new Date().toLocaleString()
+    const currentDate = new Date().toLocaleString();
 
     return {
       model: getModel(model),
@@ -44,16 +44,16 @@ export function researcher({
       tools: {
         search: searchTool,
         retrieve: retrieveTool,
-        videoSearch: videoSearchTool
+        videoSearch: videoSearchTool,
       },
       experimental_activeTools: searchMode
-        ? ['search', 'retrieve', 'videoSearch']
+        ? ["search", "retrieve", "videoSearch"]
         : [],
       maxSteps: searchMode ? 5 : 1,
-      experimental_transform: smoothStream({ chunking: 'word' })
-    }
+      experimental_transform: smoothStream({ chunking: "word" }),
+    };
   } catch (error) {
-    console.error('Error in chatResearcher:', error)
-    throw error
+    console.error("Error in chatResearcher:", error);
+    throw error;
   }
 }

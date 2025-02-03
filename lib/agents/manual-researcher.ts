@@ -1,6 +1,5 @@
-import { CoreMessage, smoothStream, streamText } from 'ai'
-import { getModel }  from '../utilsAdvace/registry'
-
+import { CoreMessage, smoothStream, streamText } from "ai";
+import { getModel } from "../utilsAdvace/registry";
 
 const BASE_SYSTEM_PROMPT = `
 Instructions:
@@ -11,7 +10,7 @@ You are a helpful AI assistant providing accurate information.
 2. Use markdown to structure your responses with appropriate headings
 3. Acknowledge when you are uncertain about specific details
 4. Focus on maintaining high accuracy in your responses
-`
+`;
 
 const SEARCH_ENABLED_PROMPT = `
 ${BASE_SYSTEM_PROMPT}
@@ -25,7 +24,7 @@ When analyzing search results:
 
 Citation Format:
 [number](url)
-`
+`;
 
 const SEARCH_DISABLED_PROMPT = `
 ${BASE_SYSTEM_PROMPT}
@@ -34,26 +33,26 @@ Important:
 1. Provide responses based on your general knowledge
 2. Be clear about any limitations in your knowledge
 3. Suggest when searching for additional information might be beneficial
-`
+`;
 
 interface ManualResearcherConfig {
-  messages: CoreMessage[]
-  model: string
-  isSearchEnabled?: boolean
+  messages: CoreMessage[];
+  model: string;
+  isSearchEnabled?: boolean;
 }
 
-type ManualResearcherReturn = Parameters<typeof streamText>[0]
+type ManualResearcherReturn = Parameters<typeof streamText>[0];
 
 export function manualResearcher({
   messages,
   model,
-  isSearchEnabled = true
+  isSearchEnabled = true,
 }: ManualResearcherConfig): ManualResearcherReturn {
   try {
-    const currentDate = new Date().toLocaleString()
+    const currentDate = new Date().toLocaleString();
     const systemPrompt = isSearchEnabled
       ? SEARCH_ENABLED_PROMPT
-      : SEARCH_DISABLED_PROMPT
+      : SEARCH_DISABLED_PROMPT;
 
     return {
       model: getModel(model),
@@ -62,10 +61,10 @@ export function manualResearcher({
       temperature: 0.6,
       topP: 1,
       topK: 40,
-      experimental_transform: smoothStream({ chunking: 'word' })
-    }
+      experimental_transform: smoothStream({ chunking: "word" }),
+    };
   } catch (error) {
-    console.error('Error in manualResearcher:', error)
-    throw error
+    console.error("Error in manualResearcher:", error);
+    throw error;
   }
 }

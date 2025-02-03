@@ -1,5 +1,5 @@
-import { OpenAIModel } from '@/types/types';
-import { FC } from 'react';
+import { OpenAIModel } from "@/types/types";
+import { FC } from "react";
 
 interface Props {
   model: OpenAIModel;

@@ -1,89 +1,101 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Settings } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { CookieIcon } from './cookie-icon'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Settings } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { CookieIcon } from "./cookie-icon";
 
 type CookieCategory = {
-  name: string
-  description: string
-  required: boolean
-}
+  name: string;
+  description: string;
+  required: boolean;
+};
 
 const cookieCategories: CookieCategory[] = [
   {
-    name: 'Necessary',
-    description: 'These cookies are essential for the website to function properly.',
-    required: true
+    name: "Necessary",
+    description:
+      "These cookies are essential for the website to function properly.",
+    required: true,
   },
   {
-    name: 'Functional',
-    description: 'These cookies enable personalized features and remember your preferences.',
-    required: false
+    name: "Functional",
+    description:
+      "These cookies enable personalized features and remember your preferences.",
+    required: false,
   },
   {
-    name: 'Analytics',
-    description: 'These cookies help us understand how visitors interact with the website.',
-    required: false
+    name: "Analytics",
+    description:
+      "These cookies help us understand how visitors interact with the website.",
+    required: false,
   },
   {
-    name: 'Marketing',
-    description: 'These cookies are used to deliver relevant ads and track their performance.',
-    required: false
-  }
-]
+    name: "Marketing",
+    description:
+      "These cookies are used to deliver relevant ads and track their performance.",
+    required: false,
+  },
+];
 
 export default function CookieConsent() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [showQuickConsent, setShowQuickConsent] = useState(false)
-  const [preferences, setPreferences] = useState<Record<string, boolean>>({})
+  const [isOpen, setIsOpen] = useState(false);
+  const [showQuickConsent, setShowQuickConsent] = useState(false);
+  const [preferences, setPreferences] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const storedPreferences = localStorage.getItem('cookiePreferences')
+    const storedPreferences = localStorage.getItem("cookiePreferences");
     if (storedPreferences) {
-      setPreferences(JSON.parse(storedPreferences))
+      setPreferences(JSON.parse(storedPreferences));
     } else {
-      setShowQuickConsent(true)
+      setShowQuickConsent(true);
     }
-  }, [])
+  }, []);
 
   const handleAcceptAll = () => {
     const allAccepted = cookieCategories.reduce((acc, category) => {
-      acc[category.name] = true
-      return acc
-    }, {} as Record<string, boolean>)
-    setPreferences(allAccepted)
-    localStorage.setItem('cookiePreferences', JSON.stringify(allAccepted))
-    setShowQuickConsent(false)
-    setIsOpen(false)
-  }
+      acc[category.name] = true;
+      return acc;
+    }, {} as Record<string, boolean>);
+    setPreferences(allAccepted);
+    localStorage.setItem("cookiePreferences", JSON.stringify(allAccepted));
+    setShowQuickConsent(false);
+    setIsOpen(false);
+  };
 
   const handleDeclineAll = () => {
     const allDeclined = cookieCategories.reduce((acc, category) => {
-      acc[category.name] = category.required
-      return acc
-    }, {} as Record<string, boolean>)
-    setPreferences(allDeclined)
-    localStorage.setItem('cookiePreferences', JSON.stringify(allDeclined))
-    setShowQuickConsent(false)
-    setIsOpen(false)
-  }
+      acc[category.name] = category.required;
+      return acc;
+    }, {} as Record<string, boolean>);
+    setPreferences(allDeclined);
+    localStorage.setItem("cookiePreferences", JSON.stringify(allDeclined));
+    setShowQuickConsent(false);
+    setIsOpen(false);
+  };
 
   const handleToggle = (category: string) => {
-    setPreferences(prev => {
-      const updated = { ...prev, [category]: !prev[category] }
-      return updated
-    })
-  }
+    setPreferences((prev) => {
+      const updated = { ...prev, [category]: !prev[category] };
+      return updated;
+    });
+  };
 
   const handleSave = () => {
-    localStorage.setItem('cookiePreferences', JSON.stringify(preferences))
-    setIsOpen(false)
-  }
+    localStorage.setItem("cookiePreferences", JSON.stringify(preferences));
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -117,28 +129,36 @@ export default function CookieConsent() {
                     <DialogHeader>
                       <DialogTitle>Cookie Settings</DialogTitle>
                       <DialogDescription>
-                        Customize your cookie preferences here. You can enable or disable different types of cookies below.
+                        Customize your cookie preferences here. You can enable
+                        or disable different types of cookies below.
                       </DialogDescription>
                     </DialogHeader>
                     <div className="py-4">
                       {cookieCategories.map((category) => (
-                        <div key={category.name} className="flex items-center justify-between py-2">
+                        <div
+                          key={category.name}
+                          className="flex items-center justify-between py-2"
+                        >
                           <div>
                             <h3 className="font-semibold">{category.name}</h3>
-                            <p className="text-sm text-muted-foreground">{category.description}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {category.description}
+                            </p>
                           </div>
                           <Switch
-                            checked={preferences[category.name] || category.required}
-                            onCheckedChange={() => !category.required && handleToggle(category.name)}
+                            checked={
+                              preferences[category.name] || category.required
+                            }
+                            onCheckedChange={() =>
+                              !category.required && handleToggle(category.name)
+                            }
                             disabled={category.required}
                           />
                         </div>
                       ))}
                     </div>
                     <DialogFooter>
-                      <Button 
-                        
-                      onClick={handleSave}>Save preferences</Button>
+                      <Button onClick={handleSave}>Save preferences</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -148,47 +168,59 @@ export default function CookieConsent() {
         )}
       </AnimatePresence>
 
-      {!showQuickConsent && (
-        <CookieIcon onClick={() => setIsOpen(true)} />
-      )}
+      {!showQuickConsent && <CookieIcon onClick={() => setIsOpen(true)} />}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[700px]">
           <DialogHeader>
             <DialogTitle>Cookie Preferences</DialogTitle>
             <DialogDescription>
-              Cogify.social uses cookies to enhance your experience and analyze our traffic. Please choose your preferences below.
+              Cogify.social uses cookies to enhance your experience and analyze
+              our traffic. Please choose your preferences below.
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
             {cookieCategories.map((category) => (
-              <div key={category.name} className="flex items-center justify-between py-2">
+              <div
+                key={category.name}
+                className="flex items-center justify-between py-2"
+              >
                 <div>
                   <h3 className="font-semibold">{category.name}</h3>
-                  <p className="text-sm text-muted-foreground">{category.description}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {category.description}
+                  </p>
                 </div>
                 <Switch
                   checked={preferences[category.name] || category.required}
-                  onCheckedChange={() => !category.required && handleToggle(category.name)}
+                  onCheckedChange={() =>
+                    !category.required && handleToggle(category.name)
+                  }
                   disabled={category.required}
                 />
               </div>
             ))}
           </div>
-          
+
           <DialogFooter className="flex justify-between ">
             <div className=" justify-item items-center dark:text-white">
-              <Button variant="outline" onClick={handleDeclineAll} className="mr-2">
+              <Button
+                variant="outline"
+                onClick={handleDeclineAll}
+                className="mr-2"
+              >
                 Decline All
               </Button>
               <Button variant="outline" onClick={handleAcceptAll}>
                 Accept All
               </Button>
             </div>
-            <Button variant="outline" onClick={handleSave}>Save Preferences</Button>
+            <Button variant="outline" onClick={handleSave}>
+              Save Preferences
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }

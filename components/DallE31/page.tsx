@@ -5,7 +5,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Download, Share2 } from 'lucide-react';
+import { Download, Share2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -36,8 +36,7 @@ import {
 import { QuestionsByPage } from "./audioquestion";
 import { Textarea } from "@/components/ui/textarea";
 import Head from "next/head";
-import {ImageModal} from "../ui/image-modal";
-
+import { ImageModal } from "../ui/image-modal";
 
 const getRandomQuestion = () => {
   // Randomly select a page
@@ -47,7 +46,7 @@ const getRandomQuestion = () => {
 
   // Randomly select a question from that page
   const questionsOnSelectedPage =
-  QuestionsByPage[randomPage as keyof typeof QuestionsByPage];
+    QuestionsByPage[randomPage as keyof typeof QuestionsByPage];
   const randomQuestionIndex = Math.floor(
     Math.random() * questionsOnSelectedPage.length
   );
@@ -73,7 +72,7 @@ export const DallE31: React.FC = () => {
       colorOption: "", // Empty string is acceptable for optional fields
     },
   });
-  
+
   const clearSelections = () => {
     form.setValue("styleOption", "");
     form.setValue("colorOption", "");
@@ -102,21 +101,21 @@ export const DallE31: React.FC = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setPhotos([]);
-  
+
       let prompt = values.prompt;
-  
+
       const selectedStyleOption = values.styleOption;
       const selectedStyleLabel =
         styleOption.find((option) => option.value === selectedStyleOption)
           ?.label || "";
-  
+
       const selectedColorOption = values.colorOption;
       const selectedColorLabel =
         colorOption.find((option) => option.value === selectedColorOption)
           ?.label || "";
-  
+
       prompt += selectedStyleLabel + selectedColorLabel;
-  
+
       const response = await axios.post("/api/image", { ...values, prompt });
       const urls = response.data.map((image: { url: string }) => image.url);
       setPhotos(urls);
@@ -126,7 +125,6 @@ export const DallE31: React.FC = () => {
       router.refresh();
     }
   };
-  
 
   function chunkArray<T>(array: T[], size: number): T[][] {
     const chunkedArray: T[][] = [];
@@ -136,12 +134,9 @@ export const DallE31: React.FC = () => {
     return chunkedArray;
   }
 
-
   const [randomQuestion, setRandomQuestion] = useState(getRandomQuestion());
   const modelImage = form.getValues("modelImage"); // Extracted variable
   const [showSecondMessage, setShowSecondMessage] = useState(false);
-
-  
 
   useEffect(() => {
     if (modelImage === "dall-e-3") {
@@ -166,7 +161,13 @@ export const DallE31: React.FC = () => {
       <Heading
         title="Image Generation"
         description="Get AI based Image with Dall-E3: The best AI image generation model."
-        icon={<img src="https://thinglabs.io/wp-content/uploads/dall-e-logo1.png" alt="Image Generation Icon" className="w-full h-full object-contain" />} // Use the image as the icon
+        icon={
+          <img
+            src="https://thinglabs.io/wp-content/uploads/dall-e-logo1.png"
+            alt="Image Generation Icon"
+            className="w-full h-full object-contain"
+          />
+        } // Use the image as the icon
         iconColor="text-violet-500 "
         bgColor="bg-violet-500/10 dark:bg-white"
       />
@@ -268,7 +269,7 @@ export const DallE31: React.FC = () => {
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue>
-                          {field.value || "Select Style"}
+                            {field.value || "Select Style"}
                           </SelectValue>
                         </SelectTrigger>
                       </FormControl>
@@ -291,7 +292,6 @@ export const DallE31: React.FC = () => {
                         </div>
                       </SelectContent>
                     </Select>
-                    
                   </FormItem>
                 )}
               />
@@ -312,7 +312,7 @@ export const DallE31: React.FC = () => {
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue>
-                          {field.value || "Select Color"}
+                            {field.value || "Select Color"}
                           </SelectValue>
                         </SelectTrigger>
                       </FormControl>
@@ -387,13 +387,12 @@ export const DallE31: React.FC = () => {
 
             <Button
               className=" col-span-12 lg:col-span-12 w-full mt-5 "
-             variant="Sketch"
+              variant="Sketch"
               disabled={isLoading}
               size="icon"
             >
               Generate
             </Button>
-            
           </form>
         </Form>
 
@@ -457,4 +456,3 @@ export const DallE31: React.FC = () => {
     </div>
   );
 };
-

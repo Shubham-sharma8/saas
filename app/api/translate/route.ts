@@ -1,14 +1,12 @@
-export const dynamic = 'force-dynamic'; // Prevents static optimization
+export const dynamic = "force-dynamic"; // Prevents static optimization
 
-import { TranslateBody } from '@/types/types';
-import { OpenAIStream } from '@/utils';
-import toast from 'react-hot-toast';
+import { TranslateBody } from "@/types/types";
+import { OpenAIStream } from "@/utils";
+import toast from "react-hot-toast";
 
-export async function POST(
-  req: Request
-) {
-  if (req.method !== 'POST') {
-    return new Response('Method Not Allowed', { status: 405 });
+export async function POST(req: Request) {
+  if (req.method !== "POST") {
+    return new Response("Method Not Allowed", { status: 405 });
   }
 
   try {
@@ -20,14 +18,12 @@ export async function POST(
       outputLanguage,
       inputCode,
       model,
-      apiKey,
-      
+      apiKey
     );
 
     return new Response(stream);
   } catch (error) {
     toast.error(String(error));
-    return new Response('Error', { status: 500 });
+    return new Response("Error", { status: 500 });
   }
-};
-
+}

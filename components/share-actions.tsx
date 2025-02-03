@@ -1,61 +1,62 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { formatDistanceToNow } from 'date-fns'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { useState } from "react";
+import Link from "next/link";
+import { formatDistanceToNow } from "date-fns";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
-import { History, Share2, Copy } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { toast } from 'react-hot-toast'
+} from "@/components/ui/sheet";
+import { History, Share2, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "react-hot-toast";
 
 interface ShareActionsProps {
-  className?: string
-  chats: ChatUrl[]
+  className?: string;
+  chats: ChatUrl[];
 }
 
 type ChatUrl = {
-  id: string
-  title: string
-  createdAt: Date
-  path: string
-}
+  id: string;
+  title: string;
+  createdAt: Date;
+  path: string;
+};
 
 export function ShareActions({ className, chats }: ShareActionsProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleShare = async () => {
     try {
       if (navigator.share) {
-        await navigator.share({
-          title: document.title,
-          url: window.location.href
-        })
-        .then(() => toast.success('Shared successfully'))
-        .catch((error) => toast.error(error.message))
+        await navigator
+          .share({
+            title: document.title,
+            url: window.location.href,
+          })
+          .then(() => toast.success("Shared successfully"))
+          .catch((error) => toast.error(error.message));
       } else {
-        handleCopy()
+        handleCopy();
       }
     } catch (error) {
-      console.error('Error sharing:', error)
+      console.error("Error sharing:", error);
     }
-  }
+  };
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href)
-      toast.success('URL copied to clipboard')
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("URL copied to clipboard");
     } catch (error) {
-      console.error('Error copying:', error)
-      toast.error('Failed to copy URL')
+      console.error("Error copying:", error);
+      toast.error("Failed to copy URL");
     }
-  }
+  };
 
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
@@ -73,14 +74,16 @@ export function ShareActions({ className, chats }: ShareActionsProps) {
             <ul className="space-y-2">
               {chats.map((chat) => (
                 <li key={chat.id}>
-                  <Link 
+                  <Link
                     href={chat.path}
                     className="block hover:bg-accent hover:text-accent-foreground p-2 rounded-md transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     <div className="font-medium">{chat.title}</div>
                     <div className="text-sm text-muted-foreground">
-                      {formatDistanceToNow(new Date(chat.createdAt), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(chat.createdAt), {
+                        addSuffix: true,
+                      })}
                     </div>
                   </Link>
                 </li>
@@ -106,6 +109,5 @@ export function ShareActions({ className, chats }: ShareActionsProps) {
         <Copy className="h-5 w-5" />
       </Button>
     </div>
-  )
+  );
 }
-

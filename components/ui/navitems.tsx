@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
+import * as React from "react";
+import Link from "next/link";
 
-
-import { cn } from "@/lib/utils"
-import Image from "next/image"
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,7 +13,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -43,8 +42,7 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "Mistral",
     href: "/conversation",
-    description:
-      "Unlimited Chat conversaiton with Mistral Large-2411.",
+    description: "Unlimited Chat conversaiton with Mistral Large-2411.",
   },
   {
     title: "More Models",
@@ -52,44 +50,45 @@ const components: { title: string; href: string; description: string }[] = [
     description:
       "Unlimited Chat conversaiton with models like Perpexility, Cohere etc.",
   },
-]
-const componentsPart2: { title: string; href: string; description: string }[] = [
-  {
-    title: "Dall-E 3",
-    href: "/image",
-    description:
-      "Unlimited High Quality Image Generation with OpenAI's Dall-E 3.",
-  },
-  {
-    title: "Google Imagen 3",
-    href: "/image",
-    description:
-      "Unlimited High Quality Image Generation with Google's Imagen 3.",
-  },
-  {
-    title: "Flux Pro",
-    href: "/image",
-    description:
-      "Unlimited High Quality Image Generation with Flux Pro.",
-  },
-  {
-    title: "Stable Diffusion",
-    href: "/image",
-    description: "Unlimited High Quality Image Generation with Stable Diffusion.",
-  },
-  {
-    title: "Image Colorization",
-    href: "/colorize",
-    description:
-      "Fill Colour in your images with AI powered Image Colorization.",
-  },
-  {
-    title: "OCR Scanner",
-    href: "/ocr",
-    description:
-      "Get Equations and Text from Images in HTML, LaTeX, and more.",
-  },
-]
+];
+const componentsPart2: { title: string; href: string; description: string }[] =
+  [
+    {
+      title: "Dall-E 3",
+      href: "/image",
+      description:
+        "Unlimited High Quality Image Generation with OpenAI's Dall-E 3.",
+    },
+    {
+      title: "Google Imagen 3",
+      href: "/image",
+      description:
+        "Unlimited High Quality Image Generation with Google's Imagen 3.",
+    },
+    {
+      title: "Flux Pro",
+      href: "/image",
+      description: "Unlimited High Quality Image Generation with Flux Pro.",
+    },
+    {
+      title: "Stable Diffusion",
+      href: "/image",
+      description:
+        "Unlimited High Quality Image Generation with Stable Diffusion.",
+    },
+    {
+      title: "Image Colorization",
+      href: "/colorize",
+      description:
+        "Fill Colour in your images with AI powered Image Colorization.",
+    },
+    {
+      title: "OCR Scanner",
+      href: "/ocr",
+      description:
+        "Get Equations and Text from Images in HTML, LaTeX, and more.",
+    },
+  ];
 
 export function NavigationMenuMain() {
   return (
@@ -105,24 +104,27 @@ export function NavigationMenuMain() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
-                    <Image 
+                    <Image
                       alt="Cogify.Social"
                       src="/logo.png"
                       width={24}
                       height={24}
                       layout="fixed"
-                     className="h-6 w-6" />
+                      className="h-6 w-6"
+                    />
                     <div className="mb-2 mt-4 text-lg font-medium">
                       Cogify.Social
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                    Enjoy unlimited AI generations, including text, images, Documents and Audio without ads
+                      Enjoy unlimited AI generations, including text, images,
+                      Documents and Audio without ads
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/realtime" title="Realtime Voice">
-               Conversational support realtime audio inputs and outputs, voice activation detection, and much more.
+                Conversational support realtime audio inputs and outputs, voice
+                activation detection, and much more.
               </ListItem>
               <ListItem href="/settings" title="Text Conversation">
                 Text-based chatbots and conversational agents.
@@ -131,7 +133,8 @@ export function NavigationMenuMain() {
                 Generate High quality images from text input.
               </ListItem>
               <ListItem href="/ocr" title="OCR Scanner">
-              AI powered OCR document processor that extracts text, math equations, and tables from images.
+                AI powered OCR document processor that extracts text, math
+                equations, and tables from images.
               </ListItem>
             </ul>
           </NavigationMenuContent>
@@ -177,7 +180,7 @@ export function NavigationMenuMain() {
         </NavigationMenuItem> */}
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
 
 const ListItem = React.forwardRef<
@@ -202,6 +205,6 @@ const ListItem = React.forwardRef<
         </a>
       </NavigationMenuLink>
     </li>
-  )
-})
-ListItem.displayName = "ListItem"
+  );
+});
+ListItem.displayName = "ListItem";

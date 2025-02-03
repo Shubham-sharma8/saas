@@ -1,37 +1,37 @@
-'use client'
+"use client";
 
-import { useTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
-import { ChevronLeft, Menu } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { History as HistoryIcon } from 'lucide-react'
-import { Suspense } from 'react'
-import { HistorySkeleton } from './history-skeleton'
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { History as HistoryIcon } from "lucide-react";
+import { Suspense } from "react";
+import { HistorySkeleton } from "./history-skeleton";
 
 type HistoryProps = {
-  location: 'sidebar' | 'header'
-  children?: React.ReactNode
-}
+  location: "sidebar" | "header";
+  children?: React.ReactNode;
+};
 
 export function History({ location, children }: HistoryProps) {
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const onOpenChange = (open: boolean) => {
     if (open) {
       startTransition(() => {
-        router.refresh()
-      })
+        router.refresh();
+      });
     }
-  }
+  };
 
   return (
     <Sheet onOpenChange={onOpenChange}>
@@ -40,10 +40,10 @@ export function History({ location, children }: HistoryProps) {
           variant="ghost"
           size="icon"
           className={cn({
-            'rounded-full text-foreground/30': location === 'sidebar'
+            "rounded-full text-foreground/30": location === "sidebar",
           })}
         >
-          {location === 'header' ? <Menu /> : <ChevronLeft size={16} />}
+          {location === "header" ? <Menu /> : <ChevronLeft size={16} />}
         </Button>
       </SheetTrigger>
       <SheetContent className="w-64 rounded-tl-xl rounded-bl-xl">
@@ -58,5 +58,5 @@ export function History({ location, children }: HistoryProps) {
         </div>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
