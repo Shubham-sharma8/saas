@@ -63,6 +63,8 @@ export default function ColorizePage() {
       link.href = URL.createObjectURL(blob);
       link.download = filename;
       document.body.appendChild(link);
+      link.target = "_blank"; // Open in new tab
+
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(link.href);

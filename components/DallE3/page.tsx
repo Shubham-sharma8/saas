@@ -159,6 +159,7 @@ export const DallE3: React.FC = () => {
                   <Button
                     onClick={() => {
                       const link = document.createElement("a");
+                      link.target = "_blank"; // Open in new tab
                       link.href = src;
                       link.download = "generated-image.png";
                       document.body.appendChild(link);
@@ -183,6 +184,8 @@ export const DallE3: React.FC = () => {
               onDownload={() => {
                 const link = document.createElement("a");
                 link.href = selectedImage;
+                link.target = "_blank"; // Open in new tab
+
                 link.download = "generated-image.png";
                 document.body.appendChild(link);
                 link.click();

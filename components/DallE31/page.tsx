@@ -421,6 +421,8 @@ export const DallE31: React.FC = () => {
                 <Button
                   onClick={() => {
                     const link = document.createElement("a");
+                    link.target = "_blank"; // Open in new tab
+
                     link.href = src;
                     link.download = "generated-image.png";
                     document.body.appendChild(link);
@@ -444,6 +446,7 @@ export const DallE31: React.FC = () => {
             onClose={() => setSelectedImage(null)}
             onDownload={() => {
               const link = document.createElement("a");
+              link.target = "_blank"; // Open in new tab
               link.href = selectedImage;
               link.download = "generated-image.png";
               document.body.appendChild(link);

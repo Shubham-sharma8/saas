@@ -97,6 +97,15 @@ export function SplineSceneBasic() {
                   </Button>
                 </Link>
               </div>
+                <Link
+                href="https://www.buymeacoffee.com/cogify"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                <Button className="w-60 h-10 rounded-xl bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-black border border-transparent text-sm font-semibold hover:from-pink-500 hover:to-yellow-400 transition-all duration-300">
+                  🍕 Buy me a pizza?
+                </Button>
+                </Link>
             </div>
           </motion.h1>
           <div className="flex flex-col justify-center space-y-6">

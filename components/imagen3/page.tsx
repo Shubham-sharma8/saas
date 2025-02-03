@@ -217,26 +217,27 @@ export const Imagen3: React.FC = () => {
                       />
                     </div>
                     <CardFooter className="p-2 flex space-x-2">
-                      <Button
+                        <Button
                         onClick={async () => {
                           try {
-                            const response = await fetch(src, { mode: "cors" }); // Fetch the image
-                            const blob = await response.blob(); // Convert to blob
-                            const link = document.createElement("a");
-                            link.href = URL.createObjectURL(blob); // Create a download link
-                            link.download = "image"; // Specify the download file name
-                            link.click(); // Trigger the download
-                            URL.revokeObjectURL(link.href); // Clean up URL object
+                          const response = await fetch(src, { mode: "cors" }); // Fetch the image
+                          const blob = await response.blob(); // Convert to blob
+                          const link = document.createElement("a");
+                          link.href = URL.createObjectURL(blob); // Create a download link
+                          link.download = "image"; // Specify the download file name
+                          link.target = "_blank"; // Open in new tab
+                          link.click(); // Trigger the download
+                          URL.revokeObjectURL(link.href); // Clean up URL object
                           } catch (error) {
-                            toast.error("Failed to download the image");
+                          toast.error("Failed to download the image");
                           }
                         }}
                         variant="secondary"
                         className="w-full"
-                      >
+                        >
                         <Download className="h-4 w-4 mr-2" />
                         Download
-                      </Button>
+                        </Button>
                       <Button
                         onClick={async () => {
                           try {

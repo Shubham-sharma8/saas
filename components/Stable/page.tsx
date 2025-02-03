@@ -174,7 +174,10 @@ export const StableAI: React.FC = () => {
                     try {
                       const response = await fetch(photo.url);
                       const blob = await response.blob();
+                     
                       const link = document.createElement("a");
+                      link.target = "_blank"; // Open in new tab
+
                       link.href = URL.createObjectURL(blob);
                       link.download = photo.name;
                       link.click();
