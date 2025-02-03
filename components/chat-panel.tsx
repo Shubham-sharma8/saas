@@ -77,6 +77,21 @@ export function ChatPanel({
           : 'fixed bottom-8 left-0 right-0 top-6 flex flex-col items-center justify-center'
       )}
     >
+      {messages.length === 0 && (
+        <div className="mb-8">
+      
+      
+        <div className="max-w-[980px] mx-auto text-center mb-12">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4">
+            Advance Search {" "}
+            <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">Cogify</span>
+          </h1>
+
+          </div>
+          </div>
+
+        
+      )}
       
       <form
         onSubmit={handleSubmit}
