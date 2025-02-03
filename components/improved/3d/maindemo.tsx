@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Cover } from "@/components/ui/cover";
 import { useMediaQuery } from "react-responsive";
 import { ToggleRobotButton } from "./ToggleRobotButton";
+import BuyMeAPizza from "./BuyMePizza"; // ✅ Importing the component
 
 export function SplineSceneBasic() {
   const { isSignedIn } = useAuth();
@@ -46,18 +47,9 @@ export function SplineSceneBasic() {
           }`}
         >
           <motion.h1
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              y: [20, -5, 0],
-            }}
-            transition={{
-              duration: 0.5,
-              ease: [0.4, 0.0, 0.2, 1],
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: [20, -5, 0] }}
+            transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
             className={`text-2xl md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto ${
               !showRobot ? "w-full" : ""
             }`}
@@ -97,15 +89,8 @@ export function SplineSceneBasic() {
                   </Button>
                 </Link>
               </div>
-                <Link
-                href="https://www.buymeacoffee.com/cogify"
-                target="_blank"
-                rel="noopener noreferrer"
-                >
-                <Button className="w-60 h-10 rounded-xl bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-black border border-transparent text-sm font-semibold hover:from-pink-500 hover:to-yellow-400 transition-all duration-300">
-                  🍕 Buy me a pizza?
-                </Button>
-                </Link>
+              {/* Buy Me a Coffee/Pizza Button */}
+              <BuyMeAPizza />
             </div>
           </motion.h1>
           <div className="flex flex-col justify-center space-y-6">
