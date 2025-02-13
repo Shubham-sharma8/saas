@@ -49,7 +49,7 @@ const nextConfig = {
         hostname: "hebbkx1anhila5yf.public.blob.vercel-storage.com",
       },
       { protocol: "https", hostname: "custom.typingmind.com" },
-      // { protocol: 'https', hostname: 'custom.typingmind.com' },
+      { protocol: 'https', hostname: 'azure.microsoft.com' },
     ],
   },
 };

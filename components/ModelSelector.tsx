@@ -63,7 +63,7 @@ const chatModels: Model[] = [
     value: "mistral",
     label: "Mistral-Large-2411",
     rating: 4.2,
-    imageUrl: "https://mistral.ai/images/news/announcing-mistral.png",
+    imageUrl: "https://azure.microsoft.com/en-us/blog/wp-content/uploads/2024/02/MSFT_Azure_FEB12_319938_Blog_BlogHeader_240226_600x600_V1.jpg",
   },
   {
     value: "perp",

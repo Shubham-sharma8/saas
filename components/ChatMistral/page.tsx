@@ -83,7 +83,7 @@ export const ChatMistral: React.FC = () => {
         description="Unlock the next level of conversation with Mistral-large-2411"
         icon={
           <img
-            src="https://mistral.ai/images/news/announcing-mistral.png"
+            src="https://azure.microsoft.com/en-us/blog/wp-content/uploads/2024/02/MSFT_Azure_FEB12_319938_Blog_BlogHeader_240226_600x600_V1.jpg"
             alt="Mistral Icon"
             className="w-full h-full object-contain"
           />
