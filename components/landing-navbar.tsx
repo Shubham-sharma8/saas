@@ -39,7 +39,7 @@ export const LandingNavbar = async (props: Props) => {
 
       <aside className="flex items-center gap-4">
         <Link
-          href="/dashboard"
+          href= {user ? "/dashboard" : "/sign-in"}
           className="relative w-30 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm "
         >
           {/* <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" /> */}
@@ -47,7 +47,7 @@ export const LandingNavbar = async (props: Props) => {
             {user ? "Dashboard" : "Get Started"}
           </span>
         </Link>
-        {user ? <UserButton afterSignOutUrl="/" /> : null}
+        {user ? <UserButton  /> : null}
         <MenuIcon className="md:hidden" />
       </aside>
     </nav>
