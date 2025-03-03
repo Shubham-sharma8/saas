@@ -20,7 +20,7 @@ const components: { title: string; href: string; description: string }[] = [
     title: "Open AI",
     href: "/conversation",
     description:
-      "Every model with OpenAI, including O1-Preview, O1-Mini, GPT-4o, GPT-4 Turbo and more.",
+      "Every model with OpenAI, including O1-Preview, gpt-4.5, O1-Mini, GPT-4o, GPT-4 Turbo and more.",
   },
   {
     title: "Anthropic",

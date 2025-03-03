@@ -24,7 +24,12 @@ export const models: Model[] = [
     provider: "OpenAI",
     providerId: "openai",
   },
-
+  {
+    id: "gpt-4.5-preview",
+    name: "GPT-4.5",
+    provider: "OpenAI",
+    providerId: "openai",
+  },
   {
     id: "gpt-4o",
     name: "GPT-4o",

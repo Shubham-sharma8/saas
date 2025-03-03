@@ -36,6 +36,11 @@ export const modelOption = [
     data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023",
   },
   {
+    value: "gpt-4.5-preview",
+    label: "GPT 4.5",
+    data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023",
+  },
+  {
     value: "chatgpt-4o-latest",
     label: "CHATGPT 4o Latest",
     data: "Our Most advanced model and it has the same high intelligence as GPT-4 Turbo but is much more efficient—it generates text 2x faster. Up to Oct 2023",
