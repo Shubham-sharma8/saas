@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
             text: "I'm sending you a file as well. Please analyze its contents.",
           },
           {
-            type: "image_url",
+            type: "file",
             image_url: {
               url: `data:image/jpeg;base64,${base64File}`,
             },

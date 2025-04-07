@@ -1,52 +1,46 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect, useRef } from "react";
-import { useChat } from "ai/react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { motion, AnimatePresence } from "framer-motion";
-import { formSchema } from "./constants";
-import { MessageList } from "@/components/convo/MessageList";
-import { ModelSelector } from "./ModelSelector";
-import { Heading } from "@/components/heading";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, X } from "lucide-react";
-import { Widget } from "@uploadcare/react-widget";
-import { toast } from "react-hot-toast";
-import axios from "axios";
+import type React from "react"
+import { useState, useEffect, useRef } from "react"
+import { useChat } from "ai/react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import type * as z from "zod"
+import { motion, AnimatePresence } from "framer-motion"
+import { formSchema } from "./constants"
+import { MessageList } from "@/components/convo/MessageList"
+import { ModelSelector } from "./ModelSelector"
+import { Heading } from "@/components/heading"
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AlertCircle, X } from "lucide-react"
+import { Widget } from "@uploadcare/react-widget"
+import { toast } from "react-hot-toast"
 
 export const ChatGPT: React.FC = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [error, setError] = useState<string | null>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedModel, setSelectedModel] = useState("chatgpt-4o-latest");
+  const formRef = useRef<HTMLFormElement>(null)
+  const [error, setError] = useState<string | null>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const [selectedModel, setSelectedModel] = useState("chatgpt-4o-latest")
   const [uploadedFile, setUploadedFile] = useState<{
-    cdnUrl: string;
-    name: string;
-    isImage: boolean;
-  } | null>(null);
+    cdnUrl: string
+    name: string
+    isImage: boolean
+  } | null>(null)
 
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    setInput,
-  } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
     api: "/api/chatdead",
+    
     onError: (error) => {
-      setError(error.message);
+      setError(error.message)
     },
     body: {
       model: selectedModel,
-      fileUrl: uploadedFile?.cdnUrl,
+      fileUrl: uploadedFile?.cdnUrl || null,
     },
-  });
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,54 +48,60 @@ export const ChatGPT: React.FC = () => {
       prompt: "",
       model: "chatgpt-4o-latest",
     },
-  });
+  })
 
   const adjustTextareaHeight = () => {
-    const textarea = textareaRef.current;
+    const textarea = textareaRef.current
     if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.height = "auto"
+      textarea.style.height = `${textarea.scrollHeight}px`
     }
-  };
+  }
 
   useEffect(() => {
-    adjustTextareaHeight();
-  }, [input]);
+    adjustTextareaHeight()
+  }, [input])
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setError(null);
-      setSelectedModel(values.model);
+      setError(null)
+      setSelectedModel(values.model)
 
-      if (uploadedFile) {
-        setInput((prev) => `${prev}\n[Attached file: ${uploadedFile.name}]`);
-      }
+      // Set the input value without modifying it for file attachments
+      // The backend will handle the file attachment
+      await handleSubmit(new Event("submit") as any)
 
-      await handleSubmit(new Event("submit") as any);
-      form.setValue("prompt", "");
-      setInput("");
+      // Reset form after submission
+      form.setValue("prompt", "")
+      setInput("")
+      setUploadedFile(null) // Clear the uploaded file after sending
     } catch (error: any) {
-      setError(error.message || "An error occurred while submitting the form");
-      toast.error("Failed to submit form. Please try again.");
+      setError(error.message || "An error occurred while submitting the form")
+      toast.error("Failed to submit form. Please try again.")
     } finally {
       if (textareaRef.current) {
-        textareaRef.current.style.height = "auto";
+        textareaRef.current.style.height = "auto"
       }
     }
-  };
+  }
 
   const handleFileUpload = (info: any) => {
-    const isImage = info.isImage;
+    const fileType = info.mimeType || ""
+    const isImage = fileType.startsWith("image/")
+
     setUploadedFile({
       cdnUrl: info.cdnUrl,
       name: info.name,
       isImage: isImage,
-    });
-  };
+    })
+
+    // Add a notification about the file
+    toast.success(`File "${info.name}" attached successfully`)
+  }
 
   const removeUploadedFile = () => {
-    setUploadedFile(null);
-  };
+    setUploadedFile(null)
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -150,9 +150,9 @@ export const ChatGPT: React.FC = () => {
                               placeholder="Type your message here..."
                               value={input}
                               onChange={(e) => {
-                                handleInputChange(e);
-                                field.onChange(e);
-                                adjustTextareaHeight();
+                                handleInputChange(e)
+                                field.onChange(e)
+                                adjustTextareaHeight()
                               }}
                             />
                           </FormControl>
@@ -160,25 +160,19 @@ export const ChatGPT: React.FC = () => {
                       )}
                     />
                     <div className="flex flex-col gap-4 md:w-[280px]">
-                      <ModelSelector
-                        control={form.control}
-                        onChange={(value) => setSelectedModel(value)}
-                      />
+                      <ModelSelector control={form.control} onChange={(value) => setSelectedModel(value)} />
                       <div className="flex items-center gap-2">
                         {uploadedFile ? (
                           <div className="relative inline-block">
                             {uploadedFile.isImage ? (
                               <img
-                                src={uploadedFile.cdnUrl}
+                                src={uploadedFile.cdnUrl || "/placeholder.svg"}
                                 alt="Uploaded file"
                                 className="w-12 h-12 object-cover rounded"
                               />
                             ) : (
                               <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs">
-                                {uploadedFile.name
-                                  .split(".")
-                                  .pop()
-                                  ?.toUpperCase()}
+                                {uploadedFile.name.split(".").pop()?.toUpperCase()}
                               </div>
                             )}
                             <Button
@@ -190,21 +184,14 @@ export const ChatGPT: React.FC = () => {
                           </div>
                         ) : (
                           <Widget
-                            publicKey={
-                              process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!
-                            }
+                            publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY!}
                             onChange={handleFileUpload}
                             tabs="file camera url facebook gdrive gphotos dropbox onedrive"
                             previewStep
                             clearable
                           />
                         )}
-                        <Button
-                          variant="Sketch"
-                          disabled={isLoading}
-                          type="submit"
-                          className="w-full"
-                        >
+                        <Button variant="Sketch" disabled={isLoading} type="submit" className="w-full">
                           {isLoading ? "Generating..." : "Send"}
                         </Button>
                       </div>
@@ -231,5 +218,6 @@ export const ChatGPT: React.FC = () => {
         </AnimatePresence>
       </div>
     </div>
-  );
-};
+  )
+}
+

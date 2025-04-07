@@ -6,8 +6,8 @@ export const formSchema = z.object({
     .min(1, {
       message: "Prompt is required and must not be empty.",
     })
-    .max(1000, {
-      message: "Prompt must not exceed 1000 characters.",
+    .max(100000, {
+      message: "Prompt must not exceed 100000 characters.",
     }),
   model: z.string().min(1, {
     message: "Model selection is required. ",
