@@ -7,6 +7,19 @@ export interface Model {
 
 export const models: Model[] = [
   {
+    id: "gpt-4.1",
+    name: "GPT-4.1",
+    provider: "OpenAI",
+    providerId: "openai",
+  },
+  {
+    id: "o1-pro",
+    name: "o1-Pro",
+    provider: "OpenAI",
+    providerId: "openai",
+  },
+  
+  {
     id: "o1",
     name: "o1",
     provider: "OpenAI",
